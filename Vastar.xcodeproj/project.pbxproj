@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,7 @@
 		22F1C31526648CF8003A1D5C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C31326648CF8003A1D5C /* Main.storyboard */; };
 		22F1C31726648D01003A1D5C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C31626648D01003A1D5C /* Assets.xcassets */; };
 		22F1C31A26648D01003A1D5C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C31826648D01003A1D5C /* LaunchScreen.storyboard */; };
+		22F1C36C2664D152003A1D5C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C36E2664D152003A1D5C /* Localizable.strings */; };
 		59BB5765C24B763600503843 /* Pods_Vastar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D3F6B628888968EBF5FED1C /* Pods_Vastar.framework */; };
 /* End PBXBuildFile section */
 
@@ -25,6 +26,10 @@
 		22F1C31626648D01003A1D5C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22F1C31926648D01003A1D5C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22F1C31B26648D01003A1D5C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22F1C3642664D090003A1D5C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		22F1C3652664D090003A1D5C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		22F1C36D2664D152003A1D5C /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		22F1C3702664D158003A1D5C /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		4D3F6B628888968EBF5FED1C /* Pods_Vastar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vastar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		712042D70D1373F3119BDA1B /* Pods-Vastar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vastar.release.xcconfig"; path = "Target Support Files/Pods-Vastar/Pods-Vastar.release.xcconfig"; sourceTree = "<group>"; };
 		AA7D015424682E86B089ECA9 /* Pods-Vastar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vastar.debug.xcconfig"; path = "Target Support Files/Pods-Vastar/Pods-Vastar.debug.xcconfig"; sourceTree = "<group>"; };
@@ -70,6 +75,7 @@
 				22F1C31626648D01003A1D5C /* Assets.xcassets */,
 				22F1C31826648D01003A1D5C /* LaunchScreen.storyboard */,
 				22F1C31B26648D01003A1D5C /* Info.plist */,
+				22F1C36E2664D152003A1D5C /* Localizable.strings */,
 			);
 			path = Vastar;
 			sourceTree = "<group>";
@@ -88,7 +94,6 @@
 				AA7D015424682E86B089ECA9 /* Pods-Vastar.debug.xcconfig */,
 				712042D70D1373F3119BDA1B /* Pods-Vastar.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -135,6 +140,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = 22F1C30126648CF7003A1D5C;
 			productRefGroup = 22F1C30B26648CF7003A1D5C /* Products */;
@@ -152,6 +158,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				22F1C31A26648D01003A1D5C /* LaunchScreen.storyboard in Resources */,
+				22F1C36C2664D152003A1D5C /* Localizable.strings in Resources */,
 				22F1C31726648D01003A1D5C /* Assets.xcassets in Resources */,
 				22F1C31526648CF8003A1D5C /* Main.storyboard in Resources */,
 			);
@@ -219,6 +226,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				22F1C31426648CF8003A1D5C /* Base */,
+				22F1C3642664D090003A1D5C /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -227,8 +235,18 @@
 			isa = PBXVariantGroup;
 			children = (
 				22F1C31926648D01003A1D5C /* Base */,
+				22F1C3652664D090003A1D5C /* zh-Hant */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		22F1C36E2664D152003A1D5C /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				22F1C36D2664D152003A1D5C /* en */,
+				22F1C3702664D158003A1D5C /* zh-Hant */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -238,6 +256,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -299,6 +318,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
