@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="RegisterViewController" customModule="Vastar" customModuleProvider="target">
+            <connections>
+                <outlet property="confirmPwTextField" destination="GuH-gs-aUQ" id="Y3Z-K2-wqC"/>
+                <outlet property="loginBtn" destination="RBe-Qd-1Xu" id="T6g-KN-euA"/>
+                <outlet property="nameTextField" destination="vLR-ND-zcR" id="Pfl-O3-wT9"/>
+                <outlet property="passwordTextField" destination="Q2T-qu-uUH" id="oIR-li-hKu"/>
+                <outlet property="phoneTextField" destination="pBr-BB-A3L" id="fef-uE-53s"/>
+                <outlet property="registerBtn" destination="wuU-9j-NdE" id="syE-HX-QKL"/>
+                <outlet property="verifyCodeBtn" destination="STa-zm-NXA" id="T5j-8m-O06"/>
+                <outlet property="verifyCodeTextField" destination="wWa-fC-EHt" id="kEI-9t-myR"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="IsE-0D-6nU">
+                    <rect key="frame" x="20" y="50" width="335" height="567"/>
+                </imageView>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vLR-ND-zcR">
+                    <rect key="frame" x="60" y="120" width="255" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pBr-BB-A3L">
+                    <rect key="frame" x="60" y="174" width="255" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q2T-qu-uUH">
+                    <rect key="frame" x="60" y="228" width="255" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GuH-gs-aUQ">
+                    <rect key="frame" x="60" y="282" width="255" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wWa-fC-EHt">
+                    <rect key="frame" x="60" y="336" width="100" height="34"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="wHB-6K-aAJ"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STa-zm-NXA">
+                    <rect key="frame" x="210" y="333" width="105" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="VoH-PX-rae"/>
+                    </constraints>
+                    <state key="normal" title="Button" backgroundImage="get_captcha_btn"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wuU-9j-NdE">
+                    <rect key="frame" x="130" y="433" width="115" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="ExB-Cy-7WT"/>
+                    </constraints>
+                    <state key="normal" title="Button" backgroundImage="btn"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RBe-Qd-1Xu">
+                    <rect key="frame" x="100" y="513" width="175" height="30"/>
+                    <state key="normal" title="Button"/>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" red="0.0" green="0.2410504222" blue="0.14645946030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Q2T-qu-uUH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="04u-VJ-f3v"/>
+                <constraint firstItem="wWa-fC-EHt" firstAttribute="leading" secondItem="GuH-gs-aUQ" secondAttribute="leading" id="07J-b7-SLO"/>
+                <constraint firstItem="STa-zm-NXA" firstAttribute="centerY" secondItem="wWa-fC-EHt" secondAttribute="centerY" id="0Kf-bc-4kw"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Q2T-qu-uUH" secondAttribute="trailing" constant="60" id="4ck-I8-eeP"/>
+                <constraint firstItem="GuH-gs-aUQ" firstAttribute="top" secondItem="Q2T-qu-uUH" secondAttribute="bottom" constant="20" id="8Vl-oy-SaG"/>
+                <constraint firstItem="wuU-9j-NdE" firstAttribute="top" secondItem="STa-zm-NXA" secondAttribute="bottom" constant="60" id="B8E-0M-WlL"/>
+                <constraint firstItem="GuH-gs-aUQ" firstAttribute="centerX" secondItem="vLR-ND-zcR" secondAttribute="centerX" id="FI3-RA-o6a"/>
+                <constraint firstItem="GuH-gs-aUQ" firstAttribute="top" secondItem="Q2T-qu-uUH" secondAttribute="bottom" constant="20" id="H50-GX-AW7"/>
+                <constraint firstItem="IsE-0D-6nU" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="JOc-7v-3rd"/>
+                <constraint firstItem="RBe-Qd-1Xu" firstAttribute="top" secondItem="wuU-9j-NdE" secondAttribute="bottom" constant="20" id="JmB-JR-K2v"/>
+                <constraint firstItem="Q2T-qu-uUH" firstAttribute="top" secondItem="pBr-BB-A3L" secondAttribute="bottom" constant="20" id="Qc1-Vo-TeD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pBr-BB-A3L" secondAttribute="trailing" constant="60" id="V5m-bc-obI"/>
+                <constraint firstItem="vLR-ND-zcR" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="120" id="XvJ-zY-Ag8"/>
+                <constraint firstItem="STa-zm-NXA" firstAttribute="leading" secondItem="wWa-fC-EHt" secondAttribute="trailing" constant="50" id="YBy-Iy-Dji"/>
+                <constraint firstItem="RBe-Qd-1Xu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="100" id="YnC-1y-DnY"/>
+                <constraint firstItem="pBr-BB-A3L" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="ZGv-Se-NjA"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vLR-ND-zcR" secondAttribute="trailing" constant="60" id="ZdA-5X-UlC"/>
+                <constraint firstItem="Q2T-qu-uUH" firstAttribute="centerX" secondItem="vLR-ND-zcR" secondAttribute="centerX" id="aWl-D3-qXx"/>
+                <constraint firstItem="IsE-0D-6nU" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="azu-Ux-pVC"/>
+                <constraint firstItem="wuU-9j-NdE" firstAttribute="centerX" secondItem="vLR-ND-zcR" secondAttribute="centerX" id="bOv-9Q-S8U"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="IsE-0D-6nU" secondAttribute="trailing" constant="20" id="c49-cJ-lBD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="GuH-gs-aUQ" secondAttribute="trailing" constant="60" id="cmM-tb-Dxw"/>
+                <constraint firstItem="pBr-BB-A3L" firstAttribute="centerX" secondItem="vLR-ND-zcR" secondAttribute="centerX" id="d2w-qY-VCf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="IsE-0D-6nU" secondAttribute="bottom" constant="50" id="eSP-Dx-vKh"/>
+                <constraint firstItem="vLR-ND-zcR" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="fS5-lZ-cfT"/>
+                <constraint firstItem="GuH-gs-aUQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="gRU-bz-SeO"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RBe-Qd-1Xu" secondAttribute="trailing" constant="100" id="k5q-34-TtK"/>
+                <constraint firstItem="wuU-9j-NdE" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="130" id="kOY-0S-S5s"/>
+                <constraint firstItem="pBr-BB-A3L" firstAttribute="top" secondItem="vLR-ND-zcR" secondAttribute="bottom" constant="20" id="kzM-AW-lsq"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wuU-9j-NdE" secondAttribute="trailing" constant="130" id="nkC-Y0-rur"/>
+                <constraint firstItem="wWa-fC-EHt" firstAttribute="top" secondItem="GuH-gs-aUQ" secondAttribute="bottom" constant="20" id="orL-yw-K1c"/>
+                <constraint firstItem="STa-zm-NXA" firstAttribute="trailing" secondItem="GuH-gs-aUQ" secondAttribute="trailing" id="pR2-Yr-fpQ"/>
+                <constraint firstItem="RBe-Qd-1Xu" firstAttribute="centerX" secondItem="vLR-ND-zcR" secondAttribute="centerX" id="z6j-fU-TZ4"/>
+            </constraints>
+            <point key="canvasLocation" x="111.2" y="96.7016491754123"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="background" width="734" height="1224"/>
+        <image name="btn" width="477" height="246"/>
+        <image name="get_captcha_btn" width="330" height="183"/>
+    </resources>
+</document>

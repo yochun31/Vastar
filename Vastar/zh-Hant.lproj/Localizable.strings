@@ -5,3 +5,26 @@
   Created by 郭堯彰 on 2021/5/31.
   
 */
+
+"Login_Account_title" = "手機號碼";
+"Login_Password_title" = "密碼";
+"Login_Button_title" = "登入";
+"Login_Forget_Button_title" = "忘記密碼";
+"Login_Register_Button_title" = "我還沒註冊，點我註冊";
+
+"Register_Name_title" = "姓名";
+"Register_Phone_title" = "手機號碼";
+"Register_Password_title" = "密碼";
+"Register_Confirm_Password_title" = "確認密碼";
+"Register_Verify_Code_title" = "驗證碼";
+"Register_Verify_Code_Btn_title" = "取得驗證碼";
+"Register_Button_title" = "註冊";
+"Register_Login_Btn_title" = "我已有帳號，點我登入";
+
+"Forget_Pw_Phone_title" = "手機號碼";
+"Forget_Pw_New_title" = "輸入新密碼";
+"Forget_Pw_Confirm_title" = "確認新密碼";
+"Forget_Verify_Code_title" = "驗證碼";
+"Forget_Verify_Code_Btn_title" = "取得驗證碼";
+"Forget_Confirm_Btn_title" = "確定";
+"Forget_Cancel_Btn_title" = "取消";

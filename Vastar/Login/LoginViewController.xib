@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="Vastar" customModuleProvider="target">
+            <connections>
+                <outlet property="accountNameTextField" destination="oYB-Xf-8Z3" id="1gZ-9b-yd5"/>
+                <outlet property="forgetPwBtn" destination="RV1-4n-Rj4" id="nre-su-rlG"/>
+                <outlet property="loginBtn" destination="yqR-WG-AUe" id="zgR-Vv-t71"/>
+                <outlet property="passwordTextField" destination="EXi-SV-OFu" id="bO6-zQ-WsR"/>
+                <outlet property="registerBtn" destination="Juv-cF-eDe" id="CwV-dN-tiZ"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="fNw-if-Wqu">
+                    <rect key="frame" x="20" y="50" width="335" height="567"/>
+                </imageView>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oYB-Xf-8Z3">
+                    <rect key="frame" x="70" y="170" width="235" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                </textField>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EXi-SV-OFu">
+                    <rect key="frame" x="70" y="254" width="235" height="34"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqR-WG-AUe">
+                    <rect key="frame" x="130" y="348" width="115" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="ZWf-4P-XjJ"/>
+                    </constraints>
+                    <state key="normal" title="Button" backgroundImage="btn"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RV1-4n-Rj4">
+                    <rect key="frame" x="150" y="423" width="75" height="30"/>
+                    <state key="normal" title="Button"/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Juv-cF-eDe">
+                    <rect key="frame" x="100" y="483" width="175" height="30"/>
+                    <state key="normal" title="Button"/>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" red="0.0" green="0.2410504222" blue="0.14645946030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="EXi-SV-OFu" firstAttribute="top" secondItem="oYB-Xf-8Z3" secondAttribute="bottom" constant="50" id="8pO-NX-QBx"/>
+                <constraint firstItem="RV1-4n-Rj4" firstAttribute="centerX" secondItem="oYB-Xf-8Z3" secondAttribute="centerX" id="90b-6W-I5U"/>
+                <constraint firstItem="RV1-4n-Rj4" firstAttribute="top" secondItem="yqR-WG-AUe" secondAttribute="bottom" constant="15" id="AEN-ae-CQk"/>
+                <constraint firstItem="yqR-WG-AUe" firstAttribute="top" secondItem="EXi-SV-OFu" secondAttribute="bottom" constant="60" id="AQb-DW-sNF"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="fNw-if-Wqu" secondAttribute="bottom" constant="50" id="JS4-mW-LyH"/>
+                <constraint firstItem="fNw-if-Wqu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="M0N-Ia-92M"/>
+                <constraint firstItem="oYB-Xf-8Z3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="70" id="UYf-bh-F2Y"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="oYB-Xf-8Z3" secondAttribute="trailing" constant="70" id="VTR-ua-nd1"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="yqR-WG-AUe" secondAttribute="trailing" constant="130" id="Xqy-Ho-mVD"/>
+                <constraint firstItem="EXi-SV-OFu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="70" id="Ypg-eQ-RdG"/>
+                <constraint firstItem="oYB-Xf-8Z3" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="170" id="aKu-66-HcF"/>
+                <constraint firstItem="yqR-WG-AUe" firstAttribute="centerX" secondItem="oYB-Xf-8Z3" secondAttribute="centerX" id="cBz-Vu-mqW"/>
+                <constraint firstItem="RV1-4n-Rj4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="150" id="h5x-SZ-Xt3"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Juv-cF-eDe" secondAttribute="trailing" constant="100" id="h9v-ZQ-Z1B"/>
+                <constraint firstItem="EXi-SV-OFu" firstAttribute="centerX" secondItem="oYB-Xf-8Z3" secondAttribute="centerX" id="jfi-jC-IQ2"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fNw-if-Wqu" secondAttribute="trailing" constant="20" id="jld-sz-A79"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="EXi-SV-OFu" secondAttribute="trailing" constant="70" id="n2H-pa-9yW"/>
+                <constraint firstItem="fNw-if-Wqu" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="o2b-52-yCI"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="RV1-4n-Rj4" secondAttribute="trailing" constant="150" id="qKG-wR-hzE"/>
+                <constraint firstItem="Juv-cF-eDe" firstAttribute="top" secondItem="RV1-4n-Rj4" secondAttribute="bottom" constant="30" id="tb6-f7-K5s"/>
+                <constraint firstItem="Juv-cF-eDe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="100" id="vTr-iS-JIT"/>
+                <constraint firstItem="yqR-WG-AUe" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="130" id="z8a-vJ-Nxq"/>
+                <constraint firstItem="Juv-cF-eDe" firstAttribute="centerX" secondItem="oYB-Xf-8Z3" secondAttribute="centerX" id="zZj-3D-jfc"/>
+            </constraints>
+            <point key="canvasLocation" x="20" y="96.7016491754123"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="background" width="734" height="1224"/>
+        <image name="btn" width="477" height="246"/>
+    </resources>
+</document>
