@@ -38,6 +38,8 @@
 		22F1C3EC266885F7003A1D5C /* HistoryOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C3EA266885F7003A1D5C /* HistoryOrderViewController.xib */; };
 		22F1C3F026688620003A1D5C /* MemberDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C3EE26688620003A1D5C /* MemberDataViewController.swift */; };
 		22F1C3F126688620003A1D5C /* MemberDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C3EF26688620003A1D5C /* MemberDataViewController.xib */; };
+		22F1C3F52668B44C003A1D5C /* CloudGatewayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C3F42668B44C003A1D5C /* CloudGatewayManager.swift */; };
+		22F1C3F82668B522003A1D5C /* VClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C3F72668B522003A1D5C /* VClient.swift */; };
 		59BB5765C24B763600503843 /* Pods_Vastar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D3F6B628888968EBF5FED1C /* Pods_Vastar.framework */; };
 /* End PBXBuildFile section */
 
@@ -78,6 +80,8 @@
 		22F1C3EA266885F7003A1D5C /* HistoryOrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryOrderViewController.xib; sourceTree = "<group>"; };
 		22F1C3EE26688620003A1D5C /* MemberDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDataViewController.swift; sourceTree = "<group>"; };
 		22F1C3EF26688620003A1D5C /* MemberDataViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberDataViewController.xib; sourceTree = "<group>"; };
+		22F1C3F42668B44C003A1D5C /* CloudGatewayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudGatewayManager.swift; sourceTree = "<group>"; };
+		22F1C3F72668B522003A1D5C /* VClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VClient.swift; sourceTree = "<group>"; };
 		4D3F6B628888968EBF5FED1C /* Pods_Vastar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vastar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		712042D70D1373F3119BDA1B /* Pods-Vastar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vastar.release.xcconfig"; path = "Target Support Files/Pods-Vastar/Pods-Vastar.release.xcconfig"; sourceTree = "<group>"; };
 		AA7D015424682E86B089ECA9 /* Pods-Vastar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vastar.debug.xcconfig"; path = "Target Support Files/Pods-Vastar/Pods-Vastar.debug.xcconfig"; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 		22F1C39126660E1D003A1D5C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				22F1C3F32668B41B003A1D5C /* VClient */,
 				22F1C39326660F17003A1D5C /* TableViewCell */,
 				22F1C39226660EFE003A1D5C /* SideMenu */,
 			);
@@ -190,6 +195,15 @@
 				22F1C3EF26688620003A1D5C /* MemberDataViewController.xib */,
 			);
 			path = SideBar;
+			sourceTree = "<group>";
+		};
+		22F1C3F32668B41B003A1D5C /* VClient */ = {
+			isa = PBXGroup;
+			children = (
+				22F1C3F42668B44C003A1D5C /* CloudGatewayManager.swift */,
+				22F1C3F72668B522003A1D5C /* VClient.swift */,
+			);
+			path = VClient;
 			sourceTree = "<group>";
 		};
 		4F478BFC4CD209678CBA066D /* Frameworks */ = {
@@ -343,8 +357,10 @@
 				22F1C39C26660FCC003A1D5C /* SMSideMenuViewController.swift in Sources */,
 				22F1C3D82668852D003A1D5C /* ProductViewController.swift in Sources */,
 				22F1C31226648CF8003A1D5C /* ViewController.swift in Sources */,
+				22F1C3F82668B522003A1D5C /* VClient.swift in Sources */,
 				22F1C3EB266885F7003A1D5C /* HistoryOrderViewController.swift in Sources */,
 				22F1C30E26648CF8003A1D5C /* AppDelegate.swift in Sources */,
+				22F1C3F52668B44C003A1D5C /* CloudGatewayManager.swift in Sources */,
 				22F1C39626660F7C003A1D5C /* SMMainViewController.swift in Sources */,
 				22F1C3E02668857B003A1D5C /* ShoppingCarViewController.swift in Sources */,
 				22F1C3A1266613F7003A1D5C /* SideMenuTableViewCell.swift in Sources */,
