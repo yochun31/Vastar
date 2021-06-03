@@ -20,6 +20,24 @@
 		22F1C3872665CB99003A1D5C /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C3852665CB99003A1D5C /* RegisterViewController.xib */; };
 		22F1C38C2665CBCB003A1D5C /* ForgetPwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C38A2665CBCB003A1D5C /* ForgetPwViewController.swift */; };
 		22F1C38D2665CBCB003A1D5C /* ForgetPwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C38B2665CBCB003A1D5C /* ForgetPwViewController.xib */; };
+		22F1C39626660F7C003A1D5C /* SMMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C39426660F7C003A1D5C /* SMMainViewController.swift */; };
+		22F1C39726660F7C003A1D5C /* SMMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C39526660F7C003A1D5C /* SMMainViewController.xib */; };
+		22F1C39C26660FCC003A1D5C /* SMSideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C39A26660FCC003A1D5C /* SMSideMenuViewController.swift */; };
+		22F1C39D26660FCC003A1D5C /* SMSideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C39B26660FCC003A1D5C /* SMSideMenuViewController.xib */; };
+		22F1C3A1266613F7003A1D5C /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C39F266613F7003A1D5C /* SideMenuTableViewCell.swift */; };
+		22F1C3A2266613F7003A1D5C /* SideMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C3A0266613F7003A1D5C /* SideMenuTableViewCell.xib */; };
+		22F1C3A726661A34003A1D5C /* VideoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C3A526661A34003A1D5C /* VideoViewController.swift */; };
+		22F1C3A826661A34003A1D5C /* VideoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C3A626661A34003A1D5C /* VideoViewController.xib */; };
+		22F1C3D82668852D003A1D5C /* ProductViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C3D62668852D003A1D5C /* ProductViewController.swift */; };
+		22F1C3D92668852D003A1D5C /* ProductViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C3D72668852D003A1D5C /* ProductViewController.xib */; };
+		22F1C3E02668857B003A1D5C /* ShoppingCarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C3DE2668857B003A1D5C /* ShoppingCarViewController.swift */; };
+		22F1C3E12668857B003A1D5C /* ShoppingCarViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C3DF2668857B003A1D5C /* ShoppingCarViewController.xib */; };
+		22F1C3E6266885D9003A1D5C /* OrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C3E4266885D9003A1D5C /* OrderViewController.swift */; };
+		22F1C3E7266885D9003A1D5C /* OrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C3E5266885D9003A1D5C /* OrderViewController.xib */; };
+		22F1C3EB266885F7003A1D5C /* HistoryOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C3E9266885F7003A1D5C /* HistoryOrderViewController.swift */; };
+		22F1C3EC266885F7003A1D5C /* HistoryOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C3EA266885F7003A1D5C /* HistoryOrderViewController.xib */; };
+		22F1C3F026688620003A1D5C /* MemberDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C3EE26688620003A1D5C /* MemberDataViewController.swift */; };
+		22F1C3F126688620003A1D5C /* MemberDataViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C3EF26688620003A1D5C /* MemberDataViewController.xib */; };
 		59BB5765C24B763600503843 /* Pods_Vastar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D3F6B628888968EBF5FED1C /* Pods_Vastar.framework */; };
 /* End PBXBuildFile section */
 
@@ -42,6 +60,24 @@
 		22F1C3852665CB99003A1D5C /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		22F1C38A2665CBCB003A1D5C /* ForgetPwViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPwViewController.swift; sourceTree = "<group>"; };
 		22F1C38B2665CBCB003A1D5C /* ForgetPwViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgetPwViewController.xib; sourceTree = "<group>"; };
+		22F1C39426660F7C003A1D5C /* SMMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMMainViewController.swift; sourceTree = "<group>"; };
+		22F1C39526660F7C003A1D5C /* SMMainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SMMainViewController.xib; sourceTree = "<group>"; };
+		22F1C39A26660FCC003A1D5C /* SMSideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSideMenuViewController.swift; sourceTree = "<group>"; };
+		22F1C39B26660FCC003A1D5C /* SMSideMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SMSideMenuViewController.xib; sourceTree = "<group>"; };
+		22F1C39F266613F7003A1D5C /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
+		22F1C3A0266613F7003A1D5C /* SideMenuTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SideMenuTableViewCell.xib; sourceTree = "<group>"; };
+		22F1C3A526661A34003A1D5C /* VideoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewController.swift; sourceTree = "<group>"; };
+		22F1C3A626661A34003A1D5C /* VideoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoViewController.xib; sourceTree = "<group>"; };
+		22F1C3D62668852D003A1D5C /* ProductViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductViewController.swift; sourceTree = "<group>"; };
+		22F1C3D72668852D003A1D5C /* ProductViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductViewController.xib; sourceTree = "<group>"; };
+		22F1C3DE2668857B003A1D5C /* ShoppingCarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingCarViewController.swift; sourceTree = "<group>"; };
+		22F1C3DF2668857B003A1D5C /* ShoppingCarViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ShoppingCarViewController.xib; sourceTree = "<group>"; };
+		22F1C3E4266885D9003A1D5C /* OrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewController.swift; sourceTree = "<group>"; };
+		22F1C3E5266885D9003A1D5C /* OrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderViewController.xib; sourceTree = "<group>"; };
+		22F1C3E9266885F7003A1D5C /* HistoryOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOrderViewController.swift; sourceTree = "<group>"; };
+		22F1C3EA266885F7003A1D5C /* HistoryOrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryOrderViewController.xib; sourceTree = "<group>"; };
+		22F1C3EE26688620003A1D5C /* MemberDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemberDataViewController.swift; sourceTree = "<group>"; };
+		22F1C3EF26688620003A1D5C /* MemberDataViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MemberDataViewController.xib; sourceTree = "<group>"; };
 		4D3F6B628888968EBF5FED1C /* Pods_Vastar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vastar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		712042D70D1373F3119BDA1B /* Pods-Vastar.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vastar.release.xcconfig"; path = "Target Support Files/Pods-Vastar/Pods-Vastar.release.xcconfig"; sourceTree = "<group>"; };
 		AA7D015424682E86B089ECA9 /* Pods-Vastar.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vastar.debug.xcconfig"; path = "Target Support Files/Pods-Vastar/Pods-Vastar.debug.xcconfig"; sourceTree = "<group>"; };
@@ -80,7 +116,9 @@
 		22F1C30C26648CF7003A1D5C /* Vastar */ = {
 			isa = PBXGroup;
 			children = (
+				22F1C39126660E1D003A1D5C /* Components */,
 				22F1C3532664C58F003A1D5C /* Login */,
+				22F1C3A4266619FA003A1D5C /* SideBar */,
 				22F1C30D26648CF8003A1D5C /* AppDelegate.swift */,
 				22F1C30F26648CF8003A1D5C /* SceneDelegate.swift */,
 				22F1C31126648CF8003A1D5C /* ViewController.swift */,
@@ -104,6 +142,54 @@
 				22F1C38B2665CBCB003A1D5C /* ForgetPwViewController.xib */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		22F1C39126660E1D003A1D5C /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				22F1C39326660F17003A1D5C /* TableViewCell */,
+				22F1C39226660EFE003A1D5C /* SideMenu */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		22F1C39226660EFE003A1D5C /* SideMenu */ = {
+			isa = PBXGroup;
+			children = (
+				22F1C39426660F7C003A1D5C /* SMMainViewController.swift */,
+				22F1C39526660F7C003A1D5C /* SMMainViewController.xib */,
+				22F1C39A26660FCC003A1D5C /* SMSideMenuViewController.swift */,
+				22F1C39B26660FCC003A1D5C /* SMSideMenuViewController.xib */,
+			);
+			path = SideMenu;
+			sourceTree = "<group>";
+		};
+		22F1C39326660F17003A1D5C /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				22F1C39F266613F7003A1D5C /* SideMenuTableViewCell.swift */,
+				22F1C3A0266613F7003A1D5C /* SideMenuTableViewCell.xib */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		22F1C3A4266619FA003A1D5C /* SideBar */ = {
+			isa = PBXGroup;
+			children = (
+				22F1C3A526661A34003A1D5C /* VideoViewController.swift */,
+				22F1C3A626661A34003A1D5C /* VideoViewController.xib */,
+				22F1C3D62668852D003A1D5C /* ProductViewController.swift */,
+				22F1C3D72668852D003A1D5C /* ProductViewController.xib */,
+				22F1C3DE2668857B003A1D5C /* ShoppingCarViewController.swift */,
+				22F1C3DF2668857B003A1D5C /* ShoppingCarViewController.xib */,
+				22F1C3E4266885D9003A1D5C /* OrderViewController.swift */,
+				22F1C3E5266885D9003A1D5C /* OrderViewController.xib */,
+				22F1C3E9266885F7003A1D5C /* HistoryOrderViewController.swift */,
+				22F1C3EA266885F7003A1D5C /* HistoryOrderViewController.xib */,
+				22F1C3EE26688620003A1D5C /* MemberDataViewController.swift */,
+				22F1C3EF26688620003A1D5C /* MemberDataViewController.xib */,
+			);
+			path = SideBar;
 			sourceTree = "<group>";
 		};
 		4F478BFC4CD209678CBA066D /* Frameworks */ = {
@@ -183,12 +269,21 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22F1C39D26660FCC003A1D5C /* SMSideMenuViewController.xib in Resources */,
+				22F1C3A2266613F7003A1D5C /* SideMenuTableViewCell.xib in Resources */,
 				22F1C35D2664C7AC003A1D5C /* LoginViewController.xib in Resources */,
+				22F1C3E12668857B003A1D5C /* ShoppingCarViewController.xib in Resources */,
 				22F1C38D2665CBCB003A1D5C /* ForgetPwViewController.xib in Resources */,
 				22F1C31A26648D01003A1D5C /* LaunchScreen.storyboard in Resources */,
 				22F1C36C2664D152003A1D5C /* Localizable.strings in Resources */,
+				22F1C3E7266885D9003A1D5C /* OrderViewController.xib in Resources */,
 				22F1C31726648D01003A1D5C /* Assets.xcassets in Resources */,
+				22F1C39726660F7C003A1D5C /* SMMainViewController.xib in Resources */,
 				22F1C31526648CF8003A1D5C /* Main.storyboard in Resources */,
+				22F1C3A826661A34003A1D5C /* VideoViewController.xib in Resources */,
+				22F1C3D92668852D003A1D5C /* ProductViewController.xib in Resources */,
+				22F1C3EC266885F7003A1D5C /* HistoryOrderViewController.xib in Resources */,
+				22F1C3F126688620003A1D5C /* MemberDataViewController.xib in Resources */,
 				22F1C3872665CB99003A1D5C /* RegisterViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -244,9 +339,18 @@
 			files = (
 				22F1C35C2664C7AC003A1D5C /* LoginViewController.swift in Sources */,
 				22F1C3862665CB99003A1D5C /* RegisterViewController.swift in Sources */,
+				22F1C3E6266885D9003A1D5C /* OrderViewController.swift in Sources */,
+				22F1C39C26660FCC003A1D5C /* SMSideMenuViewController.swift in Sources */,
+				22F1C3D82668852D003A1D5C /* ProductViewController.swift in Sources */,
 				22F1C31226648CF8003A1D5C /* ViewController.swift in Sources */,
+				22F1C3EB266885F7003A1D5C /* HistoryOrderViewController.swift in Sources */,
 				22F1C30E26648CF8003A1D5C /* AppDelegate.swift in Sources */,
+				22F1C39626660F7C003A1D5C /* SMMainViewController.swift in Sources */,
+				22F1C3E02668857B003A1D5C /* ShoppingCarViewController.swift in Sources */,
+				22F1C3A1266613F7003A1D5C /* SideMenuTableViewCell.swift in Sources */,
+				22F1C3F026688620003A1D5C /* MemberDataViewController.swift in Sources */,
 				22F1C38C2665CBCB003A1D5C /* ForgetPwViewController.swift in Sources */,
+				22F1C3A726661A34003A1D5C /* VideoViewController.swift in Sources */,
 				22F1C31026648CF8003A1D5C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,7 +440,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -392,7 +496,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class LoginViewController: UIViewController {
 
     @IBOutlet var accountNameTextField: UITextField!
@@ -24,6 +25,10 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         setInterface()
+        
+
+
+        
     }
 
     // MARK: - UI Interface Methods
@@ -51,9 +56,24 @@ class LoginViewController: UIViewController {
     }
     
     
+
+    
     //MARK: - Action
     
     @objc func loginBtnClick(_ sender:UIButton) {
+        
+//        let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
+//        let navController = UINavigationController(rootViewController: vc)
+        
+//        let nav = UINavigationController()
+//        let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
+//        nav.modalPresentationStyle = .fullScreen
+//        nav.viewControllers = [vc]
+//        self.present(nav, animated: true, completion: nil)
+        
+        let vc = SMMainViewController(nibName: "SMMainViewController", bundle: nil)
+        vc.modalPresentationStyle = .fullScreen
+        self.present(vc, animated: true, completion: nil)
         
     }
     

@@ -28,3 +28,14 @@
 "Forget_Verify_Code_Btn_title" = "取得驗證碼";
 "Forget_Confirm_Btn_title" = "確定";
 "Forget_Cancel_Btn_title" = "取消";
+
+"SideBar_Menu_Section1_title" = "訂單";
+"SideBar_Menu_Section2_title" = "會員";
+"SideBar_Menu_Section0_row0_title" = "影片首頁";
+"SideBar_Menu_Section0_row1_title" = "商品圖片與規格";
+"SideBar_Menu_Section0_row2_title" = "購物車";
+"SideBar_Menu_Section1_row0_title" = "訂單狀態";
+"SideBar_Menu_Section1_row1_title" = "歷史訂單";
+"SideBar_Menu_Section2_row0_title" = "會員資料";
+"SideBar_Menu_Section2_row1_title" = "修改密碼";
+"SideBar_Menu_Section2_row2_title" = "登出";
