@@ -17,6 +17,10 @@ class LoginViewController: UIViewController {
     @IBOutlet var forgetPwBtn: UIButton!
     @IBOutlet var registerBtn: UIButton!
     
+    private var userResgisterTime:String = ""
+    
+    private var vaiv = VActivityIndicatorView()
+    
     //MARK: -  Life Cycle
     
     override func viewDidLoad() {
@@ -38,7 +42,7 @@ class LoginViewController: UIViewController {
         self.accountNameTextField.placeholder = NSLocalizedString("Login_Account_title", comment: "")
         
         self.passwordTextField.placeholder = NSLocalizedString("Login_Password_title", comment: "")
-        
+        self.passwordTextField.isSecureTextEntry = true
         
         self.loginBtn.setTitle(NSLocalizedString("Login_Button_title", comment: ""), for: .normal)
         self.loginBtn.titleLabel?.font = UIFont.systemFont(ofSize: 25.0)
@@ -55,25 +59,74 @@ class LoginViewController: UIViewController {
         
     }
     
+    //MARK: - Assistant Methods
     
-
+    func getUserInfo(accountName:String,pw:String) {
+        
+        self.vaiv.startProgressHUD(view: self.view, content: NSLocalizedString("Login_ActivityIndicatorView_title", comment: ""))
+        
+        VClient.sharedInstance().VCGetUserInfoByPhone(phone: accountName) { (_ isSuccess:Bool,_ message:String,_ dictResData:[String:Any]) in
+            
+            if isSuccess {
+                let res_registerTime = dictResData["RegisterTime"] as? String ?? ""
+                let registerTimeArray = res_registerTime.split(separator: ".")
+                self.userResgisterTime = String(registerTimeArray[0])
+                
+                let passWord:String = "\(pw)\(self.userResgisterTime)"
+                self.loginVerification(accountName: accountName, pw: passWord)
+            }else{
+                self.vaiv.stopProgressHUD(view: self.view)
+                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
+                    
+                }
+            }
+        }
+    }
+    
+    func loginVerification(accountName:String,pw:String) {
+        
+        VClient.sharedInstance().VCLoginByPhone(account: accountName, pw: pw) { (_ isSuccess:Bool,_ message:String) in
+            
+            if isSuccess {
+                
+                print("--\(message)--")
+                self.vaiv.stopProgressHUD(view: self.view)
+                let vc = SMMainViewController(nibName: "SMMainViewController", bundle: nil)
+                vc.modalPresentationStyle = .fullScreen
+                self.present(vc, animated: true, completion: nil)
+                
+            }else{
+                self.vaiv.stopProgressHUD(view: self.view)
+                
+                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
+                    
+                }
+            }
+        }
+    }
+    
+    
     
     //MARK: - Action
     
     @objc func loginBtnClick(_ sender:UIButton) {
         
-//        let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
-//        let navController = UINavigationController(rootViewController: vc)
+        let accountText:String = self.accountNameTextField.text ?? ""
+        let pwText:String = self.passwordTextField.text ?? ""
         
-//        let nav = UINavigationController()
-//        let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
-//        nav.modalPresentationStyle = .fullScreen
-//        nav.viewControllers = [vc]
-//        self.present(nav, animated: true, completion: nil)
+        if accountText.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Login_Input_Phone_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
+                
+            }
+        }else if pwText.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Login_Input_Pw_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
+                
+            }
+        }else {
+            getUserInfo(accountName: accountText, pw: pwText)
+        }
         
-        let vc = SMMainViewController(nibName: "SMMainViewController", bundle: nil)
-        vc.modalPresentationStyle = .fullScreen
-        self.present(vc, animated: true, completion: nil)
+        
         
     }
     

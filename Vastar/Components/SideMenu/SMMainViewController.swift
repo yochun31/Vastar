@@ -165,7 +165,12 @@ extension SMMainViewController: SMSideMenuSelectDelegate {
             }else if row == 1 {
                 showViewController(viewController: UINavigationController.self, xibName: "")
             }else if row == 2 {
-                self.dismiss(animated: true, completion: nil)
+                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("LogOut_Alert_Text", comment: ""), actionTitle: [NSLocalizedString("Alert_Sure_title", comment: "")], preferredStyle: .alert, viewController: self) { (btnIndex, btnTitle) in
+                    if btnIndex == 1 {
+                        self.dismiss(animated: true, completion: nil)
+                    }
+                }
+                
             }
             
             break

@@ -6,11 +6,21 @@
   
 */
 
+"Alert_Loading_title" = "載入中";
+"Alert_Sure_title" = "確定";
+"Alert_Cancel_title" = "取消";
+"Alert_title" = "提示";
+
 "Login_Account_title" = "手機號碼";
 "Login_Password_title" = "密碼";
 "Login_Button_title" = "登入";
 "Login_Forget_Button_title" = "忘記密碼";
 "Login_Register_Button_title" = "我還沒註冊，點我註冊";
+"Login_ActivityIndicatorView_title" = "登入中...";
+"Login_Input_Phone_Alert_Text" = "尚未輸入手機";
+"Login_Input_Pw_Alert_Text" = "尚未輸入密碼";
+
+"LogOut_Alert_Text" = "是否確定要登出?";
 
 "Register_Name_title" = "姓名";
 "Register_Phone_title" = "手機號碼";

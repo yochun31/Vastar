@@ -7,5 +7,6 @@ target 'Vastar' do
 
   # Pods for Vastar
     pod 'Alamofire' ,'4.9.1'
+    pod 'IQKeyboardManagerSwift'
 
 end
