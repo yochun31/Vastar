@@ -75,10 +75,51 @@ class VClient {
         }
     }
     
+    //MARK:- Member
+    
     func VCGetUserInfoByPhone(phone:String,result:@escaping(_ isSuccess:Bool,_ message:String,_ dictResData:[String:Any]) -> Void) {
 
         CloudGatewayManager.sharedInstance().CGMGetUserInfoByPhone(phone: phone) { (_ isSuccess:Bool,_ message:String,_ dictResData:[String:Any]) in
             result(isSuccess,message,dictResData)
+        }
+    }
+    
+    
+    func VCUpdateForgetPw(phone:String,newPw:String,result:@escaping(_ isSuccess:Bool,_ message:String) -> Void) {
+        
+        let md5Data = MD5_String(string:newPw)
+        let md5Data1 = MD5_Data(data: md5Data)
+        let md5Hex =  md5Data1.map { String(format: "%02hhx", $0) }.joined()
+        let hashPassword = "0x\(md5Hex)"
+        
+        var bodyDict:[String:String] = [:]
+        bodyDict.updateValue("vastar", forKey: "UserID")
+        bodyDict.updateValue("vastar@2673", forKey: "Password")
+        bodyDict.updateValue(phone, forKey: "Account_Name")
+        bodyDict.updateValue("UpdateHashPasswordForget", forKey: "UpdateMode")
+        bodyDict.updateValue("", forKey: "OldHashPassword")
+        bodyDict.updateValue(hashPassword, forKey: "NewHashPassword")
+        bodyDict.updateValue("", forKey: "Name")
+        bodyDict.updateValue("", forKey: "Birthday")
+        bodyDict.updateValue("", forKey: "Telephone")
+        
+        CloudGatewayManager.sharedInstance().CGMUpdateUserInfoByData(reqBodyDict: bodyDict) { (_ isSuccess:Bool,_ message:String) in
+            result(isSuccess,message)
+        }
+    }
+    
+    
+    func VCRegisterUserByData(pw:String,regBodyDict:[String:Any],result:@escaping (_ isSuccess:Bool,_ message:String) -> Void) {
+        
+        let md5Data = MD5_String(string:pw)
+        let md5Data1 = MD5_Data(data: md5Data)
+        let md5Hex =  md5Data1.map { String(format: "%02hhx", $0) }.joined()
+        let hashPassword = "0x\(md5Hex)"
+        var dataDict:[String:Any] = regBodyDict
+        dataDict.updateValue(hashPassword, forKey: "HashPassword")
+        
+        CloudGatewayManager.sharedInstance().CGMRegisterUserByData(regBodyDict: dataDict) { (_ isSuccess:Bool,_ message:String) in
+            result(isSuccess,message)
         }
     }
 }

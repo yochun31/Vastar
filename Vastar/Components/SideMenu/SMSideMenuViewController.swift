@@ -23,6 +23,8 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
     private var section1_menuItemArray:Array<String> = []
     private var section2_menuItemArray:Array<String> = []
     
+    var menuTitle:String = ""
+    
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -31,6 +33,7 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
         // Do any additional setup after loading the view.
         
         setSideMenuTableView()
+        
     }
     
     
@@ -50,6 +53,8 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
         self.section0_menuItemArray = [NSLocalizedString("SideBar_Menu_Section0_row0_title", comment: ""),NSLocalizedString("SideBar_Menu_Section0_row1_title", comment: ""),NSLocalizedString("SideBar_Menu_Section0_row2_title", comment: "")]
         self.section1_menuItemArray = [NSLocalizedString("SideBar_Menu_Section1_row0_title", comment: ""),NSLocalizedString("SideBar_Menu_Section1_row1_title", comment: "")]
         self.section2_menuItemArray = [NSLocalizedString("SideBar_Menu_Section2_row0_title", comment: ""),NSLocalizedString("SideBar_Menu_Section2_row1_title", comment: ""),NSLocalizedString("SideBar_Menu_Section2_row2_title", comment: "")]
+        
+        self.sideBarTitleLabel.text = menuTitle
         
     }
     

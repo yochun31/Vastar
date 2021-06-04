@@ -20,6 +20,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet var registerBtn: UIButton!
     @IBOutlet var loginBtn: UIButton!
     
+    private var vaiv = VActivityIndicatorView()
     
     //MARK: - Life Cycle
     
@@ -41,8 +42,10 @@ class RegisterViewController: UIViewController {
         self.phoneTextField.placeholder = NSLocalizedString("Register_Phone_title", comment: "")
         
         self.passwordTextField.placeholder = NSLocalizedString("Register_Password_title", comment: "")
+        self.passwordTextField.isSecureTextEntry = true
         
         self.confirmPwTextField.placeholder = NSLocalizedString("Register_Confirm_Password_title", comment: "")
+        self.confirmPwTextField.isSecureTextEntry = true
         
         self.verifyCodeTextField.placeholder = NSLocalizedString("Register_Verify_Code_title", comment: "")
         
@@ -60,6 +63,76 @@ class RegisterViewController: UIViewController {
         self.loginBtn.addTarget(self, action: #selector(loginBtnClick(_:)), for: .touchUpInside)
     }
     
+    //MARK: - Assistant Methods
+    
+    func createRegisterUserData(name:String,phone:String,pw:String) {
+        
+        let nowdate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let nowDateString = dateFormatter.string(from: nowdate)
+        print("==date = \(nowDateString)")
+        
+        var regDataDict:[String:Any] = [:]
+        regDataDict.updateValue("vastar", forKey: "UserID")
+        regDataDict.updateValue("vastar@2673", forKey: "Password")
+        regDataDict.updateValue(phone, forKey: "Account_Name")
+        regDataDict.updateValue(1, forKey: "Phone_Check")
+        regDataDict.updateValue(name, forKey: "Name")
+        regDataDict.updateValue(nowDateString, forKey: "RegisterTime")
+        
+        let newPassWord:String = "\(pw)\(nowDateString)"
+        
+        self.vaiv.startProgressHUD(view: self.view, content: NSLocalizedString("Alert_Loading_title", comment: ""))
+        VClient.sharedInstance().VCRegisterUserByData(pw: newPassWord, regBodyDict: regDataDict) { (_ isSuccess:Bool,_ message:String) in
+            
+            if isSuccess {
+            
+                self.vaiv.stopProgressHUD(view: self.view)
+                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            }else{
+                self.vaiv.stopProgressHUD(view: self.view)
+                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            }
+        }
+        
+    }
+    
+    func checkInputData() {
+        
+        let nameText = self.nameTextField.text ?? ""
+        let phoneText = self.phoneTextField.text ?? ""
+        let pwText = self.passwordTextField.text ?? ""
+        let confirmPwText = self.confirmPwTextField.text ?? ""
+        
+        if nameText.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Register_Input_Name_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else if phoneText.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Register_Input_Phone_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else if pwText.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Register_Input_Pw_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else if pwText.count < 8 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Register_Input_Pw_8_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else if confirmPwText.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Register_Input_Confirm_Pw_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else if pwText != confirmPwText {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Register_Input_diff_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else {
+            
+            self.createRegisterUserData(name: nameText, phone: phoneText, pw: pwText)
+        }
+        
+    }
+    
+    
     //MARK: - Action
     
     @objc func verifyCodeBtnClick(_ sender:UIButton){
@@ -68,6 +141,7 @@ class RegisterViewController: UIViewController {
     
     @objc func registerBtnClick(_ sender:UIButton){
         
+        checkInputData()
     }
     
     @objc func loginBtnClick(_ sender:UIButton){

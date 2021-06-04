@@ -30,6 +30,13 @@
 "Register_Verify_Code_Btn_title" = "取得驗證碼";
 "Register_Button_title" = "註冊";
 "Register_Login_Btn_title" = "我已有帳號，點我登入";
+"Register_Input_Name_Alert_Text" = "尚未輸入姓名";
+"Register_Input_Phone_Alert_Text" = "尚未輸入手機";
+"Register_Input_Pw_Alert_Text" = "尚未輸入密碼";
+"Register_Input_Confirm_Pw_Alert_Text" = "尚未輸入確認密碼";
+"Register_Input_diff_Alert_Text" = "輸入密碼不同";
+"Register_Input_Pw_8_Alert_Text" = "密碼至少為8碼";
+"Register_Success_Alert_Text" = "新增成功";
 
 "Forget_Pw_Phone_title" = "手機號碼";
 "Forget_Pw_New_title" = "輸入新密碼";
@@ -38,6 +45,12 @@
 "Forget_Verify_Code_Btn_title" = "取得驗證碼";
 "Forget_Confirm_Btn_title" = "確定";
 "Forget_Cancel_Btn_title" = "取消";
+"Forget_Input_Phone_Alert_Text" = "尚未輸入手機";
+"Forget_Input_Pw_Alert_Text" = "尚未輸入新密碼";
+"Forget_Input_Confirm_Pw_Alert_Text" = "尚未輸入確認新密碼";
+"Forget_Input_diff_Alert_Text" = "輸入密碼不同";
+"Forget_Input_Pw_8_Alert_Text" = "密碼至少為8碼";
+"Forget_Update_Success_Alert_Text" = "更新成功";
 
 "SideBar_Menu_Section1_title" = "訂單";
 "SideBar_Menu_Section2_title" = "會員";
@@ -49,4 +62,3 @@
 "SideBar_Menu_Section2_row0_title" = "會員資料";
 "SideBar_Menu_Section2_row1_title" = "修改密碼";
 "SideBar_Menu_Section2_row2_title" = "登出";
-

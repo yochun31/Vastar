@@ -57,6 +57,9 @@ class CloudGatewayManager {
         
     }
     
+
+    //MARK: - Member
+    
     func CGMGetUserInfoByPhone(phone:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ dictResData:[String:Any]) -> Void) {
         
         let headers:HTTPHeaders = ["Content-Type" : "application/json"]
@@ -101,6 +104,72 @@ class CloudGatewayManager {
             case .failure(_):
                 
                 result(false,"Error",[:])
+                break
+            }
+        }
+        
+    }
+    
+    func CGMUpdateUserInfoByData(reqBodyDict:[String:String],result:@escaping (_ isSuccess:Bool,_ message:String) -> Void) {
+        
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = reqBodyDict
+        let urlString:String = vApiUrl + "/api/Member/Update"
+        let url = URL.init(string: urlString)
+        
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                let jsonInfo = json as? [String : Any] ?? [:]
+                
+                var isResStatus:Bool = false
+                let resStatus:Int = jsonInfo["Result"] as? Int ?? -1
+                let messageStr:String = jsonInfo["Message"] as? String ?? ""
+                if resStatus == 0 {
+                    isResStatus = true
+                }else{
+                    isResStatus = false
+                }
+                
+                result(isResStatus,messageStr)
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"Error")
+                break
+            }
+        }
+    }
+    
+    func CGMRegisterUserByData(regBodyDict:[String:Any],result:@escaping (_ isSuccess:Bool,_ message:String) -> Void) {
+        
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = regBodyDict
+        let urlString:String = vApiUrl + "/api/Member/Register"
+        let url = URL.init(string: urlString)
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                let jsonInfo = json as? [String : Any] ?? [:]
+                
+                var isResStatus:Bool = false
+                let resStatus:Int = jsonInfo["Result"] as? Int ?? -1
+                let messageStr:String = jsonInfo["Message"] as? String ?? ""
+                if resStatus == 0 {
+                    isResStatus = true
+                }else{
+                    isResStatus = false
+                }
+                
+                result(isResStatus,messageStr)
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"Error")
                 break
             }
         }

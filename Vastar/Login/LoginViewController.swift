@@ -93,6 +93,7 @@ class LoginViewController: UIViewController {
                 self.vaiv.stopProgressHUD(view: self.view)
                 let vc = SMMainViewController(nibName: "SMMainViewController", bundle: nil)
                 vc.modalPresentationStyle = .fullScreen
+                vc.sideMenuTitle = accountName
                 self.present(vc, animated: true, completion: nil)
                 
             }else{

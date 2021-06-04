@@ -24,6 +24,8 @@ class SMMainViewController: UIViewController {
     private var revealSideMenuOnTop: Bool = true
     
     var gestureEnabled: Bool = true
+    var sideMenuTitle:String = ""
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +49,7 @@ class SMMainViewController: UIViewController {
         
         self.sideMenuViewController = SMSideMenuViewController(nibName: "SMSideMenuViewController", bundle: nil)
         self.sideMenuViewController.delegate = self
+        self.sideMenuViewController.menuTitle = sideMenuTitle
         view.insertSubview(self.sideMenuViewController!.view, at: self.revealSideMenuOnTop ? 2 : 0)
         addChild(self.sideMenuViewController!)
         self.sideMenuViewController!.didMove(toParent: self)
