@@ -29,10 +29,14 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         setInterface()
+    
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-
-
-        
+        self.accountNameTextField.text = ""
+        self.passwordTextField.text = ""
     }
 
     // MARK: - UI Interface Methods
