@@ -1,0 +1,64 @@
+/* 
+  Localizable.strings
+  Vastar
+
+  Created by 郭堯彰 on 2021/5/31.
+  
+*/
+
+"Alert_Loading_title" = "載入中";
+"Alert_Sure_title" = "確定";
+"Alert_Cancel_title" = "取消";
+"Alert_title" = "提示";
+
+"Login_Account_title" = "手機號碼";
+"Login_Password_title" = "密碼";
+"Login_Button_title" = "登入";
+"Login_Forget_Button_title" = "忘記密碼";
+"Login_Register_Button_title" = "我還沒註冊，點我註冊";
+"Login_ActivityIndicatorView_title" = "登入中...";
+"Login_Input_Phone_Alert_Text" = "尚未輸入手機";
+"Login_Input_Pw_Alert_Text" = "尚未輸入密碼";
+
+"LogOut_Alert_Text" = "是否確定要登出?";
+
+"Register_Name_title" = "姓名";
+"Register_Phone_title" = "手機號碼";
+"Register_Password_title" = "密碼";
+"Register_Confirm_Password_title" = "確認密碼";
+"Register_Verify_Code_title" = "驗證碼";
+"Register_Verify_Code_Btn_title" = "取得驗證碼";
+"Register_Button_title" = "註冊";
+"Register_Login_Btn_title" = "我已有帳號，點我登入";
+"Register_Input_Name_Alert_Text" = "尚未輸入姓名";
+"Register_Input_Phone_Alert_Text" = "尚未輸入手機";
+"Register_Input_Pw_Alert_Text" = "尚未輸入密碼";
+"Register_Input_Confirm_Pw_Alert_Text" = "尚未輸入確認密碼";
+"Register_Input_diff_Alert_Text" = "輸入密碼不同";
+"Register_Input_Pw_8_Alert_Text" = "密碼至少為8碼";
+"Register_Success_Alert_Text" = "新增成功";
+
+"Forget_Pw_Phone_title" = "手機號碼";
+"Forget_Pw_New_title" = "輸入新密碼";
+"Forget_Pw_Confirm_title" = "確認新密碼";
+"Forget_Verify_Code_title" = "驗證碼";
+"Forget_Verify_Code_Btn_title" = "取得驗證碼";
+"Forget_Confirm_Btn_title" = "確定";
+"Forget_Cancel_Btn_title" = "取消";
+"Forget_Input_Phone_Alert_Text" = "尚未輸入手機";
+"Forget_Input_Pw_Alert_Text" = "尚未輸入新密碼";
+"Forget_Input_Confirm_Pw_Alert_Text" = "尚未輸入確認新密碼";
+"Forget_Input_diff_Alert_Text" = "輸入密碼不同";
+"Forget_Input_Pw_8_Alert_Text" = "密碼至少為8碼";
+"Forget_Update_Success_Alert_Text" = "更新成功";
+
+"SideBar_Menu_Section1_title" = "訂單";
+"SideBar_Menu_Section2_title" = "會員";
+"SideBar_Menu_Section0_row0_title" = "影片首頁";
+"SideBar_Menu_Section0_row1_title" = "商品圖片與規格";
+"SideBar_Menu_Section0_row2_title" = "購物車";
+"SideBar_Menu_Section1_row0_title" = "訂單狀態";
+"SideBar_Menu_Section1_row1_title" = "歷史訂單";
+"SideBar_Menu_Section2_row0_title" = "會員資料";
+"SideBar_Menu_Section2_row1_title" = "修改密碼";
+"SideBar_Menu_Section2_row2_title" = "登出";
