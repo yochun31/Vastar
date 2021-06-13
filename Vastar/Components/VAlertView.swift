@@ -20,6 +20,18 @@ class VAlertView: NSObject {
         
     }
     
+    static func presentAlertMultipleAction(title:String,message:String,actionTitle:Array<String>,preferredStyle:UIAlertController.Style,viewController:UIViewController,handler:@escaping (_ buttonIndex:Int,_ buttonTitle:String)->Void){
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: preferredStyle)
+        for i in 0..<actionTitle.count {
+            let confirmAction = UIAlertAction(title: actionTitle[i], style: .default, handler: {(action:UIAlertAction) ->()in
+                handler((i+1),actionTitle[i])
+            })
+            alert.addAction(confirmAction);
+        }
+        viewController.present(alert,animated: true, completion: nil);
+    }
+    
     
     static func presentAlert(title:String,message:String,actionTitle:Array<String>,preferredStyle:UIAlertController.Style,viewController:UIViewController,handler:@escaping (_ buttonIndex:Int,_ buttonTitle:String)->Void){
         
