@@ -17,6 +17,7 @@ class OrderViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setLeftBarButton()
+        setInterface()
     }
 
     
@@ -29,6 +30,10 @@ class OrderViewController: UIViewController {
         let leftBarItem = UIBarButtonItem(customView: leftBarBtn)
         self.navigationItem.leftBarButtonItem = leftBarItem
 
+    }
+    
+    func setInterface() {
+        self.navigationItem.title = NSLocalizedString("Order_title", comment: "")
     }
 
 

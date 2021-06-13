@@ -18,6 +18,7 @@ class VideoViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         setLeftBarButton()
+        setInterface()
     }
 
     
@@ -30,6 +31,10 @@ class VideoViewController: UIViewController {
         let leftBarItem = UIBarButtonItem(customView: leftBarBtn)
         self.navigationItem.leftBarButtonItem = leftBarItem
 
+    }
+    
+    func setInterface() {
+        self.navigationItem.title = NSLocalizedString("Video_title", comment: "")
     }
     
     

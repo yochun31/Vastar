@@ -16,6 +16,7 @@ class ProductViewController: UIViewController {
 
         // Do any additional setup after loading the view.
         setLeftBarButton()
+        setInterface()
     }
 
     
@@ -28,6 +29,10 @@ class ProductViewController: UIViewController {
         let leftBarItem = UIBarButtonItem(customView: leftBarBtn)
         self.navigationItem.leftBarButtonItem = leftBarItem
 
+    }
+    
+    func setInterface() {
+        self.navigationItem.title = NSLocalizedString("Product_title", comment: "")
     }
 
     /*
