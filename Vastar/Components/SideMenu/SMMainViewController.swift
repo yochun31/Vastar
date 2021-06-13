@@ -74,7 +74,24 @@ class SMMainViewController: UIViewController {
         view.addGestureRecognizer(panGestureRecognizer)
 
         // Default Main View Controller
-        showViewController(viewController: UINavigationController.self, xibName: "VideoViewController")
+
+        let nav = UINavigationController()
+        let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
+        nav.viewControllers = [vc]
+        nav.view.tag = 99
+        self.view.insertSubview(nav.view, at: self.revealSideMenuOnTop ? 0 : 1)
+        addChild(nav)
+        nav.view.translatesAutoresizingMaskIntoConstraints = false
+        let top = NSLayoutConstraint(item: nav.view!, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1.0, constant: 0.0)
+        let left = NSLayoutConstraint(item: nav.view!, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1.0, constant: 0.0)
+        let right = NSLayoutConstraint(item: nav.view!, attribute: .right, relatedBy: .equal, toItem: self.view, attribute: .right, multiplier: 1.0, constant: 0.0)
+        let bottom = NSLayoutConstraint(item: nav.view!, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+        
+        self.view.addConstraint(top)
+        self.view.addConstraint(left)
+        self.view.addConstraint(right)
+        self.view.addConstraint(bottom)
+        
 
     }
     
@@ -166,11 +183,12 @@ extension SMMainViewController: SMSideMenuSelectDelegate {
             if row == 0 {
                 showViewController(viewController: UINavigationController.self, xibName: "MemberDataViewController")
             }else if row == 1 {
-                showViewController(viewController: UINavigationController.self, xibName: "")
+                showViewController(viewController: UINavigationController.self, xibName: "ChangePwViewController")
             }else if row == 2 {
                 VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("LogOut_Alert_Text", comment: ""), actionTitle: [NSLocalizedString("Alert_Sure_title", comment: "")], preferredStyle: .alert, viewController: self) { (btnIndex, btnTitle) in
                     if btnIndex == 1 {
-                        self.dismiss(animated: true, completion: nil)
+//                        self.dismiss(animated: true, completion: nil)
+                        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
                     }
                 }
                 
@@ -188,9 +206,12 @@ extension SMMainViewController: SMSideMenuSelectDelegate {
     
     func showViewController<T: UIViewController>(viewController: T.Type, xibName: String) -> () {
         // Remove the previous View
-        for subview in view.subviews {
+        for subview in self.view.subviews {
             if subview.tag == 99 {
+                print("DDDDDDD")
                 subview.removeFromSuperview()
+            }else{
+                print("NNNNN")
             }
         }
         
@@ -213,15 +234,18 @@ extension SMMainViewController: SMSideMenuSelectDelegate {
             nav.viewControllers = [vc]
         }else if xibName == "MemberDataViewController" {
             let vc = MemberDataViewController(nibName: xibName, bundle: nil)
+            vc.accountPhone = sideMenuTitle
             nav.viewControllers = [vc]
-        }else if xibName == "" {
-            
+        }else if xibName == "ChangePwViewController" {
+            let vc = ChangePwViewController(nibName: xibName, bundle: nil)
+            vc.accountPhone = sideMenuTitle
+            nav.viewControllers = [vc]
         }
         
+        print("\(nav)")
         nav.view.tag = 99
-        self.viewContainer.addSubview(nav.view)
-//        self.viewContainer.insertSubview(nav.view, at: self.revealSideMenuOnTop ? 0 : 1)
-//        addChild(vc)
+        self.view.insertSubview(nav.view, at: self.revealSideMenuOnTop ? 0 : 1)
+        addChild(nav)
         if !self.revealSideMenuOnTop {
             if isExpanded {
                 nav.view.frame.origin.x = self.sideMenuRevealWidth

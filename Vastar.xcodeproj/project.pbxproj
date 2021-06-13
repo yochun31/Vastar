@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2203BBE2266DCD3C006986D2 /* ChangePwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203BBE0266DCD3C006986D2 /* ChangePwViewController.swift */; };
+		2203BBE3266DCD3C006986D2 /* ChangePwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2203BBE1266DCD3C006986D2 /* ChangePwViewController.xib */; };
+		2203BBE62670947E006986D2 /* AppInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203BBE52670947D006986D2 /* AppInfoManager.swift */; };
+		2203BBE92670C3EE006986D2 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203BBE82670C3EE006986D2 /* CustomButton.swift */; };
+		2203BBEE26721043006986D2 /* RecipientAddView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203BBED26721043006986D2 /* RecipientAddView.swift */; };
+		2203BBF12672106D006986D2 /* RecipientAddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2203BBF02672106D006986D2 /* RecipientAddView.xib */; };
+		2203BBF5267362BA006986D2 /* ReceiverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203BBF3267362BA006986D2 /* ReceiverTableViewCell.swift */; };
+		2203BBF6267362BA006986D2 /* ReceiverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2203BBF4267362BA006986D2 /* ReceiverTableViewCell.xib */; };
 		22F1C30E26648CF8003A1D5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C30D26648CF8003A1D5C /* AppDelegate.swift */; };
 		22F1C31026648CF8003A1D5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C30F26648CF8003A1D5C /* SceneDelegate.swift */; };
 		22F1C31226648CF8003A1D5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C31126648CF8003A1D5C /* ViewController.swift */; };
@@ -48,6 +56,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2203BBE0266DCD3C006986D2 /* ChangePwViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePwViewController.swift; sourceTree = "<group>"; };
+		2203BBE1266DCD3C006986D2 /* ChangePwViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePwViewController.xib; sourceTree = "<group>"; };
+		2203BBE52670947D006986D2 /* AppInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoManager.swift; sourceTree = "<group>"; };
+		2203BBE82670C3EE006986D2 /* CustomButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		2203BBED26721043006986D2 /* RecipientAddView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipientAddView.swift; sourceTree = "<group>"; };
+		2203BBF02672106D006986D2 /* RecipientAddView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipientAddView.xib; sourceTree = "<group>"; };
+		2203BBF3267362BA006986D2 /* ReceiverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverTableViewCell.swift; sourceTree = "<group>"; };
+		2203BBF4267362BA006986D2 /* ReceiverTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiverTableViewCell.xib; sourceTree = "<group>"; };
 		22F1C30A26648CF7003A1D5C /* Vastar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vastar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F1C30D26648CF8003A1D5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22F1C30F26648CF8003A1D5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -132,6 +148,7 @@
 			isa = PBXGroup;
 			children = (
 				22F1C3FE2668BD44003A1D5C /* AppDefine.swift */,
+				2203BBE52670947D006986D2 /* AppInfoManager.swift */,
 				22F1C39126660E1D003A1D5C /* Components */,
 				22F1C3532664C58F003A1D5C /* Login */,
 				22F1C3A4266619FA003A1D5C /* SideBar */,
@@ -169,6 +186,7 @@
 				22F1C39226660EFE003A1D5C /* SideMenu */,
 				22F1C4072668DA83003A1D5C /* VActivityIndicatorView.swift */,
 				22F1C40A2668DAA8003A1D5C /* VAlertView.swift */,
+				2203BBE82670C3EE006986D2 /* CustomButton.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -189,6 +207,8 @@
 			children = (
 				22F1C39F266613F7003A1D5C /* SideMenuTableViewCell.swift */,
 				22F1C3A0266613F7003A1D5C /* SideMenuTableViewCell.xib */,
+				2203BBF3267362BA006986D2 /* ReceiverTableViewCell.swift */,
+				2203BBF4267362BA006986D2 /* ReceiverTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -208,6 +228,10 @@
 				22F1C3EA266885F7003A1D5C /* HistoryOrderViewController.xib */,
 				22F1C3EE26688620003A1D5C /* MemberDataViewController.swift */,
 				22F1C3EF26688620003A1D5C /* MemberDataViewController.xib */,
+				2203BBED26721043006986D2 /* RecipientAddView.swift */,
+				2203BBF02672106D006986D2 /* RecipientAddView.xib */,
+				2203BBE0266DCD3C006986D2 /* ChangePwViewController.swift */,
+				2203BBE1266DCD3C006986D2 /* ChangePwViewController.xib */,
 			);
 			path = SideBar;
 			sourceTree = "<group>";
@@ -304,7 +328,10 @@
 				22F1C3E12668857B003A1D5C /* ShoppingCarViewController.xib in Resources */,
 				22F1C38D2665CBCB003A1D5C /* ForgetPwViewController.xib in Resources */,
 				22F1C31A26648D01003A1D5C /* LaunchScreen.storyboard in Resources */,
+				2203BBF12672106D006986D2 /* RecipientAddView.xib in Resources */,
 				22F1C36C2664D152003A1D5C /* Localizable.strings in Resources */,
+				2203BBF6267362BA006986D2 /* ReceiverTableViewCell.xib in Resources */,
+				2203BBE3266DCD3C006986D2 /* ChangePwViewController.xib in Resources */,
 				22F1C3E7266885D9003A1D5C /* OrderViewController.xib in Resources */,
 				22F1C31726648D01003A1D5C /* Assets.xcassets in Resources */,
 				22F1C39726660F7C003A1D5C /* SMMainViewController.xib in Resources */,
@@ -366,6 +393,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2203BBEE26721043006986D2 /* RecipientAddView.swift in Sources */,
+				2203BBE2266DCD3C006986D2 /* ChangePwViewController.swift in Sources */,
+				2203BBE62670947E006986D2 /* AppInfoManager.swift in Sources */,
 				22F1C35C2664C7AC003A1D5C /* LoginViewController.swift in Sources */,
 				22F1C3862665CB99003A1D5C /* RegisterViewController.swift in Sources */,
 				22F1C3E6266885D9003A1D5C /* OrderViewController.swift in Sources */,
@@ -381,11 +411,13 @@
 				22F1C3E02668857B003A1D5C /* ShoppingCarViewController.swift in Sources */,
 				22F1C3A1266613F7003A1D5C /* SideMenuTableViewCell.swift in Sources */,
 				22F1C3F026688620003A1D5C /* MemberDataViewController.swift in Sources */,
+				2203BBE92670C3EE006986D2 /* CustomButton.swift in Sources */,
 				22F1C3FF2668BD44003A1D5C /* AppDefine.swift in Sources */,
 				22F1C38C2665CBCB003A1D5C /* ForgetPwViewController.swift in Sources */,
 				22F1C3A726661A34003A1D5C /* VideoViewController.swift in Sources */,
 				22F1C31026648CF8003A1D5C /* SceneDelegate.swift in Sources */,
 				22F1C4082668DA83003A1D5C /* VActivityIndicatorView.swift in Sources */,
+				2203BBF5267362BA006986D2 /* ReceiverTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
