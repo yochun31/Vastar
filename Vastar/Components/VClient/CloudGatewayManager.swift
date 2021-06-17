@@ -391,5 +391,129 @@ class CloudGatewayManager {
             }
         }
     }
+    
+    
+    //MARK: - Product
+    
+    
+    func CGMGetAllProductData(result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
         
+        var resProductDataArray:Array<Array<Any>> = []
+        var productOrderArray:Array<Int> = []
+        var productGroupArray:Array<Int> = []
+        var productNameArray:Array<String> = []
+        var productImageUrlArray:Array<String> = []
+        var messageStr:String = ""
+        
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673"]
+        let urlString:String = vApiUrl + "/api/Product/QueryAll"
+        let url = URL.init(string: urlString)
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+                
+                    let jsonArray:Array<Any> = json as? Array<Any> ?? []
+                    
+                    for i in 0 ..< jsonArray.count{
+                        let resultDict = jsonArray[i] as? [String:Any] ?? [:]
+                        let result:Int = resultDict["Result"] as? Int ?? 0
+                        
+                        if result == 0 {
+                            let order:Int = resultDict["Product_Order"] as? Int ?? 0
+                            let groupID:Int = resultDict["Product_Group"] as? Int ?? 0
+                            let name:String = resultDict["Product_Name"] as? String ?? ""
+                            let imageUrlSt:String = resultDict["Thumbnail_Address"] as? String ?? ""
+
+                            productOrderArray.append(order)
+                            productGroupArray.append(groupID)
+                            productNameArray.append(name)
+                            productImageUrlArray.append(imageUrlSt)
+
+                        }else{
+                            messageStr = resultDict["Message"] as? String ?? ""
+                        }
+                    }
+                    
+                    if productOrderArray.count != 0 || productGroupArray.count != 0 || productNameArray.count != 0 || productImageUrlArray.count != 0  {
+                        resProductDataArray = [productOrderArray,productGroupArray,productNameArray,productImageUrlArray]
+                    }
+                    result(true,messageStr,resProductDataArray)
+                    
+                }else{
+                    result(false,"statusCode = \(String(describing: responseData.response?.statusCode))",[])
+                }
+                
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"Error",[])
+                break
+            }
+        }
+    }
+    
+    
+    func CGMGetProductDataByType(type:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
+        
+        var resProductDataArray:Array<Array<Any>> = []
+        var productOrderArray:Array<Int> = []
+        var productGroupArray:Array<Int> = []
+        var productNameArray:Array<String> = []
+        var productImageUrlArray:Array<String> = []
+        var messageStr:String = ""
+        
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673", "ProductType" : type]
+        let urlString:String = vApiUrl + "/api/Product/QueryProductType"
+        let url = URL.init(string: urlString)
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+                
+                    let jsonArray:Array<Any> = json as? Array<Any> ?? []
+                    
+                    for i in 0 ..< jsonArray.count{
+                        let resultDict = jsonArray[i] as? [String:Any] ?? [:]
+                        let result:Int = resultDict["Result"] as? Int ?? 0
+                        
+                        if result == 0 {
+                            let order:Int = resultDict["Product_Order"] as? Int ?? 0
+                            let groupID:Int = resultDict["Product_Group"] as? Int ?? 0
+                            let name:String = resultDict["Product_Name"] as? String ?? ""
+                            let imageUrlSt:String = resultDict["Thumbnail_Address"] as? String ?? ""
+
+                            productOrderArray.append(order)
+                            productGroupArray.append(groupID)
+                            productNameArray.append(name)
+                            productImageUrlArray.append(imageUrlSt)
+
+                        }else{
+                            messageStr = resultDict["Message"] as? String ?? ""
+                        }
+                    }
+                    
+                    if productOrderArray.count != 0 || productGroupArray.count != 0 || productNameArray.count != 0 || productImageUrlArray.count != 0  {
+                        resProductDataArray = [productOrderArray,productGroupArray,productNameArray,productImageUrlArray]
+                    }
+                    result(true,messageStr,resProductDataArray)
+                    
+                }else{
+                    result(false,"statusCode = \(String(describing: responseData.response?.statusCode))",[])
+                }
+                
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"Error",[])
+                break
+            }
+        }
+    }
 }

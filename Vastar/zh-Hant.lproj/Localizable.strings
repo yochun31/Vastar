@@ -103,8 +103,16 @@
 "Member_Recipient_Address_Aleart_Text" = "*尚未輸入地址";
 "Member_Recipient_Delete_Aleart_Text" = "是否確定刪除?";
 
-"Video_title" = "影片首頁";
 "Product_title" = "商品圖片與規格";
+"Product_All_Btn_title" = "所有商品";
+"Product_Item1_Btn_title" = "電爐";
+"Product_Item2_Btn_title" = "電暖器";
+"Product_Item3_Btn_title" = "烤箱";
+"Product_Item4_Btn_title" = "油炸鍋";
+"Product_Item5_Btn_title" = "飛騰女兒鍋";
+"Product_Item6_Btn_title" = "清潔劑";
+
+"Video_title" = "影片首頁";
 "Shopping_title" = "購物車";
 "Order_title" = "訂單狀態";
 "History_title" = "歷史訂單";
