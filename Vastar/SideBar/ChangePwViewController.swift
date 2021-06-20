@@ -26,6 +26,11 @@ class ChangePwViewController: UIViewController {
     private var userResgisterTime:String = ""
     private var vaiv = VActivityIndicatorView()
     
+    private var verifyCode = 0
+    private var verifyCodeSt = ""
+    private var timer = Timer()
+    private var defaultSec:Int = 30
+    
     var delegate:ChangePwViewDelegate?
     var accountPhone:String = ""
     
@@ -71,6 +76,7 @@ class ChangePwViewController: UIViewController {
         
         self.verifyCodeBtn.setTitle(NSLocalizedString("Change_Pw_Verify_Code_Btn_title", comment: ""), for: .normal)
         self.verifyCodeBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.verifyCodeBtn.addTarget(self, action: #selector(verifyCodeBtnClick(_:)), for: .touchUpInside)
         
         self.confirmBtn.setTitle(NSLocalizedString("Change_Pw_Confirm_Btn_title", comment: ""), for: .normal)
         self.confirmBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
@@ -133,6 +139,7 @@ class ChangePwViewController: UIViewController {
         let oldPwText = self.oldPwTextField.text ?? ""
         let newPwText = self.newPwTextField.text ?? ""
         let confirmPwText = self.confirmPwTextField.text ?? ""
+        let veriftyCodeText = self.verifyCodeTextField.text ?? ""
         
         if oldPwText.count == 0 {
             VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_Input_Old_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
@@ -149,11 +156,49 @@ class ChangePwViewController: UIViewController {
         }else if confirmPwText != newPwText {
             VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_Input_diff_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
             
+        }else if veriftyCodeText.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_Input_VeriftyCode_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else if veriftyCodeText != verifyCodeSt {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_VeriftyCode_Error_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
         }else{
             
             self.getUserInfo(accountName: self.accountPhone, oldPwSt: oldPwText, newPwSt: newPwText)
         }
         
+    }
+    
+    func sendMMS(phone:String) {
+        verifyCode = Int.random(in: 0000...9999)
+        verifyCodeSt = String(format: "%04d", verifyCode)
+        print("--->SMS code = \(verifyCodeSt)")
+        VClient.sharedInstance().VCSendMMSVerify(sendPhone: phone, code: verifyCodeSt) { isSuccess in
+            if isSuccess {
+                self.setVerifyBtn()
+            }
+        }
+    }
+    
+    func setVerifyBtn() {
+    
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (Timer) in
+            if self.defaultSec == 0 {
+                self.verifyCodeBtn.isEnabled = true
+                self.stopTimer()
+                self.verifyCodeBtn.setTitle(NSLocalizedString("Change_Pw_Verify_Code_Btn_title", comment: ""), for: .normal)
+            }else{
+                self.defaultSec = self.defaultSec-1
+                self.verifyCodeBtn.setTitle("\(self.defaultSec)\(NSLocalizedString("Change_Pw_Verify_Wait_Btn_title", comment: ""))", for: .normal)
+                
+            }
+        })
+        
+    }
+    
+    func stopTimer() {
+        self.timer.invalidate()
+        self.defaultSec = 30
     }
     
     
@@ -170,6 +215,11 @@ class ChangePwViewController: UIViewController {
         vc.modalPresentationStyle = .fullScreen
         vc.sideMenuTitle = self.accountPhone
         self.present(vc, animated: false, completion: nil)
+    }
+    
+    @objc func verifyCodeBtnClick(_ sender:UIButton) {
+        self.verifyCodeBtn.isEnabled = false
+        sendMMS(phone: self.accountPhone)
     }
 
 
