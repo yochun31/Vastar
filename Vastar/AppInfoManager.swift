@@ -12,6 +12,10 @@ enum VMemberDataEditBtnItem:Int {
     case VMemberDataEditBtnEdit = 0, VMemberDataEditBtnConfirm
 }
 
+enum VProductItem:Int {
+    case VProductAll = 0, VProductElectricStove,VProductElectricHeater,VProductOven,VProductFryPan,VProductVastar,VProductDetergent
+}
+
 
 class AppInfoManager {
     
@@ -25,6 +29,38 @@ class AppInfoManager {
             break
         case VMemberDataEditBtnItem.VMemberDataEditBtnConfirm.rawValue:
             title = NSLocalizedString("Member_Confirm_Btn_title", comment: "")
+            break
+        default:
+            break
+        }
+        return title
+    }
+    
+    func GetProductItemTitle(item:Int) -> String {
+        
+        var title:String = ""
+        
+        switch item {
+        case VProductItem.VProductAll.rawValue:
+            title = NSLocalizedString("Product_All_Btn_title", comment: "")
+            break
+        case VProductItem.VProductElectricStove.rawValue:
+            title = NSLocalizedString("Product_Item1_Btn_title", comment: "")
+            break
+        case VProductItem.VProductElectricHeater.rawValue:
+            title = NSLocalizedString("Product_Item2_Btn_title", comment: "")
+            break
+        case VProductItem.VProductOven.rawValue:
+            title = NSLocalizedString("Product_Item3_Btn_title", comment: "")
+            break
+        case VProductItem.VProductFryPan.rawValue:
+            title = NSLocalizedString("Product_Item4_Btn_title", comment: "")
+            break
+        case VProductItem.VProductVastar.rawValue:
+            title = NSLocalizedString("Product_Item5_Btn_title", comment: "")
+            break
+        case VProductItem.VProductDetergent.rawValue:
+            title = NSLocalizedString("Product_Item6_Btn_title", comment: "")
             break
         default:
             break
