@@ -210,7 +210,7 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
         let bottomOffset = scrollView.contentSize.height - contentOffsetY
 //        print("h = \(heigh)  c = \(contentOffsetY)  b = \(bottomOffset) --\(scrollView.contentSize.height)")
         
-        if bottomOffset == heigh {
+        if bottomOffset <= heigh {
             
             if self.productImageDataArray.count >= self.productImageUrlArray.count {
                 

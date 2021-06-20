@@ -57,6 +57,32 @@ class CloudGatewayManager {
         
     }
     
+    //MARK: - 簡訊驗證
+    
+    func CGMSendMMSVerify(reqBodyDict:[String:String],result:@escaping (_ isSuccess:Bool) -> Void) {
+        
+        let parames:Parameters = reqBodyDict
+        let urlString:String = "https://oms.every8d.com/API21/HTTP/sendSMS.ashx"
+        let url = URL.init(string: urlString)
+        
+        Alamofire.request(url!, method: .get, parameters: parames, encoding: URLEncoding.default, headers: nil).validate().responseData { (responseData:DataResponse) in
+            switch (responseData.result) {
+            case .success(_):
+
+                let code = responseData.response?.statusCode
+                if code == 200 {
+                    result(true)
+                }
+            
+                break
+            case .failure(_):
+                
+                break
+            }
+        }
+        
+    }
+    
 
     //MARK: - Member
     

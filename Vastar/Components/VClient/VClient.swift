@@ -75,6 +75,25 @@ class VClient {
         }
     }
     
+    
+    func VCSendMMSVerify(sendPhone:String,code:String,result:@escaping (_ isSuccess:Bool) -> Void) {
+        
+        let msg:String = "[飛騰家電] 您的認證碼是「\(code)」，請儘速進行驗證，切勿將驗證碼洩漏他人。"
+        var bodyDict:[String:String] = [:]
+        bodyDict.updateValue("0930908999", forKey: "UID")
+        bodyDict.updateValue("mimichi999", forKey: "PWD")
+        bodyDict.updateValue("簡訊驗證", forKey: "SB")
+        bodyDict.updateValue(msg, forKey: "MSG")
+        bodyDict.updateValue(sendPhone, forKey: "DEST")
+        bodyDict.updateValue("", forKey: "ST")
+        bodyDict.updateValue("1", forKey: "RETRYTIME")
+        
+        
+        CloudGatewayManager.sharedInstance().CGMSendMMSVerify(reqBodyDict: bodyDict) { (_ isSuccess:Bool) in
+            result(isSuccess)
+        }
+    }
+    
     //MARK:- Member
     
     

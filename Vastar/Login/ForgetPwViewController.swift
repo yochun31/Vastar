@@ -22,6 +22,11 @@ class ForgetPwViewController: UIViewController {
     private var userResgisterTime:String = ""
     private var vaiv = VActivityIndicatorView()
     
+    private var verifyCode = 0
+    private var verifyCodeSt = ""
+    private var timer = Timer()
+    private var defaultSec:Int = 30
+    
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -30,6 +35,11 @@ class ForgetPwViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         setInterface()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
     }
 
     
@@ -107,6 +117,7 @@ class ForgetPwViewController: UIViewController {
         let phoneText = self.phoneTextField.text ?? ""
         let newPwText = self.newPwTextField.text ?? ""
         let confirmPwText = self.confirmPwTextField.text ?? ""
+        let veriftyCodeText = self.verifyCodeTextField.text ?? ""
         
         if phoneText.count == 0 {
             VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Forget_Input_Phone_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
@@ -121,6 +132,13 @@ class ForgetPwViewController: UIViewController {
             
         }else if newPwText != confirmPwText {
             VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Forget_Input_diff_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else if veriftyCodeText.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Forget_Input_VeriftyCode_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else if veriftyCodeText != verifyCodeSt {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Forget_Input_VeriftyCode_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
         }else{
             
             self.getUserInfo(accountName: phoneText, pw: newPwText)
@@ -128,10 +146,54 @@ class ForgetPwViewController: UIViewController {
     }
     
     
+    func sendMMS(phone:String) {
+        verifyCode = Int.random(in: 0000...9999)
+        verifyCodeSt = String(format: "%04d", verifyCode)
+        print("--->SMS code = \(verifyCodeSt)")
+        VClient.sharedInstance().VCSendMMSVerify(sendPhone: phone, code: verifyCodeSt) { isSuccess in
+            if isSuccess {
+                self.setVerifyBtn()
+            }
+        }
+    }
+    
+    func setVerifyBtn() {
+    
+        self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (Timer) in
+            if self.defaultSec == 0 {
+                self.verifyCodeBtn.isEnabled = true
+                self.stopTimer()
+                self.verifyCodeBtn.setTitle(NSLocalizedString("Forget_Verify_Code_Btn_title", comment: ""), for: .normal)
+            }else{
+                self.defaultSec = self.defaultSec-1
+                self.verifyCodeBtn.setTitle("\(self.defaultSec)\(NSLocalizedString("Forget_Verify_Wait_Btn_title", comment: ""))", for: .normal)
+                
+            }
+        })
+        
+    }
+    
+    func stopTimer() {
+        self.timer.invalidate()
+        self.defaultSec = 30
+    }
+    
+    
+    
     
     //MARK: - Action
     
     @objc func verifyCodeBtnClick(_ sender:UIButton) {
+        
+        let phoneText = self.phoneTextField.text ?? ""
+        if phoneText.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Forget_Input_Phone_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+        }else if phoneText.count < 10 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Forget_Input_Phone_10_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+        }else{
+            self.verifyCodeBtn.isEnabled = false
+            sendMMS(phone: phoneText)
+        }
         
     }
     

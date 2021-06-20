@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -65,11 +65,12 @@
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t2H-aN-cBe">
-                    <rect key="frame" x="210" y="309" width="105" height="40"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t2H-aN-cBe">
+                    <rect key="frame" x="195" y="309" width="120" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="GsQ-tt-t8V"/>
                     </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <state key="normal" title="Button" backgroundImage="get_captcha_btn"/>
                 </button>
             </subviews>
@@ -92,7 +93,7 @@
                 <constraint firstItem="WYT-xE-8Q0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="aek-bE-fzO"/>
                 <constraint firstItem="216-s7-45K" firstAttribute="top" secondItem="tuQ-Uz-EhY" secondAttribute="bottom" constant="20" id="eFz-m0-oaH"/>
                 <constraint firstItem="xFN-gE-Uuy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="90" id="eaw-2Z-oyl"/>
-                <constraint firstItem="t2H-aN-cBe" firstAttribute="leading" secondItem="Y5L-Pq-g38" secondAttribute="trailing" constant="50" id="fHB-g2-70a"/>
+                <constraint firstItem="t2H-aN-cBe" firstAttribute="leading" secondItem="Y5L-Pq-g38" secondAttribute="trailing" constant="35" id="fHB-g2-70a"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pgf-yZ-GUC" secondAttribute="trailing" constant="20" id="ik1-ol-6EI"/>
                 <constraint firstItem="ved-um-MRO" firstAttribute="leading" secondItem="xFN-gE-Uuy" secondAttribute="trailing" constant="10" id="kqZ-GZ-bjK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="pgf-yZ-GUC" secondAttribute="bottom" constant="50" id="n43-7k-eoi"/>
