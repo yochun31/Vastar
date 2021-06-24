@@ -542,4 +542,76 @@ class CloudGatewayManager {
             }
         }
     }
+    
+    
+    func CGMGetProductGroupData(gID:Int,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
+        
+        var resProductDataArray:Array<Array<Any>> = []
+        var productCodeArray:Array<String> = []
+        var productNoArray:Array<String> = []
+        var productNameArray:Array<String> = []
+        var productPriceArray:Array<Int> = []
+        var productVoltageArray:Array<String> = []
+        var productColorArray:Array<String> = []
+        var productImageUrlArray:Array<String> = []
+        var productContentArray:Array<String> = []
+        var messageStr:String = ""
+        
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673", "Product_Group" : gID]
+        let urlString:String = vApiUrl + "/api/Product/QueryProduct_Group"
+        let url = URL.init(string: urlString)
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+                
+                    let jsonArray:Array<Any> = json as? Array<Any> ?? []
+                    
+                    for i in 0 ..< jsonArray.count{
+                        let resultDict = jsonArray[i] as? [String:Any] ?? [:]
+                        let result:Int = resultDict["Result"] as? Int ?? 0
+                        
+                        if result == 0 {
+                            let code:String = resultDict["Product_Code"] as? String ?? ""
+                            let NO:String = resultDict["Product_No"] as? String ?? ""
+                            let name:String = resultDict["Product_Name"] as? String ?? ""
+                            let price:Int = resultDict["Product_Price"] as? Int ?? 0
+                            let voltage:String = resultDict["Product_Voltage"] as? String ?? ""
+                            let color:String = resultDict["Product_Color"] as? String ?? ""
+                            let imageUrlSt:String = resultDict["Thumbnail_Address"] as? String ?? ""
+                            let content:String = resultDict["Remark"] as? String ?? ""
+
+                            productCodeArray.append(code)
+                            productNoArray.append(NO)
+                            productNameArray.append(name)
+                            productPriceArray.append(price)
+                            productVoltageArray.append(voltage)
+                            productColorArray.append(color)
+                            productImageUrlArray.append(imageUrlSt)
+                            productContentArray.append(content)
+
+                        }else{
+                            messageStr = resultDict["Message"] as? String ?? ""
+                        }
+                    }
+                    
+                    resProductDataArray = [productCodeArray,productNoArray,productNameArray,productPriceArray,productVoltageArray,productColorArray,productImageUrlArray,productContentArray]
+                    
+                    result(true,messageStr,resProductDataArray)
+                    
+                }else{
+                    result(false,"statusCode = \(String(describing: responseData.response?.statusCode))",[])
+                }
+                
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"Error",[])
+                break
+            }
+        }
+    }
 }

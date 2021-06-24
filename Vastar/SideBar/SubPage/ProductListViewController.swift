@@ -20,6 +20,7 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
     private var productImageUrlArray:Array<String> = []
     private var productImageDataArray:Array<Data> = []
     
+    private var flag:Int = 0
     let AppInfo = AppInfoManager()
     var productItemID:Int = -1
     
@@ -59,15 +60,35 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     func getAllProductData() {
         
+        self.productOrderArray.removeAll()
+        self.productGroupArray.removeAll()
+        self.productNameArray.removeAll()
+        self.productImageUrlArray.removeAll()
+        
         self.vaiv.startProgressHUD(view: self.view, content: NSLocalizedString("Alert_Loading_title", comment: ""))
         VClient.sharedInstance().VCGetAllProductData { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
             
             if isSuccess {
                 if resDataArray.count != 0 {
-                    self.productOrderArray = resDataArray[0] as? Array<Int> ?? []
-                    self.productGroupArray = resDataArray[1] as? Array<Int> ?? []
-                    self.productNameArray = resDataArray[2] as? Array<String> ?? []
-                    self.productImageUrlArray = resDataArray[3] as? Array<String> ?? []
+                    
+                    let groupIDArray = resDataArray[1] as? Array<Int> ?? []
+                    let set = Set(groupIDArray)
+                    let setArray = Array(set.sorted(by: <))
+                    print("\(self.productGroupArray) === \(set.sorted(by: <))")
+                    
+                    for i in 0 ..< setArray.count {
+                        let dict = self.processProductData(gID: setArray[i], resDataArray: resDataArray)
+                        let array = dict[setArray[i]] ?? []
+                        let order_Array = array[0] as? Array<Int> ?? []
+                        let groupID_Array = array[1] as? Array<Int> ?? []
+                        let name_Array = array[2] as? Array<String> ?? []
+                        let imageUrl_Array = array[3] as? Array<String> ?? []
+                        
+                        self.productOrderArray.append(order_Array[0])
+                        self.productGroupArray.append(groupID_Array[0])
+                        self.productNameArray.append(name_Array[0])
+                        self.productImageUrlArray.append(imageUrl_Array[0])
+                    }
                     self.defaultDownloadImage()
                 }else{
                     VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
@@ -83,17 +104,40 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     func getProductDataByType(typeSt:String) {
         
+        self.productOrderArray.removeAll()
+        self.productGroupArray.removeAll()
+        self.productNameArray.removeAll()
+        self.productImageUrlArray.removeAll()
+        
         self.vaiv.startProgressHUD(view: self.view, content: NSLocalizedString("Alert_Loading_title", comment: ""))
         
-        VClient.sharedInstance().CGMGetProductDataByType(type: typeSt) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
+        VClient.sharedInstance().VCGetProductDataByType(type: typeSt) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
             
             if isSuccess {
                 if resDataArray.count != 0 {
-                    self.productOrderArray = resDataArray[0] as? Array<Int> ?? []
-                    self.productGroupArray = resDataArray[1] as? Array<Int> ?? []
-                    self.productNameArray = resDataArray[2] as? Array<String> ?? []
-                    self.productImageUrlArray = resDataArray[3] as? Array<String> ?? []
+                    
+                    let groupIDArray = resDataArray[1] as? Array<Int> ?? []
+                    let set = Set(groupIDArray)
+                    let setArray = Array(set.sorted(by: <))
+                    print("\(self.productGroupArray) === \(set.sorted(by: <))")
+                    
+                    for i in 0 ..< setArray.count {
+                        let dict = self.processProductData(gID: setArray[i], resDataArray: resDataArray)
+                        let array = dict[setArray[i]] ?? []
+                        let order_Array = array[0] as? Array<Int> ?? []
+                        let groupID_Array = array[1] as? Array<Int> ?? []
+                        let name_Array = array[2] as? Array<String> ?? []
+                        let imageUrl_Array = array[3] as? Array<String> ?? []
+                        
+                        self.productOrderArray.append(order_Array[0])
+                        self.productGroupArray.append(groupID_Array[0])
+                        self.productNameArray.append(name_Array[0])
+                        self.productImageUrlArray.append(imageUrl_Array[0])
+                    }
+                    
                     self.defaultDownloadImage()
+
+                    
                 }else{
                     VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
                 }
@@ -155,10 +199,50 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
             
             DispatchQueue.main.async {
                 self.productTableView.reloadData()
+                self.flag = 0
                 self.vaiv.stopProgressHUD(view: self.view)
             }
         }
     }
+    
+    
+    func processProductData(gID:Int,resDataArray:Array<Array<Any>>) -> [Int:Array<Any>] {
+        
+        let orderArray = resDataArray[0] as? Array<Int> ?? []
+        let groupArray = resDataArray[1] as? Array<Int> ?? []
+        let nameArray = resDataArray[2] as? Array<String> ?? []
+        let imageUrlArray = resDataArray[3] as? Array<String> ?? []
+        
+        var dataDict:[Int:Array<Any>] = [:]
+        var dataArray:Array<Any> = []
+        
+        var pOrderArray:Array<Int> = []
+        var pGroupArray:Array<Int> = []
+        var pNameArray:Array<String> = []
+        var pImageUrlArray:Array<String> = []
+        
+        for i in 0 ..< orderArray.count {
+            let order:Int = orderArray[i]
+            let groupID:Int = groupArray[i]
+            let name:String = nameArray[i]
+            let imageUrl:String = imageUrlArray[i]
+            
+            if groupID == gID {
+                
+                pOrderArray.append(order)
+                pGroupArray.append(groupID)
+                pNameArray.append(name)
+                pImageUrlArray.append(imageUrl)
+            }
+        }
+        
+        dataArray = [pOrderArray,pGroupArray,pNameArray,pImageUrlArray]
+        dataDict.updateValue(dataArray, forKey: gID)
+        return dataDict
+        
+    }
+    
+    
 
     /*
     // MARK: - Navigation
@@ -190,7 +274,7 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
         let selectBkView = UIView()
         selectBkView.backgroundColor = UIColor.clear
         cell.selectedBackgroundView = selectBkView
-        
+
         let name:String = self.productNameArray[indexPath.row]
         let photo:UIImage = UIImage(data: self.productImageDataArray[indexPath.row])!
   
@@ -198,6 +282,16 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
         
         
         return cell
+    }
+    
+    //MARK: - UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        print("==\(indexPath.row)")
+        let vc = ProductDetailViewController(nibName: "ProductDetailViewController", bundle: nil)
+        vc.groupID = self.productGroupArray[indexPath.row]
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     
@@ -216,7 +310,11 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
                 
             }else{
                 print("----End----")
-                self.downloadImage(currentCount: self.productImageDataArray.count)
+                flag+=1
+                if flag == 1 {
+                    print("----bbb----")
+                    self.downloadImage(currentCount: self.productImageDataArray.count)
+                }
             }
         }
     }

@@ -167,6 +167,86 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
         
         self.delegate?.selectedCell(section: indexPath.section, row: indexPath.row)
         print("section = \(indexPath.section)  row = \(indexPath.row)")
+        
+        let nav = UINavigationController()
+        let reveal = self.revealViewController()
+        
+        let section = indexPath.section
+        let rowIndex = indexPath.row
+        
+        if section == 0 {
+            switch rowIndex {
+            case 0:
+                let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
+                nav.viewControllers = [vc]
+                reveal?.pushFrontViewController(nav, animated: true)
+                
+                break
+            case 1:
+                let vc = ProductViewController(nibName: "ProductViewController", bundle: nil)
+                nav.viewControllers = [vc]
+                reveal?.pushFrontViewController(nav, animated: true)
+    
+                break
+            case 2:
+                
+                let vc = ShoppingCarViewController(nibName: "ShoppingCarViewController", bundle: nil)
+                nav.viewControllers = [vc]
+                reveal?.pushFrontViewController(nav, animated: true)
+                
+                break
+            default:
+                break
+            }
+        }else if section == 1 {
+            
+            switch rowIndex {
+            case 0:
+                let vc = OrderViewController(nibName: "OrderViewController", bundle: nil)
+                nav.viewControllers = [vc]
+                reveal?.pushFrontViewController(nav, animated: true)
+                
+                break
+            case 1:
+                let vc = HistoryOrderViewController(nibName: "HistoryOrderViewController", bundle: nil)
+                nav.viewControllers = [vc]
+                reveal?.pushFrontViewController(nav, animated: true)
+                
+                break
+
+            default:
+                break
+            }
+        }else if section == 2 {
+            switch rowIndex {
+            case 0:
+                let vc = MemberDataViewController(nibName: "MemberDataViewController", bundle: nil)
+                vc.accountPhone = menuTitle
+                nav.viewControllers = [vc]
+                reveal?.pushFrontViewController(nav, animated: true)
+                
+                break
+            case 1:
+                let vc = ChangePwViewController(nibName: "ChangePwViewController", bundle: nil)
+                vc.accountPhone = menuTitle
+                nav.viewControllers = [vc]
+                reveal?.pushFrontViewController(nav, animated: true)
+                
+                break
+            case 2:
+                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("LogOut_Alert_Text", comment: ""), actionTitle: [NSLocalizedString("Alert_Sure_title", comment: "")], preferredStyle: .alert, viewController: self) { (btnIndex, btnTitle) in
+                    if btnIndex == 1 {
+//                        self.dismiss(animated: true, completion: nil)
+                        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                    }
+                }
+                
+                break
+            default:
+                break
+            }
+        }
+        
     }
     
 }
