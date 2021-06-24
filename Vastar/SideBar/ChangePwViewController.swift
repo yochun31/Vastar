@@ -44,7 +44,7 @@ class ChangePwViewController: UIViewController {
         
         setLeftBarButton()
         setInterface()
-        
+        setupSWReveal()
     }
     
     
@@ -53,10 +53,20 @@ class ChangePwViewController: UIViewController {
     func setLeftBarButton() {
         let leftBarBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         leftBarBtn.setImage(UIImage(named: "menu"), for: .normal)
-        leftBarBtn.addTarget(revealViewController(), action: #selector(revealViewController()?.revealSideMenu), for: .touchUpInside)
+        leftBarBtn.addTarget(self, action: #selector(leftBarBtnClick(_:)), for: .touchUpInside)
         let leftBarItem = UIBarButtonItem(customView: leftBarBtn)
         self.navigationItem.leftBarButtonItem = leftBarItem
-
+    }
+    
+    func setupSWReveal(){
+        //adding panGesture to reveal menu controller
+        view.addGestureRecognizer((self.revealViewController()?.panGestureRecognizer())!)
+        
+        //adding tap gesture to hide menu controller
+        view.addGestureRecognizer((self.revealViewController()?.tapGestureRecognizer())!)
+        
+        //setting reveal width of menu controller manually
+        self.revealViewController()?.rearViewRevealWidth = UIScreen.main.bounds.width * (2/3)
     }
     
     func setInterface() {
@@ -204,6 +214,10 @@ class ChangePwViewController: UIViewController {
     
     //MARK: - Action
     
+    @objc func leftBarBtnClick(_ sender:UIButton) {
+        self.revealViewController()?.revealToggle(animated: true)
+    }
+    
     @objc func confirmBtnClick(_ sender:UIButton) {
         
         checkInputData()
@@ -211,10 +225,11 @@ class ChangePwViewController: UIViewController {
     
     @objc func cancelBtnClick(_ sender:UIButton) {
         
-        let vc = SMMainViewController(nibName: "SMMainViewController", bundle: nil)
-        vc.modalPresentationStyle = .fullScreen
-        vc.sideMenuTitle = self.accountPhone
-        self.present(vc, animated: false, completion: nil)
+        let nav = UINavigationController()
+        let reveal = self.revealViewController()
+        let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
+        nav.viewControllers = [vc]
+        reveal?.pushFrontViewController(nav, animated: true)
     }
     
     @objc func verifyCodeBtnClick(_ sender:UIButton) {

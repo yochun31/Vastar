@@ -19,6 +19,9 @@
 		2244F61426789586006754D6 /* ProductListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2244F61226789586006754D6 /* ProductListViewController.xib */; };
 		2244F61726789606006754D6 /* ProductListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244F61526789606006754D6 /* ProductListTableViewCell.swift */; };
 		2244F61826789606006754D6 /* ProductListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2244F61626789606006754D6 /* ProductListTableViewCell.xib */; };
+		2244F61B268039D3006754D6 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244F619268039D3006754D6 /* ProductDetailViewController.swift */; };
+		2244F61C268039D3006754D6 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2244F61A268039D3006754D6 /* ProductDetailViewController.xib */; };
+		2244F6202682D10C006754D6 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2244F61F2682D10A006754D6 /* SWRevealViewController.m */; };
 		22F1C30E26648CF8003A1D5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C30D26648CF8003A1D5C /* AppDelegate.swift */; };
 		22F1C31026648CF8003A1D5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C30F26648CF8003A1D5C /* SceneDelegate.swift */; };
 		22F1C31226648CF8003A1D5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C31126648CF8003A1D5C /* ViewController.swift */; };
@@ -32,8 +35,6 @@
 		22F1C3872665CB99003A1D5C /* RegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C3852665CB99003A1D5C /* RegisterViewController.xib */; };
 		22F1C38C2665CBCB003A1D5C /* ForgetPwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C38A2665CBCB003A1D5C /* ForgetPwViewController.swift */; };
 		22F1C38D2665CBCB003A1D5C /* ForgetPwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C38B2665CBCB003A1D5C /* ForgetPwViewController.xib */; };
-		22F1C39626660F7C003A1D5C /* SMMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C39426660F7C003A1D5C /* SMMainViewController.swift */; };
-		22F1C39726660F7C003A1D5C /* SMMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C39526660F7C003A1D5C /* SMMainViewController.xib */; };
 		22F1C39C26660FCC003A1D5C /* SMSideMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C39A26660FCC003A1D5C /* SMSideMenuViewController.swift */; };
 		22F1C39D26660FCC003A1D5C /* SMSideMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22F1C39B26660FCC003A1D5C /* SMSideMenuViewController.xib */; };
 		22F1C3A1266613F7003A1D5C /* SideMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C39F266613F7003A1D5C /* SideMenuTableViewCell.swift */; };
@@ -72,6 +73,10 @@
 		2244F61226789586006754D6 /* ProductListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductListViewController.xib; sourceTree = "<group>"; };
 		2244F61526789606006754D6 /* ProductListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListTableViewCell.swift; sourceTree = "<group>"; };
 		2244F61626789606006754D6 /* ProductListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductListTableViewCell.xib; sourceTree = "<group>"; };
+		2244F619268039D3006754D6 /* ProductDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailViewController.swift; sourceTree = "<group>"; };
+		2244F61A268039D3006754D6 /* ProductDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailViewController.xib; sourceTree = "<group>"; };
+		2244F61E2682D10A006754D6 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		2244F61F2682D10A006754D6 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		22F1C30A26648CF7003A1D5C /* Vastar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vastar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F1C30D26648CF8003A1D5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22F1C30F26648CF8003A1D5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -90,8 +95,6 @@
 		22F1C3852665CB99003A1D5C /* RegisterViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegisterViewController.xib; sourceTree = "<group>"; };
 		22F1C38A2665CBCB003A1D5C /* ForgetPwViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPwViewController.swift; sourceTree = "<group>"; };
 		22F1C38B2665CBCB003A1D5C /* ForgetPwViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgetPwViewController.xib; sourceTree = "<group>"; };
-		22F1C39426660F7C003A1D5C /* SMMainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMMainViewController.swift; sourceTree = "<group>"; };
-		22F1C39526660F7C003A1D5C /* SMMainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SMMainViewController.xib; sourceTree = "<group>"; };
 		22F1C39A26660FCC003A1D5C /* SMSideMenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSideMenuViewController.swift; sourceTree = "<group>"; };
 		22F1C39B26660FCC003A1D5C /* SMSideMenuViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SMSideMenuViewController.xib; sourceTree = "<group>"; };
 		22F1C39F266613F7003A1D5C /* SideMenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideMenuTableViewCell.swift; sourceTree = "<group>"; };
@@ -138,8 +141,19 @@
 			children = (
 				2244F61126789586006754D6 /* ProductListViewController.swift */,
 				2244F61226789586006754D6 /* ProductListViewController.xib */,
+				2244F619268039D3006754D6 /* ProductDetailViewController.swift */,
+				2244F61A268039D3006754D6 /* ProductDetailViewController.xib */,
 			);
 			path = SubPage;
+			sourceTree = "<group>";
+		};
+		2244F61D2682CFFD006754D6 /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				2244F61E2682D10A006754D6 /* SWRevealViewController.h */,
+				2244F61F2682D10A006754D6 /* SWRevealViewController.m */,
+			);
+			path = SWRevealViewController;
 			sourceTree = "<group>";
 		};
 		22F1C30126648CF7003A1D5C = {
@@ -197,6 +211,7 @@
 		22F1C39126660E1D003A1D5C /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				2244F61D2682CFFD006754D6 /* SWRevealViewController */,
 				22F1C4022668D1E8003A1D5C /* swiftMBProgressHUD.framework */,
 				22F1C3F32668B41B003A1D5C /* VClient */,
 				22F1C39326660F17003A1D5C /* TableViewCell */,
@@ -211,8 +226,6 @@
 		22F1C39226660EFE003A1D5C /* SideMenu */ = {
 			isa = PBXGroup;
 			children = (
-				22F1C39426660F7C003A1D5C /* SMMainViewController.swift */,
-				22F1C39526660F7C003A1D5C /* SMMainViewController.xib */,
 				22F1C39A26660FCC003A1D5C /* SMSideMenuViewController.swift */,
 				22F1C39B26660FCC003A1D5C /* SMSideMenuViewController.xib */,
 			);
@@ -235,7 +248,6 @@
 		22F1C3A4266619FA003A1D5C /* SideBar */ = {
 			isa = PBXGroup;
 			children = (
-				2244F61026789458006754D6 /* SubPage */,
 				22F1C3A526661A34003A1D5C /* VideoViewController.swift */,
 				22F1C3A626661A34003A1D5C /* VideoViewController.xib */,
 				22F1C3D62668852D003A1D5C /* ProductViewController.swift */,
@@ -252,6 +264,7 @@
 				2203BBF02672106D006986D2 /* RecipientAddView.xib */,
 				2203BBE0266DCD3C006986D2 /* ChangePwViewController.swift */,
 				2203BBE1266DCD3C006986D2 /* ChangePwViewController.xib */,
+				2244F61026789458006754D6 /* SubPage */,
 			);
 			path = SideBar;
 			sourceTree = "<group>";
@@ -355,12 +368,12 @@
 				2203BBE3266DCD3C006986D2 /* ChangePwViewController.xib in Resources */,
 				22F1C3E7266885D9003A1D5C /* OrderViewController.xib in Resources */,
 				22F1C31726648D01003A1D5C /* Assets.xcassets in Resources */,
-				22F1C39726660F7C003A1D5C /* SMMainViewController.xib in Resources */,
 				22F1C31526648CF8003A1D5C /* Main.storyboard in Resources */,
 				22F1C3A826661A34003A1D5C /* VideoViewController.xib in Resources */,
 				22F1C3D92668852D003A1D5C /* ProductViewController.xib in Resources */,
 				22F1C3EC266885F7003A1D5C /* HistoryOrderViewController.xib in Resources */,
 				22F1C3F126688620003A1D5C /* MemberDataViewController.xib in Resources */,
+				2244F61C268039D3006754D6 /* ProductDetailViewController.xib in Resources */,
 				2244F61426789586006754D6 /* ProductListViewController.xib in Resources */,
 				22F1C3872665CB99003A1D5C /* RegisterViewController.xib in Resources */,
 			);
@@ -424,19 +437,20 @@
 				22F1C39C26660FCC003A1D5C /* SMSideMenuViewController.swift in Sources */,
 				22F1C3D82668852D003A1D5C /* ProductViewController.swift in Sources */,
 				22F1C31226648CF8003A1D5C /* ViewController.swift in Sources */,
+				2244F61B268039D3006754D6 /* ProductDetailViewController.swift in Sources */,
 				22F1C3F82668B522003A1D5C /* VClient.swift in Sources */,
 				22F1C3EB266885F7003A1D5C /* HistoryOrderViewController.swift in Sources */,
 				22F1C40B2668DAA8003A1D5C /* VAlertView.swift in Sources */,
 				22F1C30E26648CF8003A1D5C /* AppDelegate.swift in Sources */,
 				22F1C3F52668B44C003A1D5C /* CloudGatewayManager.swift in Sources */,
 				2244F61326789586006754D6 /* ProductListViewController.swift in Sources */,
-				22F1C39626660F7C003A1D5C /* SMMainViewController.swift in Sources */,
 				22F1C3E02668857B003A1D5C /* ShoppingCarViewController.swift in Sources */,
 				2244F61726789606006754D6 /* ProductListTableViewCell.swift in Sources */,
 				22F1C3A1266613F7003A1D5C /* SideMenuTableViewCell.swift in Sources */,
 				22F1C3F026688620003A1D5C /* MemberDataViewController.swift in Sources */,
 				2203BBE92670C3EE006986D2 /* CustomButton.swift in Sources */,
 				22F1C3FF2668BD44003A1D5C /* AppDefine.swift in Sources */,
+				2244F6202682D10C006754D6 /* SWRevealViewController.m in Sources */,
 				22F1C38C2665CBCB003A1D5C /* ForgetPwViewController.swift in Sources */,
 				22F1C3A726661A34003A1D5C /* VideoViewController.swift in Sources */,
 				22F1C31026648CF8003A1D5C /* SceneDelegate.swift in Sources */,

@@ -18,6 +18,7 @@ class HistoryOrderViewController: UIViewController {
         // Do any additional setup after loading the view.
         setLeftBarButton()
         setInterface()
+        setupSWReveal()
     }
 
     
@@ -26,14 +27,30 @@ class HistoryOrderViewController: UIViewController {
     func setLeftBarButton() {
         let leftBarBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         leftBarBtn.setImage(UIImage(named: "menu"), for: .normal)
-        leftBarBtn.addTarget(revealViewController(), action: #selector(revealViewController()?.revealSideMenu), for: .touchUpInside)
+        leftBarBtn.addTarget(self, action: #selector(leftBarBtnClick(_:)), for: .touchUpInside)
         let leftBarItem = UIBarButtonItem(customView: leftBarBtn)
         self.navigationItem.leftBarButtonItem = leftBarItem
-
     }
     
     func setInterface() {
         self.navigationItem.title = NSLocalizedString("History_title", comment: "")
+    }
+    
+    func setupSWReveal(){
+        //adding panGesture to reveal menu controller
+        view.addGestureRecognizer((self.revealViewController()?.panGestureRecognizer())!)
+        
+        //adding tap gesture to hide menu controller
+        view.addGestureRecognizer((self.revealViewController()?.tapGestureRecognizer())!)
+        
+        //setting reveal width of menu controller manually
+        self.revealViewController()?.rearViewRevealWidth = UIScreen.main.bounds.width * (2/3)
+    }
+    
+    //MARK: - Action
+    
+    @objc func leftBarBtnClick(_ sender:UIButton) {
+        self.revealViewController()?.revealToggle(animated: true)
     }
 
 

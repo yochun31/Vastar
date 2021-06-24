@@ -118,6 +118,11 @@
 "Product_Item4_Btn_title" = "油炸鍋";
 "Product_Item5_Btn_title" = "飛騰女兒鍋";
 "Product_Item6_Btn_title" = "清潔劑";
+"Product_Detail_Color_title" = "顏色";
+"Product_Detail_Voltage_title" = "電壓";
+"Product_Detail_Amount_title" = "數量";
+"Product_Detail_Add_ShoppingCar_title" = "加入購物車";
+"Product_Detail_Aleart_title" = "不存在此商品型號!";
 
 "Verify_Get_Btn_title" = "取得驗證碼";
 "Verify_Wait_Btn_title" = "秒後可再次發送";
