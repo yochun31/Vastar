@@ -12,3 +12,4 @@
 #endif /* Vastar_Bridging_Header_h */
 
 #import <swiftMBProgressHUD/swiftMBProgressHUD.h>
+#import "SWRevealViewController.h"

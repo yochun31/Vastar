@@ -37,6 +37,7 @@ class LoginViewController: UIViewController {
         
         self.accountNameTextField.text = ""
         self.passwordTextField.text = ""
+
     }
 
     // MARK: - UI Interface Methods
@@ -94,11 +95,19 @@ class LoginViewController: UIViewController {
             if isSuccess {
                 
                 print("--\(message)--")
+
                 self.vaiv.stopProgressHUD(view: self.view)
-                let vc = SMMainViewController(nibName: "SMMainViewController", bundle: nil)
-                vc.modalPresentationStyle = .fullScreen
-                vc.sideMenuTitle = accountName
-                self.present(vc, animated: true, completion: nil)
+                let frontNavigationController:UINavigationController
+
+                let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
+                frontNavigationController = UINavigationController(rootViewController: vc)
+                let sideMenuTable = SMSideMenuViewController(nibName: "SMSideMenuViewController", bundle: nil)
+                sideMenuTable.menuTitle = accountName
+                
+                let reveal = SWRevealViewController(rearViewController: sideMenuTable, frontViewController: frontNavigationController)
+                reveal?.modalPresentationStyle = .fullScreen
+                self.present(reveal!, animated: true, completion:  nil)
+                
                 
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)

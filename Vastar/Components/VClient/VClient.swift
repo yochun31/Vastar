@@ -312,9 +312,16 @@ class VClient {
         }
     }
     
-    func CGMGetProductDataByType(type:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
+    func VCGetProductDataByType(type:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
         
         CloudGatewayManager.sharedInstance().CGMGetProductDataByType(type: type) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
+            result(isSuccess,message,resDataArray)
+        }
+    }
+    
+    func VCGGetProductGroupData(gID:Int,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
+        
+        CloudGatewayManager.sharedInstance().CGMGetProductGroupData(gID: gID) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
             result(isSuccess,message,resDataArray)
         }
     }
