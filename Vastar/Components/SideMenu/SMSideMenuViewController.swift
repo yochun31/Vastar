@@ -102,6 +102,10 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
         let cell:SideMenuTableViewCell = tableView.dequeueReusableCell(withIdentifier: "sidemenuCell", for: indexPath) as! SideMenuTableViewCell
         
         cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 61.0/255.0, blue: 36.0/255.0, alpha: 1.0)
+        let selectBkView = UIView()
+        selectBkView.backgroundColor = UIColor.clear
+        cell.selectedBackgroundView = selectBkView
+        
         let icon:UIImage = UIImage(named: "box")!
         switch indexPath.section {
         case 0:
@@ -191,6 +195,7 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
             case 2:
                 
                 let vc = ShoppingCarViewController(nibName: "ShoppingCarViewController", bundle: nil)
+                vc.accountPhone = menuTitle
                 nav.viewControllers = [vc]
                 reveal?.pushFrontViewController(nav, animated: true)
                 
@@ -237,7 +242,12 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
                 VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("LogOut_Alert_Text", comment: ""), actionTitle: [NSLocalizedString("Alert_Sure_title", comment: "")], preferredStyle: .alert, viewController: self) { (btnIndex, btnTitle) in
                     if btnIndex == 1 {
 //                        self.dismiss(animated: true, completion: nil)
-                        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                        VClient.sharedInstance().VCDeleteAllShoppingCarData { isDone in
+                            if isDone {
+                                self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+                            }
+                        }
+                        
                     }
                 }
                 

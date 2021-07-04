@@ -24,6 +24,9 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
     @IBOutlet var amountTitleLabel: UILabel!
     @IBOutlet var amountTextField: UITextField!
     
+    @IBOutlet var amountAddBtn: UIButton!
+    @IBOutlet var amountLessBtn: UIButton!
+    
     @IBOutlet var addShoppingCarBtn: UIButton!
     
     @IBOutlet var contentTextView: UITextView!
@@ -53,7 +56,13 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
     
     private var responesProductDataArray:Array<Array<Any>> = []
     
+    private var amountNum:Int = 1
+    private var price_Int:Int = 0
+    
+    private let userDefault = UserDefaults.standard
+    
     var groupID:Int = 0
+    
     
     //MARK: - Life Cycle 
     
@@ -89,9 +98,17 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         
         self.amountTitleLabel.text = NSLocalizedString("Product_Detail_Amount_title", comment: "")
         self.amountTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.amountTextField.text = String(amountNum)
+        
+        self.amountAddBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.amountAddBtn.addTarget(self, action: #selector(amountAddBtnClick(_:)), for: .touchUpInside)
+        
+        self.amountLessBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.amountLessBtn.addTarget(self, action: #selector(amountLessBtnClick(_:)), for: .touchUpInside)
         
         self.addShoppingCarBtn.setTitle(NSLocalizedString("Product_Detail_Add_ShoppingCar_title", comment: ""), for: .normal)
         self.addShoppingCarBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.addShoppingCarBtn.addTarget(self, action: #selector(addShoppingCarBtnClick(_:)), for: .touchUpInside)
         
         self.contentTextView.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
         self.contentTextView.isEditable = false
@@ -283,6 +300,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
             self.productTitleLabel.text = name
             self.productModelLabel.text = code
             self.productPriceLabel.text = "$\(String(price))"
+            self.price_Int = price
             self.contentTextView.text = content
             
             let url = URL.init(string: imageUrl)
@@ -298,7 +316,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
             
         }else{
             self.vaiv.stopProgressHUD(view: self.view)
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Product_Detail_Aleart_title", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Product_Detail_Alert_title", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
                 self.voltageTextField.text = voltageSt
                 self.colorTextField.text = colorSt
             }
@@ -339,6 +357,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
                     self.productTitleLabel.text = name
                     self.productModelLabel.text = code
                     self.productPriceLabel.text = "$\(String(price))"
+                    self.price_Int = price
                     self.contentTextView.text = content
                     self.productPhoto.image = photo
                     self.vaiv.stopProgressHUD(view: self.view)
@@ -346,7 +365,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
             }else{
                 DispatchQueue.main.async {
                     self.vaiv.stopProgressHUD(view: self.view)
-                    VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Product_Detail_Aleart_title", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+                    VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Product_Detail_Alert_title", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
                 }
             }
         }
@@ -377,6 +396,27 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         }
     }
     
+    func addShppingCarData() {
+                
+        let p_title = self.productTitleLabel.text ?? ""
+        let p_color = self.colorTextField.text ?? ""
+        let p_v = self.voltageTextField.text ?? ""
+        let p_price = self.price_Int
+        let p_amount = self.amountTextField.text ?? ""
+        
+        let defaultData = UIImage(named: "logo_item")!.pngData()
+        let p_image = self.productPhoto.image?.pngData() ?? defaultData
+        let imageData:NSData = p_image! as NSData
+        
+        let dataArray:Array<Any> = [p_title,p_color,p_v,Int(p_amount)!,p_price,imageData]
+        
+        VClient.sharedInstance().VCAddShoppingCarData(dataArray: dataArray) { (_ isDone:Bool) in
+            if isDone {
+                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Product_Detail_Add_Success_Alert_title", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            }
+        }
+    }
+    
     
     //MARK: - Action
     
@@ -389,6 +429,30 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
     @objc func colorDoneBtnClick(_ sender:UIButton) {
         self.view.endEditing(true)
         self.GetColorPickerViewSelect()
+    }
+    
+    @objc func amountAddBtnClick(_ sender:UIButton) {
+        
+        amountNum = amountNum + 1
+        self.amountTextField.text = String(amountNum)
+    }
+    
+    @objc func amountLessBtnClick(_ sender:UIButton) {
+        
+        if amountNum > 0 {
+            amountNum = amountNum - 1
+            self.amountTextField.text = String(amountNum)
+        }
+    }
+    
+    @objc func addShoppingCarBtnClick(_ sender:UIButton) {
+        
+        if amountNum > 0 {
+            addShppingCarData()
+        }else{
+            print("NNNNNNNNNNNN")
+        }
+        
     }
     
     

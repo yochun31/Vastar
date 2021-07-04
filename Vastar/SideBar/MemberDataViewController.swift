@@ -469,7 +469,7 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     }
 
     @objc func closeBtnClick(_ sender:UIButton) {
-        VAlertView.presentAlert(title: NSLocalizedString("Member_Recipient_Delete_Aleart_Text", comment: ""), message: "", actionTitle: [NSLocalizedString("Member_Confirm_Btn_title", comment: "")], preferredStyle: .alert, viewController: self) { (_ buttonIndex:Int,_ buttonTitle:String) in
+        VAlertView.presentAlert(title: NSLocalizedString("Member_Recipient_Delete_Alert_Text", comment: ""), message: "", actionTitle: [NSLocalizedString("Member_Confirm_Btn_title", comment: "")], preferredStyle: .alert, viewController: self) { (_ buttonIndex:Int,_ buttonTitle:String) in
             if buttonIndex == 1 {
                 self.deleteReceiverData(ID: sender.tag)
             }
