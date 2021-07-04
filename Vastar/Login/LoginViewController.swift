@@ -37,7 +37,6 @@ class LoginViewController: UIViewController {
         
         self.accountNameTextField.text = ""
         self.passwordTextField.text = ""
-
     }
 
     // MARK: - UI Interface Methods

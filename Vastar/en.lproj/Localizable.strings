@@ -105,10 +105,10 @@
 "Member_Recipient_Adress_City_title" = "選擇縣市";
 "Member_Recipient_Adress_Town_title" = "選擇行政區";
 "Member_Recipient_Adress_Placeholder_title" = "請輸入收件地址";
-"Member_Recipient_Name_Aleart_Text" = "*尚未輸入姓名";
-"Member_Recipient_Phone_Aleart_Text" = "*尚未輸入電話";
-"Member_Recipient_Address_Aleart_Text" = "*尚未輸入地址";
-"Member_Recipient_Delete_Aleart_Text" = "是否確定刪除?";
+"Member_Recipient_Name_Alert_Text" = "*尚未輸入姓名";
+"Member_Recipient_Phone_Alert_Text" = "*尚未輸入電話";
+"Member_Recipient_Address_Alert_Text" = "*尚未輸入地址";
+"Member_Recipient_Delete_Alert_Text" = "是否確定刪除?";
 
 "Product_title" = "商品圖片與規格";
 "Product_All_Btn_title" = "所有商品";
@@ -122,12 +122,32 @@
 "Product_Detail_Voltage_title" = "電壓";
 "Product_Detail_Amount_title" = "數量";
 "Product_Detail_Add_ShoppingCar_title" = "加入購物車";
-"Product_Detail_Aleart_title" = "不存在此商品型號!";
+"Product_Detail_Alert_title" = "不存在此商品型號!";
+"Product_Detail_Add_Success_Alert_title" = "成功加入購物車";
+
+"Shopping_title" = "購物車";
+"Shopping_Checkout_Btn_title" = "去結帳";
+"Shopping_Checkout_Select_Product_title" = "已選商品";
+"Shopping_Checkout_Pay_title" = "付款方式";
+"Shopping_Checkout_Select_Pay_title" = "選擇付款方式";
+"Shopping_Checkout_Transport_title" = "運送方式";
+"Shopping_Checkout_Home_Delivery_title" = "宅配";
+"Shopping_Checkout_Recipient_title" = "收件人";
+"Shopping_Checkout_Recipient_Phone_title" = "電話";
+"Shopping_Checkout_Address_title" = "運送地址";
+"Shopping_Checkout_Address_Posttal_Code_title" = "郵遞區號";
+"Shopping_Checkout_Address_Detail_title" = "地址(路、巷、號、樓)";
+"Shopping_Checkout_Order_title" = "訂單資訊";
+"Shopping_Checkout_Total_title" = "總金額";
+"Shopping_Checkout_Fee_title" = "運費";
+"Shopping_Checkout_Money_title" = "實付金額";
+"Shopping_Checkout_Confirm_Btn_title" = "確認訂單";
+"Shopping_Checkout_title" = "結帳";
+"Shopping_Checkout_Alert_title" = "您的購物車中沒有商品！";
 
 "Verify_Get_Btn_title" = "取得驗證碼";
 "Verify_Wait_Btn_title" = "秒後可再次發送";
 
 "Video_title" = "影片首頁";
-"Shopping_title" = "購物車";
 "Order_title" = "訂單狀態";
 "History_title" = "歷史訂單";

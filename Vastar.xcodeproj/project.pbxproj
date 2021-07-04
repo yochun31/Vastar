@@ -22,6 +22,14 @@
 		2244F61B268039D3006754D6 /* ProductDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244F619268039D3006754D6 /* ProductDetailViewController.swift */; };
 		2244F61C268039D3006754D6 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2244F61A268039D3006754D6 /* ProductDetailViewController.xib */; };
 		2244F6202682D10C006754D6 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2244F61F2682D10A006754D6 /* SWRevealViewController.m */; };
+		228BDD7B268C55B50080F843 /* DBSqliteHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228BDD7A268C55B50080F843 /* DBSqliteHelper.framework */; };
+		228BDD7D268C57F20080F843 /* VastarDataBase.db in Resources */ = {isa = PBXBuildFile; fileRef = 228BDD7C268C57F20080F843 /* VastarDataBase.db */; };
+		228BDD80268C72C70080F843 /* shoppingCarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BDD7E268C72C70080F843 /* shoppingCarTableViewCell.swift */; };
+		228BDD81268C72C70080F843 /* shoppingCarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228BDD7F268C72C70080F843 /* shoppingCarTableViewCell.xib */; };
+		228BDD84268EC22F0080F843 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BDD82268EC22E0080F843 /* CheckoutViewController.swift */; };
+		228BDD85268EC22F0080F843 /* CheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228BDD83268EC22E0080F843 /* CheckoutViewController.xib */; };
+		228BDD88268F0FDD0080F843 /* CheckoutProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BDD86268F0FDD0080F843 /* CheckoutProductTableViewCell.swift */; };
+		228BDD89268F0FDD0080F843 /* CheckoutProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228BDD87268F0FDD0080F843 /* CheckoutProductTableViewCell.xib */; };
 		22F1C30E26648CF8003A1D5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C30D26648CF8003A1D5C /* AppDelegate.swift */; };
 		22F1C31026648CF8003A1D5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C30F26648CF8003A1D5C /* SceneDelegate.swift */; };
 		22F1C31226648CF8003A1D5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C31126648CF8003A1D5C /* ViewController.swift */; };
@@ -77,6 +85,14 @@
 		2244F61A268039D3006754D6 /* ProductDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductDetailViewController.xib; sourceTree = "<group>"; };
 		2244F61E2682D10A006754D6 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		2244F61F2682D10A006754D6 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		228BDD7A268C55B50080F843 /* DBSqliteHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DBSqliteHelper.framework; sourceTree = "<group>"; };
+		228BDD7C268C57F20080F843 /* VastarDataBase.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = VastarDataBase.db; sourceTree = "<group>"; };
+		228BDD7E268C72C70080F843 /* shoppingCarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shoppingCarTableViewCell.swift; sourceTree = "<group>"; };
+		228BDD7F268C72C70080F843 /* shoppingCarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = shoppingCarTableViewCell.xib; sourceTree = "<group>"; };
+		228BDD82268EC22E0080F843 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
+		228BDD83268EC22E0080F843 /* CheckoutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckoutViewController.xib; sourceTree = "<group>"; };
+		228BDD86268F0FDD0080F843 /* CheckoutProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutProductTableViewCell.swift; sourceTree = "<group>"; };
+		228BDD87268F0FDD0080F843 /* CheckoutProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckoutProductTableViewCell.xib; sourceTree = "<group>"; };
 		22F1C30A26648CF7003A1D5C /* Vastar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vastar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F1C30D26648CF8003A1D5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22F1C30F26648CF8003A1D5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,6 +146,7 @@
 			files = (
 				22F1C4032668D1E8003A1D5C /* swiftMBProgressHUD.framework in Frameworks */,
 				59BB5765C24B763600503843 /* Pods_Vastar.framework in Frameworks */,
+				228BDD7B268C55B50080F843 /* DBSqliteHelper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +160,8 @@
 				2244F61226789586006754D6 /* ProductListViewController.xib */,
 				2244F619268039D3006754D6 /* ProductDetailViewController.swift */,
 				2244F61A268039D3006754D6 /* ProductDetailViewController.xib */,
+				228BDD82268EC22E0080F843 /* CheckoutViewController.swift */,
+				228BDD83268EC22E0080F843 /* CheckoutViewController.xib */,
 			);
 			path = SubPage;
 			sourceTree = "<group>";
@@ -160,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				22F1C4052668D219003A1D5C /* Vastar-Bridging-Header.h */,
+				228BDD7C268C57F20080F843 /* VastarDataBase.db */,
 				22F1C30C26648CF7003A1D5C /* Vastar */,
 				22F1C30B26648CF7003A1D5C /* Products */,
 				8463F18985A4874208FC738A /* Pods */,
@@ -213,6 +233,7 @@
 			children = (
 				2244F61D2682CFFD006754D6 /* SWRevealViewController */,
 				22F1C4022668D1E8003A1D5C /* swiftMBProgressHUD.framework */,
+				228BDD7A268C55B50080F843 /* DBSqliteHelper.framework */,
 				22F1C3F32668B41B003A1D5C /* VClient */,
 				22F1C39326660F17003A1D5C /* TableViewCell */,
 				22F1C39226660EFE003A1D5C /* SideMenu */,
@@ -241,6 +262,10 @@
 				2203BBF4267362BA006986D2 /* ReceiverTableViewCell.xib */,
 				2244F61526789606006754D6 /* ProductListTableViewCell.swift */,
 				2244F61626789606006754D6 /* ProductListTableViewCell.xib */,
+				228BDD7E268C72C70080F843 /* shoppingCarTableViewCell.swift */,
+				228BDD7F268C72C70080F843 /* shoppingCarTableViewCell.xib */,
+				228BDD86268F0FDD0080F843 /* CheckoutProductTableViewCell.swift */,
+				228BDD87268F0FDD0080F843 /* CheckoutProductTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -361,15 +386,19 @@
 				22F1C3E12668857B003A1D5C /* ShoppingCarViewController.xib in Resources */,
 				22F1C38D2665CBCB003A1D5C /* ForgetPwViewController.xib in Resources */,
 				22F1C31A26648D01003A1D5C /* LaunchScreen.storyboard in Resources */,
+				228BDD89268F0FDD0080F843 /* CheckoutProductTableViewCell.xib in Resources */,
 				2203BBF12672106D006986D2 /* RecipientAddView.xib in Resources */,
 				2244F61826789606006754D6 /* ProductListTableViewCell.xib in Resources */,
 				22F1C36C2664D152003A1D5C /* Localizable.strings in Resources */,
 				2203BBF6267362BA006986D2 /* ReceiverTableViewCell.xib in Resources */,
 				2203BBE3266DCD3C006986D2 /* ChangePwViewController.xib in Resources */,
+				228BDD7D268C57F20080F843 /* VastarDataBase.db in Resources */,
 				22F1C3E7266885D9003A1D5C /* OrderViewController.xib in Resources */,
 				22F1C31726648D01003A1D5C /* Assets.xcassets in Resources */,
 				22F1C31526648CF8003A1D5C /* Main.storyboard in Resources */,
 				22F1C3A826661A34003A1D5C /* VideoViewController.xib in Resources */,
+				228BDD85268EC22F0080F843 /* CheckoutViewController.xib in Resources */,
+				228BDD81268C72C70080F843 /* shoppingCarTableViewCell.xib in Resources */,
 				22F1C3D92668852D003A1D5C /* ProductViewController.xib in Resources */,
 				22F1C3EC266885F7003A1D5C /* HistoryOrderViewController.xib in Resources */,
 				22F1C3F126688620003A1D5C /* MemberDataViewController.xib in Resources */,
@@ -447,6 +476,7 @@
 				22F1C3E02668857B003A1D5C /* ShoppingCarViewController.swift in Sources */,
 				2244F61726789606006754D6 /* ProductListTableViewCell.swift in Sources */,
 				22F1C3A1266613F7003A1D5C /* SideMenuTableViewCell.swift in Sources */,
+				228BDD80268C72C70080F843 /* shoppingCarTableViewCell.swift in Sources */,
 				22F1C3F026688620003A1D5C /* MemberDataViewController.swift in Sources */,
 				2203BBE92670C3EE006986D2 /* CustomButton.swift in Sources */,
 				22F1C3FF2668BD44003A1D5C /* AppDefine.swift in Sources */,
@@ -455,6 +485,8 @@
 				22F1C3A726661A34003A1D5C /* VideoViewController.swift in Sources */,
 				22F1C31026648CF8003A1D5C /* SceneDelegate.swift in Sources */,
 				22F1C4082668DA83003A1D5C /* VActivityIndicatorView.swift in Sources */,
+				228BDD88268F0FDD0080F843 /* CheckoutProductTableViewCell.swift in Sources */,
+				228BDD84268EC22F0080F843 /* CheckoutViewController.swift in Sources */,
 				2203BBF5267362BA006986D2 /* ReceiverTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
