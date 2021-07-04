@@ -325,5 +325,149 @@ class VClient {
             result(isSuccess,message,resDataArray)
         }
     }
+    
+    func VCAddShoppingCarData(dataArray:Array<Any>,result:@escaping (_ isDone:Bool) -> Void){
+        
+        let SQLITE_STATIC = unsafeBitCast(0, to: sqlite3_destructor_type.self)
+        let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
+        
+        var doneFlag:Bool = false
+        let p_title:String = dataArray[0] as? String ?? ""
+        let p_color:String = dataArray[1] as? String ?? ""
+        let p_v:String = dataArray[2] as? String ?? ""
+        let p_amount:Int = dataArray[3] as? Int ?? 0
+        let p_price:Int = dataArray[4] as? Int ?? 0
+        let imageData:NSData = dataArray[5] as! NSData
+
+        let dbSqliteHelper = DBSqlite()
+        let db = dbSqliteHelper.openDataBase("VastarDataBase")
+        let sql:String = "Insert into 'shoppingCar' ('title','color','voltage','amount','price','photo','addtime')  VALUES (?,?,?,?,?,?,datetime('now', 'localtime'));"
+        var stmt:OpaquePointer? = nil
+        let sqlResult:Int = Int(sqlite3_prepare(db, sql, -1, &stmt, nil))
+        if sqlResult == SQLITE_OK {
+            sqlite3_bind_text(stmt, 1, p_title, -1, SQLITE_TRANSIENT)
+            sqlite3_bind_text(stmt, 2, p_color, -1, SQLITE_TRANSIENT)
+            sqlite3_bind_text(stmt, 3, p_v, -1, SQLITE_TRANSIENT)
+            sqlite3_bind_int(stmt, 4, Int32(p_amount))
+            sqlite3_bind_int(stmt, 5, Int32(p_price))
+            sqlite3_bind_blob(stmt, 6, imageData.bytes, Int32(imageData.length), SQLITE_TRANSIENT)
+
+            if sqlite3_step(stmt) == SQLITE_DONE {
+                doneFlag = true
+                sqlite3_finalize(stmt)
+            }else{
+                print("---FFF---")
+            }
+        }
+        
+        dbSqliteHelper.closeDataBase()
+        result(doneFlag)
+    }
+    
+    func VCGetShoppingCarData(result:@escaping (_ dataArray:Array<Array<Any>>,_ isDone:Bool) -> Void){
+
+        var DataArray:Array<Array<Any>> = []
+        var doneFlag:Bool = false
+        
+        var IDArray:Array<Int> = []
+        var titleArray:Array<String> = []
+        var colorArray:Array<String> = []
+        var amountArray:Array<Int> = []
+        var vArray:Array<String> = []
+        var priceArray:Array<Int> = []
+        var photoArray:Array<UIImage> = []
+        
+        let dbSqliteHelper = DBSqlite()
+        let db = dbSqliteHelper.openDataBase("VastarDataBase")
+        let sql:String = "select ID,title,color,sum(amount)as amountS, voltage, price,photo from shoppingCar group by title,color,voltage"
+        var stmt:OpaquePointer? = nil
+        let sqlResult:Int = Int(sqlite3_prepare(db, sql, -1, &stmt, nil))
+        if sqlResult == SQLITE_OK {
+            while sqlite3_step(stmt) == SQLITE_ROW {
+                
+                let ID = sqlite3_column_int(stmt, 0)
+                let title = UnsafePointer(sqlite3_column_text(stmt, 1))
+                let color = UnsafePointer(sqlite3_column_text(stmt, 2))
+                let amount = sqlite3_column_int(stmt, 3)
+                let voltage = UnsafePointer(sqlite3_column_text(stmt, 4))
+                let price = sqlite3_column_int(stmt, 5)
+                let imageLength = sqlite3_column_bytes(stmt, 6)
+                let imageData = NSData(bytes:sqlite3_column_blob(stmt, 6) , length: Int(imageLength))
+                
+                IDArray.append(Int(ID))
+                titleArray.append(String.init(cString: title!))
+                colorArray.append(String.init(cString: color!))
+                amountArray.append(Int(amount))
+                vArray.append(String.init(cString: voltage!))
+                priceArray.append(Int(price))
+                photoArray.append(UIImage(data: imageData as Data)!)
+
+                
+            }
+            doneFlag = true
+            sqlite3_finalize(stmt)
+            
+            if IDArray.count != 0 || titleArray.count != 0 || colorArray.count != 0 || amountArray.count != 0 || vArray.count != 0 || priceArray.count != 0 || photoArray.count != 0 {
+                DataArray = [IDArray,titleArray,colorArray,amountArray,vArray,priceArray,photoArray]
+            }
+        }else{
+            doneFlag = false
+        }
+        
+        dbSqliteHelper.closeDataBase()
+        result(DataArray,doneFlag)
+    }
+    
+    
+    func VCDeleteShoppingCarDataByID(titleSt:String,colorSt:String,v:String,result:@escaping (_ isDone:Bool) -> Void) {
+        
+        var doneFlag:Bool = false
+        let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
+        let dbSqliteHelper = DBSqlite()
+        let db = dbSqliteHelper.openDataBase("VastarDataBase")
+        let sql:String = "DELETE FROM shoppingCar WHERE title = ? and color = ? and voltage = ?"
+        var stmt:OpaquePointer? = nil
+        let sqlResult:Int = Int(sqlite3_prepare(db, sql, -1, &stmt, nil))
+        if sqlResult == SQLITE_OK {
+            sqlite3_bind_text(stmt, 1, titleSt, -1, SQLITE_TRANSIENT)
+            sqlite3_bind_text(stmt, 2, colorSt, -1, SQLITE_TRANSIENT)
+            sqlite3_bind_text(stmt, 3, v, -1, SQLITE_TRANSIENT)
+
+            if sqlite3_step(stmt) == SQLITE_DONE {
+
+                doneFlag = true
+                sqlite3_finalize(stmt)
+            }else{
+                print("---FFF---")
+            }
+        }
+        
+        dbSqliteHelper.closeDataBase()
+        result(doneFlag)
+    }
+    
+    func VCDeleteAllShoppingCarData(result:@escaping (_ isDone:Bool) -> Void) {
+        
+        var doneFlag:Bool = false
+
+        let dbSqliteHelper = DBSqlite()
+        let db = dbSqliteHelper.openDataBase("VastarDataBase")
+        let sql:String = "DELETE FROM shoppingCar;UPDATE SQLITE_SEQUENCE SET seq = 0 WHERE name = 'shoppingCar';VACUUM;"
+        var stmt:OpaquePointer? = nil
+        let sqlResult:Int = Int(sqlite3_prepare(db, sql, -1, &stmt, nil))
+        if sqlResult == SQLITE_OK {
+            
+            if sqlite3_step(stmt) == SQLITE_DONE {
+
+                doneFlag = true
+                sqlite3_finalize(stmt)
+            }else{
+                print("---FFF---")
+            }
+        }
+        
+        dbSqliteHelper.closeDataBase()
+        result(doneFlag)
+    }
 
 }

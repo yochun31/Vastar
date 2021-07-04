@@ -6,9 +6,28 @@
 //
 
 import UIKit
+import IQKeyboardManagerSwift
 
-class ShoppingCarViewController: UIViewController {
+class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,ShoppingCarTableviewDelegate {
 
+    @IBOutlet var shoppingCarTableView: UITableView!
+    @IBOutlet var countLabel: UILabel!
+    @IBOutlet var checkoutBtn: UIButton!
+    
+    private var vaiv = VActivityIndicatorView()
+    
+    private var IDArray:Array<Int> = []
+    private var titleArray:Array<String> = []
+    private var colorArray:Array<String> = []
+    private var amountArray:Array<Int> = []
+    private var vArray:Array<String> = []
+    private var priceArray:Array<Int> = []
+    private var photoArray:Array<UIImage> = []
+    
+    private var tmpAmount:Int = 0
+    
+    var accountPhone:String = ""
+    
     //MARK: - Life Cycle
     
     override func viewDidLoad() {
@@ -17,7 +36,9 @@ class ShoppingCarViewController: UIViewController {
         // Do any additional setup after loading the view.
         setLeftBarButton()
         setInterface()
+        setTableView()
         setupSWReveal()
+        getShoppingCarData()
     }
 
     
@@ -33,6 +54,24 @@ class ShoppingCarViewController: UIViewController {
     
     func setInterface() {
         self.navigationItem.title = NSLocalizedString("Shopping_title", comment: "")
+        self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        
+        self.countLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.checkoutBtn.setTitle(NSLocalizedString("Shopping_Checkout_Btn_title", comment: ""), for: .normal)
+        self.checkoutBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.checkoutBtn.addTarget(self, action: #selector(checkoutBtnClick(_:)), for: .touchUpInside)
+        
+        
+    }
+    
+    func setTableView() {
+        
+        self.shoppingCarTableView.delegate = self
+        self.shoppingCarTableView.dataSource = self
+        self.shoppingCarTableView.separatorStyle = .none
+        
+        self.shoppingCarTableView.register(UINib(nibName: "shoppingCarTableViewCell", bundle: nil), forCellReuseIdentifier: "shoppingCell")
+        self.shoppingCarTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
     }
     
     func setupSWReveal(){
@@ -49,10 +88,145 @@ class ShoppingCarViewController: UIViewController {
         
     }
     
+    //MARK: - Assistant Methods
+    
+    func getShoppingCarData() {
+        
+        self.IDArray.removeAll()
+        self.titleArray.removeAll()
+        self.colorArray.removeAll()
+        self.amountArray.removeAll()
+        self.vArray.removeAll()
+        self.priceArray.removeAll()
+        self.photoArray.removeAll()
+        
+        VClient.sharedInstance().VCGetShoppingCarData { (_ dataArray:Array<Array<Any>>,_ isDone:Bool) in
+            if isDone {
+                if dataArray.count != 0 {
+                    
+                    self.IDArray = dataArray[0] as? Array<Int> ?? []
+                    self.titleArray = dataArray[1] as? Array<String> ?? []
+                    self.colorArray = dataArray[2] as? Array<String> ?? []
+                    self.amountArray = dataArray[3] as? Array<Int> ?? []
+                    self.vArray = dataArray[4] as? Array<String> ?? []
+                    self.priceArray = dataArray[5] as? Array<Int> ?? []
+                    self.photoArray = dataArray[6] as? Array<UIImage> ?? []
+                    self.getSum()
+                    self.shoppingCarTableView.reloadData()
+                }else{
+                    
+                    VClient.sharedInstance().VCDeleteAllShoppingCarData { isDone in
+                        if isDone {
+                            self.getSum()
+                            self.shoppingCarTableView.reloadData()
+                        }else{
+                            self.getSum()
+                            self.shoppingCarTableView.reloadData()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func getSum() {
+        
+        var countProduct:Int = 0
+        var countProductPrice:Int = 0
+        for i in 0 ..< self.amountArray.count {
+            
+            countProduct = countProduct + self.amountArray[i]
+            countProductPrice = countProductPrice + (self.amountArray[i] * self.priceArray[i])
+        }
+        
+        let format = NumberFormatter()
+        format.numberStyle = .decimal
+        let countProductPriceSt:String = format.string(from: NSNumber(value:countProductPrice)) ?? ""
+
+        self.countLabel.text = "共\(countProduct)件  共\(countProductPriceSt)元"
+    }
+    
+    func deleteShoppingCarByID(titleSt:String,colorSt:String,vSt:String) {
+        
+        VClient.sharedInstance().VCDeleteShoppingCarDataByID(titleSt: titleSt, colorSt: colorSt, v: vSt) { (_ isDone:Bool) in
+            
+            if isDone {
+                self.getShoppingCarData()
+            }
+        }
+    }
+    
+    func addShppingCarData(dataArray:Array<Any>) {
+                
+        let p_title = dataArray[0] as? String ?? ""
+        let p_color = dataArray[1] as? String ?? ""
+        let p_v = dataArray[2] as? String ?? ""
+        let p_price = dataArray[3] as? Int ?? 0
+        let p_amount = dataArray[4] as? Int ?? 0
+        
+        let image = dataArray[5] as? UIImage
+        let defaultData = UIImage(named: "logo_item")!.pngData()
+        let p_image = image?.pngData() ?? defaultData
+        let imageData:NSData = p_image! as NSData
+        
+        let dataArray:Array<Any> = [p_title,p_color,p_v,p_amount,p_price,imageData]
+        
+        VClient.sharedInstance().VCAddShoppingCarData(dataArray: dataArray) { (_ isDone:Bool) in
+            if isDone {
+                self.getShoppingCarData()
+            }
+        }
+    }
+    
+    
+    
     //MARK: - Action
     
     @objc func leftBarBtnClick(_ sender:UIButton) {
         self.revealViewController()?.revealToggle(animated: true)
+    }
+    
+    @objc func closeBtnClick(_ sender:UIButton) {
+        
+        let index:Int = sender.tag
+        self.deleteShoppingCarByID(titleSt: self.titleArray[index], colorSt: self.colorArray[index], vSt: self.vArray[index])
+        print(">>>>>\(index) <<<<<<")
+    }
+    
+    
+    @objc func amountTextFieldClick(_ textField:UITextField) {
+        
+        
+        let indexTag:Int = textField.tag
+        
+        let currentAmountText:String = textField.text ?? "0"
+        let currentAmount:Int = Int(currentAmountText) ?? 0
+        
+        if currentAmount > self.tmpAmount {
+            
+            let num:Int = currentAmount - self.tmpAmount
+            let dataArray:Array<Any> = [self.titleArray[indexTag],self.colorArray[indexTag],self.vArray[indexTag],self.priceArray[indexTag],num,self.photoArray[indexTag]]
+            addShppingCarData(dataArray: dataArray)
+            
+        }else if currentAmount < self.tmpAmount {
+            
+            let num:Int = currentAmount - self.tmpAmount
+            let dataArray:Array<Any> = [self.titleArray[indexTag],self.colorArray[indexTag],self.vArray[indexTag],self.priceArray[indexTag],num,self.photoArray[indexTag]]
+            addShppingCarData(dataArray: dataArray)
+            
+        }else if currentAmount == self.tmpAmount {
+            
+        }
+    }
+    
+    @objc func checkoutBtnClick(_ sender:UIButton) {
+        if self.titleArray.count != 0 {
+            let vc = CheckoutViewController(nibName: "CheckoutViewController", bundle: nil)
+            vc.accountPhone = self.accountPhone
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Alert_title", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+        }
     }
 
 
@@ -65,5 +239,79 @@ class ShoppingCarViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //MARK: - UITableViewDataSource
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
 
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return self.titleArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell:shoppingCarTableViewCell = tableView.dequeueReusableCell(withIdentifier: "shoppingCell", for: indexPath) as! shoppingCarTableViewCell
+        cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        
+        let selectBkView = UIView()
+        selectBkView.backgroundColor = UIColor.clear
+        cell.selectedBackgroundView = selectBkView
+
+        let name:String = self.titleArray[indexPath.row]
+        let color:String = self.colorArray[indexPath.row]
+        let v:String = self.vArray[indexPath.row]
+        let price:Int = self.priceArray[indexPath.row]
+        let amount:Int = self.amountArray[indexPath.row]
+        
+        let photo:UIImage = self.photoArray[indexPath.row]
+        
+        let format = NumberFormatter()
+        format.numberStyle = .decimal
+        let countPriceSt:String = format.string(from: NSNumber(value:price)) ?? ""
+  
+        let titleSt:String = "\(name)\n\(v),\(color)\n$\(countPriceSt)"
+        cell.loadData(titleST: titleSt, amount: amount, photo: photo)
+        
+        cell.closeBtn.addTarget(self, action: #selector(closeBtnClick(_:)), for: .touchUpInside)
+        cell.closeBtn.tag = indexPath.row
+        
+        cell.amountAddBtn.tag = indexPath.row
+        cell.amountLessBtn.tag = indexPath.row
+        
+        cell.amountTextField.tag = indexPath.row
+        cell.amountTextField.delegate = self
+        cell.amountTextField.keyboardToolbar.doneBarButton .setTarget(self, action: #selector(amountTextFieldClick(_:)))
+        
+        cell.delegate = self
+        
+        return cell
+    }
+    
+    
+    //MARK: - UITextFieldDelegate
+
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        
+        let text:String = textField.text ?? "0"
+        self.tmpAmount = Int(text) ?? 0
+        print("-----> \(self.tmpAmount)")
+    }
+    
+    //MARK: - ShoppingCarTableviewDelegate
+    
+    func amountAddBtnClick(index: Int) {
+        
+        let dataArray:Array<Any> = [self.titleArray[index],self.colorArray[index],self.vArray[index],self.priceArray[index],1,self.photoArray[index]]
+        addShppingCarData(dataArray: dataArray)
+        
+    }
+    func amountLessBtnClick(index: Int) {
+        
+        let dataArray:Array<Any> = [self.titleArray[index],self.colorArray[index],self.vArray[index],self.priceArray[index],-1,self.photoArray[index]]
+        addShppingCarData(dataArray: dataArray)
+    }
 }

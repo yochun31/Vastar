@@ -101,13 +101,13 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         
         self.nameTitleLabel.text = NSLocalizedString("Member_Recipient_Name_title", comment: "")
         self.nameTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
-        self.nameWarningLabel.text = NSLocalizedString("Member_Recipient_Name_Aleart_Text", comment: "")
+        self.nameWarningLabel.text = NSLocalizedString("Member_Recipient_Name_Alert_Text", comment: "")
         self.nameWarningLabel.textColor = UIColor.init(red: 255.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         self.nameWarningLabel.isHidden = true
         
         self.phoneTitleLabel.text = NSLocalizedString("Member_Recipient_Phone_title", comment: "")
         self.phoneTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
-        self.phoneWarningLabel.text = NSLocalizedString("Member_Recipient_Phone_Aleart_Text", comment: "")
+        self.phoneWarningLabel.text = NSLocalizedString("Member_Recipient_Phone_Alert_Text", comment: "")
         self.phoneWarningLabel.textColor = UIColor.init(red: 255.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         self.phoneWarningLabel.isHidden = true
         
@@ -120,7 +120,7 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         self.addressTitleLabel.text = NSLocalizedString("Member_Recipient_Adress_title", comment: "")
         self.addressTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
         self.addressTextField.placeholder = NSLocalizedString("Member_Recipient_Adress_Placeholder_title", comment: "")
-        self.addressWarningLabel.text = NSLocalizedString("Member_Recipient_Address_Aleart_Text", comment: "")
+        self.addressWarningLabel.text = NSLocalizedString("Member_Recipient_Address_Alert_Text", comment: "")
         self.addressWarningLabel.textColor = UIColor.init(red: 255.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
         self.addressWarningLabel.isHidden = true
         

@@ -1,0 +1,6 @@
+framework module DBSqliteHelper {
+  umbrella header "DBSqliteHelper.h"
+
+  export *
+  module * { export * }
+}

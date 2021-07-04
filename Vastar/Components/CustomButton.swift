@@ -20,6 +20,8 @@ class CustomButton: UIButton {
     var customInputView = UIView()
     var toolBarView = UIView()
     
+    var textString:String?
+    
     override var inputView: UIView {
         get {
             return customInputView

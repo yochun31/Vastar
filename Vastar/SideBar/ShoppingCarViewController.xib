@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,6 +11,9 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ShoppingCarViewController" customModule="Vastar" customModuleProvider="target">
             <connections>
+                <outlet property="checkoutBtn" destination="xMn-mA-z1D" id="dhM-T0-hWG"/>
+                <outlet property="countLabel" destination="J40-X7-fUi" id="xYp-1T-3RB"/>
+                <outlet property="shoppingCarTableView" destination="SZ1-pc-rmg" id="k7Q-Wh-pLd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,23 +22,62 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shopping" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1C6-ZK-QAq">
-                    <rect key="frame" x="0.0" y="0.0" width="73" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="SZ1-pc-rmg">
+                    <rect key="frame" x="15" y="15" width="345" height="502"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DW3-Ze-FAw">
+                    <rect key="frame" x="15" y="537" width="345" height="100"/>
+                    <subviews>
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="get_captcha_btn" translatesAutoresizingMaskIntoConstraints="NO" id="tki-so-uHw">
+                            <rect key="frame" x="0.0" y="0.0" width="345" height="100"/>
+                        </imageView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xMn-mA-z1D">
+                            <rect key="frame" x="215" y="30" width="80" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="8w7-xW-mTB"/>
+                                <constraint firstAttribute="width" constant="80" id="tZI-gH-mff"/>
+                            </constraints>
+                            <state key="normal" title="Button" backgroundImage="get_captcha_btn"/>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J40-X7-fUi">
+                            <rect key="frame" x="50" y="39.5" width="42" height="21"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="tki-so-uHw" firstAttribute="leading" secondItem="DW3-Ze-FAw" secondAttribute="leading" id="5RG-u3-TE8"/>
+                        <constraint firstItem="J40-X7-fUi" firstAttribute="leading" secondItem="DW3-Ze-FAw" secondAttribute="leading" constant="50" id="ALK-EC-hO9"/>
+                        <constraint firstItem="tki-so-uHw" firstAttribute="top" secondItem="DW3-Ze-FAw" secondAttribute="top" id="FWt-fV-625"/>
+                        <constraint firstAttribute="trailing" secondItem="xMn-mA-z1D" secondAttribute="trailing" constant="50" id="RVU-An-ylR"/>
+                        <constraint firstAttribute="trailing" secondItem="tki-so-uHw" secondAttribute="trailing" id="WPY-ei-MMy"/>
+                        <constraint firstAttribute="bottom" secondItem="tki-so-uHw" secondAttribute="bottom" id="cuO-2C-XJc"/>
+                        <constraint firstItem="xMn-mA-z1D" firstAttribute="centerY" secondItem="DW3-Ze-FAw" secondAttribute="centerY" id="eT4-N6-Bj9"/>
+                        <constraint firstItem="J40-X7-fUi" firstAttribute="centerY" secondItem="DW3-Ze-FAw" secondAttribute="centerY" id="p2K-BN-qCA"/>
+                        <constraint firstAttribute="height" constant="100" id="sH6-CH-WYk"/>
+                        <constraint firstItem="J40-X7-fUi" firstAttribute="centerY" secondItem="xMn-mA-z1D" secondAttribute="centerY" id="vIm-wR-irJ"/>
+                    </constraints>
+                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
-                <constraint firstItem="1C6-ZK-QAq" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Mhr-g6-Pdr"/>
-                <constraint firstItem="1C6-ZK-QAq" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="rnj-35-CHA"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DW3-Ze-FAw" secondAttribute="trailing" constant="15" id="Dqu-Ia-8NN"/>
+                <constraint firstItem="DW3-Ze-FAw" firstAttribute="top" secondItem="SZ1-pc-rmg" secondAttribute="bottom" constant="20" id="HbU-sk-YSE"/>
+                <constraint firstItem="SZ1-pc-rmg" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="Ih8-y7-FgO"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="SZ1-pc-rmg" secondAttribute="trailing" constant="15" id="QI2-wP-D1O"/>
+                <constraint firstItem="DW3-Ze-FAw" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="Sd0-IX-REt"/>
+                <constraint firstItem="SZ1-pc-rmg" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="15" id="hTH-rS-vH1"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="DW3-Ze-FAw" secondAttribute="bottom" constant="30" id="u74-gi-fBX"/>
             </constraints>
-            <point key="canvasLocation" x="97" y="69"/>
+            <point key="canvasLocation" x="96.799999999999997" y="68.815592203898049"/>
         </view>
     </objects>
     <resources>
+        <image name="get_captcha_btn" width="330" height="183"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
