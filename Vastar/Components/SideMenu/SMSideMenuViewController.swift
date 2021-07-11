@@ -207,7 +207,8 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
             
             switch rowIndex {
             case 0:
-                let vc = OrderViewController(nibName: "OrderViewController", bundle: nil)
+                let vc = OrderListViewController(nibName: "OrderListViewController", bundle: nil)
+                vc.accountPhone = menuTitle
                 nav.viewControllers = [vc]
                 reveal?.pushFrontViewController(nav, animated: true)
                 

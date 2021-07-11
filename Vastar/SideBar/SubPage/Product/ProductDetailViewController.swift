@@ -58,6 +58,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
     
     private var amountNum:Int = 1
     private var price_Int:Int = 0
+    private var No:String = ""
     
     private let userDefault = UserDefaults.standard
     
@@ -297,6 +298,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
             let content:String = dictValue[7] as? String ?? ""
             
             self.navigationItem.title = name
+            self.No = No
             self.productTitleLabel.text = name
             self.productModelLabel.text = code
             self.productPriceLabel.text = "$\(String(price))"
@@ -354,6 +356,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
                 DispatchQueue.main.async {
                     
                     self.navigationItem.title = name
+                    self.No = No
                     self.productTitleLabel.text = name
                     self.productModelLabel.text = code
                     self.productPriceLabel.text = "$\(String(price))"
@@ -398,6 +401,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
     
     func addShppingCarData() {
                 
+        let p_No = self.No
         let p_title = self.productTitleLabel.text ?? ""
         let p_color = self.colorTextField.text ?? ""
         let p_v = self.voltageTextField.text ?? ""
@@ -408,7 +412,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         let p_image = self.productPhoto.image?.pngData() ?? defaultData
         let imageData:NSData = p_image! as NSData
         
-        let dataArray:Array<Any> = [p_title,p_color,p_v,Int(p_amount)!,p_price,imageData]
+        let dataArray:Array<Any> = [p_No,p_title,p_color,p_v,Int(p_amount)!,p_price,imageData]
         
         VClient.sharedInstance().VCAddShoppingCarData(dataArray: dataArray) { (_ isDone:Bool) in
             if isDone {

@@ -192,7 +192,7 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
             
             if isSuccess {
                 self.cityDataArray = resDataArray
-                print("\(self.cityDataArray)")
+//                print("\(self.cityDataArray)")
                 self.cityPickerView.reloadComponent(0)
             }
         }
@@ -346,7 +346,8 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
             if pickerView == self.cityPickerView {
                 title =  self.cityDataArray[row]
             }else if pickerView == self.townPickerView {
-                title = self.townDataArray[row]
+                let town:String = self.townDataArray[row]
+                title = town
             }
             break
         default:
