@@ -36,15 +36,15 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
     @IBOutlet var addressDetailTextField: UITextField!
     
     @IBOutlet var orderTitleLabel: UILabel!
-    
-    @IBOutlet var totalTitleLabel: UILabel!
-    @IBOutlet var totalValueLabel: UILabel!
+        
+    @IBOutlet var totalProductTitleLabel: UILabel!
+    @IBOutlet var totalProductValueLabel: UILabel!
     
     @IBOutlet var feeTitleLabel: UILabel!
     @IBOutlet var feeValueLabel: UILabel!
     
-    @IBOutlet var moneyTitleLabel: UILabel!
-    @IBOutlet var moneyValueLabel: UILabel!
+    @IBOutlet var totalPriceTitleLabel: UILabel!
+    @IBOutlet var totalPriceValueLabel: UILabel!
     
     @IBOutlet var confirmBtn: UIButton!
     
@@ -70,6 +70,7 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
     private var vaiv = VActivityIndicatorView()
     
     private var IDArray:Array<Int> = []
+    private var NoArray:Array<String> = []
     private var titleArray:Array<String> = []
     private var colorArray:Array<String> = []
     private var amountArray:Array<Int> = []
@@ -83,6 +84,16 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
     private var receiverCityArray:Array<String> = []
     private var receiverDistrictArray:Array<String> = []
     private var receiverAddressArray:Array<String> = []
+    
+    private var current_Sum_Product_Price:Int = 0
+    private var sum_MainPrice:Int = 0
+    private var sum_OutlyingPrice:Int = 0
+    
+    private var final_totalProduct:Int = 0
+    private var final_fee:Int = 0
+    private var final_total:Int = 0
+    
+    private var doneFlagArray:Array<Bool> = []
     
     var accountPhone:String = ""
     
@@ -145,7 +156,10 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         self.addressTitleLabel.text = NSLocalizedString("Shopping_Checkout_Address_title", comment: "")
         self.addressTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
         
+        self.cityTextField.placeholder = NSLocalizedString("Shopping_Checkout_Address_City_title", comment: "")
         self.cityTextField.inputAccessoryView = UIView()
+        
+        self.townTextField.placeholder = NSLocalizedString("Shopping_Checkout_Address_Town_title", comment: "")
         self.townTextField.inputAccessoryView = UIView()
         
         self.posttalCodeTextField.placeholder = NSLocalizedString("Shopping_Checkout_Address_Posttal_Code_title", comment: "")
@@ -158,23 +172,24 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         self.orderTitleLabel.text = NSLocalizedString("Shopping_Checkout_Order_title", comment: "")
         self.orderTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
         
-        self.totalTitleLabel.text = NSLocalizedString("Shopping_Checkout_Total_title", comment: "")
-        self.totalTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
-        self.totalValueLabel.text = NSLocalizedString("", comment: "")
-        self.totalValueLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.totalProductTitleLabel.text = NSLocalizedString("Shopping_Checkout_Total_title", comment: "")
+        self.totalProductTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.totalProductValueLabel.text = NSLocalizedString("", comment: "")
+        self.totalProductValueLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
         self.feeTitleLabel.text = NSLocalizedString("Shopping_Checkout_Fee_title", comment: "")
         self.feeTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
         self.feeValueLabel.text = NSLocalizedString("", comment: "")
         self.feeValueLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
-        self.moneyTitleLabel.text = NSLocalizedString("Shopping_Checkout_Money_title", comment: "")
-        self.moneyTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
-        self.moneyValueLabel.text = NSLocalizedString("", comment: "")
-        self.moneyValueLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.totalPriceTitleLabel.text = NSLocalizedString("Shopping_Checkout_Money_title", comment: "")
+        self.totalPriceTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.totalPriceValueLabel.text = NSLocalizedString("", comment: "")
+        self.totalPriceValueLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
         
         self.confirmBtn.setTitle(NSLocalizedString("Shopping_Checkout_Confirm_Btn_title", comment: ""), for: .normal)
         self.confirmBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.confirmBtn.addTarget(self, action: #selector(confirmBtnClick(_:)), for: .touchUpInside)
         
-        self.payDataArray = ["信用卡"]
+        self.payDataArray = ["信用卡付款"]
     }
     
     func setTableView() {
@@ -287,7 +302,11 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     func getShoppingCarData() {
         
+        sum_MainPrice = 0
+        sum_OutlyingPrice = 0
+        
         self.IDArray.removeAll()
+        self.NoArray.removeAll()
         self.titleArray.removeAll()
         self.colorArray.removeAll()
         self.amountArray.removeAll()
@@ -300,14 +319,15 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
                 if dataArray.count != 0 {
                     
                     self.IDArray = dataArray[0] as? Array<Int> ?? []
-                    self.titleArray = dataArray[1] as? Array<String> ?? []
-                    self.colorArray = dataArray[2] as? Array<String> ?? []
-                    self.amountArray = dataArray[3] as? Array<Int> ?? []
-                    self.vArray = dataArray[4] as? Array<String> ?? []
-                    self.priceArray = dataArray[5] as? Array<Int> ?? []
-                    self.photoArray = dataArray[6] as? Array<UIImage> ?? []
+                    self.NoArray = dataArray[1] as? Array<String> ?? []
+                    self.titleArray = dataArray[2] as? Array<String> ?? []
+                    self.colorArray = dataArray[3] as? Array<String> ?? []
+                    self.amountArray = dataArray[4] as? Array<Int> ?? []
+                    self.vArray = dataArray[5] as? Array<String> ?? []
+                    self.priceArray = dataArray[6] as? Array<Int> ?? []
+                    self.photoArray = dataArray[7] as? Array<UIImage> ?? []
                     self.selectProductTableView.reloadData()
-                    self.getSum()
+                    self.getShippingData()
                 }
             }
         }
@@ -321,18 +341,23 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
             
             countProduct = countProduct + self.amountArray[i]
             countProductPrice = countProductPrice + (self.amountArray[i] * self.priceArray[i])
+            self.current_Sum_Product_Price = countProductPrice
+            self.final_totalProduct = countProductPrice
         }
         
         let format = NumberFormatter()
         format.numberStyle = .decimal
         let countProductPriceSt:String = format.string(from: NSNumber(value:countProductPrice)) ?? ""
-        let feePricr:Int = 450
+        let feePricr:Int = sum_MainPrice
+        self.final_fee = feePricr
         
-        let moneySt:String = format.string(from: NSNumber(value:countProductPrice + feePricr)) ?? ""
+        let totalSt:String = format.string(from: NSNumber(value:countProductPrice + feePricr)) ?? ""
+        self.final_total = countProductPrice + feePricr
 
-        self.totalValueLabel.text = "$\(countProductPriceSt)"
+        self.totalProductValueLabel.text = "$\(countProductPriceSt)"
         self.feeValueLabel.text = "$\(feePricr)"
-        self.moneyValueLabel.text = "$\(moneySt)"
+        self.totalPriceValueLabel.text = "$\(totalSt)"
+
     }
     
     func getReceiverData() {
@@ -385,6 +410,7 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
             self.addressDetailTextField.text = self.receiverAddressArray[component]
             
             getTownData(citySt: self.cityTextField.text ?? "")
+            getPostalCodeData(citySt: self.cityTextField.text ?? "", townSt: self.townTextField.text ?? "")
         }
     }
     
@@ -394,7 +420,6 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
             
             if isSuccess {
                 self.cityDataArray = resDataArray
-                print("\(self.cityDataArray)")
                 self.cityPickerView.reloadComponent(0)
             }
         }
@@ -406,6 +431,33 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
             if isSuccess {
                 self.townDataArray = resDataArray
                 self.townPickerView.reloadComponent(0)
+            }
+        }
+    }
+    
+    func getPostalCodeData(citySt:String,townSt:String) {
+        
+        VClient.sharedInstance().VCGetPostalCodeData(city: citySt, town: townSt) { (_ isSuccess:Bool,_ message:String,_ resData:String,_ isOutlying:Int) in
+            if isSuccess {
+                self.posttalCodeTextField.text = resData
+                
+                if isOutlying == 1 {
+                    self.feeValueLabel.text = "$\(self.sum_OutlyingPrice)"
+                    self.final_fee = self.sum_OutlyingPrice
+                    let format = NumberFormatter()
+                    format.numberStyle = .decimal
+                    let totalSt:String = format.string(from: NSNumber(value:self.current_Sum_Product_Price + self.sum_OutlyingPrice)) ?? ""
+                    self.totalPriceValueLabel.text = "$\(totalSt)"
+                    self.final_total = self.current_Sum_Product_Price + self.sum_OutlyingPrice
+                }else{
+                    self.feeValueLabel.text = "$\(self.sum_MainPrice)"
+                    self.final_fee = self.sum_MainPrice
+                    let format = NumberFormatter()
+                    format.numberStyle = .decimal
+                    let totalSt:String = format.string(from: NSNumber(value:self.current_Sum_Product_Price + self.sum_MainPrice)) ?? ""
+                    self.totalPriceValueLabel.text = "$\(totalSt)"
+                    self.final_total = self.current_Sum_Product_Price + self.sum_MainPrice
+                }
             }
         }
     }
@@ -426,6 +478,127 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
             self.selectTownSt = self.townDataArray[component]
             self.townTextField.text = self.selectTownSt
         }
+        let city:String = self.cityTextField.text ?? ""
+        getPostalCodeData(citySt: city, townSt: self.selectTownSt)
+    }
+    
+    
+    func getShippingData() {
+        
+        for i in 0 ..< self.IDArray.count {
+            
+            let noSt:String = self.NoArray[i]
+            let amount:Int = self.amountArray[i]
+            print("---\(noSt)  -- \(amount)")
+            VClient.sharedInstance().VCGetShippingData(productNo: noSt) { (_ isSuccess:Bool,_ message:String,_ mainPrice:Int,_ OutlyingPrice:Int) in
+                if isSuccess {
+                    print("main =\(mainPrice) Out = \(OutlyingPrice)")
+                    let main:Int = mainPrice * amount
+                    let out:Int = OutlyingPrice * amount
+                    self.checkGetShippingDataDone(doneFlag: true, mainPrice: main, OutPrice: out)
+                }
+            }
+        }
+    }
+    
+    func checkGetShippingDataDone(doneFlag:Bool,mainPrice:Int,OutPrice:Int) {
+        
+        self.doneFlagArray.append(doneFlag)
+        print(self.doneFlagArray)
+        
+        sum_MainPrice = sum_MainPrice + mainPrice
+        sum_OutlyingPrice = sum_OutlyingPrice + OutPrice
+        
+        if self.doneFlagArray.count == self.IDArray.count {
+            self.doneFlagArray = []
+            getSum()
+        }
+    }
+    
+    func getCheckoutDictData() -> [String:Any] {
+        var dictData:[String:Any] = [:]
+        
+        let pay:String = self.payTextField.text ?? ""
+        let transport:String = self.transportTextField.text ?? ""
+        let name:String = self.receiverNameTextField.text ?? ""
+        let phone:String = self.receiverPhoneTextField.text ?? ""
+        let city:String = self.cityTextField.text ?? ""
+        let town:String = self.townTextField.text ?? ""
+        let postalCode:String = self.posttalCodeTextField.text ?? ""
+        let address:String = self.addressDetailTextField.text ?? ""
+        let totalProduct:Int = self.final_totalProduct 
+        let fee:Int = self.final_fee 
+        let total:Int = self.final_total
+        
+        let todayDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let nowDateString = dateFormatter.string(from: todayDate)
+        
+        
+        dictData.updateValue("vastar", forKey: "UserID")
+        dictData.updateValue("vastar@2673", forKey: "Password")
+        dictData.updateValue("", forKey: "Order_No")
+        dictData.updateValue(accountPhone, forKey: "Account_Name")
+        dictData.updateValue(totalProduct, forKey: "TotalProductPrice")
+        dictData.updateValue(fee, forKey: "ShippingFee")
+        dictData.updateValue(total, forKey: "TotalPrice")
+        dictData.updateValue(name, forKey: "Receiver_Name")
+        dictData.updateValue(phone, forKey: "Receiver_Phone")
+        dictData.updateValue(city, forKey: "Receiver_City")
+        dictData.updateValue(town, forKey: "Receiver_District")
+        dictData.updateValue(postalCode, forKey: "Receiver_CityCode")
+        dictData.updateValue(address, forKey: "Receiver_Address")
+        dictData.updateValue(transport, forKey: "ShippingMethod")
+        dictData.updateValue(pay, forKey: "PaymentMethod")
+        dictData.updateValue(nowDateString, forKey: "OrderEstablishTime")
+        dictData.updateValue("訂單已送出", forKey: "Order_Status")
+        
+        return dictData
+    }
+    
+    
+    
+    func checkInputData() {
+        
+        let pay = self.payTextField.text ?? ""
+        let receiver = self.receiverTextField.text ?? ""
+        let receiverName = self.receiverNameTextField.text ?? ""
+        let receiverPhone = self.receiverPhoneTextField.text ?? ""
+        let city = self.cityTextField.text ?? ""
+        let town = self.townTextField.text ?? ""
+        let posttalCode = self.posttalCodeTextField.text ?? ""
+        let addressDetail = self.addressDetailTextField.text ?? ""
+        
+        if pay.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Select_Pay_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else if receiver.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Input_Reciver_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else if receiverName.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Input_Reciver_Name_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else if receiverPhone.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Input_Reciver_Phone_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else if city.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Select_Reciver_City_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else if town.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Select_Reciver_Town_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else if posttalCode.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Select_PostalCode_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else if addressDetail.count == 0 {
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Input_Address_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+        }else{
+            let vc = ConfirmOrderViewController(nibName: "ConfirmOrderViewController", bundle: nil)
+            vc.dataDict = self.getCheckoutDictData()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     //MARK:- Action
@@ -444,11 +617,17 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         self.view.endEditing(true)
         self.GetCityPickerViewSelect()
         self.townTextField.text = ""
+        self.posttalCodeTextField.text = ""
     }
     
     @objc func townDoneBtnClick(_ sender:UIButton) {
         self.view.endEditing(true)
         self.GetTownPickerViewSelect()
+    }
+    
+    @objc func confirmBtnClick(_ sender:UIButton) {
+        
+        checkInputData()
     }
 
     /*

@@ -23,13 +23,21 @@
 		2244F61C268039D3006754D6 /* ProductDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2244F61A268039D3006754D6 /* ProductDetailViewController.xib */; };
 		2244F6202682D10C006754D6 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2244F61F2682D10A006754D6 /* SWRevealViewController.m */; };
 		228BDD7B268C55B50080F843 /* DBSqliteHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228BDD7A268C55B50080F843 /* DBSqliteHelper.framework */; };
-		228BDD7D268C57F20080F843 /* VastarDataBase.db in Resources */ = {isa = PBXBuildFile; fileRef = 228BDD7C268C57F20080F843 /* VastarDataBase.db */; };
 		228BDD80268C72C70080F843 /* shoppingCarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BDD7E268C72C70080F843 /* shoppingCarTableViewCell.swift */; };
 		228BDD81268C72C70080F843 /* shoppingCarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228BDD7F268C72C70080F843 /* shoppingCarTableViewCell.xib */; };
 		228BDD84268EC22F0080F843 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BDD82268EC22E0080F843 /* CheckoutViewController.swift */; };
 		228BDD85268EC22F0080F843 /* CheckoutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228BDD83268EC22E0080F843 /* CheckoutViewController.xib */; };
 		228BDD88268F0FDD0080F843 /* CheckoutProductTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BDD86268F0FDD0080F843 /* CheckoutProductTableViewCell.swift */; };
 		228BDD89268F0FDD0080F843 /* CheckoutProductTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228BDD87268F0FDD0080F843 /* CheckoutProductTableViewCell.xib */; };
+		228BDD8B26959A860080F843 /* VastarDataBase.db in Resources */ = {isa = PBXBuildFile; fileRef = 228BDD8A26959A860080F843 /* VastarDataBase.db */; };
+		228BDD902696EED80080F843 /* ConfirmOrderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BDD8E2696EED80080F843 /* ConfirmOrderViewController.swift */; };
+		228BDD912696EED80080F843 /* ConfirmOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228BDD8F2696EED80080F843 /* ConfirmOrderViewController.xib */; };
+		228BDD95269843460080F843 /* OrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BDD93269843450080F843 /* OrderListViewController.swift */; };
+		228BDD96269843460080F843 /* OrderListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228BDD94269843450080F843 /* OrderListViewController.xib */; };
+		228BDD992698436F0080F843 /* OrderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BDD972698436F0080F843 /* OrderListTableViewCell.swift */; };
+		228BDD9A2698436F0080F843 /* OrderListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228BDD982698436F0080F843 /* OrderListTableViewCell.xib */; };
+		228BDD9D269AEE2F0080F843 /* OrderCreateDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BDD9B269AEE2E0080F843 /* OrderCreateDoneViewController.swift */; };
+		228BDD9E269AEE2F0080F843 /* OrderCreateDoneViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228BDD9C269AEE2E0080F843 /* OrderCreateDoneViewController.xib */; };
 		22F1C30E26648CF8003A1D5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C30D26648CF8003A1D5C /* AppDelegate.swift */; };
 		22F1C31026648CF8003A1D5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C30F26648CF8003A1D5C /* SceneDelegate.swift */; };
 		22F1C31226648CF8003A1D5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C31126648CF8003A1D5C /* ViewController.swift */; };
@@ -86,13 +94,21 @@
 		2244F61E2682D10A006754D6 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		2244F61F2682D10A006754D6 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		228BDD7A268C55B50080F843 /* DBSqliteHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DBSqliteHelper.framework; sourceTree = "<group>"; };
-		228BDD7C268C57F20080F843 /* VastarDataBase.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = VastarDataBase.db; sourceTree = "<group>"; };
 		228BDD7E268C72C70080F843 /* shoppingCarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shoppingCarTableViewCell.swift; sourceTree = "<group>"; };
 		228BDD7F268C72C70080F843 /* shoppingCarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = shoppingCarTableViewCell.xib; sourceTree = "<group>"; };
 		228BDD82268EC22E0080F843 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
 		228BDD83268EC22E0080F843 /* CheckoutViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckoutViewController.xib; sourceTree = "<group>"; };
 		228BDD86268F0FDD0080F843 /* CheckoutProductTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutProductTableViewCell.swift; sourceTree = "<group>"; };
 		228BDD87268F0FDD0080F843 /* CheckoutProductTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CheckoutProductTableViewCell.xib; sourceTree = "<group>"; };
+		228BDD8A26959A860080F843 /* VastarDataBase.db */ = {isa = PBXFileReference; lastKnownFileType = file; path = VastarDataBase.db; sourceTree = "<group>"; };
+		228BDD8E2696EED80080F843 /* ConfirmOrderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmOrderViewController.swift; sourceTree = "<group>"; };
+		228BDD8F2696EED80080F843 /* ConfirmOrderViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConfirmOrderViewController.xib; sourceTree = "<group>"; };
+		228BDD93269843450080F843 /* OrderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListViewController.swift; sourceTree = "<group>"; };
+		228BDD94269843450080F843 /* OrderListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderListViewController.xib; sourceTree = "<group>"; };
+		228BDD972698436F0080F843 /* OrderListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListTableViewCell.swift; sourceTree = "<group>"; };
+		228BDD982698436F0080F843 /* OrderListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderListTableViewCell.xib; sourceTree = "<group>"; };
+		228BDD9B269AEE2E0080F843 /* OrderCreateDoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCreateDoneViewController.swift; sourceTree = "<group>"; };
+		228BDD9C269AEE2E0080F843 /* OrderCreateDoneViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderCreateDoneViewController.xib; sourceTree = "<group>"; };
 		22F1C30A26648CF7003A1D5C /* Vastar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vastar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F1C30D26648CF8003A1D5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22F1C30F26648CF8003A1D5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -156,12 +172,9 @@
 		2244F61026789458006754D6 /* SubPage */ = {
 			isa = PBXGroup;
 			children = (
-				2244F61126789586006754D6 /* ProductListViewController.swift */,
-				2244F61226789586006754D6 /* ProductListViewController.xib */,
-				2244F619268039D3006754D6 /* ProductDetailViewController.swift */,
-				2244F61A268039D3006754D6 /* ProductDetailViewController.xib */,
-				228BDD82268EC22E0080F843 /* CheckoutViewController.swift */,
-				228BDD83268EC22E0080F843 /* CheckoutViewController.xib */,
+				228BDD9226983C760080F843 /* Order */,
+				228BDD8C2696EA810080F843 /* Product */,
+				228BDD8D2696EDE10080F843 /* ShoppingCar */,
 			);
 			path = SubPage;
 			sourceTree = "<group>";
@@ -175,11 +188,42 @@
 			path = SWRevealViewController;
 			sourceTree = "<group>";
 		};
+		228BDD8C2696EA810080F843 /* Product */ = {
+			isa = PBXGroup;
+			children = (
+				2244F61126789586006754D6 /* ProductListViewController.swift */,
+				2244F61226789586006754D6 /* ProductListViewController.xib */,
+				2244F619268039D3006754D6 /* ProductDetailViewController.swift */,
+				2244F61A268039D3006754D6 /* ProductDetailViewController.xib */,
+			);
+			path = Product;
+			sourceTree = "<group>";
+		};
+		228BDD8D2696EDE10080F843 /* ShoppingCar */ = {
+			isa = PBXGroup;
+			children = (
+				228BDD82268EC22E0080F843 /* CheckoutViewController.swift */,
+				228BDD83268EC22E0080F843 /* CheckoutViewController.xib */,
+				228BDD8E2696EED80080F843 /* ConfirmOrderViewController.swift */,
+				228BDD8F2696EED80080F843 /* ConfirmOrderViewController.xib */,
+			);
+			path = ShoppingCar;
+			sourceTree = "<group>";
+		};
+		228BDD9226983C760080F843 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				228BDD9B269AEE2E0080F843 /* OrderCreateDoneViewController.swift */,
+				228BDD9C269AEE2E0080F843 /* OrderCreateDoneViewController.xib */,
+			);
+			path = Order;
+			sourceTree = "<group>";
+		};
 		22F1C30126648CF7003A1D5C = {
 			isa = PBXGroup;
 			children = (
 				22F1C4052668D219003A1D5C /* Vastar-Bridging-Header.h */,
-				228BDD7C268C57F20080F843 /* VastarDataBase.db */,
+				228BDD8A26959A860080F843 /* VastarDataBase.db */,
 				22F1C30C26648CF7003A1D5C /* Vastar */,
 				22F1C30B26648CF7003A1D5C /* Products */,
 				8463F18985A4874208FC738A /* Pods */,
@@ -266,6 +310,8 @@
 				228BDD7F268C72C70080F843 /* shoppingCarTableViewCell.xib */,
 				228BDD86268F0FDD0080F843 /* CheckoutProductTableViewCell.swift */,
 				228BDD87268F0FDD0080F843 /* CheckoutProductTableViewCell.xib */,
+				228BDD972698436F0080F843 /* OrderListTableViewCell.swift */,
+				228BDD982698436F0080F843 /* OrderListTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -281,6 +327,8 @@
 				22F1C3DF2668857B003A1D5C /* ShoppingCarViewController.xib */,
 				22F1C3E4266885D9003A1D5C /* OrderViewController.swift */,
 				22F1C3E5266885D9003A1D5C /* OrderViewController.xib */,
+				228BDD93269843450080F843 /* OrderListViewController.swift */,
+				228BDD94269843450080F843 /* OrderListViewController.xib */,
 				22F1C3E9266885F7003A1D5C /* HistoryOrderViewController.swift */,
 				22F1C3EA266885F7003A1D5C /* HistoryOrderViewController.xib */,
 				22F1C3EE26688620003A1D5C /* MemberDataViewController.swift */,
@@ -381,18 +429,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				22F1C39D26660FCC003A1D5C /* SMSideMenuViewController.xib in Resources */,
+				228BDD9E269AEE2F0080F843 /* OrderCreateDoneViewController.xib in Resources */,
 				22F1C3A2266613F7003A1D5C /* SideMenuTableViewCell.xib in Resources */,
 				22F1C35D2664C7AC003A1D5C /* LoginViewController.xib in Resources */,
 				22F1C3E12668857B003A1D5C /* ShoppingCarViewController.xib in Resources */,
 				22F1C38D2665CBCB003A1D5C /* ForgetPwViewController.xib in Resources */,
 				22F1C31A26648D01003A1D5C /* LaunchScreen.storyboard in Resources */,
+				228BDD96269843460080F843 /* OrderListViewController.xib in Resources */,
 				228BDD89268F0FDD0080F843 /* CheckoutProductTableViewCell.xib in Resources */,
 				2203BBF12672106D006986D2 /* RecipientAddView.xib in Resources */,
 				2244F61826789606006754D6 /* ProductListTableViewCell.xib in Resources */,
 				22F1C36C2664D152003A1D5C /* Localizable.strings in Resources */,
 				2203BBF6267362BA006986D2 /* ReceiverTableViewCell.xib in Resources */,
 				2203BBE3266DCD3C006986D2 /* ChangePwViewController.xib in Resources */,
-				228BDD7D268C57F20080F843 /* VastarDataBase.db in Resources */,
 				22F1C3E7266885D9003A1D5C /* OrderViewController.xib in Resources */,
 				22F1C31726648D01003A1D5C /* Assets.xcassets in Resources */,
 				22F1C31526648CF8003A1D5C /* Main.storyboard in Resources */,
@@ -401,10 +450,13 @@
 				228BDD81268C72C70080F843 /* shoppingCarTableViewCell.xib in Resources */,
 				22F1C3D92668852D003A1D5C /* ProductViewController.xib in Resources */,
 				22F1C3EC266885F7003A1D5C /* HistoryOrderViewController.xib in Resources */,
+				228BDD912696EED80080F843 /* ConfirmOrderViewController.xib in Resources */,
 				22F1C3F126688620003A1D5C /* MemberDataViewController.xib in Resources */,
 				2244F61C268039D3006754D6 /* ProductDetailViewController.xib in Resources */,
 				2244F61426789586006754D6 /* ProductListViewController.xib in Resources */,
 				22F1C3872665CB99003A1D5C /* RegisterViewController.xib in Resources */,
+				228BDD9A2698436F0080F843 /* OrderListTableViewCell.xib in Resources */,
+				228BDD8B26959A860080F843 /* VastarDataBase.db in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -463,8 +515,10 @@
 				22F1C35C2664C7AC003A1D5C /* LoginViewController.swift in Sources */,
 				22F1C3862665CB99003A1D5C /* RegisterViewController.swift in Sources */,
 				22F1C3E6266885D9003A1D5C /* OrderViewController.swift in Sources */,
+				228BDD9D269AEE2F0080F843 /* OrderCreateDoneViewController.swift in Sources */,
 				22F1C39C26660FCC003A1D5C /* SMSideMenuViewController.swift in Sources */,
 				22F1C3D82668852D003A1D5C /* ProductViewController.swift in Sources */,
+				228BDD902696EED80080F843 /* ConfirmOrderViewController.swift in Sources */,
 				22F1C31226648CF8003A1D5C /* ViewController.swift in Sources */,
 				2244F61B268039D3006754D6 /* ProductDetailViewController.swift in Sources */,
 				22F1C3F82668B522003A1D5C /* VClient.swift in Sources */,
@@ -481,6 +535,8 @@
 				2203BBE92670C3EE006986D2 /* CustomButton.swift in Sources */,
 				22F1C3FF2668BD44003A1D5C /* AppDefine.swift in Sources */,
 				2244F6202682D10C006754D6 /* SWRevealViewController.m in Sources */,
+				228BDD95269843460080F843 /* OrderListViewController.swift in Sources */,
+				228BDD992698436F0080F843 /* OrderListTableViewCell.swift in Sources */,
 				22F1C38C2665CBCB003A1D5C /* ForgetPwViewController.swift in Sources */,
 				22F1C3A726661A34003A1D5C /* VideoViewController.swift in Sources */,
 				22F1C31026648CF8003A1D5C /* SceneDelegate.swift in Sources */,
