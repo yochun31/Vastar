@@ -19,8 +19,6 @@
                 <outlet property="contentView" destination="GDF-cI-oYP" id="ulK-mk-7hK"/>
                 <outlet property="feeTitleLabel" destination="x0p-8X-p3q" id="Zzc-Sg-88G"/>
                 <outlet property="feeValueLabel" destination="JK6-qT-IUf" id="vFu-AV-oTT"/>
-                <outlet property="moneyTitleLabel" destination="fmM-YN-btv" id="AjD-vz-1rM"/>
-                <outlet property="moneyValueLabel" destination="qJ9-te-8Rf" id="kVU-0k-pq1"/>
                 <outlet property="orderTitleLabel" destination="9dH-wZ-isN" id="c5i-x0-3Hk"/>
                 <outlet property="payTextField" destination="wff-gV-DxD" id="sin-TE-OmY"/>
                 <outlet property="payTitleLabel" destination="OCw-LV-sw3" id="gGd-qf-ISn"/>
@@ -31,8 +29,10 @@
                 <outlet property="receiverTitleLabel" destination="JxA-P5-558" id="BzV-p9-rOf"/>
                 <outlet property="selectProductTableView" destination="dyQ-6K-KBE" id="dxb-Gp-9D8"/>
                 <outlet property="selectTitleLabel" destination="9Ik-2Z-dDO" id="ft8-fQ-mPZ"/>
-                <outlet property="totalTitleLabel" destination="5Xc-jo-KX4" id="UBc-Xm-AcP"/>
-                <outlet property="totalValueLabel" destination="bAK-eQ-8G7" id="AN1-9d-Qx9"/>
+                <outlet property="totalPriceTitleLabel" destination="fmM-YN-btv" id="Nj3-dH-TBs"/>
+                <outlet property="totalPriceValueLabel" destination="qJ9-te-8Rf" id="wSl-Y8-eeK"/>
+                <outlet property="totalProductTitleLabel" destination="5Xc-jo-KX4" id="hku-wV-2Qq"/>
+                <outlet property="totalProductValueLabel" destination="bAK-eQ-8G7" id="Zsa-cE-9X0"/>
                 <outlet property="townTextField" destination="les-lV-ZCW" id="SG2-OX-Qez"/>
                 <outlet property="transportTextField" destination="fZb-3k-Aeg" id="JPN-IU-cYo"/>
                 <outlet property="transportTitleLabel" destination="jQi-qv-vsF" id="ZHe-Rw-S01"/>

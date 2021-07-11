@@ -17,6 +17,7 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
     private var vaiv = VActivityIndicatorView()
     
     private var IDArray:Array<Int> = []
+    private var NoArray:Array<String> = []
     private var titleArray:Array<String> = []
     private var colorArray:Array<String> = []
     private var amountArray:Array<Int> = []
@@ -93,6 +94,7 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
     func getShoppingCarData() {
         
         self.IDArray.removeAll()
+        self.NoArray.removeAll()
         self.titleArray.removeAll()
         self.colorArray.removeAll()
         self.amountArray.removeAll()
@@ -105,12 +107,13 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
                 if dataArray.count != 0 {
                     
                     self.IDArray = dataArray[0] as? Array<Int> ?? []
-                    self.titleArray = dataArray[1] as? Array<String> ?? []
-                    self.colorArray = dataArray[2] as? Array<String> ?? []
-                    self.amountArray = dataArray[3] as? Array<Int> ?? []
-                    self.vArray = dataArray[4] as? Array<String> ?? []
-                    self.priceArray = dataArray[5] as? Array<Int> ?? []
-                    self.photoArray = dataArray[6] as? Array<UIImage> ?? []
+                    self.NoArray = dataArray[1] as? Array<String> ?? []
+                    self.titleArray = dataArray[2] as? Array<String> ?? []
+                    self.colorArray = dataArray[3] as? Array<String> ?? []
+                    self.amountArray = dataArray[4] as? Array<Int> ?? []
+                    self.vArray = dataArray[5] as? Array<String> ?? []
+                    self.priceArray = dataArray[6] as? Array<Int> ?? []
+                    self.photoArray = dataArray[7] as? Array<UIImage> ?? []
                     self.getSum()
                     self.shoppingCarTableView.reloadData()
                 }else{
@@ -157,19 +160,20 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
     }
     
     func addShppingCarData(dataArray:Array<Any>) {
-                
-        let p_title = dataArray[0] as? String ?? ""
-        let p_color = dataArray[1] as? String ?? ""
-        let p_v = dataArray[2] as? String ?? ""
-        let p_price = dataArray[3] as? Int ?? 0
-        let p_amount = dataArray[4] as? Int ?? 0
+            
+        let p_No = dataArray[0] as? String ?? ""
+        let p_title = dataArray[1] as? String ?? ""
+        let p_color = dataArray[2] as? String ?? ""
+        let p_v = dataArray[3] as? String ?? ""
+        let p_price = dataArray[4] as? Int ?? 0
+        let p_amount = dataArray[5] as? Int ?? 0
         
-        let image = dataArray[5] as? UIImage
+        let image = dataArray[6] as? UIImage
         let defaultData = UIImage(named: "logo_item")!.pngData()
         let p_image = image?.pngData() ?? defaultData
         let imageData:NSData = p_image! as NSData
         
-        let dataArray:Array<Any> = [p_title,p_color,p_v,p_amount,p_price,imageData]
+        let dataArray:Array<Any> = [p_No,p_title,p_color,p_v,p_amount,p_price,imageData]
         
         VClient.sharedInstance().VCAddShoppingCarData(dataArray: dataArray) { (_ isDone:Bool) in
             if isDone {
@@ -205,13 +209,13 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
         if currentAmount > self.tmpAmount {
             
             let num:Int = currentAmount - self.tmpAmount
-            let dataArray:Array<Any> = [self.titleArray[indexTag],self.colorArray[indexTag],self.vArray[indexTag],self.priceArray[indexTag],num,self.photoArray[indexTag]]
+            let dataArray:Array<Any> = [self.NoArray[indexTag],self.titleArray[indexTag],self.colorArray[indexTag],self.vArray[indexTag],self.priceArray[indexTag],num,self.photoArray[indexTag]]
             addShppingCarData(dataArray: dataArray)
             
         }else if currentAmount < self.tmpAmount {
             
             let num:Int = currentAmount - self.tmpAmount
-            let dataArray:Array<Any> = [self.titleArray[indexTag],self.colorArray[indexTag],self.vArray[indexTag],self.priceArray[indexTag],num,self.photoArray[indexTag]]
+            let dataArray:Array<Any> = [self.NoArray[indexTag],self.titleArray[indexTag],self.colorArray[indexTag],self.vArray[indexTag],self.priceArray[indexTag],num,self.photoArray[indexTag]]
             addShppingCarData(dataArray: dataArray)
             
         }else if currentAmount == self.tmpAmount {
@@ -305,13 +309,13 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
     
     func amountAddBtnClick(index: Int) {
         
-        let dataArray:Array<Any> = [self.titleArray[index],self.colorArray[index],self.vArray[index],self.priceArray[index],1,self.photoArray[index]]
+        let dataArray:Array<Any> = [self.NoArray[index],self.titleArray[index],self.colorArray[index],self.vArray[index],self.priceArray[index],1,self.photoArray[index]]
         addShppingCarData(dataArray: dataArray)
         
     }
     func amountLessBtnClick(index: Int) {
         
-        let dataArray:Array<Any> = [self.titleArray[index],self.colorArray[index],self.vArray[index],self.priceArray[index],-1,self.photoArray[index]]
+        let dataArray:Array<Any> = [self.NoArray[index],self.titleArray[index],self.colorArray[index],self.vArray[index],self.priceArray[index],-1,self.photoArray[index]]
         addShppingCarData(dataArray: dataArray)
     }
 }

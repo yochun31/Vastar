@@ -135,6 +135,8 @@
 "Shopping_Checkout_Recipient_title" = "收件人";
 "Shopping_Checkout_Recipient_Phone_title" = "電話";
 "Shopping_Checkout_Address_title" = "運送地址";
+"Shopping_Checkout_Address_City_title" = "選擇縣市";
+"Shopping_Checkout_Address_Town_title" = "選擇行政區";
 "Shopping_Checkout_Address_Posttal_Code_title" = "郵遞區號";
 "Shopping_Checkout_Address_Detail_title" = "地址(路、巷、號、樓)";
 "Shopping_Checkout_Order_title" = "訂單資訊";
@@ -144,10 +146,29 @@
 "Shopping_Checkout_Confirm_Btn_title" = "確認訂單";
 "Shopping_Checkout_title" = "結帳";
 "Shopping_Checkout_Alert_title" = "您的購物車中沒有商品！";
+"Shopping_Checkout_Select_Pay_Alert_Text" = "尚未選擇付款方式";
+"Shopping_Checkout_Input_Reciver_Alert_Text" = "尚未輸入收件人";
+"Shopping_Checkout_Input_Reciver_Name_Alert_Text" = "尚未輸入收件人姓名";
+"Shopping_Checkout_Input_Reciver_Phone_Alert_Text" = "尚未輸入電話";
+"Shopping_Checkout_Select_Reciver_City_Alert_Text" = "尚未選擇縣市";
+"Shopping_Checkout_Select_Reciver_Town_Alert_Text" = "尚未選擇行政區";
+"Shopping_Checkout_Select_PostalCode_Alert_Text" = "尚未輸入郵遞區號";
+"Shopping_Checkout_Input_Address_Alert_Text" = "尚未輸入郵遞區號";
+"Shopping_Checkout_Send_Btn_title" = "確認訂單";
+"Shopping_Checkout_ReturnInfo_title" = "＊退換貨需知";
+"Shopping_Checkout_ReturnInfo_Text" = "猶豫期不是試用期，本商品不提供試用。商品購買後，若不使用請勿拆封。退換貨的商品，必須為全新未使用狀態，且包裝完好。";
+
+"Order_title" = "訂單狀態";
+"Order_Number_title" = "訂單編號:";
+"Order_Schedule_title" = "訂單進度:";
+"Order_Freight_title" = "貨運編號:";
+"Order_Create_Done_text" = "訂單已建立！";
+"Order_Later_Pay_Btn_title" = "稍後付款";
+"Order_Now_Pay_Btn_title" = "立即付款";
 
 "Verify_Get_Btn_title" = "取得驗證碼";
 "Verify_Wait_Btn_title" = "秒後可再次發送";
 
 "Video_title" = "影片首頁";
-"Order_title" = "訂單狀態";
+
 "History_title" = "歷史訂單";

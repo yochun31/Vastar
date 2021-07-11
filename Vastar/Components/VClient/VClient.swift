@@ -254,6 +254,13 @@ class VClient {
         }
     }
     
+    func VCGetPostalCodeData(city:String,town:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resData:String,_ isOutlying:Int) -> Void) {
+        
+        CloudGatewayManager.sharedInstance().CGMGetPostalCodeData(city: city, town: town) { (_ isSuccess:Bool,_ message:String,_ resData:String,_ isOutlying:Int) in
+            result(isSuccess,message,resData,isOutlying)
+        }
+    }
+    
     //MARK: - Recriver
     
     func VCAddReceiverByData(bodyArray:Array<String>,result:@escaping (_ isSuccess:Bool,_ message:String) -> Void) {
@@ -332,25 +339,27 @@ class VClient {
         let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
         
         var doneFlag:Bool = false
-        let p_title:String = dataArray[0] as? String ?? ""
-        let p_color:String = dataArray[1] as? String ?? ""
-        let p_v:String = dataArray[2] as? String ?? ""
-        let p_amount:Int = dataArray[3] as? Int ?? 0
-        let p_price:Int = dataArray[4] as? Int ?? 0
-        let imageData:NSData = dataArray[5] as! NSData
+        let p_No:String = dataArray[0] as? String ?? ""
+        let p_title:String = dataArray[1] as? String ?? ""
+        let p_color:String = dataArray[2] as? String ?? ""
+        let p_v:String = dataArray[3] as? String ?? ""
+        let p_amount:Int = dataArray[4] as? Int ?? 0
+        let p_price:Int = dataArray[5] as? Int ?? 0
+        let imageData:NSData = dataArray[6] as! NSData
 
         let dbSqliteHelper = DBSqlite()
         let db = dbSqliteHelper.openDataBase("VastarDataBase")
-        let sql:String = "Insert into 'shoppingCar' ('title','color','voltage','amount','price','photo','addtime')  VALUES (?,?,?,?,?,?,datetime('now', 'localtime'));"
+        let sql:String = "Insert into 'shoppingCar' ('No','title','color','voltage','amount','price','photo','addtime')  VALUES (?,?,?,?,?,?,?,datetime('now', 'localtime'));"
         var stmt:OpaquePointer? = nil
         let sqlResult:Int = Int(sqlite3_prepare(db, sql, -1, &stmt, nil))
         if sqlResult == SQLITE_OK {
-            sqlite3_bind_text(stmt, 1, p_title, -1, SQLITE_TRANSIENT)
-            sqlite3_bind_text(stmt, 2, p_color, -1, SQLITE_TRANSIENT)
-            sqlite3_bind_text(stmt, 3, p_v, -1, SQLITE_TRANSIENT)
-            sqlite3_bind_int(stmt, 4, Int32(p_amount))
-            sqlite3_bind_int(stmt, 5, Int32(p_price))
-            sqlite3_bind_blob(stmt, 6, imageData.bytes, Int32(imageData.length), SQLITE_TRANSIENT)
+            sqlite3_bind_text(stmt, 1, p_No, -1, SQLITE_TRANSIENT)
+            sqlite3_bind_text(stmt, 2, p_title, -1, SQLITE_TRANSIENT)
+            sqlite3_bind_text(stmt, 3, p_color, -1, SQLITE_TRANSIENT)
+            sqlite3_bind_text(stmt, 4, p_v, -1, SQLITE_TRANSIENT)
+            sqlite3_bind_int(stmt, 5, Int32(p_amount))
+            sqlite3_bind_int(stmt, 6, Int32(p_price))
+            sqlite3_bind_blob(stmt, 7, imageData.bytes, Int32(imageData.length), SQLITE_TRANSIENT)
 
             if sqlite3_step(stmt) == SQLITE_DONE {
                 doneFlag = true
@@ -370,6 +379,7 @@ class VClient {
         var doneFlag:Bool = false
         
         var IDArray:Array<Int> = []
+        var NoArray:Array<String> = []
         var titleArray:Array<String> = []
         var colorArray:Array<String> = []
         var amountArray:Array<Int> = []
@@ -379,22 +389,24 @@ class VClient {
         
         let dbSqliteHelper = DBSqlite()
         let db = dbSqliteHelper.openDataBase("VastarDataBase")
-        let sql:String = "select ID,title,color,sum(amount)as amountS, voltage, price,photo from shoppingCar group by title,color,voltage"
+        let sql:String = "select ID,No,title,color,sum(amount)as amountS, voltage, price,photo from shoppingCar group by title,color,voltage"
         var stmt:OpaquePointer? = nil
         let sqlResult:Int = Int(sqlite3_prepare(db, sql, -1, &stmt, nil))
         if sqlResult == SQLITE_OK {
             while sqlite3_step(stmt) == SQLITE_ROW {
                 
                 let ID = sqlite3_column_int(stmt, 0)
-                let title = UnsafePointer(sqlite3_column_text(stmt, 1))
-                let color = UnsafePointer(sqlite3_column_text(stmt, 2))
-                let amount = sqlite3_column_int(stmt, 3)
-                let voltage = UnsafePointer(sqlite3_column_text(stmt, 4))
-                let price = sqlite3_column_int(stmt, 5)
-                let imageLength = sqlite3_column_bytes(stmt, 6)
-                let imageData = NSData(bytes:sqlite3_column_blob(stmt, 6) , length: Int(imageLength))
+                let No = UnsafePointer(sqlite3_column_text(stmt, 1))
+                let title = UnsafePointer(sqlite3_column_text(stmt, 2))
+                let color = UnsafePointer(sqlite3_column_text(stmt, 3))
+                let amount = sqlite3_column_int(stmt, 4)
+                let voltage = UnsafePointer(sqlite3_column_text(stmt, 5))
+                let price = sqlite3_column_int(stmt, 6)
+                let imageLength = sqlite3_column_bytes(stmt, 7)
+                let imageData = NSData(bytes:sqlite3_column_blob(stmt, 7) , length: Int(imageLength))
                 
                 IDArray.append(Int(ID))
+                NoArray.append(String.init(cString: No!))
                 titleArray.append(String.init(cString: title!))
                 colorArray.append(String.init(cString: color!))
                 amountArray.append(Int(amount))
@@ -407,8 +419,8 @@ class VClient {
             doneFlag = true
             sqlite3_finalize(stmt)
             
-            if IDArray.count != 0 || titleArray.count != 0 || colorArray.count != 0 || amountArray.count != 0 || vArray.count != 0 || priceArray.count != 0 || photoArray.count != 0 {
-                DataArray = [IDArray,titleArray,colorArray,amountArray,vArray,priceArray,photoArray]
+            if IDArray.count != 0 || NoArray.count != 0 || titleArray.count != 0 || colorArray.count != 0 || amountArray.count != 0 || vArray.count != 0 || priceArray.count != 0 || photoArray.count != 0 {
+                DataArray = [IDArray,NoArray,titleArray,colorArray,amountArray,vArray,priceArray,photoArray]
             }
         }else{
             doneFlag = false
@@ -468,6 +480,32 @@ class VClient {
         
         dbSqliteHelper.closeDataBase()
         result(doneFlag)
+    }
+    
+    //MARK: - Shipping
+    
+    func VCGetShippingData(productNo:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ mainPrice:Int,_ OutlyingPrice:Int) -> Void) {
+        
+        CloudGatewayManager.sharedInstance().CGMGetShippingData(productNo: productNo) { (_ isSuccess:Bool,_ message:String,_ mainPrice:Int,_ OutlyingPrice:Int) in
+            result(isSuccess,message,mainPrice,OutlyingPrice)
+        }
+    }
+    
+    //MARK:- Order
+    
+    func VCGetOrderListData(phone:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
+        
+        CloudGatewayManager.sharedInstance().CGMGetOrderListData(phone: phone) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
+            result(isSuccess,message,resDataArray)
+        }
+    }
+    
+    
+    func VCAddOrderByData(reqBodyDict:[String:Any],result:@escaping (_ isSuccess:Bool,_ message:String,_ orderNo:String) -> Void) {
+        CloudGatewayManager.sharedInstance().CGMAddOrderByData(reqBodyDict: reqBodyDict) { (_ isSuccess:Bool,_ message:String,_ orderNo:String) in
+            result(isSuccess,message,orderNo)
+        }
+        
     }
 
 }
