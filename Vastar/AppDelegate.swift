@@ -16,8 +16,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
+        Thread.sleep(forTimeInterval: 1)
+        
         IQKeyboardManager.shared.enable = true
         IQKeyboardManager.shared.previousNextDisplayMode = IQPreviousNextDisplayMode.alwaysHide
+        
+        let navBar = UINavigationBar.appearance()
+        navBar.tintColor = UIColor.white
+        navBar.barTintColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+        
+        //Change navigation title Color
+        navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
         
         if #available(iOS 13.0, *) {
             
@@ -32,6 +41,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         return true
     }
+    
 
     // MARK: UISceneSession Lifecycle
 

@@ -1,17 +1,14 @@
 //
-//  ConfirmOrderViewController.swift
+//  HistoryOrderDetailViewController.swift
 //  Vastar
 //
-//  Created by 郭堯彰 on 2021/7/8.
+//  Created by 郭堯彰 on 2021/7/16.
 //
 
 import UIKit
 
-class ConfirmOrderViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class HistoryOrderDetailViewController: UIViewController {
     
-    
-    
-    @IBOutlet var productTableView: UITableView!
     
     @IBOutlet var payTitleLabel: UILabel!
     @IBOutlet var payValueLabel: UILabel!
@@ -20,6 +17,7 @@ class ConfirmOrderViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet var transportValueLabel: UILabel!
     
     @IBOutlet var addressTitleLabel: UILabel!
+    
     @IBOutlet var receiverNameLabel: UILabel!
     @IBOutlet var receiverPhoneLabel: UILabel!
     @IBOutlet var receiverAddressLabel: UILabel!
@@ -38,49 +36,23 @@ class ConfirmOrderViewController: UIViewController,UITableViewDelegate,UITableVi
     @IBOutlet var totalPriceTitleLabel: UILabel!
     @IBOutlet var totalPriceValueLabel: UILabel!
     
-    @IBOutlet var sendBtn: UIButton!
-    
-    @IBOutlet var contentView: UIView!
-    
-    private var IDArray:Array<Int> = []
-    private var NoArray:Array<String> = []
-    private var titleArray:Array<String> = []
-    private var colorArray:Array<String> = []
-    private var amountArray:Array<Int> = []
-    private var vArray:Array<String> = []
-    private var priceArray:Array<Int> = []
-    private var photoArray:Array<UIImage> = []
-    
-    private var receiverIDArray:Array<Int> = []
-    private var receiverNameArray:Array<String> = []
-    private var receiverPhoneArray:Array<String> = []
-    private var receiverCityArray:Array<String> = []
-    private var receiverDistrictArray:Array<String> = []
-    private var receiverAddressArray:Array<String> = []
-    
-    let userDefault = UserDefaults.standard
     var dataDict:[String:Any] = [:]
-    
-    //MARK: - Life Cycle
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         
         setInterface()
-        setTableView()
-        getCheckoutData()
     }
-    
     
     //MARK: - UI Interface Methods
     
     func setInterface() {
         
+        self.navigationItem.title = NSLocalizedString("", comment: "")
         self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
-        self.contentView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
-        
+
         let format = NumberFormatter()
         format.numberStyle = .decimal
         
@@ -149,72 +121,6 @@ class ConfirmOrderViewController: UIViewController,UITableViewDelegate,UITableVi
         self.totalPriceValueLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
         self.totalPriceValueLabel.font = UIFont(name: "PingFangTC-Semibold", size: 17.0)
         
-        self.sendBtn.setTitle(NSLocalizedString("Shopping_Checkout_Send_Btn_title", comment: ""), for: .normal)
-        self.sendBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
-        self.sendBtn.addTarget(self, action: #selector(sendBtnClick(_:)), for: .touchUpInside)
-        
-    }
-    
-    func setTableView() {
-        
-        self.productTableView.delegate = self
-        self.productTableView.dataSource = self
-        self.productTableView.register(UINib(nibName: "CheckoutProductTableViewCell", bundle: nil), forCellReuseIdentifier: "CheckoutProductCell")
-        self.productTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
-    }
-    
-    
-    //MARK:- Assistant Methods
-    
-    func getCheckoutData() {
-        
-        self.IDArray.removeAll()
-        self.NoArray.removeAll()
-        self.titleArray.removeAll()
-        self.colorArray.removeAll()
-        self.amountArray.removeAll()
-        self.vArray.removeAll()
-        self.priceArray.removeAll()
-        self.photoArray.removeAll()
-        
-        VClient.sharedInstance().VCGetShoppingCarData { (_ dataArray:Array<Array<Any>>,_ isDone:Bool) in
-            if isDone {
-                if dataArray.count != 0 {
-                    
-                    self.IDArray = dataArray[0] as? Array<Int> ?? []
-                    self.NoArray = dataArray[1] as? Array<String> ?? []
-                    self.titleArray = dataArray[2] as? Array<String> ?? []
-                    self.colorArray = dataArray[3] as? Array<String> ?? []
-                    self.amountArray = dataArray[4] as? Array<Int> ?? []
-                    self.vArray = dataArray[5] as? Array<String> ?? []
-                    self.priceArray = dataArray[6] as? Array<Int> ?? []
-                    self.photoArray = dataArray[7] as? Array<UIImage> ?? []
-                    self.productTableView.reloadData()
-                }
-            }
-        }
-    }
-    
-    func AddOrder() {
-        
-        VClient.sharedInstance().VCAddOrderByData(reqBodyDict: self.dataDict) { (_ isSuccess:Bool,_ message:String,_ orderNo:String) in
-            
-            if isSuccess {
-                
-                print("--\(orderNo)")
-                let vc = OrderCreateDoneViewController(nibName: "OrderCreateDoneViewController", bundle: nil)
-                self.navigationController?.pushViewController(vc, animated: false)
-            }
-        }
-    }
-    
-    
-    //MARK: - Action
-    
-    @objc func sendBtnClick(_ sender:UIButton) {
-        
-        self.userDefault.set(1, forKey: "backDefault")
-        self.AddOrder()
     }
 
 
@@ -227,43 +133,5 @@ class ConfirmOrderViewController: UIViewController,UITableViewDelegate,UITableVi
         // Pass the selected object to the new view controller.
     }
     */
-    
-    //MARK: - UITableViewDataSource
-    
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return 1
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return self.titleArray.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell:CheckoutProductTableViewCell = tableView.dequeueReusableCell(withIdentifier: "CheckoutProductCell", for: indexPath) as! CheckoutProductTableViewCell
-        cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
-        
-        let selectBkView = UIView()
-        selectBkView.backgroundColor = UIColor.clear
-        cell.selectedBackgroundView = selectBkView
-
-        let name:String = self.titleArray[indexPath.row]
-        let color:String = self.colorArray[indexPath.row]
-        let v:String = self.vArray[indexPath.row]
-        let price:Int = self.priceArray[indexPath.row]
-        let amount:Int = self.amountArray[indexPath.row]
-        
-        let photo:UIImage = self.photoArray[indexPath.row]
-        
-        let format = NumberFormatter()
-        format.numberStyle = .decimal
-        let countPriceSt:String = format.string(from: NSNumber(value:price)) ?? ""
-  
-        let titleSt:String = "\(name)\n\(v),\(color)\n共\(amount)件\n$\(countPriceSt)"
-        cell.loadData(titleST: titleSt, photo: photo)
-
-        return cell
-    }
 
 }

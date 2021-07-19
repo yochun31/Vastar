@@ -482,6 +482,15 @@ class VClient {
         result(doneFlag)
     }
     
+    //MARK: - 付款方式
+    
+    func VCGetPayMethodData(result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) -> Void) {
+        CloudGatewayManager.sharedInstance().CGMGetPayMethodData { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) in
+            result(isSuccess,message,resDataArray)
+        }
+    }
+    
+    
     //MARK: - Shipping
     
     func VCGetShippingData(productNo:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ mainPrice:Int,_ OutlyingPrice:Int) -> Void) {
@@ -506,6 +515,13 @@ class VClient {
             result(isSuccess,message,orderNo)
         }
         
+    }
+    
+    func VCGetHistoryOrderListData(phone:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
+        
+        CloudGatewayManager.sharedInstance().CGMGetHistoryOrderListData(phone: phone) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
+            result(isSuccess,message,resDataArray)
+        }
     }
 
 }

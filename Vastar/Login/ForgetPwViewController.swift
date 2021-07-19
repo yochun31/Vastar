@@ -11,13 +11,19 @@ class ForgetPwViewController: UIViewController {
 
     
     @IBOutlet var phoneTextField: UITextField!
-    @IBOutlet var newPwTextField: UITextField!
+    @IBOutlet var nPwTextField: UITextField!
     @IBOutlet var confirmPwTextField: UITextField!
     @IBOutlet var verifyCodeTextField: UITextField!
     
     @IBOutlet var verifyCodeBtn: UIButton!
     @IBOutlet var confirmBtn: UIButton!
     @IBOutlet var cancelBtn: UIButton!
+    
+    @IBOutlet var phoneErrorLabel: UILabel!
+    @IBOutlet var nPwErrorLabel: UILabel!
+    @IBOutlet var confirmPwErrorLabel: UILabel!
+    @IBOutlet var verifyCodeErrorLabel: UILabel!
+    
     
     private var userResgisterTime:String = ""
     private var vaiv = VActivityIndicatorView()
@@ -49,12 +55,17 @@ class ForgetPwViewController: UIViewController {
         
         self.phoneTextField.placeholder = NSLocalizedString("Forget_Pw_Phone_title", comment: "")
         
-        self.newPwTextField.placeholder = NSLocalizedString("Forget_Pw_New_title", comment: "")
-        self.newPwTextField.isSecureTextEntry = true
+        self.nPwTextField.placeholder = NSLocalizedString("Forget_Pw_New_title", comment: "")
+        self.nPwTextField.isSecureTextEntry = true
+        self.nPwTextField.autocorrectionType = .no
+        self.nPwTextField.keyboardType = .namePhonePad
         
         self.confirmPwTextField.placeholder = NSLocalizedString("Forget_Pw_Confirm_title", comment: "")
         self.confirmPwTextField.isSecureTextEntry = true
+        self.confirmPwTextField.autocorrectionType = .no
+        self.confirmPwTextField.keyboardType = .namePhonePad
         
+        self.verifyCodeTextField.keyboardType = .numberPad
         self.verifyCodeTextField.placeholder = NSLocalizedString("Forget_Verify_Code_title", comment: "")
         
         self.verifyCodeBtn.setTitle(NSLocalizedString("Forget_Verify_Code_Btn_title", comment: ""), for: .normal)
@@ -69,6 +80,12 @@ class ForgetPwViewController: UIViewController {
         self.cancelBtn.setTitle(NSLocalizedString("Forget_Cancel_Btn_title", comment: ""), for: .normal)
         self.cancelBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
         self.cancelBtn.addTarget(self, action: #selector(cancelBtnClick(_:)), for: .touchUpInside)
+        
+        
+        self.phoneErrorLabel.text = ""
+        self.nPwErrorLabel.text = ""
+        self.confirmPwErrorLabel.text = ""
+        self.verifyCodeErrorLabel.text = ""
     }
     
     //MARK: - Assistant Methods
@@ -115,33 +132,63 @@ class ForgetPwViewController: UIViewController {
     
     func checkIputData() {
         let phoneText = self.phoneTextField.text ?? ""
-        let newPwText = self.newPwTextField.text ?? ""
+        let nPwText = self.nPwTextField.text ?? ""
         let confirmPwText = self.confirmPwTextField.text ?? ""
         let veriftyCodeText = self.verifyCodeTextField.text ?? ""
         
         if phoneText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Forget_Input_Phone_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
-        }else if newPwText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Forget_Input_Pw_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
-            
-        }else if newPwText.count < 8 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Forget_Input_Pw_8_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
-        
+            self.phoneErrorLabel.text = NSLocalizedString("Forget_Input_Phone_Alert_Text", comment: "")
+            self.phoneErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+
+            self.nPwErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
+            self.verifyCodeErrorLabel.text = ""
+
+        }else if nPwText.count == 0 {
+            self.nPwErrorLabel.text = NSLocalizedString("Forget_Input_Pw_Alert_Text", comment: "")
+            self.nPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.phoneErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
+            self.verifyCodeErrorLabel.text = ""
+
+        }else if nPwText.count < 8 {
+            self.nPwErrorLabel.text = NSLocalizedString("Forget_Input_Pw_8_Alert_Text", comment: "")
+            self.nPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.phoneErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
+            self.verifyCodeErrorLabel.text = ""
+
         }else if confirmPwText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Forget_Input_Confirm_Pw_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
-            
-        }else if newPwText != confirmPwText {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Forget_Input_diff_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
-            
+            self.confirmPwErrorLabel.text = NSLocalizedString("Forget_Input_Confirm_Pw_Alert_Text", comment: "")
+            self.confirmPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.phoneErrorLabel.text = ""
+            self.nPwErrorLabel.text = ""
+            self.verifyCodeErrorLabel.text = ""
+
+        }else if nPwText != confirmPwText {
+            self.confirmPwErrorLabel.text = NSLocalizedString("Forget_Input_diff_Alert_Text", comment: "")
+            self.confirmPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.phoneErrorLabel.text = ""
+            self.nPwErrorLabel.text = ""
+            self.verifyCodeErrorLabel.text = ""
+
         }else if veriftyCodeText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Forget_Input_VeriftyCode_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
-            
+            self.verifyCodeErrorLabel.text = NSLocalizedString("Forget_Input_VeriftyCode_Alert_Text", comment: "")
+            self.verifyCodeErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.phoneErrorLabel.text = ""
+            self.nPwErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
+
         }else if veriftyCodeText != verifyCodeSt {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Forget_Input_VeriftyCode_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
-            
+            self.verifyCodeErrorLabel.text = NSLocalizedString("Forget_Input_VeriftyCode_Error_Alert_Text", comment: "")
+            self.verifyCodeErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.phoneErrorLabel.text = ""
+            self.nPwErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
+
         }else{
-            
-            self.getUserInfo(accountName: phoneText, pw: newPwText)
+
+            self.getUserInfo(accountName: phoneText, pw: nPwText)
         }
     }
     

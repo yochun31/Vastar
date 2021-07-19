@@ -27,6 +27,8 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
     
     private var tmpAmount:Int = 0
     
+    let userDefault = UserDefaults.standard
+
     var accountPhone:String = ""
     
     //MARK: - Life Cycle
@@ -40,6 +42,20 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
         setTableView()
         setupSWReveal()
         getShoppingCarData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        let flag:Int = self.userDefault.object(forKey: "backDefault")as? Int ?? 0
+        if flag == 1 {
+            self.userDefault.set(0, forKey: "backDefault")
+            let nav = UINavigationController()
+            let reveal = self.revealViewController()
+            let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
+            nav.viewControllers = [vc]
+            reveal?.pushFrontViewController(nav, animated: true)
+        }
     }
 
     

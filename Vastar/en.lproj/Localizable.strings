@@ -165,6 +165,7 @@
 "Order_Create_Done_text" = "訂單已建立！";
 "Order_Later_Pay_Btn_title" = "稍後付款";
 "Order_Now_Pay_Btn_title" = "立即付款";
+"Order_Confirm_title" = "確認訂單";
 
 "Verify_Get_Btn_title" = "取得驗證碼";
 "Verify_Wait_Btn_title" = "秒後可再次發送";

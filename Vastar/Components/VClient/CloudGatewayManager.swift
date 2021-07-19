@@ -658,6 +658,46 @@ class CloudGatewayManager {
         }
     }
     
+    //MARK: - 付款方式
+    
+    func CGMGetPayMethodData(result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) -> Void) {
+        
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673"]
+        let urlString:String = vApiUrl + "/api/Payment/Query"
+        let url = URL.init(string: urlString)
+        var resMethodDataArray:Array<String> = []
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+                
+                    let jsonArray:Array<Any> = json as? Array<Any> ?? []
+                    
+                    for i in 0 ..< jsonArray.count {
+                        let resultDict = jsonArray[i] as? [String:Any] ?? [:]
+                        let method:String = resultDict["Method"] as? String ?? ""
+                        if method != "選擇付款方式" {
+                            resMethodDataArray.append(method)
+                        }
+                    }
+                    result(true,"",resMethodDataArray)
+                    
+                }else{
+                    result(false,"statusCode = \(String(describing: responseData.response?.statusCode))",[])
+                }
+                
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"Error",[])
+                break
+            }
+        }
+    }
+    
     
     //MARK: - 運費
     
@@ -831,6 +871,103 @@ class CloudGatewayManager {
                 
                 print("\(error)")
                 result(false,"Error","")
+                break
+            }
+        }
+    }
+    
+    func CGMGetHistoryOrderListData(phone:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
+        
+        var resProductDataArray:Array<Array<Any>> = []
+        
+        var orderIDArray:Array<Int> = []
+        var orderNoArray:Array<String> = []
+        var orderAccountNameArray:Array<String> = []
+        var orderTotalProductPriceArray:Array<Int> = []
+        var orderFeeArray:Array<Int> = []
+        var orderTotalPriceArray:Array<Int> = []
+        var orderReceiverNameArray:Array<String> = []
+        var orderReceiverPhoneArray:Array<String> = []
+        var orderReceiverCityArray:Array<String> = []
+        var orderReceiverTownArray:Array<String> = []
+        var orderReceiverCityCodeArray:Array<String> = []
+        var orderReceiverAddressArray:Array<String> = []
+        var orderShippingMethodArray:Array<String> = []
+        var orderPaymentMethodArray:Array<String> = []
+        var orderCreateTimeArray:Array<String> = []
+        var orderStatusArray:Array<String> = []
+        
+        var messageStr:String = ""
+        
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673", "Account_Name" : phone]
+        let urlString:String = vApiUrl + "/api/Order/QueryHistory"
+        let url = URL.init(string: urlString)
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+                
+                    let jsonArray:Array<Any> = json as? Array<Any> ?? []
+                    
+                    for i in 0 ..< jsonArray.count{
+                        let resultDict = jsonArray[i] as? [String:Any] ?? [:]
+                        let result:Int = resultDict["Result"] as? Int ?? 0
+                        
+                        if result == 0 {
+                            let ID:Int = resultDict["ID"] as? Int ?? 0
+                            let NO:String = resultDict["Order_No"] as? String ?? ""
+                            let accountName:String = resultDict["Account_Name"] as? String ?? ""
+                            let totalProductPrice:Int = resultDict["TotalProductPrice"] as? Int ?? 0
+                            let fee:Int = resultDict["ShippingFee"] as? Int ?? 0
+                            let totalPrice:Int = resultDict["TotalPrice"] as? Int ?? 0
+                            let r_Name:String = resultDict["Receiver_Name"] as? String ?? ""
+                            let r_Phone:String = resultDict["Receiver_Phone"] as? String ?? ""
+                            let r_City:String = resultDict["Receiver_City"] as? String ?? ""
+                            let r_Town:String = resultDict["Receiver_District"] as? String ?? ""
+                            let r_CityCode:String = resultDict["Receiver_CityCode"] as? String ?? ""
+                            let r_Address:String = resultDict["Receiver_Address"] as? String ?? ""
+                            let shippingMethod:String = resultDict["ShippingMethod"] as? String ?? ""
+                            let payMethod:String = resultDict["PaymentMethod"] as? String ?? ""
+                            let createTime:String = resultDict["OrderEstablishTime"] as? String ?? ""
+                            let status:String = resultDict["Order_Status"] as? String ?? ""
+
+                            orderIDArray.append(ID)
+                            orderNoArray.append(NO)
+                            orderAccountNameArray.append(accountName)
+                            orderTotalProductPriceArray.append(totalProductPrice)
+                            orderFeeArray.append(fee)
+                            orderTotalPriceArray.append(totalPrice)
+                            orderReceiverNameArray.append(r_Name)
+                            orderReceiverPhoneArray.append(r_Phone)
+                            orderReceiverCityArray.append(r_City)
+                            orderReceiverTownArray.append(r_Town)
+                            orderReceiverCityCodeArray.append(r_CityCode)
+                            orderReceiverAddressArray.append(r_Address)
+                            orderShippingMethodArray.append(shippingMethod)
+                            orderPaymentMethodArray.append(payMethod)
+                            orderCreateTimeArray.append(createTime)
+                            orderStatusArray.append(status)
+
+                        }else{
+                            messageStr = resultDict["Message"] as? String ?? ""
+                        }
+                    }
+                    
+                    resProductDataArray = [orderIDArray,orderNoArray,orderAccountNameArray,orderTotalProductPriceArray,orderFeeArray,orderTotalPriceArray,orderReceiverNameArray,orderReceiverPhoneArray,orderReceiverCityArray,orderReceiverTownArray,orderReceiverCityCodeArray,orderReceiverAddressArray,orderShippingMethodArray,orderPaymentMethodArray,orderCreateTimeArray,orderStatusArray]
+                    
+                    result(true,messageStr,resProductDataArray)
+                    
+                }else{
+                    result(false,"statusCode = \(String(describing: responseData.response?.statusCode))",[])
+                }
+                
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"Error",[])
                 break
             }
         }

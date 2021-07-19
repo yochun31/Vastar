@@ -23,6 +23,11 @@ class ChangePwViewController: UIViewController {
     @IBOutlet var confirmBtn: UIButton!
     @IBOutlet var cancelBtn: UIButton!
     
+    @IBOutlet var oldPwErrorLabel: UILabel!
+    @IBOutlet var nPwErrorLabel: UILabel!
+    @IBOutlet var confirmPwErrorLabel: UILabel!
+    @IBOutlet var verifyErrorLabel: UILabel!
+    
     private var userResgisterTime:String = ""
     private var vaiv = VActivityIndicatorView()
     
@@ -95,6 +100,11 @@ class ChangePwViewController: UIViewController {
         self.cancelBtn.setTitle(NSLocalizedString("Change_Pw_Cancel_Btn_title", comment: ""), for: .normal)
         self.cancelBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
         self.cancelBtn.addTarget(self, action: #selector(cancelBtnClick(_:)), for: .touchUpInside)
+        
+        self.oldPwErrorLabel.text = ""
+        self.nPwErrorLabel.text = ""
+        self.confirmPwErrorLabel.text = ""
+        self.verifyErrorLabel.text = ""
     }
     
     
@@ -152,25 +162,60 @@ class ChangePwViewController: UIViewController {
         let veriftyCodeText = self.verifyCodeTextField.text ?? ""
         
         if oldPwText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_Input_Old_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.oldPwErrorLabel.text = NSLocalizedString("Change_Pw_Input_Old_Alert_Text", comment: "")
+            self.oldPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+
+            self.nPwErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
+            self.verifyErrorLabel.text = ""
             
         }else if newPwText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_Input_New_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.nPwErrorLabel.text = NSLocalizedString("Change_Pw_Input_New_Alert_Text", comment: "")
+            self.nPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            
+            self.oldPwErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
+            self.verifyErrorLabel.text = ""
             
         }else if newPwText.count < 8 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_Input_Pw_8_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.nPwErrorLabel.text = NSLocalizedString("Change_Pw_Input_Pw_8_Alert_Text", comment: "")
+            self.nPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            
+            self.oldPwErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
+            self.verifyErrorLabel.text = ""
             
         }else if confirmPwText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_Input_Confirm_Pw_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.confirmPwErrorLabel.text = NSLocalizedString("Change_Pw_Input_Confirm_Pw_Alert_Text", comment: "")
+            self.confirmPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            
+            self.oldPwErrorLabel.text = ""
+            self.nPwErrorLabel.text = ""
+            self.verifyErrorLabel.text = ""
             
         }else if confirmPwText != newPwText {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_Input_diff_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.confirmPwErrorLabel.text = NSLocalizedString("Change_Pw_Input_diff_Alert_Text", comment: "")
+            self.confirmPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            
+            self.oldPwErrorLabel.text = ""
+            self.nPwErrorLabel.text = ""
+            self.verifyErrorLabel.text = ""
             
         }else if veriftyCodeText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_Input_VeriftyCode_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.verifyErrorLabel.text = NSLocalizedString("Change_Pw_Input_VeriftyCode_Alert_Text", comment: "")
+            self.verifyErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            
+            self.oldPwErrorLabel.text = ""
+            self.nPwErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
             
         }else if veriftyCodeText != verifyCodeSt {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_VeriftyCode_Error_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.verifyErrorLabel.text = NSLocalizedString("Change_Pw_VeriftyCode_Error_Alert_Text", comment: "")
+            self.verifyErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            
+            self.oldPwErrorLabel.text = ""
+            self.nPwErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
             
         }else{
             

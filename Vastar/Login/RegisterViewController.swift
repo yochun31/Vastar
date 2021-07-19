@@ -20,6 +20,13 @@ class RegisterViewController: UIViewController {
     @IBOutlet var registerBtn: UIButton!
     @IBOutlet var loginBtn: UIButton!
     
+    @IBOutlet var nameErrorLabel: UILabel!
+    @IBOutlet var phoneErrorLabel: UILabel!
+    @IBOutlet var pwErrorLabel: UILabel!
+    @IBOutlet var confirmPwErrorLabel: UILabel!
+    @IBOutlet var verifyErrorLabel: UILabel!
+    
+    
     private var vaiv = VActivityIndicatorView()
     
     //MARK: - Life Cycle
@@ -43,9 +50,15 @@ class RegisterViewController: UIViewController {
         
         self.passwordTextField.placeholder = NSLocalizedString("Register_Password_title", comment: "")
         self.passwordTextField.isSecureTextEntry = true
+        self.passwordTextField.autocorrectionType = .no
+        self.passwordTextField.keyboardType = .namePhonePad
+        self.passwordTextField.textContentType = .username
         
         self.confirmPwTextField.placeholder = NSLocalizedString("Register_Confirm_Password_title", comment: "")
         self.confirmPwTextField.isSecureTextEntry = true
+        self.confirmPwTextField.autocorrectionType = .no
+        self.confirmPwTextField.keyboardType = .namePhonePad
+        self.confirmPwTextField.textContentType = .username
         
         self.verifyCodeTextField.placeholder = NSLocalizedString("Register_Verify_Code_title", comment: "")
         
@@ -61,6 +74,12 @@ class RegisterViewController: UIViewController {
         self.loginBtn.setTitle(NSLocalizedString("Register_Login_Btn_title", comment: ""), for: .normal)
         self.loginBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
         self.loginBtn.addTarget(self, action: #selector(loginBtnClick(_:)), for: .touchUpInside)
+        
+        self.nameErrorLabel.text = ""
+        self.phoneErrorLabel.text = ""
+        self.pwErrorLabel.text = ""
+        self.confirmPwErrorLabel.text = ""
+        self.verifyErrorLabel.text = ""
     }
     
     //MARK: - Assistant Methods
@@ -108,22 +127,60 @@ class RegisterViewController: UIViewController {
         let confirmPwText = self.confirmPwTextField.text ?? ""
         
         if nameText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Register_Input_Name_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.nameErrorLabel.text = NSLocalizedString("Register_Input_Name_Alert_Text", comment: "")
+            self.nameErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            
+            self.phoneErrorLabel.text = ""
+            self.pwErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
+            self.verifyErrorLabel.text = ""
             
         }else if phoneText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Register_Input_Phone_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.phoneErrorLabel.text = NSLocalizedString("Register_Input_Phone_Alert_Text", comment: "")
+            self.phoneErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            
+            self.nameErrorLabel.text = ""
+            self.pwErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
+            self.verifyErrorLabel.text = ""
             
         }else if pwText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Register_Input_Pw_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.pwErrorLabel.text = NSLocalizedString("Register_Input_Pw_Alert_Text", comment: "")
+            self.pwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            
+            self.nameErrorLabel.text = ""
+            self.phoneErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
+            self.verifyErrorLabel.text = ""
             
         }else if pwText.count < 8 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Register_Input_Pw_8_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.pwErrorLabel.text = NSLocalizedString("Register_Input_Pw_8_Alert_Text", comment: "")
+            self.pwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            
+            self.nameErrorLabel.text = ""
+            self.phoneErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
+            self.verifyErrorLabel.text = ""
             
         }else if confirmPwText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Register_Input_Confirm_Pw_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.confirmPwErrorLabel.text = NSLocalizedString("Register_Input_Confirm_Pw_Alert_Text", comment: "")
+            self.confirmPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            
+            self.nameErrorLabel.text = ""
+            self.phoneErrorLabel.text = ""
+            self.pwErrorLabel.text = ""
+            self.verifyErrorLabel.text = ""
             
         }else if pwText != confirmPwText {
             VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Register_Input_diff_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+            self.confirmPwErrorLabel.text = NSLocalizedString("Register_Input_diff_Alert_Text", comment: "")
+            self.confirmPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            
+            self.nameErrorLabel.text = ""
+            self.phoneErrorLabel.text = ""
+            self.pwErrorLabel.text = ""
+            self.verifyErrorLabel.text = ""
             
         }else {
             

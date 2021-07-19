@@ -110,6 +110,7 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         createReceiverPickerView()
         createCityPickerView()
         createTownPickerView()
+        getPayMethodData()
         getShoppingCarData()
         getReceiverData()
         getCityData()
@@ -189,7 +190,6 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         self.confirmBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
         self.confirmBtn.addTarget(self, action: #selector(confirmBtnClick(_:)), for: .touchUpInside)
         
-        self.payDataArray = ["信用卡付款"]
     }
     
     func setTableView() {
@@ -299,6 +299,20 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     
     //MARK:- Assistant Methods
+    
+    func getPayMethodData() {
+        
+        VClient.sharedInstance().VCGetPayMethodData { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) in
+            
+            if isSuccess {
+                if resDataArray.count != 0 {
+                    self.payDataArray = resDataArray
+                    self.payPickerView.reloadComponent(0)
+                }
+            }
+        }
+    }
+    
     
     func getShoppingCarData() {
         
