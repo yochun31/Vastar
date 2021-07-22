@@ -73,9 +73,9 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
         self.navigationItem.title = NSLocalizedString("Shopping_title", comment: "")
         self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
         
-        self.countLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.countLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.checkoutBtn.setTitle(NSLocalizedString("Shopping_Checkout_Btn_title", comment: ""), for: .normal)
-        self.checkoutBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.checkoutBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.checkoutBtn.addTarget(self, action: #selector(checkoutBtnClick(_:)), for: .touchUpInside)
         
         

@@ -41,8 +41,8 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
         self.productTableView.dataSource = self
         
         self.productTableView.register(UINib(nibName: "ProductListTableViewCell", bundle: nil), forCellReuseIdentifier: "ProdectCell")
-        self.productTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 61.0/255.0, blue: 36.0/255.0, alpha: 1.0)
-        self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 61.0/255.0, blue: 36.0/255.0, alpha: 1.0)
+        self.productTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
     }
     
     //MARK: - Assistant Methods
@@ -269,7 +269,7 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:ProductListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ProdectCell", for: indexPath) as! ProductListTableViewCell
-        cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 61.0/255.0, blue: 36.0/255.0, alpha: 1.0)
+        cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
         
         let selectBkView = UIView()
         selectBkView.backgroundColor = UIColor.clear

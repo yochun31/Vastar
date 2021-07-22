@@ -33,30 +33,40 @@
                     <rect key="frame" x="20" y="50" width="335" height="567"/>
                 </imageView>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="CDp-iy-4qI">
-                    <rect key="frame" x="60" y="150" width="255" height="34"/>
+                    <rect key="frame" x="60" y="150" width="255" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="7Qz-WN-FsU"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="s4s-T2-zi2">
-                    <rect key="frame" x="60" y="225" width="255" height="34"/>
+                    <rect key="frame" x="60" y="231" width="255" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="pew-2T-u2r"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3ny-kC-MH4">
-                    <rect key="frame" x="60" y="300" width="255" height="34"/>
+                    <rect key="frame" x="60" y="312" width="255" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="phG-EZ-bFj"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gbP-l6-RzN">
-                    <rect key="frame" x="60" y="375" width="100" height="34"/>
+                    <rect key="frame" x="60" y="393" width="100" height="40"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Cy7-K7-K1t"/>
                         <constraint firstAttribute="width" constant="100" id="POX-Bf-pw9"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3E-zU-Nh7">
-                    <rect key="frame" x="200" y="372" width="115" height="40"/>
+                    <rect key="frame" x="200" y="393" width="115" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="KHW-bJ-Uka"/>
                     </constraints>
@@ -64,46 +74,46 @@
                     <state key="normal" title="Button" backgroundImage="btn"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rwv-jV-BKd">
-                    <rect key="frame" x="90" y="460" width="92.5" height="50"/>
+                    <rect key="frame" x="90" y="484" width="92.5" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="R3R-mR-ccX"/>
                     </constraints>
                     <state key="normal" title="Button" backgroundImage="btn"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6MC-P2-cLq">
-                    <rect key="frame" x="192.5" y="460" width="92.5" height="50"/>
+                    <rect key="frame" x="192.5" y="484" width="92.5" height="50"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="50" id="JQI-U1-YnA"/>
                     </constraints>
                     <state key="normal" title="Button" backgroundImage="btn"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Obq-iB-M9G">
-                    <rect key="frame" x="60" y="189" width="42" height="21"/>
+                    <rect key="frame" x="60" y="195" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k9D-yd-9yS">
-                    <rect key="frame" x="60" y="264" width="42" height="21"/>
+                    <rect key="frame" x="60" y="276" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xzy-le-hY1">
-                    <rect key="frame" x="60" y="339" width="42" height="21"/>
+                    <rect key="frame" x="60" y="357" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mgj-jF-bcs">
-                    <rect key="frame" x="60" y="414" width="42" height="21"/>
+                    <rect key="frame" x="60" y="438" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" red="0.0" green="0.24109309910000001" blue="0.14230054619999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="k9D-yd-9yS" firstAttribute="leading" secondItem="CDp-iy-4qI" secondAttribute="leading" id="0Hf-fG-WWc"/>
                 <constraint firstItem="3ny-kC-MH4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="61u-ad-1L7"/>

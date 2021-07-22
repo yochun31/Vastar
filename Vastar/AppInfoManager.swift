@@ -68,3 +68,30 @@ class AppInfoManager {
         return title
     }
 }
+
+extension UITextField {
+    
+    func setTextColor(_ color: UIColor, font: UIFont) {
+
+        self.textColor = color
+        self.font = font
+    }
+
+    func setBottomBorder(with color: UIColor, width: CGFloat, bkColor:UIColor) {
+        self.borderStyle = .none
+        self.layer.backgroundColor = bkColor.cgColor  // bg color of your choice
+
+        self.layer.masksToBounds = false
+        self.layer.shadowColor = color.cgColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: width)
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowRadius = 0.0
+    }
+    
+    func setPlaceHolderAttributes(placeHolderText : String, colour : UIColor , font : UIFont){
+
+        self.attributedPlaceholder = NSAttributedString(string:placeHolderText, attributes:[NSAttributedString.Key.foregroundColor: colour , NSAttributedString.Key.font : font])
+    }
+    
+    
+}

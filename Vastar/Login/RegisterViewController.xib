@@ -35,84 +35,97 @@
                     <rect key="frame" x="20" y="50" width="335" height="567"/>
                 </imageView>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vLR-ND-zcR">
-                    <rect key="frame" x="60" y="120" width="255" height="34"/>
+                    <rect key="frame" x="60" y="120" width="255" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="Uey-iv-uk0"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pBr-BB-A3L">
-                    <rect key="frame" x="60" y="192" width="255" height="34"/>
+                    <rect key="frame" x="60" y="198" width="255" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="1b1-dx-AMz"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Q2T-qu-uUH">
-                    <rect key="frame" x="60" y="264" width="255" height="34"/>
+                    <rect key="frame" x="60" y="276" width="255" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="GGS-1n-eZM"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="GuH-gs-aUQ">
-                    <rect key="frame" x="60" y="336" width="255" height="34"/>
+                    <rect key="frame" x="60" y="354" width="255" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="EzU-La-Y9G"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wWa-fC-EHt">
-                    <rect key="frame" x="60" y="408" width="100" height="34"/>
+                    <rect key="frame" x="60" y="432" width="100" height="40"/>
                     <constraints>
+                        <constraint firstAttribute="height" constant="40" id="kIH-n0-5LW"/>
                         <constraint firstAttribute="width" constant="100" id="wHB-6K-aAJ"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STa-zm-NXA">
-                    <rect key="frame" x="210" y="405" width="105" height="40"/>
+                    <rect key="frame" x="210" y="432" width="105" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="VoH-PX-rae"/>
                     </constraints>
                     <state key="normal" title="Button" backgroundImage="get_captcha_btn"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wuU-9j-NdE">
-                    <rect key="frame" x="130" y="508" width="115" height="60"/>
+                    <rect key="frame" x="130" y="538" width="115" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="ExB-Cy-7WT"/>
                     </constraints>
                     <state key="normal" title="Button" backgroundImage="btn"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RBe-Qd-1Xu">
-                    <rect key="frame" x="100" y="588" width="175" height="30"/>
+                    <rect key="frame" x="100" y="618" width="175" height="30"/>
                     <state key="normal" title="Button"/>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="soX-GV-Ob4">
-                    <rect key="frame" x="60" y="159" width="42" height="21"/>
+                    <rect key="frame" x="60" y="165" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mf6-Ng-hFo">
-                    <rect key="frame" x="60" y="231" width="42" height="21"/>
+                    <rect key="frame" x="60" y="243" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="01g-up-R3y">
-                    <rect key="frame" x="60" y="303" width="42" height="21"/>
+                    <rect key="frame" x="60" y="321" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ya0-BT-MRo">
-                    <rect key="frame" x="60" y="375" width="42" height="21"/>
+                    <rect key="frame" x="60" y="399" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8mk-eP-3HA">
-                    <rect key="frame" x="60" y="447" width="42" height="21"/>
+                    <rect key="frame" x="60" y="477" width="42" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" red="0.0" green="0.2410504222" blue="0.14645946030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="Q2T-qu-uUH" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="04u-VJ-f3v"/>
                 <constraint firstItem="wWa-fC-EHt" firstAttribute="leading" secondItem="GuH-gs-aUQ" secondAttribute="leading" id="07J-b7-SLO"/>

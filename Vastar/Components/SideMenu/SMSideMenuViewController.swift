@@ -42,13 +42,15 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
     
     func setSideMenuTableView() {
         
+        self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        
         self.sideMenuTableView.delegate = self
         self.sideMenuTableView.dataSource = self
         self.sideMenuTableView.register(UINib(nibName: "SideMenuTableViewCell", bundle: nil), forCellReuseIdentifier: "sidemenuCell")
-        self.sideMenuTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 61.0/255.0, blue: 36.0/255.0, alpha: 1.0)
+        self.sideMenuTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
         self.sideMenuTableView.separatorStyle = .none
         
-        self.sideBarTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.sideBarTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
         self.section0_menuItemArray = [NSLocalizedString("SideBar_Menu_Section0_row0_title", comment: ""),NSLocalizedString("SideBar_Menu_Section0_row1_title", comment: ""),NSLocalizedString("SideBar_Menu_Section0_row2_title", comment: "")]
         self.section1_menuItemArray = [NSLocalizedString("SideBar_Menu_Section1_row0_title", comment: ""),NSLocalizedString("SideBar_Menu_Section1_row1_title", comment: "")]
@@ -101,7 +103,7 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
         
         let cell:SideMenuTableViewCell = tableView.dequeueReusableCell(withIdentifier: "sidemenuCell", for: indexPath) as! SideMenuTableViewCell
         
-        cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 61.0/255.0, blue: 36.0/255.0, alpha: 1.0)
+        cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
         let selectBkView = UIView()
         selectBkView.backgroundColor = UIColor.clear
         cell.selectedBackgroundView = selectBkView
@@ -153,8 +155,8 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
     func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
         let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
-        view.tintColor = UIColor.init(red: 0.0/255.0, green: 61.0/255.0, blue: 36.0/255.0, alpha: 1.0)
+        header.textLabel?.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        view.tintColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {

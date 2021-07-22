@@ -53,32 +53,48 @@ class ForgetPwViewController: UIViewController {
     
     func setInterface() {
         
-        self.phoneTextField.placeholder = NSLocalizedString("Forget_Pw_Phone_title", comment: "")
+        self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
         
-        self.nPwTextField.placeholder = NSLocalizedString("Forget_Pw_New_title", comment: "")
+        let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+        let placeHolderTextColor:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        let textColor:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        let lineColor:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        let font:UIFont = UIFont.systemFont(ofSize: 20.0)
+        
+        self.phoneTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: placeHolderTextColor, font: font)
+        self.phoneTextField.setTextColor(textColor, font: font)
+        
+        self.nPwTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.nPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_New_title", comment: ""), colour: placeHolderTextColor, font: font)
+        self.nPwTextField.setTextColor(textColor, font: font)
         self.nPwTextField.isSecureTextEntry = true
         self.nPwTextField.autocorrectionType = .no
         self.nPwTextField.keyboardType = .namePhonePad
         
-        self.confirmPwTextField.placeholder = NSLocalizedString("Forget_Pw_Confirm_title", comment: "")
+        self.confirmPwTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Confirm_title", comment: ""), colour: placeHolderTextColor, font: font)
+        self.confirmPwTextField.setTextColor(textColor, font: font)
         self.confirmPwTextField.isSecureTextEntry = true
         self.confirmPwTextField.autocorrectionType = .no
         self.confirmPwTextField.keyboardType = .namePhonePad
         
+        self.verifyCodeTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Verify_Code_title", comment: ""), colour: placeHolderTextColor, font: font)
+        self.verifyCodeTextField.setTextColor(textColor, font: font)
         self.verifyCodeTextField.keyboardType = .numberPad
-        self.verifyCodeTextField.placeholder = NSLocalizedString("Forget_Verify_Code_title", comment: "")
-        
+
         self.verifyCodeBtn.setTitle(NSLocalizedString("Forget_Verify_Code_Btn_title", comment: ""), for: .normal)
-        self.verifyCodeBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.verifyCodeBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.verifyCodeBtn.addTarget(self, action: #selector(verifyCodeBtnClick(_:)), for: .touchUpInside)
         
         
         self.confirmBtn.setTitle(NSLocalizedString("Forget_Confirm_Btn_title", comment: ""), for: .normal)
-        self.confirmBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.confirmBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.confirmBtn.addTarget(self, action: #selector(confirmBtnClick(_:)), for: .touchUpInside)
         
         self.cancelBtn.setTitle(NSLocalizedString("Forget_Cancel_Btn_title", comment: ""), for: .normal)
-        self.cancelBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.cancelBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.cancelBtn.addTarget(self, action: #selector(cancelBtnClick(_:)), for: .touchUpInside)
         
         
@@ -136,9 +152,28 @@ class ForgetPwViewController: UIViewController {
         let confirmPwText = self.confirmPwTextField.text ?? ""
         let veriftyCodeText = self.verifyCodeTextField.text ?? ""
         
+        let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+        let font:UIFont = UIFont.systemFont(ofSize: 20.0)
+        let errorColor:UIColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+        let color:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        
         if phoneText.count == 0 {
             self.phoneErrorLabel.text = NSLocalizedString("Forget_Input_Phone_Alert_Text", comment: "")
+            self.phoneErrorLabel.textColor = errorColor
+            
+            self.phoneTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: errorColor, font: font)
+
+            self.nPwErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
+            self.verifyCodeErrorLabel.text = ""
+
+        }else if phoneText.count < 10 {
+            self.phoneErrorLabel.text = NSLocalizedString("Forget_Input_Phone_10_Alert_Text", comment: "")
             self.phoneErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.phoneTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: errorColor, font: font)
+
 
             self.nPwErrorLabel.text = ""
             self.confirmPwErrorLabel.text = ""
@@ -147,44 +182,116 @@ class ForgetPwViewController: UIViewController {
         }else if nPwText.count == 0 {
             self.nPwErrorLabel.text = NSLocalizedString("Forget_Input_Pw_Alert_Text", comment: "")
             self.nPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.nPwTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.nPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_New_title", comment: ""), colour: errorColor, font: font)
+
+            
             self.phoneErrorLabel.text = ""
+            self.phoneTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: color, font: font)
+            
             self.confirmPwErrorLabel.text = ""
+            self.confirmPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Confirm_title", comment: ""), colour: color, font: font)
+            
             self.verifyCodeErrorLabel.text = ""
+            self.verifyCodeTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Verify_Code_title", comment: ""), colour: color, font: font)
 
         }else if nPwText.count < 8 {
             self.nPwErrorLabel.text = NSLocalizedString("Forget_Input_Pw_8_Alert_Text", comment: "")
             self.nPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.nPwTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.nPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_New_title", comment: ""), colour: errorColor, font: font)
+            
             self.phoneErrorLabel.text = ""
+            self.phoneTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: color, font: font)
+            
             self.confirmPwErrorLabel.text = ""
+            self.confirmPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Confirm_title", comment: ""), colour: color, font: font)
+            
             self.verifyCodeErrorLabel.text = ""
+            self.verifyCodeTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Verify_Code_title", comment: ""), colour: color, font: font)
 
         }else if confirmPwText.count == 0 {
             self.confirmPwErrorLabel.text = NSLocalizedString("Forget_Input_Confirm_Pw_Alert_Text", comment: "")
             self.confirmPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            
+            self.confirmPwTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Confirm_title", comment: ""), colour: errorColor, font: font)
+            
+            
             self.phoneErrorLabel.text = ""
+            self.phoneTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: color, font: font)
+            
             self.nPwErrorLabel.text = ""
+            self.nPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.nPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_New_title", comment: ""), colour: color, font: font)
+            
             self.verifyCodeErrorLabel.text = ""
+            self.verifyCodeTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Verify_Code_title", comment: ""), colour: color, font: font)
 
         }else if nPwText != confirmPwText {
             self.confirmPwErrorLabel.text = NSLocalizedString("Forget_Input_diff_Alert_Text", comment: "")
             self.confirmPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.confirmPwTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Confirm_title", comment: ""), colour: errorColor, font: font)
+            
+            
             self.phoneErrorLabel.text = ""
+            self.phoneTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: color, font: font)
+            
             self.nPwErrorLabel.text = ""
+            self.nPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.nPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_New_title", comment: ""), colour: color, font: font)
+            
             self.verifyCodeErrorLabel.text = ""
+            self.verifyCodeTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Verify_Code_title", comment: ""), colour: color, font: font)
 
         }else if veriftyCodeText.count == 0 {
             self.verifyCodeErrorLabel.text = NSLocalizedString("Forget_Input_VeriftyCode_Alert_Text", comment: "")
             self.verifyCodeErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            
+            self.verifyCodeTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Verify_Code_title", comment: ""), colour: errorColor, font: font)
+            
             self.phoneErrorLabel.text = ""
+            self.phoneTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: color, font: font)
+            
             self.nPwErrorLabel.text = ""
+            self.nPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.nPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_New_title", comment: ""), colour: color, font: font)
+            
             self.confirmPwErrorLabel.text = ""
+            self.confirmPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Confirm_title", comment: ""), colour: color, font: font)
 
         }else if veriftyCodeText != verifyCodeSt {
             self.verifyCodeErrorLabel.text = NSLocalizedString("Forget_Input_VeriftyCode_Error_Alert_Text", comment: "")
             self.verifyCodeErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            
+            self.verifyCodeTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Verify_Code_title", comment: ""), colour: errorColor, font: font)
+            
             self.phoneErrorLabel.text = ""
+            self.phoneTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: color, font: font)
+            
             self.nPwErrorLabel.text = ""
+            self.nPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.nPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_New_title", comment: ""), colour: color, font: font)
+            
             self.confirmPwErrorLabel.text = ""
+            self.confirmPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Confirm_title", comment: ""), colour: color, font: font)
 
         }else{
 

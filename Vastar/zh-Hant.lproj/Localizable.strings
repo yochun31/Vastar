@@ -124,6 +124,7 @@
 "Product_Detail_Add_ShoppingCar_title" = "加入購物車";
 "Product_Detail_Alert_title" = "不存在此商品型號!";
 "Product_Detail_Add_Success_Alert_title" = "成功加入購物車";
+"Product_Detail_Input_Amount_Alert_Text" = "尚未輸入數量";
 
 "Shopping_title" = "購物車";
 "Shopping_Checkout_Btn_title" = "去結帳";
