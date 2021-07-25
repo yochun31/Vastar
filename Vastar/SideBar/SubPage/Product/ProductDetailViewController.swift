@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
 
@@ -323,15 +324,16 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
             self.contentTextView.text = content
             
             let url = URL.init(string: imageUrl)
-            if url != nil {
-                let imageData = try? Data(contentsOf: url!)
-                let defaultData = UIImage(named: "logo_item")!.pngData()
-                self.productPhoto.image = UIImage(data: imageData ?? defaultData!)
-            }else{
-                let defaultData = UIImage(named: "logo_item")!.pngData()
-                self.productPhoto.image = UIImage(data: defaultData!)
-            }
-            self.vaiv.stopProgressHUD(view: self.view)
+            self.productPhoto.sd_setImage(with: url, placeholderImage: nil,options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cacheType, imageURL) in
+                
+                if error == nil {
+                    self.productPhoto.image = image
+                    self.vaiv.stopProgressHUD(view: self.view)
+                }else{
+                    self.vaiv.stopProgressHUD(view: self.view)
+                }
+                
+            })
             
         }else{
             self.vaiv.stopProgressHUD(view: self.view)
@@ -359,17 +361,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
                 let imageUrl:String = dictValue[6] as? String ?? ""
                 let content:String = dictValue[7] as? String ?? ""
                 
-                var photo:UIImage?
                 let url = URL.init(string: imageUrl)
-                if url != nil {
-                    let imageData = try? Data(contentsOf: url!)
-                    let defaultData = UIImage(named: "logo_item")!.pngData()
-                    photo = UIImage(data: imageData ?? defaultData!)
-                }else{
-                    let defaultData = UIImage(named: "logo_item")!.pngData()
-                    photo = UIImage(data: defaultData!)
-                }
-                
                 DispatchQueue.main.async {
                     
                     self.navigationItem.title = name
@@ -379,8 +371,14 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
                     self.productPriceLabel.text = "$\(String(price))"
                     self.price_Int = price
                     self.contentTextView.text = content
-                    self.productPhoto.image = photo
-                    self.vaiv.stopProgressHUD(view: self.view)
+                    self.productPhoto.sd_setImage(with: url, placeholderImage: nil,options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cacheType, imageURL) in
+                        if error == nil {
+                            self.productPhoto.image = image
+                            self.vaiv.stopProgressHUD(view: self.view)
+                        }else{
+                            self.vaiv.stopProgressHUD(view: self.view)
+                        }
+                    })
                 }
             }else{
                 DispatchQueue.main.async {
