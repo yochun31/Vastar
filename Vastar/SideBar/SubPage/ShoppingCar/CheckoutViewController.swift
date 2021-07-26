@@ -110,6 +110,7 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         createReceiverPickerView()
         createCityPickerView()
         createTownPickerView()
+        getPayMethodData()
         getShoppingCarData()
         getReceiverData()
         getCityData()
@@ -131,65 +132,98 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
         self.contentView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
         
+        let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        let placeHolderTextColor:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        let textColor:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        let lineColor:UIColor = UIColor.darkGray
+        let font:UIFont = UIFont.systemFont(ofSize: 15.0)
+        
         self.selectTitleLabel.text = NSLocalizedString("Shopping_Checkout_Select_Product_title", comment: "")
-        self.selectTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.selectTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        self.selectTitleLabel.font = UIFont.systemFont(ofSize: 20.0)
         
         self.payTitleLabel.text = NSLocalizedString("Shopping_Checkout_Pay_title", comment: "")
-        self.payTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
-        self.payTextField.placeholder = NSLocalizedString("Shopping_Checkout_Select_Pay_title", comment: "")
+        self.payTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        self.payTitleLabel.font = UIFont.systemFont(ofSize: 20.0)
+        
         self.payTextField.inputAccessoryView = UIView()
+        self.payTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.payTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Shopping_Checkout_Select_Pay_title", comment: ""), colour: placeHolderTextColor, font: font)
+        self.payTextField.setTextColor(textColor, font: font)
         
         self.transportTitleLabel.text = NSLocalizedString("Shopping_Checkout_Transport_title", comment: "")
-        self.transportTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.transportTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        self.transportTitleLabel.font = UIFont.systemFont(ofSize: 20.0)
         
         self.transportTextField.isEnabled = false
         self.transportTextField.text = NSLocalizedString("Shopping_Checkout_Home_Delivery_title", comment: "")
+        self.transportTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.transportTextField.setTextColor(textColor, font: font)
 
         self.receiverTitleLabel.text = NSLocalizedString("Shopping_Checkout_Recipient_title", comment: "")
-        self.receiverTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.receiverTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        self.receiverTitleLabel.font = UIFont.systemFont(ofSize: 20.0)
+        
         self.receiverTextField.placeholder = NSLocalizedString("", comment: "")
         self.receiverTextField.inputAccessoryView = UIView()
-        self.receiverNameTextField.placeholder = NSLocalizedString("Shopping_Checkout_Recipient_title", comment: "")
-        self.receiverPhoneTextField.placeholder = NSLocalizedString("Shopping_Checkout_Recipient_Phone_title", comment: "")
-
+        self.receiverTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.receiverTextField.setTextColor(textColor, font: font)
+        
+        self.receiverNameTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.receiverNameTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Shopping_Checkout_Recipient_title", comment: ""), colour: placeHolderTextColor, font: font)
+        self.receiverNameTextField.setTextColor(textColor, font: font)
+        
+        self.receiverPhoneTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.receiverPhoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Shopping_Checkout_Recipient_Phone_title", comment: ""), colour: placeHolderTextColor, font: font)
+        self.receiverPhoneTextField.setTextColor(textColor, font: font)
         
         self.addressTitleLabel.text = NSLocalizedString("Shopping_Checkout_Address_title", comment: "")
-        self.addressTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.addressTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        self.addressTitleLabel.font = UIFont.systemFont(ofSize: 20.0)
         
-        self.cityTextField.placeholder = NSLocalizedString("Shopping_Checkout_Address_City_title", comment: "")
         self.cityTextField.inputAccessoryView = UIView()
+        self.cityTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.cityTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Shopping_Checkout_Address_City_title", comment: ""), colour: placeHolderTextColor, font: font)
+        self.cityTextField.setTextColor(textColor, font: font)
         
-        self.townTextField.placeholder = NSLocalizedString("Shopping_Checkout_Address_Town_title", comment: "")
         self.townTextField.inputAccessoryView = UIView()
+        self.townTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.townTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Shopping_Checkout_Address_Town_title", comment: ""), colour: placeHolderTextColor, font: font)
+        self.townTextField.setTextColor(textColor, font: font)
         
-        self.posttalCodeTextField.placeholder = NSLocalizedString("Shopping_Checkout_Address_Posttal_Code_title", comment: "")
+        self.posttalCodeTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.posttalCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Shopping_Checkout_Address_Posttal_Code_title", comment: ""), colour: placeHolderTextColor, font: font)
+        self.posttalCodeTextField.setTextColor(textColor, font: font)
 
         
         self.addressDetailTitleLabel.text = NSLocalizedString("Shopping_Checkout_Address_Detail_title", comment: "")
-        self.addressDetailTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.addressDetailTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        self.addressDetailTitleLabel.font = UIFont.systemFont(ofSize: 20.0)
+        
+        self.addressDetailTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.addressDetailTextField.setTextColor(textColor, font: font)
 
         
         self.orderTitleLabel.text = NSLocalizedString("Shopping_Checkout_Order_title", comment: "")
-        self.orderTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.orderTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
         self.totalProductTitleLabel.text = NSLocalizedString("Shopping_Checkout_Total_title", comment: "")
-        self.totalProductTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.totalProductTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.totalProductValueLabel.text = NSLocalizedString("", comment: "")
-        self.totalProductValueLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.totalProductValueLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.feeTitleLabel.text = NSLocalizedString("Shopping_Checkout_Fee_title", comment: "")
-        self.feeTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.feeTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.feeValueLabel.text = NSLocalizedString("", comment: "")
-        self.feeValueLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.feeValueLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.totalPriceTitleLabel.text = NSLocalizedString("Shopping_Checkout_Money_title", comment: "")
-        self.totalPriceTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.totalPriceTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.totalPriceValueLabel.text = NSLocalizedString("", comment: "")
-        self.totalPriceValueLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.totalPriceValueLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
         self.confirmBtn.setTitle(NSLocalizedString("Shopping_Checkout_Confirm_Btn_title", comment: ""), for: .normal)
-        self.confirmBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.confirmBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.confirmBtn.addTarget(self, action: #selector(confirmBtnClick(_:)), for: .touchUpInside)
         
-        self.payDataArray = ["信用卡付款"]
     }
     
     func setTableView() {
@@ -299,6 +333,20 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     
     //MARK:- Assistant Methods
+    
+    func getPayMethodData() {
+        
+        VClient.sharedInstance().VCGetPayMethodData { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) in
+            
+            if isSuccess {
+                if resDataArray.count != 0 {
+                    self.payDataArray = resDataArray
+                    self.payPickerView.reloadComponent(0)
+                }
+            }
+        }
+    }
+    
     
     func getShoppingCarData() {
         

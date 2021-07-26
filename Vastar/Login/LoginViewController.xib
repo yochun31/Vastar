@@ -27,33 +27,39 @@
                     <rect key="frame" x="20" y="50" width="335" height="567"/>
                 </imageView>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="oYB-Xf-8Z3">
-                    <rect key="frame" x="70" y="170" width="235" height="34"/>
+                    <rect key="frame" x="70" y="170" width="235" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="ioz-xH-qaE"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                 </textField>
                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EXi-SV-OFu">
-                    <rect key="frame" x="70" y="254" width="235" height="34"/>
+                    <rect key="frame" x="70" y="260" width="235" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="l8Q-sc-25H"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yqR-WG-AUe">
-                    <rect key="frame" x="130" y="348" width="115" height="60"/>
+                    <rect key="frame" x="130" y="360" width="115" height="60"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="ZWf-4P-XjJ"/>
                     </constraints>
                     <state key="normal" title="Button" backgroundImage="btn"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RV1-4n-Rj4">
-                    <rect key="frame" x="150" y="423" width="75" height="30"/>
+                    <rect key="frame" x="150" y="435" width="75" height="30"/>
                     <state key="normal" title="Button"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Juv-cF-eDe">
-                    <rect key="frame" x="100" y="483" width="175" height="30"/>
+                    <rect key="frame" x="100" y="495" width="175" height="30"/>
                     <state key="normal" title="Button"/>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" red="0.0" green="0.2410504222" blue="0.14645946030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="EXi-SV-OFu" firstAttribute="top" secondItem="oYB-Xf-8Z3" secondAttribute="bottom" constant="50" id="8pO-NX-QBx"/>
                 <constraint firstItem="RV1-4n-Rj4" firstAttribute="centerX" secondItem="oYB-Xf-8Z3" secondAttribute="centerX" id="90b-6W-I5U"/>

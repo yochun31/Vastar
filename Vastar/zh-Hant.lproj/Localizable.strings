@@ -28,6 +28,7 @@
 "Register_Confirm_Password_title" = "確認密碼";
 "Register_Verify_Code_title" = "驗證碼";
 "Register_Verify_Code_Btn_title" = "取得驗證碼";
+"Register_Verify_Wait_Btn_title" = "秒後可再次發送";
 "Register_Button_title" = "註冊";
 "Register_Login_Btn_title" = "我已有帳號，點我登入";
 "Register_Input_Name_Alert_Text" = "尚未輸入姓名";
@@ -36,7 +37,11 @@
 "Register_Input_Confirm_Pw_Alert_Text" = "尚未輸入確認密碼";
 "Register_Input_diff_Alert_Text" = "輸入密碼不同";
 "Register_Input_Pw_8_Alert_Text" = "密碼至少為8碼";
+"Register_Input_Phone_10_Alert_Text" = "手機號碼格式有誤";
+"Register_Input_VeriftyCode_Alert_Text" = "尚未輸入驗證碼";
+"Register_Input_VeriftyCode_Error_Alert_Text" = "輸入驗證碼錯誤";
 "Register_Success_Alert_Text" = "新增成功";
+"Register_Phone_Exist_Alert_Text" = "帳號已存在";
 
 "Forget_Pw_Phone_title" = "手機號碼";
 "Forget_Pw_New_title" = "輸入新密碼";
@@ -84,6 +89,7 @@
 "Change_Pw_VeriftyCode_Error_Alert_Text" = "輸入驗證碼錯誤";
 "Change_Pw_Update_Success_Alert_Text" = "更新成功";
 "Change_Pw_Verify_Wait_Btn_title" = "秒後可再次發送";
+"Change_Pw_Input_Old_Error_Alert_Text" = "原密碼錯誤";
 
 "Member_title" = "會員資料";
 "Member_Name_title" = "姓名:";
@@ -124,6 +130,7 @@
 "Product_Detail_Add_ShoppingCar_title" = "加入購物車";
 "Product_Detail_Alert_title" = "不存在此商品型號!";
 "Product_Detail_Add_Success_Alert_title" = "成功加入購物車";
+"Product_Detail_Input_Amount_Alert_Text" = "尚未輸入數量";
 
 "Shopping_title" = "購物車";
 "Shopping_Checkout_Btn_title" = "去結帳";
@@ -165,6 +172,7 @@
 "Order_Create_Done_text" = "訂單已建立！";
 "Order_Later_Pay_Btn_title" = "稍後付款";
 "Order_Now_Pay_Btn_title" = "立即付款";
+"Order_Confirm_title" = "確認訂單";
 
 "Verify_Get_Btn_title" = "取得驗證碼";
 "Verify_Wait_Btn_title" = "秒後可再次發送";

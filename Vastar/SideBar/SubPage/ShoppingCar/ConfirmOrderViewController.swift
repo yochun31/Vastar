@@ -58,6 +58,7 @@ class ConfirmOrderViewController: UIViewController,UITableViewDelegate,UITableVi
     private var receiverDistrictArray:Array<String> = []
     private var receiverAddressArray:Array<String> = []
     
+    let userDefault = UserDefaults.standard
     var dataDict:[String:Any] = [:]
     
     //MARK: - Life Cycle
@@ -84,28 +85,28 @@ class ConfirmOrderViewController: UIViewController,UITableViewDelegate,UITableVi
         format.numberStyle = .decimal
         
         self.payTitleLabel.text = NSLocalizedString("Shopping_Checkout_Pay_title", comment: "")
-        self.payTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.payTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.payTitleLabel.font = UIFont.systemFont(ofSize: 20.0)
         
         self.payValueLabel.text = dataDict["PaymentMethod"] as? String ?? ""
-        self.payValueLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.payValueLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
         self.transportTitleLabel.text = NSLocalizedString("Shopping_Checkout_Transport_title", comment: "")
-        self.transportTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.transportTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.transportTitleLabel.font = UIFont.systemFont(ofSize: 20.0)
         
         self.transportValueLabel.text = dataDict["ShippingMethod"] as? String ?? ""
-        self.transportValueLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.transportValueLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
         self.addressTitleLabel.text = NSLocalizedString("Shopping_Checkout_Address_title", comment: "")
-        self.addressTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.addressTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.addressTitleLabel.font = UIFont.systemFont(ofSize: 20.0)
         
         self.receiverNameLabel.text = dataDict["Receiver_Name"] as? String ?? ""
-        self.receiverNameLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.receiverNameLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
         self.receiverPhoneLabel.text = dataDict["Receiver_Phone"] as? String ?? ""
-        self.receiverPhoneLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.receiverPhoneLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
         let city:String = dataDict["Receiver_City"] as? String ?? ""
         let town:String = dataDict["Receiver_District"] as? String ?? ""
@@ -113,43 +114,43 @@ class ConfirmOrderViewController: UIViewController,UITableViewDelegate,UITableVi
         let addres:String = dataDict["Receiver_Address"] as? String ?? ""
         let addresSt:String = "\(addres),\(town),\(city),\(code)"
         self.receiverAddressLabel.text = addresSt
-        self.receiverAddressLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.receiverAddressLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
         self.returnInfoTitleLabel.text = NSLocalizedString("Shopping_Checkout_ReturnInfo_title", comment: "")
-        self.returnInfoTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.returnInfoTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.returnInfoValueLabel.text = NSLocalizedString("Shopping_Checkout_ReturnInfo_Text", comment: "")
-        self.returnInfoValueLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.returnInfoValueLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
         self.orderTitleLabel.text = NSLocalizedString("Shopping_Checkout_Order_title", comment: "")
-        self.orderTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.orderTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.orderTitleLabel.font = UIFont.systemFont(ofSize: 20.0)
         
         self.totalProductTitleLabel.text = NSLocalizedString("Shopping_Checkout_Total_title", comment: "")
-        self.totalProductTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.totalProductTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
         let totalProduct = dataDict["TotalProductPrice"] as? Int ?? 0
         let totalProductSt:String = format.string(from: NSNumber(value:totalProduct)) ?? ""
         self.totalProductValueLabel.text = "$\(totalProductSt)"
-        self.totalProductValueLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.totalProductValueLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.feeTitleLabel.text = NSLocalizedString("Shopping_Checkout_Fee_title", comment: "")
-        self.feeTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.feeTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
         let fee = dataDict["ShippingFee"] as? Int ?? 0
         let feeSt:String = format.string(from: NSNumber(value:fee)) ?? ""
         self.feeValueLabel.text = "$\(feeSt)"
-        self.feeValueLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.feeValueLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.totalPriceTitleLabel.text = NSLocalizedString("Shopping_Checkout_Money_title", comment: "")
-        self.totalPriceTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.totalPriceTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.totalPriceTitleLabel.font = UIFont(name: "PingFangTC-Semibold", size: 17.0)
         
         let totalPrice = dataDict["TotalPrice"] as? Int ?? 0
         let totalPriceSt:String = format.string(from: NSNumber(value:totalPrice)) ?? ""
         self.totalPriceValueLabel.text = "$\(totalPriceSt)"
-        self.totalPriceValueLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.totalPriceValueLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.totalPriceValueLabel.font = UIFont(name: "PingFangTC-Semibold", size: 17.0)
         
         self.sendBtn.setTitle(NSLocalizedString("Shopping_Checkout_Send_Btn_title", comment: ""), for: .normal)
-        self.sendBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.sendBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.sendBtn.addTarget(self, action: #selector(sendBtnClick(_:)), for: .touchUpInside)
         
     }
@@ -211,6 +212,8 @@ class ConfirmOrderViewController: UIViewController,UITableViewDelegate,UITableVi
     //MARK: - Action
     
     @objc func sendBtnClick(_ sender:UIButton) {
+        
+        self.userDefault.set(1, forKey: "backDefault")
         self.AddOrder()
     }
 

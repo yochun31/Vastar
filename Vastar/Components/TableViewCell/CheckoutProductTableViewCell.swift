@@ -26,7 +26,7 @@ class CheckoutProductTableViewCell: UITableViewCell {
     func loadData(titleST:String,photo:UIImage) {
         
         self.productContentLabel.text = titleST
-        self.productContentLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.productContentLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
         self.productPhoto.image = photo
         

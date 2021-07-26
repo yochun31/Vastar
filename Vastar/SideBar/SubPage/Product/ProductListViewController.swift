@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ProductListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate {
     
@@ -19,6 +20,7 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
     private var productNameArray:Array<String> = []
     private var productImageUrlArray:Array<String> = []
     private var productImageDataArray:Array<Data> = []
+    private var productTmpImageUrlArray:Array<URL> = []
     
     private var flag:Int = 0
     let AppInfo = AppInfoManager()
@@ -41,8 +43,8 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
         self.productTableView.dataSource = self
         
         self.productTableView.register(UINib(nibName: "ProductListTableViewCell", bundle: nil), forCellReuseIdentifier: "ProdectCell")
-        self.productTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 61.0/255.0, blue: 36.0/255.0, alpha: 1.0)
-        self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 61.0/255.0, blue: 36.0/255.0, alpha: 1.0)
+        self.productTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
     }
     
     //MARK: - Assistant Methods
@@ -136,7 +138,6 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
                     }
                     
                     self.defaultDownloadImage()
-
                     
                 }else{
                     VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
@@ -153,6 +154,7 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
     func defaultDownloadImage() {
         
         self.productImageDataArray.removeAll()
+        self.productTmpImageUrlArray.removeAll()
         
         var j = 10
         if self.productImageUrlArray.count < 10 {
@@ -163,12 +165,7 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
             let urlSt:String = self.productImageUrlArray[i]
             let url = URL.init(string: urlSt)
             if url != nil {
-                let imageData = try? Data(contentsOf: url!)
-                let defaultData = UIImage(named: "logo_item")!.pngData()
-                self.productImageDataArray.append(imageData ?? defaultData!)
-            }else{
-                let defaultData = UIImage(named: "logo_item")!.pngData()
-                self.productImageDataArray.append(defaultData!)
+                self.productTmpImageUrlArray.append(url!)
             }
         }
         self.productTableView.reloadData()
@@ -188,12 +185,8 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
                 let urlSt:String = self.productImageUrlArray[i]
                 let url = URL.init(string: urlSt)
                 if url != nil {
-                    let imageData = try? Data(contentsOf: url!)
-                    let defaultData = UIImage(named: "logo_item")!.pngData()
-                    self.productImageDataArray.append(imageData ?? defaultData!)
-                }else{
-                    let defaultData = UIImage(named: "logo_item")!.pngData()
-                    self.productImageDataArray.append(defaultData!)
+
+                    self.productTmpImageUrlArray.append(url!)
                 }
             }
             
@@ -263,22 +256,22 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.productImageDataArray.count
+        return self.productTmpImageUrlArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:ProductListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ProdectCell", for: indexPath) as! ProductListTableViewCell
-        cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 61.0/255.0, blue: 36.0/255.0, alpha: 1.0)
+        cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
         
         let selectBkView = UIView()
         selectBkView.backgroundColor = UIColor.clear
         cell.selectedBackgroundView = selectBkView
 
         let name:String = self.productNameArray[indexPath.row]
-        let photo:UIImage = UIImage(data: self.productImageDataArray[indexPath.row])!
-  
-        cell.loadData(productImage: photo, titleSt: name)
+        let urlSt:String = self.productImageUrlArray[indexPath.row]
+        let url = URL.init(string: urlSt)
+        cell.loadData(titleSt: name, url: url!)
         
         
         return cell
@@ -298,22 +291,22 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
     //MARK: - UIScrollViewDelegate
 
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        
+
         let heigh = scrollView.frame.size.height
         let contentOffsetY = scrollView.contentOffset.y
         let bottomOffset = scrollView.contentSize.height - contentOffsetY
 //        print("h = \(heigh)  c = \(contentOffsetY)  b = \(bottomOffset) --\(scrollView.contentSize.height)")
-        
+
         if bottomOffset <= heigh {
-            
-            if self.productImageDataArray.count >= self.productImageUrlArray.count {
-                
+
+            if self.productTmpImageUrlArray.count >= self.productImageUrlArray.count {
+
             }else{
                 print("----End----")
                 flag+=1
                 if flag == 1 {
                     print("----bbb----")
-                    self.downloadImage(currentCount: self.productImageDataArray.count)
+                    self.downloadImage(currentCount: self.productTmpImageUrlArray.count)
                 }
             }
         }

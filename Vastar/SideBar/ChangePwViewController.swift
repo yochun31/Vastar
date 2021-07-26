@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import var CommonCrypto.CC_MD5_DIGEST_LENGTH
+import func CommonCrypto.CC_MD5
+import typealias CommonCrypto.CC_LONG
 
 protocol ChangePwViewDelegate {
     func goVc()
@@ -23,6 +26,11 @@ class ChangePwViewController: UIViewController {
     @IBOutlet var confirmBtn: UIButton!
     @IBOutlet var cancelBtn: UIButton!
     
+    @IBOutlet var oldPwErrorLabel: UILabel!
+    @IBOutlet var nPwErrorLabel: UILabel!
+    @IBOutlet var confirmPwErrorLabel: UILabel!
+    @IBOutlet var verifyErrorLabel: UILabel!
+    
     private var userResgisterTime:String = ""
     private var vaiv = VActivityIndicatorView()
     
@@ -30,6 +38,8 @@ class ChangePwViewController: UIViewController {
     private var verifyCodeSt = ""
     private var timer = Timer()
     private var defaultSec:Int = 30
+    
+    let userDefault = UserDefaults.standard
     
     var delegate:ChangePwViewDelegate?
     var accountPhone:String = ""
@@ -71,30 +81,50 @@ class ChangePwViewController: UIViewController {
     
     func setInterface() {
         
+        self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
         self.navigationItem.title = NSLocalizedString("Change_Pw_title", comment: "")
         
-        self.oldPwTextField.placeholder = NSLocalizedString("Change_Pw_Old_title", comment: "")
+        let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+        let placeHolderTextColor:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        let textColor:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        let lineColor:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        let font:UIFont = UIFont.systemFont(ofSize: 20.0)
+        
+        self.oldPwTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.oldPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Old_title", comment: ""), colour: placeHolderTextColor, font: font)
+        self.oldPwTextField.setTextColor(textColor, font: font)
         self.oldPwTextField.isSecureTextEntry = true
         
-        self.newPwTextField.placeholder = NSLocalizedString("Change_Pw_New_title", comment: "")
+        self.newPwTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.newPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_New_title", comment: ""), colour: placeHolderTextColor, font: font)
+        self.newPwTextField.setTextColor(textColor, font: font)
         self.newPwTextField.isSecureTextEntry = true
         
-        self.confirmPwTextField.placeholder = NSLocalizedString("Change_Pw_Confirm_title", comment: "")
+        self.confirmPwTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Confirm_title", comment: ""), colour: placeHolderTextColor, font: font)
+        self.confirmPwTextField.setTextColor(textColor, font: font)
         self.confirmPwTextField.isSecureTextEntry = true
         
-        self.verifyCodeTextField.placeholder = NSLocalizedString("Change_Pw_Verify_Code_title", comment: "")
+        self.verifyCodeTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
+        self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Verify_Code_title", comment: ""), colour: placeHolderTextColor, font: font)
+        self.verifyCodeTextField.setTextColor(textColor, font: font)
         
         self.verifyCodeBtn.setTitle(NSLocalizedString("Change_Pw_Verify_Code_Btn_title", comment: ""), for: .normal)
-        self.verifyCodeBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.verifyCodeBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.verifyCodeBtn.addTarget(self, action: #selector(verifyCodeBtnClick(_:)), for: .touchUpInside)
         
         self.confirmBtn.setTitle(NSLocalizedString("Change_Pw_Confirm_Btn_title", comment: ""), for: .normal)
-        self.confirmBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.confirmBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.confirmBtn.addTarget(self, action: #selector(confirmBtnClick(_:)), for: .touchUpInside)
         
         self.cancelBtn.setTitle(NSLocalizedString("Change_Pw_Cancel_Btn_title", comment: ""), for: .normal)
-        self.cancelBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.cancelBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.cancelBtn.addTarget(self, action: #selector(cancelBtnClick(_:)), for: .touchUpInside)
+        
+        self.oldPwErrorLabel.text = ""
+        self.nPwErrorLabel.text = ""
+        self.confirmPwErrorLabel.text = ""
+        self.verifyErrorLabel.text = ""
     }
     
     
@@ -104,7 +134,7 @@ class ChangePwViewController: UIViewController {
         
         self.vaiv.startProgressHUD(view: self.view, content: NSLocalizedString("Alert_Loading_title", comment: ""))
         
-        VClient.sharedInstance().VCGetUserInfoByPhone(phone: accountName) { (_ isSuccess:Bool,_ message:String,_ dictResData:[String:Any]) in
+        VClient.sharedInstance().VCGetUserInfoByPhone(phone: accountName) { (_ isSuccess:Bool,_ message:String,_ isResult:Int,_ dictResData:[String:Any]) in
             
             if isSuccess {
                 let res_registerTime = dictResData["RegisterTime"] as? String ?? ""
@@ -143,6 +173,41 @@ class ChangePwViewController: UIViewController {
         
     }
     
+    func checkOldPW(pwSt:String,handler:@escaping ()->Void) {
+        
+        let md5Data = self.MD5_String(string:pwSt)
+        let md5Hex =  md5Data.map { String(format: "%02hhx", $0) }.joined()
+        print("---\(md5Hex)")
+        let oldPw:String = self.userDefault.object(forKey: "A1") as? String ?? ""
+        
+        if oldPw == md5Hex {
+            handler()
+        }else{
+            let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+            let font:UIFont = UIFont.systemFont(ofSize: 20.0)
+            let errorColor:UIColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            let color:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+            
+            self.oldPwErrorLabel.text = NSLocalizedString("Change_Pw_Input_Old_Error_Alert_Text", comment: "")
+            self.oldPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.oldPwTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.oldPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Old_title", comment: ""), colour: errorColor, font: font)
+            
+
+            self.nPwErrorLabel.text = ""
+            self.newPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.newPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_New_title", comment: ""), colour: color, font: font)
+            
+            self.confirmPwErrorLabel.text = ""
+            self.confirmPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Confirm_title", comment: ""), colour: color, font: font)
+            
+            self.verifyErrorLabel.text = ""
+            self.verifyCodeTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Verify_Code_title", comment: ""), colour: color, font: font)
+        }
+    }
+    
     
     func checkInputData() {
         
@@ -151,30 +216,144 @@ class ChangePwViewController: UIViewController {
         let confirmPwText = self.confirmPwTextField.text ?? ""
         let veriftyCodeText = self.verifyCodeTextField.text ?? ""
         
+        let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+        let font:UIFont = UIFont.systemFont(ofSize: 20.0)
+        let errorColor:UIColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+        let color:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        
         if oldPwText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_Input_Old_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.oldPwErrorLabel.text = NSLocalizedString("Change_Pw_Input_Old_Alert_Text", comment: "")
+            self.oldPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.oldPwTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.oldPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Old_title", comment: ""), colour: errorColor, font: font)
+            
+
+            self.nPwErrorLabel.text = ""
+            self.newPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.newPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_New_title", comment: ""), colour: color, font: font)
+            
+            self.confirmPwErrorLabel.text = ""
+            self.confirmPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Confirm_title", comment: ""), colour: color, font: font)
+            
+            self.verifyErrorLabel.text = ""
+            self.verifyCodeTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Verify_Code_title", comment: ""), colour: color, font: font)
             
         }else if newPwText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_Input_New_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.nPwErrorLabel.text = NSLocalizedString("Change_Pw_Input_New_Alert_Text", comment: "")
+            self.nPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.newPwTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.newPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_New_title", comment: ""), colour: errorColor, font: font)
+            
+            self.oldPwErrorLabel.text = ""
+            self.oldPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.oldPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Old_title", comment: ""), colour: color, font: font)
+            
+            self.confirmPwErrorLabel.text = ""
+            self.confirmPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Confirm_title", comment: ""), colour: color, font: font)
+            
+            self.verifyErrorLabel.text = ""
+            self.verifyCodeTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Verify_Code_title", comment: ""), colour: color, font: font)
             
         }else if newPwText.count < 8 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_Input_Pw_8_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.nPwErrorLabel.text = NSLocalizedString("Change_Pw_Input_Pw_8_Alert_Text", comment: "")
+            self.nPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.newPwTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.newPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_New_title", comment: ""), colour: errorColor, font: font)
+            
+            self.oldPwErrorLabel.text = ""
+            self.oldPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.oldPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Old_title", comment: ""), colour: color, font: font)
+            
+            self.confirmPwErrorLabel.text = ""
+            self.confirmPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Confirm_title", comment: ""), colour: color, font: font)
+            
+            self.verifyErrorLabel.text = ""
+            self.verifyCodeTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Verify_Code_title", comment: ""), colour: color, font: font)
             
         }else if confirmPwText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_Input_Confirm_Pw_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.confirmPwErrorLabel.text = NSLocalizedString("Change_Pw_Input_Confirm_Pw_Alert_Text", comment: "")
+            self.confirmPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.confirmPwTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Confirm_title", comment: ""), colour: errorColor, font: font)
+            
+            self.oldPwErrorLabel.text = ""
+            self.oldPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.oldPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Old_title", comment: ""), colour: color, font: font)
+            
+            self.nPwErrorLabel.text = ""
+            self.newPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.newPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_New_title", comment: ""), colour: color, font: font)
+            
+            self.verifyErrorLabel.text = ""
+            self.verifyCodeTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Verify_Code_title", comment: ""), colour: color, font: font)
             
         }else if confirmPwText != newPwText {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_Input_diff_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.confirmPwErrorLabel.text = NSLocalizedString("Change_Pw_Input_diff_Alert_Text", comment: "")
+            self.confirmPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.confirmPwTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Confirm_title", comment: ""), colour: errorColor, font: font)
+            
+            self.oldPwErrorLabel.text = ""
+            self.oldPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.oldPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Old_title", comment: ""), colour: color, font: font)
+            
+            self.nPwErrorLabel.text = ""
+            self.newPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.newPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_New_title", comment: ""), colour: color, font: font)
+            
+            self.verifyErrorLabel.text = ""
+            self.verifyCodeTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Verify_Code_title", comment: ""), colour: color, font: font)
             
         }else if veriftyCodeText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_Input_VeriftyCode_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.verifyErrorLabel.text = NSLocalizedString("Change_Pw_Input_VeriftyCode_Alert_Text", comment: "")
+            self.verifyErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.verifyCodeTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Verify_Code_title", comment: ""), colour: errorColor, font: font)
+            
+            self.oldPwErrorLabel.text = ""
+            self.oldPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.oldPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Old_title", comment: ""), colour: color, font: font)
+            
+            self.nPwErrorLabel.text = ""
+            self.newPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.newPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_New_title", comment: ""), colour: color, font: font)
+            
+            self.confirmPwErrorLabel.text = ""
+            self.confirmPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Confirm_title", comment: ""), colour: color, font: font)
             
         }else if veriftyCodeText != verifyCodeSt {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_VeriftyCode_Error_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.verifyErrorLabel.text = NSLocalizedString("Change_Pw_VeriftyCode_Error_Alert_Text", comment: "")
+            self.verifyErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.verifyCodeTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Verify_Code_title", comment: ""), colour: errorColor, font: font)
+            
+            self.oldPwErrorLabel.text = ""
+            self.oldPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.oldPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Old_title", comment: ""), colour: color, font: font)
+            
+            self.nPwErrorLabel.text = ""
+            self.newPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.newPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_New_title", comment: ""), colour: color, font: font)
+            
+            self.confirmPwErrorLabel.text = ""
+            self.confirmPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Confirm_title", comment: ""), colour: color, font: font)
             
         }else{
             
-            self.getUserInfo(accountName: self.accountPhone, oldPwSt: oldPwText, newPwSt: newPwText)
+            self.checkOldPW(pwSt: oldPwText) {
+                self.getUserInfo(accountName: self.accountPhone, oldPwSt: oldPwText, newPwSt: newPwText)
+            }
+            
         }
         
     }
@@ -209,6 +388,23 @@ class ChangePwViewController: UIViewController {
     func stopTimer() {
         self.timer.invalidate()
         self.defaultSec = 30
+    }
+    
+    private func MD5_String(string: String) -> Data {
+        let length = Int(CC_MD5_DIGEST_LENGTH)
+        let messageData = string.data(using:.utf8)!
+        var digestData = Data(count: length)
+        
+        _ = digestData.withUnsafeMutableBytes { digestBytes -> UInt8 in
+            messageData.withUnsafeBytes { messageBytes -> UInt8 in
+                if let messageBytesBaseAddress = messageBytes.baseAddress, let digestBytesBlindMemory = digestBytes.bindMemory(to: UInt8.self).baseAddress {
+                    let messageLength = CC_LONG(messageData.count)
+                    CC_MD5(messageBytesBaseAddress, messageLength, digestBytesBlindMemory)
+                }
+                return 0
+            }
+        }
+        return digestData
     }
     
     

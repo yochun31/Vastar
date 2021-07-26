@@ -132,10 +132,48 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
     }
     
     
+    func getCheckoutDictData(selectIndex:Int) -> [String:Any] {
+        var dictData:[String:Any] = [:]
+        
+        let pay:String = self.orderPaymentMethodArray[selectIndex]
+        let transport:String = self.orderShippingMethodArray[selectIndex]
+        let name:String = self.orderReceiverNameArray[selectIndex]
+        let phone:String = self.orderReceiverPhoneArray[selectIndex]
+        let city:String = self.orderReceiverCityArray[selectIndex]
+        let town:String = self.orderReceiverTownArray[selectIndex]
+        let postalCode:String = self.orderReceiverCityCodeArray[selectIndex]
+        let address:String = self.orderReceiverAddressArray[selectIndex]
+        let totalProduct:Int = self.orderTotalProductPriceArray[selectIndex]
+        let fee:Int = self.orderFeeArray[selectIndex]
+        let total:Int = self.orderTotalPriceArray[selectIndex]
+        
+        dictData.updateValue(totalProduct, forKey: "TotalProductPrice")
+        dictData.updateValue(fee, forKey: "ShippingFee")
+        dictData.updateValue(total, forKey: "TotalPrice")
+        dictData.updateValue(name, forKey: "Receiver_Name")
+        dictData.updateValue(phone, forKey: "Receiver_Phone")
+        dictData.updateValue(city, forKey: "Receiver_City")
+        dictData.updateValue(town, forKey: "Receiver_District")
+        dictData.updateValue(postalCode, forKey: "Receiver_CityCode")
+        dictData.updateValue(address, forKey: "Receiver_Address")
+        dictData.updateValue(transport, forKey: "ShippingMethod")
+        dictData.updateValue(pay, forKey: "PaymentMethod")
+        
+        return dictData
+    }
+    
+    
     //MARK:- Action
 
     @objc func leftBarBtnClick(_ sender:UIButton) {
         self.revealViewController()?.revealToggle(animated: true)
+    }
+    
+    @objc func orderNumValueBtnClick(_ sender:UIButton) {
+        
+        let vc = OrderConfirmViewController(nibName: "OrderConfirmViewController", bundle: nil)
+        vc.dataDict = self.getCheckoutDictData(selectIndex: sender.tag)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     /*
@@ -171,7 +209,10 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
 
         let number:String = self.orderNoArray[indexPath.row]
         
-        cell.loadData(orderNumSt: number, scheduleSt: "")
+        cell.loadData(orderNumSt: number, scheduleSt: "Btn")
+        
+        cell.orderNumValueBtn.tag = indexPath.row
+        cell.orderNumValueBtn.addTarget(self, action: #selector(orderNumValueBtnClick(_:)), for: .touchUpInside)
 
         return cell
     }

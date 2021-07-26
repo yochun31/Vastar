@@ -99,38 +99,56 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     
     func setInterface() {
         
+        let bkColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+        let placeHolderTextColor:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        let textColor:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        let lineColor:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        let font:UIFont = UIFont.systemFont(ofSize: 16.0)
+        
         self.nameTitleLabel.text = NSLocalizedString("Member_Recipient_Name_title", comment: "")
-        self.nameTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.nameTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.nameWarningLabel.text = NSLocalizedString("Member_Recipient_Name_Alert_Text", comment: "")
-        self.nameWarningLabel.textColor = UIColor.init(red: 255.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        self.nameWarningLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
         self.nameWarningLabel.isHidden = true
+        self.nameTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: bkColor)
+        self.nameTextField.setTextColor(textColor, font: font)
         
         self.phoneTitleLabel.text = NSLocalizedString("Member_Recipient_Phone_title", comment: "")
-        self.phoneTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.phoneTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.phoneWarningLabel.text = NSLocalizedString("Member_Recipient_Phone_Alert_Text", comment: "")
-        self.phoneWarningLabel.textColor = UIColor.init(red: 255.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        self.phoneWarningLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
         self.phoneWarningLabel.isHidden = true
         
-        self.cityTextField.placeholder = NSLocalizedString("Member_Recipient_Adress_City_title", comment: "")
-        self.cityTextField.inputAccessoryView = UIView()
+        self.phoneTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: bkColor)
+        self.phoneTextField.setTextColor(textColor, font: font)
         
-        self.townTextField.placeholder = NSLocalizedString("Member_Recipient_Adress_Town_title", comment: "")
+        self.cityTextField.inputAccessoryView = UIView()
+        self.cityTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: bkColor)
+        self.cityTextField.setTextColor(textColor, font: font)
+        self.cityTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Member_Recipient_Adress_City_title", comment: ""), colour: placeHolderTextColor, font: font)
+        
         self.townTextField.inputAccessoryView = UIView()
+        self.townTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: bkColor)
+        self.townTextField.setTextColor(textColor, font: font)
+        self.townTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Member_Recipient_Adress_Town_title", comment: ""), colour: placeHolderTextColor, font: font)
         
         self.addressTitleLabel.text = NSLocalizedString("Member_Recipient_Adress_title", comment: "")
-        self.addressTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.addressTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.addressTextField.placeholder = NSLocalizedString("Member_Recipient_Adress_Placeholder_title", comment: "")
         self.addressWarningLabel.text = NSLocalizedString("Member_Recipient_Address_Alert_Text", comment: "")
-        self.addressWarningLabel.textColor = UIColor.init(red: 255.0/255.0, green: 0.0/255.0, blue: 0.0/255.0, alpha: 1.0)
+        self.addressWarningLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
         self.addressWarningLabel.isHidden = true
+        
+        self.addressTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: bkColor)
+        self.addressTextField.setTextColor(textColor, font: font)
         
         self.addBtn.setTitle(NSLocalizedString("Member_Add_Btn_title", comment: ""), for: .normal)
         self.addBtn.addTarget(self, action: #selector(addBtnClick(_:)), for: .touchUpInside)
-        self.addBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.addBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         
         self.cancelBtn.setTitle(NSLocalizedString("Member_Cancel_Btn_title", comment: ""), for: .normal)
         self.cancelBtn.addTarget(self, action: #selector(cancelBtnClick(_:)), for: .touchUpInside)
-        self.cancelBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.cancelBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
     }
     
     func createCityPickerView() {
