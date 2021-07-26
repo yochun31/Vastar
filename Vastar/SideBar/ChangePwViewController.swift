@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import var CommonCrypto.CC_MD5_DIGEST_LENGTH
+import func CommonCrypto.CC_MD5
+import typealias CommonCrypto.CC_LONG
 
 protocol ChangePwViewDelegate {
     func goVc()
@@ -35,6 +38,8 @@ class ChangePwViewController: UIViewController {
     private var verifyCodeSt = ""
     private var timer = Timer()
     private var defaultSec:Int = 30
+    
+    let userDefault = UserDefaults.standard
     
     var delegate:ChangePwViewDelegate?
     var accountPhone:String = ""
@@ -129,7 +134,7 @@ class ChangePwViewController: UIViewController {
         
         self.vaiv.startProgressHUD(view: self.view, content: NSLocalizedString("Alert_Loading_title", comment: ""))
         
-        VClient.sharedInstance().VCGetUserInfoByPhone(phone: accountName) { (_ isSuccess:Bool,_ message:String,_ dictResData:[String:Any]) in
+        VClient.sharedInstance().VCGetUserInfoByPhone(phone: accountName) { (_ isSuccess:Bool,_ message:String,_ isResult:Int,_ dictResData:[String:Any]) in
             
             if isSuccess {
                 let res_registerTime = dictResData["RegisterTime"] as? String ?? ""
@@ -166,6 +171,41 @@ class ChangePwViewController: UIViewController {
             }
         }
         
+    }
+    
+    func checkOldPW(pwSt:String,handler:@escaping ()->Void) {
+        
+        let md5Data = self.MD5_String(string:pwSt)
+        let md5Hex =  md5Data.map { String(format: "%02hhx", $0) }.joined()
+        print("---\(md5Hex)")
+        let oldPw:String = self.userDefault.object(forKey: "A1") as? String ?? ""
+        
+        if oldPw == md5Hex {
+            handler()
+        }else{
+            let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+            let font:UIFont = UIFont.systemFont(ofSize: 20.0)
+            let errorColor:UIColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            let color:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+            
+            self.oldPwErrorLabel.text = NSLocalizedString("Change_Pw_Input_Old_Error_Alert_Text", comment: "")
+            self.oldPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+            self.oldPwTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.oldPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Old_title", comment: ""), colour: errorColor, font: font)
+            
+
+            self.nPwErrorLabel.text = ""
+            self.newPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.newPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_New_title", comment: ""), colour: color, font: font)
+            
+            self.confirmPwErrorLabel.text = ""
+            self.confirmPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Confirm_title", comment: ""), colour: color, font: font)
+            
+            self.verifyErrorLabel.text = ""
+            self.verifyCodeTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Change_Pw_Verify_Code_title", comment: ""), colour: color, font: font)
+        }
     }
     
     
@@ -310,7 +350,10 @@ class ChangePwViewController: UIViewController {
             
         }else{
             
-            self.getUserInfo(accountName: self.accountPhone, oldPwSt: oldPwText, newPwSt: newPwText)
+            self.checkOldPW(pwSt: oldPwText) {
+                self.getUserInfo(accountName: self.accountPhone, oldPwSt: oldPwText, newPwSt: newPwText)
+            }
+            
         }
         
     }
@@ -345,6 +388,23 @@ class ChangePwViewController: UIViewController {
     func stopTimer() {
         self.timer.invalidate()
         self.defaultSec = 30
+    }
+    
+    private func MD5_String(string: String) -> Data {
+        let length = Int(CC_MD5_DIGEST_LENGTH)
+        let messageData = string.data(using:.utf8)!
+        var digestData = Data(count: length)
+        
+        _ = digestData.withUnsafeMutableBytes { digestBytes -> UInt8 in
+            messageData.withUnsafeBytes { messageBytes -> UInt8 in
+                if let messageBytesBaseAddress = messageBytes.baseAddress, let digestBytesBlindMemory = digestBytes.bindMemory(to: UInt8.self).baseAddress {
+                    let messageLength = CC_LONG(messageData.count)
+                    CC_MD5(messageBytesBaseAddress, messageLength, digestBytesBlindMemory)
+                }
+                return 0
+            }
+        }
+        return digestData
     }
     
     

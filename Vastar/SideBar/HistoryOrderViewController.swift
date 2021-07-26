@@ -42,7 +42,6 @@ class HistoryOrderViewController: UIViewController,UITableViewDelegate,UITableVi
         setupSWReveal()
         setTableView()
         
-        accountPhone = "0918479329"
         getHistoryOrderData()
     }
 

@@ -86,7 +86,7 @@ class CloudGatewayManager {
 
     //MARK: - Member
     
-    func CGMGetUserInfoByPhone(phone:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ dictResData:[String:Any]) -> Void) {
+    func CGMGetUserInfoByPhone(phone:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ isResult:Int,_ dictResData:[String:Any]) -> Void) {
         
         let headers:HTTPHeaders = ["Content-Type" : "application/json"]
         let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673", "Account_Name" : phone]
@@ -124,12 +124,12 @@ class CloudGatewayManager {
                     isResStatus = false
                 }
                 
-                result(isResStatus,messageStr,dictData)
+                result(isResStatus,messageStr,resStatus,dictData)
         
                 break
             case .failure(_):
                 
-                result(false,"Error",[:])
+                result(false,"Error",-1,[:])
                 break
             }
         }

@@ -28,6 +28,7 @@
 "Register_Confirm_Password_title" = "確認密碼";
 "Register_Verify_Code_title" = "驗證碼";
 "Register_Verify_Code_Btn_title" = "取得驗證碼";
+"Register_Verify_Wait_Btn_title" = "秒後可再次發送";
 "Register_Button_title" = "註冊";
 "Register_Login_Btn_title" = "我已有帳號，點我登入";
 "Register_Input_Name_Alert_Text" = "尚未輸入姓名";
@@ -36,7 +37,11 @@
 "Register_Input_Confirm_Pw_Alert_Text" = "尚未輸入確認密碼";
 "Register_Input_diff_Alert_Text" = "輸入密碼不同";
 "Register_Input_Pw_8_Alert_Text" = "密碼至少為8碼";
+"Register_Input_Phone_10_Alert_Text" = "手機號碼格式有誤";
+"Register_Input_VeriftyCode_Alert_Text" = "尚未輸入驗證碼";
+"Register_Input_VeriftyCode_Error_Alert_Text" = "輸入驗證碼錯誤";
 "Register_Success_Alert_Text" = "新增成功";
+"Register_Phone_Exist_Alert_Text" = "帳號已存在";
 
 "Forget_Pw_Phone_title" = "手機號碼";
 "Forget_Pw_New_title" = "輸入新密碼";
@@ -84,6 +89,7 @@
 "Change_Pw_VeriftyCode_Error_Alert_Text" = "輸入驗證碼錯誤";
 "Change_Pw_Update_Success_Alert_Text" = "更新成功";
 "Change_Pw_Verify_Wait_Btn_title" = "秒後可再次發送";
+"Change_Pw_Input_Old_Error_Alert_Text" = "原密碼錯誤";
 
 "Member_title" = "會員資料";
 "Member_Name_title" = "姓名:";
