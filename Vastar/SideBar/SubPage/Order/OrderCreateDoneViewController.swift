@@ -42,15 +42,15 @@ class OrderCreateDoneViewController: UIViewController {
         self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
         
         self.infoTitleLabel.text = NSLocalizedString("Order_Create_Done_text", comment: "")
-        self.infoTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.infoTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.infoTitleLabel.font = UIFont(name: "PingFangTC-Semibold", size: 30.0)
         
         self.laterPayBtn.setTitle(NSLocalizedString("Order_Later_Pay_Btn_title", comment: ""), for: .normal)
-        self.laterPayBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.laterPayBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.laterPayBtn.addTarget(self, action: #selector(laterPayBtnClick(_:)), for: .touchUpInside)
         
         self.nowPayBtn.setTitle(NSLocalizedString("Order_Now_Pay_Btn_title", comment: ""), for: .normal)
-        self.nowPayBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.nowPayBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.nowPayBtn.addTarget(self, action: #selector(nowPayBtnClick(_:)), for: .touchUpInside)
     }
 

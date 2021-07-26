@@ -50,15 +50,15 @@ class shoppingCarTableViewCell: UITableViewCell {
     func loadData(titleST:String,amount:Int,photo:UIImage) {
         
         self.productTitleLabel.text = titleST
-        self.productTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.productTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
         self.productPhoto.image = photo
         
         self.amountTextField.text = String(amount)
-        self.amountTextField.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.amountTextField.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
-        self.amountAddBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
-        self.amountLessBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.amountAddBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
+        self.amountLessBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         
         self.amountAddBtn.addTarget(self, action: #selector(amountAddBtnClick(_:)), for: .touchUpInside)
         

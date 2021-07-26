@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITableViewDelegate,UITableViewDataSource {
+class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate {
     
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var nameTextField: UITextField!
@@ -26,6 +26,7 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     @IBOutlet var addBtn_Recipient: UIButton!
     
     @IBOutlet var receiverTableView: UITableView!
+    @IBOutlet var viewContainer: UIView!
     
     private var datePickerContainer = UIView()
     private var datePickerView = UIDatePicker()
@@ -99,42 +100,60 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     
     func setInterface() {
         
+        self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        self.viewContainer.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        
         self.navigationItem.title = NSLocalizedString("Member_title", comment: "")
         
+        self.nameLabel.font = UIFont.systemFont(ofSize: 20.0)
         self.nameLabel.text = NSLocalizedString("Member_Name_title", comment: "")
-        self.nameLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.nameLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.nameTextField.isEnabled = false
+        self.nameTextField.borderStyle = .none
+        self.nameTextField.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        self.nameTextField.font = UIFont.systemFont(ofSize: 17.0)
         
+        self.birthdayLabel.font = UIFont.systemFont(ofSize: 20.0)
         self.birthdayLabel.text = NSLocalizedString("Member_Birthday_title", comment: "")
-        self.birthdayLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.birthdayLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.birthdayTextField.placeholder = NSLocalizedString("Member_Birthday_Placeholder_title", comment: "")
+
         self.birthdayTextField.isEnabled = false
+        self.birthdayTextField.borderStyle = .none
+        self.birthdayTextField.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        self.birthdayTextField.font = UIFont.systemFont(ofSize: 15.0)
         
+        self.telLabel.font = UIFont.systemFont(ofSize: 20.0)
         self.telLabel.text = NSLocalizedString("Member_Tel_title", comment: "")
-        self.telLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.telLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        
+        self.telTextField.isEnabled = false
+        self.telTextField.borderStyle = .none
+        self.telTextField.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        self.telTextField.font = UIFont.systemFont(ofSize: 17.0)
         
         self.currentNameEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnEdit.rawValue
         self.currentTelEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnEdit.rawValue
         
         self.editBtn_Name.setTitle(NSLocalizedString("Member_Edit_Btn_title", comment: ""), for: .normal)
-        self.editBtn_Name.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.editBtn_Name.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.editBtn_Name.addTarget(self, action: #selector(editBtn_NameClick(_:)), for: .touchUpInside)
         
         self.setDateBtn.setTitle(NSLocalizedString("Member_Set_Date_Btn_title", comment: ""), for: .normal)
-        self.setDateBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.setDateBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.setDateBtn.addTarget(self, action: #selector(setDateBtnClick(_:)), for: .touchUpInside)
         
         self.editBtn_Tel.setTitle(NSLocalizedString("Member_Edit_Btn_title", comment: ""), for: .normal)
-        self.editBtn_Tel.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.editBtn_Tel.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.editBtn_Tel.addTarget(self, action: #selector(editBtn_TelClick(_:)), for: .touchUpInside)
         
         
         self.recipientLabel.text = NSLocalizedString("Member_Recipient_title", comment: "")
-        self.recipientLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.recipientLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.recipientLabel.font = UIFont.systemFont(ofSize: 20.0)
         
         self.addBtn_Recipient.setTitle(NSLocalizedString("Member_Recipient_Btn_title", comment: ""), for: .normal)
-        self.addBtn_Recipient.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.addBtn_Recipient.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.addBtn_Recipient.addTarget(self, action: #selector(addBtn_RecipientClick(_:)), for: .touchUpInside)
         
     }
@@ -194,7 +213,7 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         self.receiverTableView.delegate = self
         self.receiverTableView.dataSource = self
         self.receiverTableView.separatorStyle = .none
-        self.receiverTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 61.0/255.0, blue: 36.0/255.0, alpha: 1.0)
+        self.receiverTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
     
         self.receiverTableView.register(UINib(nibName: "ReceiverTableViewCell", bundle: nil), forCellReuseIdentifier: "ReceiverCell")
     }
@@ -206,7 +225,7 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         
         self.vaiv.startProgressHUD(view: self.view, content: NSLocalizedString("Alert_Loading_title", comment: ""))
         
-        VClient.sharedInstance().VCGetUserInfoByPhone(phone: accountName) { (_ isSuccess:Bool,_ message:String,_ dictResData:[String:Any]) in
+        VClient.sharedInstance().VCGetUserInfoByPhone(phone: accountName) { (_ isSuccess:Bool,_ message:String,_ isResult:Int,_ dictResData:[String:Any]) in
             
             if isSuccess {
                 
@@ -294,6 +313,9 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     
     func editBtnStatus(item:Int,textField:UITextField) {
         
+        let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+        let lineColor:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+
         switch item {
         case VMemberDataEditBtnItem.VMemberDataEditBtnEdit.rawValue:
             
@@ -305,7 +327,7 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
                 self.editBtn_Tel.setTitle(AppInfo.GetMemberDataEditBtnTitle(item: self.currentTelEditStatus), for: .normal)
             }
             
-    
+            textField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
             textField.isEnabled = true
             break
         case VMemberDataEditBtnItem.VMemberDataEditBtnConfirm.rawValue:
@@ -314,13 +336,13 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
                 self.currentNameEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnEdit.rawValue
                 self.editBtn_Name.setTitle(AppInfo.GetMemberDataEditBtnTitle(item: self.currentNameEditStatus), for: .normal)
                 checkNameInputData()
-                
             }else{
                 self.currentTelEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnEdit.rawValue
                 self.editBtn_Tel.setTitle(AppInfo.GetMemberDataEditBtnTitle(item: self.currentTelEditStatus), for: .normal)
                 checkTelInputData()
             }
             
+            textField.setBottomBorder(with: lineColor, width: 0.0, bkColor: backgroundColor)
             textField.isEnabled = false
             break
         default:
@@ -501,7 +523,7 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:ReceiverTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ReceiverCell", for: indexPath) as! ReceiverTableViewCell
-        cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 61.0/255.0, blue: 36.0/255.0, alpha: 1.0)
+        cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
         let name = self.receiverNameArray[indexPath.row]
         let phone = self.receiverPhoneArray[indexPath.row]
         let city = self.receiverCityArray[indexPath.row]

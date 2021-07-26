@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
 
@@ -73,6 +74,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         // Do any additional setup after loading the view.
         
         setInterface()
+        setNavBarBtn()
         createVoltagePickerView()
         createColorPickerView()
         getProductDetailData()
@@ -84,40 +86,56 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
 
     func setInterface() {
         
-        self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 61.0/255.0, blue: 36.0/255.0, alpha: 1.0)
-        self.productTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        self.productTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
-        self.productModelLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.productModelLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
-        self.productPriceLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.productPriceLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
         self.colorTitleLabel.text = NSLocalizedString("Product_Detail_Color_title", comment: "")
-        self.colorTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.colorTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        self.colorTextField.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        self.colorTextField.borderStyle = .none
         
         self.voltageTitleLabel.text = NSLocalizedString("Product_Detail_Voltage_title", comment: "")
-        self.voltageTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.voltageTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        self.voltageTextField.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        self.voltageTextField.borderStyle = .none
         
         self.amountTitleLabel.text = NSLocalizedString("Product_Detail_Amount_title", comment: "")
-        self.amountTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.amountTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.amountTextField.text = String(amountNum)
+        self.amountTextField.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        self.amountTextField.borderStyle = .none
+        self.amountTextField.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(amountTextFieldClick(_:)))
         
-        self.amountAddBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.amountAddBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.amountAddBtn.addTarget(self, action: #selector(amountAddBtnClick(_:)), for: .touchUpInside)
         
-        self.amountLessBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.amountLessBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.amountLessBtn.addTarget(self, action: #selector(amountLessBtnClick(_:)), for: .touchUpInside)
         
         self.addShoppingCarBtn.setTitle(NSLocalizedString("Product_Detail_Add_ShoppingCar_title", comment: ""), for: .normal)
-        self.addShoppingCarBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.addShoppingCarBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.addShoppingCarBtn.addTarget(self, action: #selector(addShoppingCarBtnClick(_:)), for: .touchUpInside)
         
-        self.contentTextView.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.contentTextView.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.contentTextView.isEditable = false
         
         self.voltageTextField.inputAccessoryView = UIView()
         
         self.colorTextField.inputAccessoryView = UIView()
+    }
+    
+    func setNavBarBtn() {
         
+        let rightBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        rightBtn.setImage(UIImage(named: "home"), for: .normal)
+        rightBtn.addTarget(self, action: #selector(rightBtnClick(_:)), for: .touchUpInside)
+        
+        let rightBarItem = UIBarButtonItem.init(customView: rightBtn)
+        self.navigationItem.rightBarButtonItem = rightBarItem
     }
     
     
@@ -306,15 +324,16 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
             self.contentTextView.text = content
             
             let url = URL.init(string: imageUrl)
-            if url != nil {
-                let imageData = try? Data(contentsOf: url!)
-                let defaultData = UIImage(named: "logo_item")!.pngData()
-                self.productPhoto.image = UIImage(data: imageData ?? defaultData!)
-            }else{
-                let defaultData = UIImage(named: "logo_item")!.pngData()
-                self.productPhoto.image = UIImage(data: defaultData!)
-            }
-            self.vaiv.stopProgressHUD(view: self.view)
+            self.productPhoto.sd_setImage(with: url, placeholderImage: nil,options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cacheType, imageURL) in
+                
+                if error == nil {
+                    self.productPhoto.image = image
+                    self.vaiv.stopProgressHUD(view: self.view)
+                }else{
+                    self.vaiv.stopProgressHUD(view: self.view)
+                }
+                
+            })
             
         }else{
             self.vaiv.stopProgressHUD(view: self.view)
@@ -342,17 +361,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
                 let imageUrl:String = dictValue[6] as? String ?? ""
                 let content:String = dictValue[7] as? String ?? ""
                 
-                var photo:UIImage?
                 let url = URL.init(string: imageUrl)
-                if url != nil {
-                    let imageData = try? Data(contentsOf: url!)
-                    let defaultData = UIImage(named: "logo_item")!.pngData()
-                    photo = UIImage(data: imageData ?? defaultData!)
-                }else{
-                    let defaultData = UIImage(named: "logo_item")!.pngData()
-                    photo = UIImage(data: defaultData!)
-                }
-                
                 DispatchQueue.main.async {
                     
                     self.navigationItem.title = name
@@ -362,8 +371,14 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
                     self.productPriceLabel.text = "$\(String(price))"
                     self.price_Int = price
                     self.contentTextView.text = content
-                    self.productPhoto.image = photo
-                    self.vaiv.stopProgressHUD(view: self.view)
+                    self.productPhoto.sd_setImage(with: url, placeholderImage: nil,options: SDWebImageOptions(rawValue: 0), completed: { (image, error, cacheType, imageURL) in
+                        if error == nil {
+                            self.productPhoto.image = image
+                            self.vaiv.stopProgressHUD(view: self.view)
+                        }else{
+                            self.vaiv.stopProgressHUD(view: self.view)
+                        }
+                    })
                 }
             }else{
                 DispatchQueue.main.async {
@@ -451,12 +466,22 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
     
     @objc func addShoppingCarBtnClick(_ sender:UIButton) {
         
-        if amountNum > 0 {
+        if amountNum > 0 && self.amountTextField.text?.count != 0 {
             addShppingCarData()
         }else{
-            print("NNNNNNNNNNNN")
+            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Product_Detail_Input_Amount_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
         }
         
+    }
+    
+    @objc func amountTextFieldClick(_ sender:UIButton) {
+        let amountSt:String = self.amountTextField.text ?? "0"
+        amountNum = Int(amountSt) ?? 1
+    }
+    
+    @objc func rightBtnClick(_ sender:UIButton) {
+        self.userDefault.set(1, forKey: "backDefault")
+        self.navigationController?.popToRootViewController(animated: false)
     }
     
     

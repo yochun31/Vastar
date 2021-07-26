@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 class ProductListTableViewCell: UITableViewCell {
     
@@ -23,11 +24,12 @@ class ProductListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func loadData(productImage:UIImage,titleSt:String) {
+    func loadData(titleSt:String,url:URL) {
         
-        self.productImageView.image = productImage
+        self.productImageView.sd_setImage(with: url, placeholderImage:nil)
+        
         self.productTitleLabel.text = titleSt
-        self.productTitleLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.productTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
     }
     

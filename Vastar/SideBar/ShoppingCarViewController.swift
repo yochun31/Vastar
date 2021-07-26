@@ -27,6 +27,8 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
     
     private var tmpAmount:Int = 0
     
+    let userDefault = UserDefaults.standard
+
     var accountPhone:String = ""
     
     //MARK: - Life Cycle
@@ -40,6 +42,20 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
         setTableView()
         setupSWReveal()
         getShoppingCarData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        let flag:Int = self.userDefault.object(forKey: "backDefault")as? Int ?? 0
+        if flag == 1 {
+            self.userDefault.set(0, forKey: "backDefault")
+            let nav = UINavigationController()
+            let reveal = self.revealViewController()
+            let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
+            nav.viewControllers = [vc]
+            reveal?.pushFrontViewController(nav, animated: true)
+        }
     }
 
     
@@ -57,9 +73,9 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
         self.navigationItem.title = NSLocalizedString("Shopping_title", comment: "")
         self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
         
-        self.countLabel.textColor = UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0)
+        self.countLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.checkoutBtn.setTitle(NSLocalizedString("Shopping_Checkout_Btn_title", comment: ""), for: .normal)
-        self.checkoutBtn.setTitleColor(UIColor.init(red: 235.0/255.0, green: 242.0/255.0, blue: 184.0/255.0, alpha: 1.0), for: .normal)
+        self.checkoutBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.checkoutBtn.addTarget(self, action: #selector(checkoutBtnClick(_:)), for: .touchUpInside)
         
         
