@@ -36,6 +36,8 @@ class HistoryOrderDetailViewController: UIViewController {
     @IBOutlet var totalPriceTitleLabel: UILabel!
     @IBOutlet var totalPriceValueLabel: UILabel!
     
+    @IBOutlet var viewContainer: UIView!
+    
     var dataDict:[String:Any] = [:]
 
     override func viewDidLoad() {
@@ -52,6 +54,7 @@ class HistoryOrderDetailViewController: UIViewController {
         
         self.navigationItem.title = NSLocalizedString("", comment: "")
         self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        self.viewContainer.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
 
         let format = NumberFormatter()
         format.numberStyle = .decimal

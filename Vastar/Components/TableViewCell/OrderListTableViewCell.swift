@@ -17,6 +17,7 @@ class OrderListTableViewCell: UITableViewCell {
     @IBOutlet var orderScheduleValueBtn: UIButton!
     
     @IBOutlet var freightTilteLabel: UILabel!
+    @IBOutlet var freightValueBtn: UIButton!
     
     
     override func awakeFromNib() {
@@ -30,7 +31,7 @@ class OrderListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func loadData(orderNumSt:String,scheduleSt:String) {
+    func loadData(orderNumSt:String,scheduleSt:String,freightNum:String) {
         
         self.orderNumTitleLabel.text = NSLocalizedString("Order_Number_title", comment: "")
         self.orderNumTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
@@ -46,6 +47,9 @@ class OrderListTableViewCell: UITableViewCell {
         
         self.freightTilteLabel.text = NSLocalizedString("Order_Freight_title", comment: "")
         self.freightTilteLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        
+        self.freightValueBtn.setTitle(freightNum, for: .normal)
+        self.freightValueBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
     }
     
 }

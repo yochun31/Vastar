@@ -20,6 +20,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet var forgetPwBtn: UIButton!
     @IBOutlet var registerBtn: UIButton!
     
+    @IBOutlet var accountNameErrorLabel: UILabel!
+    @IBOutlet var pwErrorLabel: UILabel!
+    
     private var userResgisterTime:String = ""
     
     private var vaiv = VActivityIndicatorView()
@@ -41,7 +44,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         super.viewWillAppear(animated)
         
         self.accountNameTextField.text = ""
-        self.passwordTextField.text = "" 
+        self.passwordTextField.text = ""
     }
 
     // MARK: - UI Interface Methods
@@ -59,10 +62,13 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         self.accountNameTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
         self.accountNameTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Account_title", comment: ""), colour: placeHolderTextColor, font: font)
         self.accountNameTextField.setTextColor(textColor, font: font)
+        self.accountNameErrorLabel.text = ""
         
         self.passwordTextField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
         self.passwordTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Password_title", comment: ""), colour: placeHolderTextColor, font: font)
         self.passwordTextField.setTextColor(textColor, font: font)
+        
+        self.pwErrorLabel.text = ""
         
 //        self.passwordTextField.placeholder = NSLocalizedString("Login_Password_title", comment: "")
         self.passwordTextField.isSecureTextEntry = true
@@ -99,14 +105,32 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                 self.loginVerification(accountName: accountName, pw: passWord, pw_Nodate: pw)
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
-                    
-                }
+       
+                let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+                let font:UIFont = UIFont.systemFont(ofSize: 20.0)
+                let errorColor:UIColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+
+                self.accountNameErrorLabel.text = NSLocalizedString("Login_Input_Error_Alert_Text", comment: "")
+                self.accountNameErrorLabel.textColor = errorColor
+                
+                self.accountNameTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+                self.accountNameTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Account_title", comment: ""), colour: errorColor, font: font)
+                
+                self.pwErrorLabel.text = NSLocalizedString("Login_Input_Error_Alert_Text", comment: "")
+                self.pwErrorLabel.textColor = errorColor
+                
+                self.passwordTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+                self.passwordTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Password_title", comment: ""), colour: errorColor, font: font)
             }
         }
     }
     
     func loginVerification(accountName:String,pw:String,pw_Nodate:String) {
+        
+        let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+        let font:UIFont = UIFont.systemFont(ofSize: 20.0)
+        let errorColor:UIColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+        let color:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
         VClient.sharedInstance().VCLoginByPhone(account: accountName, pw: pw) { (_ isSuccess:Bool,_ message:String) in
             
@@ -115,8 +139,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                 print("--\(message)--")
 
                 self.vaiv.stopProgressHUD(view: self.view)
+                
                 let frontNavigationController:UINavigationController
-
                 let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
                 frontNavigationController = UINavigationController(rootViewController: vc)
                 let sideMenuTable = SMSideMenuViewController(nibName: "SMSideMenuViewController", bundle: nil)
@@ -125,18 +149,38 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                 let reveal = SWRevealViewController(rearViewController: sideMenuTable, frontViewController: frontNavigationController)
                 reveal?.modalPresentationStyle = .fullScreen
                 self.present(reveal!, animated: true, completion:  nil)
-                print("===>\(pw)")
+
+                //加密一次Md5，用於修改密碼比對原始密碼是否正確
                 let md5Data = self.MD5_String(string:pw_Nodate)
                 let md5Hex =  md5Data.map { String(format: "%02hhx", $0) }.joined()
-                print("---\(md5Hex)")
                 self.userDefault.setValue(md5Hex, forKey: "A1")
+                
+                self.accountNameErrorLabel.text = ""
+                self.accountNameTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+                self.accountNameTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Account_title", comment: ""), colour: color, font: font)
+                
+                self.pwErrorLabel.text = ""
+                self.passwordTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+                self.passwordTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Password_title", comment: ""), colour: color, font: font)
+                
+                VClient.sharedInstance().VCDeleteAllShoppingCarData { isDone in
+                    if isDone {}
+                }
                 
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
+                                
+                self.accountNameErrorLabel.text = NSLocalizedString("Login_Input_Error_Alert_Text", comment: "")
+                self.accountNameErrorLabel.textColor = errorColor
                 
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
-                    
-                }
+                self.accountNameTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+                self.accountNameTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Account_title", comment: ""), colour: errorColor, font: font)
+                
+                self.pwErrorLabel.text = NSLocalizedString("Login_Input_Error_Alert_Text", comment: "")
+                self.pwErrorLabel.textColor = errorColor
+                
+                self.passwordTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+                self.passwordTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Password_title", comment: ""), colour: errorColor, font: font)
             }
         }
     }
@@ -166,14 +210,35 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         let accountText:String = self.accountNameTextField.text ?? ""
         let pwText:String = self.passwordTextField.text ?? ""
         
+        let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+        let font:UIFont = UIFont.systemFont(ofSize: 20.0)
+        let errorColor:UIColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+        let color:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        
         if accountText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Login_Input_Phone_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
-                
-            }
+
+            self.accountNameErrorLabel.text = NSLocalizedString("Login_Input_Phone_Alert_Text", comment: "")
+            self.accountNameErrorLabel.textColor = errorColor
+            
+            self.accountNameTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.accountNameTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Account_title", comment: ""), colour: errorColor, font: font)
+            
+            self.pwErrorLabel.text = ""
+            self.passwordTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.passwordTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Password_title", comment: ""), colour: color, font: font)
+            
         }else if pwText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Login_Input_Pw_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
-                
-            }
+
+            self.pwErrorLabel.text = NSLocalizedString("Login_Input_Pw_Alert_Text", comment: "")
+            self.pwErrorLabel.textColor = errorColor
+            
+            self.passwordTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.passwordTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Password_title", comment: ""), colour: errorColor, font: font)
+            
+            self.accountNameErrorLabel.text = ""
+            self.accountNameTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+            self.accountNameTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Account_title", comment: ""), colour: color, font: font)
+            
         }else {
             getUserInfo(accountName: accountText, pw: pwText)
         }

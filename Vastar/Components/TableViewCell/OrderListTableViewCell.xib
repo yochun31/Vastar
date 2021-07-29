@@ -49,9 +49,14 @@
                         <rect key="frame" x="72" y="46.5" width="46" height="30"/>
                         <state key="normal" title="Button"/>
                     </button>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OLD-Oq-I2C">
+                        <rect key="frame" x="72" y="82.5" width="46" height="30"/>
+                        <state key="normal" title="Button"/>
+                    </button>
                 </subviews>
                 <constraints>
                     <constraint firstItem="svF-Q2-gzu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="574-9V-xKC"/>
+                    <constraint firstItem="OLD-Oq-I2C" firstAttribute="centerY" secondItem="3Ek-Lc-3XJ" secondAttribute="centerY" id="5Dn-Lh-ZvY"/>
                     <constraint firstAttribute="bottom" secondItem="svF-Q2-gzu" secondAttribute="bottom" constant="10" id="8HX-3j-0qE"/>
                     <constraint firstItem="bVb-Dt-SXE" firstAttribute="centerY" secondItem="Lp8-Za-Ez1" secondAttribute="centerY" id="FH0-4b-RHW"/>
                     <constraint firstItem="3Ek-Lc-3XJ" firstAttribute="leading" secondItem="Lp8-Za-Ez1" secondAttribute="leading" id="KcQ-B5-eJR"/>
@@ -62,6 +67,7 @@
                     <constraint firstItem="Lp8-Za-Ez1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="ZST-Wz-kdd"/>
                     <constraint firstAttribute="trailing" secondItem="svF-Q2-gzu" secondAttribute="trailing" id="cKt-NW-ye1"/>
                     <constraint firstItem="Lp8-Za-Ez1" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="cPk-X8-CPx"/>
+                    <constraint firstItem="OLD-Oq-I2C" firstAttribute="leading" secondItem="3Ek-Lc-3XJ" secondAttribute="trailing" constant="20" id="gPa-un-Jt0"/>
                     <constraint firstItem="3Ek-Lc-3XJ" firstAttribute="top" secondItem="b5t-BE-Puv" secondAttribute="bottom" constant="15" id="ibH-kk-kcQ"/>
                     <constraint firstItem="bVb-Dt-SXE" firstAttribute="leading" secondItem="Lp8-Za-Ez1" secondAttribute="trailing" constant="20" id="mmW-4t-Rmt"/>
                     <constraint firstItem="svU-ps-o9V" firstAttribute="centerY" secondItem="b5t-BE-Puv" secondAttribute="centerY" id="sua-hm-5YI"/>
@@ -70,6 +76,7 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="freightTilteLabel" destination="3Ek-Lc-3XJ" id="kOT-sa-nQd"/>
+                <outlet property="freightValueBtn" destination="OLD-Oq-I2C" id="CFJ-8q-R28"/>
                 <outlet property="orderNumTitleLabel" destination="Lp8-Za-Ez1" id="eYc-V0-Nkh"/>
                 <outlet property="orderNumValueBtn" destination="bVb-Dt-SXE" id="auK-H3-0mg"/>
                 <outlet property="orderScheduleTitleLabel" destination="b5t-BE-Puv" id="nTz-NY-bGB"/>
