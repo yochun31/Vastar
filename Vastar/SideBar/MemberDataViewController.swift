@@ -121,7 +121,7 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         self.birthdayTextField.isEnabled = false
         self.birthdayTextField.borderStyle = .none
         self.birthdayTextField.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
-        self.birthdayTextField.font = UIFont.systemFont(ofSize: 15.0)
+        self.birthdayTextField.font = UIFont.systemFont(ofSize: 13.0)
         
         self.telLabel.font = UIFont.systemFont(ofSize: 20.0)
         self.telLabel.text = NSLocalizedString("Member_Tel_title", comment: "")
