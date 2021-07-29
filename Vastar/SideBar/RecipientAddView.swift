@@ -71,8 +71,6 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     init(title:String,aConditionType:Int,frame: CGRect) {
         super.init(frame: frame)
         
-
-        
     }
     
     required init?(coder: NSCoder) {
@@ -135,6 +133,7 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         self.addressTitleLabel.text = NSLocalizedString("Member_Recipient_Adress_title", comment: "")
         self.addressTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.addressTextField.placeholder = NSLocalizedString("Member_Recipient_Adress_Placeholder_title", comment: "")
+        self.addressTextField.keyboardToolbar.doneBarButton.setTarget(self, action: #selector(addressTextFieldClick(_:)))
         self.addressWarningLabel.text = NSLocalizedString("Member_Recipient_Address_Alert_Text", comment: "")
         self.addressWarningLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
         self.addressWarningLabel.isHidden = true
@@ -327,6 +326,10 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     @objc func townDoneBtnClick(_ sender:UIButton) {
         self.endEditing(true)
         self.GetTownPickerViewSelect()
+    }
+    
+    @objc func addressTextFieldClick(_ sender:UIButton) {
+        
     }
     
     //MARK: - UIPickerViewDataSource

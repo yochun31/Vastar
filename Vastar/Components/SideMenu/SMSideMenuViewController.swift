@@ -217,6 +217,7 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
                 break
             case 1:
                 let vc = HistoryOrderViewController(nibName: "HistoryOrderViewController", bundle: nil)
+                vc.accountPhone = menuTitle
                 nav.viewControllers = [vc]
                 reveal?.pushFrontViewController(nav, animated: true)
                 

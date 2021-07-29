@@ -764,6 +764,10 @@ class CloudGatewayManager {
         var orderPaymentMethodArray:Array<String> = []
         var orderCreateTimeArray:Array<String> = []
         var orderStatusArray:Array<String> = []
+        var deliveryTimeArray:Array<String> = []
+        var packageDeliveryCodeArray:Array<String> = []
+        var packageDeliveryUrlArray:Array<String> = []
+        var orderCompleteTimeArray:Array<String> = []
         
         var messageStr:String = ""
         
@@ -800,6 +804,10 @@ class CloudGatewayManager {
                             let payMethod:String = resultDict["PaymentMethod"] as? String ?? ""
                             let createTime:String = resultDict["OrderEstablishTime"] as? String ?? ""
                             let status:String = resultDict["Order_Status"] as? String ?? ""
+                            let deliveryTime:String = resultDict["DeliveryTime"] as? String ?? ""
+                            let packageDeliveryCode:String = resultDict["PackageDeliveryCode"] as? String ?? ""
+                            let packageDeliveryUrl:String = resultDict["PackageDeliveryUrl"] as? String ?? ""
+                            let orderCompleteTime:String = resultDict["OrderCompleteTime"] as? String ?? ""
 
                             orderIDArray.append(ID)
                             orderNoArray.append(NO)
@@ -817,13 +825,17 @@ class CloudGatewayManager {
                             orderPaymentMethodArray.append(payMethod)
                             orderCreateTimeArray.append(createTime)
                             orderStatusArray.append(status)
+                            deliveryTimeArray.append(deliveryTime)
+                            packageDeliveryCodeArray.append(packageDeliveryCode)
+                            packageDeliveryUrlArray.append(packageDeliveryUrl)
+                            orderCompleteTimeArray.append(orderCompleteTime)
 
                         }else{
                             messageStr = resultDict["Message"] as? String ?? ""
                         }
                     }
                     
-                    resProductDataArray = [orderIDArray,orderNoArray,orderAccountNameArray,orderTotalProductPriceArray,orderFeeArray,orderTotalPriceArray,orderReceiverNameArray,orderReceiverPhoneArray,orderReceiverCityArray,orderReceiverTownArray,orderReceiverCityCodeArray,orderReceiverAddressArray,orderShippingMethodArray,orderPaymentMethodArray,orderCreateTimeArray,orderStatusArray]
+                    resProductDataArray = [orderIDArray,orderNoArray,orderAccountNameArray,orderTotalProductPriceArray,orderFeeArray,orderTotalPriceArray,orderReceiverNameArray,orderReceiverPhoneArray,orderReceiverCityArray,orderReceiverTownArray,orderReceiverCityCodeArray,orderReceiverAddressArray,orderShippingMethodArray,orderPaymentMethodArray,orderCreateTimeArray,orderStatusArray,deliveryTimeArray,packageDeliveryCodeArray,packageDeliveryUrlArray,orderCompleteTimeArray]
                     
                     result(true,messageStr,resProductDataArray)
                     
@@ -896,9 +908,14 @@ class CloudGatewayManager {
         var orderPaymentMethodArray:Array<String> = []
         var orderCreateTimeArray:Array<String> = []
         var orderStatusArray:Array<String> = []
+        var deliveryTimeArray:Array<String> = []
+        var packageDeliveryCodeArray:Array<String> = []
+        var packageDeliveryUrlArray:Array<String> = []
+        var orderCompleteTimeArray:Array<String> = []
+        
         
         var messageStr:String = ""
-        
+        print(">>>\(phone)")
         let headers:HTTPHeaders = ["Content-Type" : "application/json"]
         let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673", "Account_Name" : phone]
         let urlString:String = vApiUrl + "/api/Order/QueryHistory"
@@ -908,7 +925,7 @@ class CloudGatewayManager {
             case .success(let json):
                 
                 if responseData.response?.statusCode == 200 {
-                
+                print("---> \(json)")
                     let jsonArray:Array<Any> = json as? Array<Any> ?? []
                     
                     for i in 0 ..< jsonArray.count{
@@ -932,6 +949,10 @@ class CloudGatewayManager {
                             let payMethod:String = resultDict["PaymentMethod"] as? String ?? ""
                             let createTime:String = resultDict["OrderEstablishTime"] as? String ?? ""
                             let status:String = resultDict["Order_Status"] as? String ?? ""
+                            let deliveryTime:String = resultDict["DeliveryTime"] as? String ?? ""
+                            let packageDeliveryCode:String = resultDict["PackageDeliveryCode"] as? String ?? ""
+                            let packageDeliveryUrl:String = resultDict["PackageDeliveryUrl"] as? String ?? ""
+                            let orderCompleteTime:String = resultDict["OrderCompleteTime"] as? String ?? ""
 
                             orderIDArray.append(ID)
                             orderNoArray.append(NO)
@@ -949,13 +970,17 @@ class CloudGatewayManager {
                             orderPaymentMethodArray.append(payMethod)
                             orderCreateTimeArray.append(createTime)
                             orderStatusArray.append(status)
+                            deliveryTimeArray.append(deliveryTime)
+                            packageDeliveryCodeArray.append(packageDeliveryCode)
+                            packageDeliveryUrlArray.append(packageDeliveryUrl)
+                            orderCompleteTimeArray.append(orderCompleteTime)
 
                         }else{
                             messageStr = resultDict["Message"] as? String ?? ""
                         }
                     }
                     
-                    resProductDataArray = [orderIDArray,orderNoArray,orderAccountNameArray,orderTotalProductPriceArray,orderFeeArray,orderTotalPriceArray,orderReceiverNameArray,orderReceiverPhoneArray,orderReceiverCityArray,orderReceiverTownArray,orderReceiverCityCodeArray,orderReceiverAddressArray,orderShippingMethodArray,orderPaymentMethodArray,orderCreateTimeArray,orderStatusArray]
+                    resProductDataArray = [orderIDArray,orderNoArray,orderAccountNameArray,orderTotalProductPriceArray,orderFeeArray,orderTotalPriceArray,orderReceiverNameArray,orderReceiverPhoneArray,orderReceiverCityArray,orderReceiverTownArray,orderReceiverCityCodeArray,orderReceiverAddressArray,orderShippingMethodArray,orderPaymentMethodArray,orderCreateTimeArray,orderStatusArray,deliveryTimeArray,packageDeliveryCodeArray,packageDeliveryUrlArray,orderCompleteTimeArray]
                     
                     result(true,messageStr,resProductDataArray)
                     

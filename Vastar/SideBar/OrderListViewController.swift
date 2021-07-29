@@ -29,6 +29,10 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
     private var orderPaymentMethodArray:Array<String> = []
     private var orderCreateTimeArray:Array<String> = []
     private var orderStatusArray:Array<String> = []
+    private var deliveryTimeArray:Array<String> = []
+    private var packageDeliveryCodeArray:Array<String> = []
+    private var packageDeliveryUrlArray:Array<String> = []
+    private var orderCompleteTimeArray:Array<String> = []
     
     var accountPhone:String = ""
     
@@ -102,6 +106,10 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
         self.orderPaymentMethodArray.removeAll()
         self.orderCreateTimeArray.removeAll()
         self.orderStatusArray.removeAll()
+        self.deliveryTimeArray.removeAll()
+        self.packageDeliveryCodeArray.removeAll()
+        self.packageDeliveryUrlArray.removeAll()
+        self.orderCompleteTimeArray.removeAll()
         
         VClient.sharedInstance().VCGetOrderListData(phone: self.accountPhone) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
             
@@ -124,6 +132,10 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
                     self.orderPaymentMethodArray = resDataArray[13] as? Array<String> ?? []
                     self.orderCreateTimeArray = resDataArray[14] as? Array<String> ?? []
                     self.orderStatusArray = resDataArray[15] as? Array<String> ?? []
+                    self.deliveryTimeArray = resDataArray[16] as? Array<String> ?? []
+                    self.packageDeliveryCodeArray = resDataArray[17] as? Array<String> ?? []
+                    self.packageDeliveryUrlArray = resDataArray[18] as? Array<String> ?? []
+                    self.orderCompleteTimeArray = resDataArray[19] as? Array<String> ?? []
                     
                     self.orderTableView.reloadData()
                 }
@@ -208,8 +220,9 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
         cell.selectedBackgroundView = selectBkView
 
         let number:String = self.orderNoArray[indexPath.row]
+        let deliveryCode:String = self.packageDeliveryCodeArray[indexPath.row]
         
-        cell.loadData(orderNumSt: number, scheduleSt: "Btn")
+        cell.loadData(orderNumSt: number, scheduleSt: "Btn", freightNum: deliveryCode)
         
         cell.orderNumValueBtn.tag = indexPath.row
         cell.orderNumValueBtn.addTarget(self, action: #selector(orderNumValueBtnClick(_:)), for: .touchUpInside)

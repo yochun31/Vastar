@@ -19,6 +19,7 @@
 "Login_ActivityIndicatorView_title" = "登入中...";
 "Login_Input_Phone_Alert_Text" = "尚未輸入手機";
 "Login_Input_Pw_Alert_Text" = "尚未輸入密碼";
+"Login_Input_Error_Alert_Text" = "帳號或密碼錯誤！";
 
 "LogOut_Alert_Text" = "是否確定要登出?";
 

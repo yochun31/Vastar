@@ -86,44 +86,33 @@ class ProductViewController: UIViewController {
         self.product_Item1_Btn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.product_Item1_Btn.titleLabel?.font = UIFont(name: "PingFangTC-Regular", size: 24.0)
         self.product_Item1_Btn.addTarget(self, action: #selector(product_Item1_BtnClick(_:)), for: .touchUpInside)
-        self.product_Item1_Btn.layer.cornerRadius = self.product_Item1_Btn.frame.width/8
-        self.product_Item1_Btn.layer.borderWidth = 3.0
-        self.product_Item1_Btn.layer.borderColor = UIColor.init(red: 184.0/255.0, green: 140.0/255.0, blue: 9.0/255.0, alpha: 1.0).cgColor
+
         
         self.product_Item2_Btn.setTitle(NSLocalizedString("Product_Item2_Btn_title", comment: ""), for: .normal)
         self.product_Item2_Btn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.product_Item2_Btn.titleLabel?.font = UIFont(name: "PingFangTC-Regular", size: 24.0)
         self.product_Item2_Btn.addTarget(self, action: #selector(product_Item2_BtnClick(_:)), for: .touchUpInside)
-        self.product_Item2_Btn.layer.cornerRadius = self.product_Item1_Btn.frame.width/8
-        self.product_Item2_Btn.layer.borderWidth = 3.0
-        self.product_Item2_Btn.layer.borderColor = UIColor.init(red: 184.0/255.0, green: 140.0/255.0, blue: 9.0/255.0, alpha: 1.0).cgColor
+
         
         
         self.product_Item3_Btn.setTitle(NSLocalizedString("Product_Item3_Btn_title", comment: ""), for: .normal)
         self.product_Item3_Btn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.product_Item3_Btn.titleLabel?.font = UIFont(name: "PingFangTC-Regular", size: 24.0)
         self.product_Item3_Btn.addTarget(self, action: #selector(product_Item3_BtnClick(_:)), for: .touchUpInside)
-        self.product_Item3_Btn.layer.cornerRadius = self.product_Item1_Btn.frame.width/8
-        self.product_Item3_Btn.layer.borderWidth = 3.0
-        self.product_Item3_Btn.layer.borderColor = UIColor.init(red: 184.0/255.0, green: 140.0/255.0, blue: 9.0/255.0, alpha: 1.0).cgColor
+     
         
         
         self.product_Item4_Btn.setTitle(NSLocalizedString("Product_Item4_Btn_title", comment: ""), for: .normal)
         self.product_Item4_Btn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.product_Item4_Btn.titleLabel?.font = UIFont(name: "PingFangTC-Regular", size: 24.0)
         self.product_Item4_Btn.addTarget(self, action: #selector(product_Item4_BtnClick(_:)), for: .touchUpInside)
-        self.product_Item4_Btn.layer.cornerRadius = self.product_Item1_Btn.frame.width/8
-        self.product_Item4_Btn.layer.borderWidth = 3.0
-        self.product_Item4_Btn.layer.borderColor = UIColor.init(red: 184.0/255.0, green: 140.0/255.0, blue: 9.0/255.0, alpha: 1.0).cgColor
+
         
         
         self.product_Item5_Btn.setTitle(NSLocalizedString("Product_Item5_Btn_title", comment: ""), for: .normal)
         self.product_Item5_Btn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.product_Item5_Btn.titleLabel?.font = UIFont(name: "PingFangTC-Regular", size: 24.0)
         self.product_Item5_Btn.addTarget(self, action: #selector(product_Item5_BtnClick(_:)), for: .touchUpInside)
-        self.product_Item5_Btn.layer.cornerRadius = self.product_Item1_Btn.frame.width/8
-        self.product_Item5_Btn.layer.borderWidth = 3.0
-        self.product_Item5_Btn.layer.borderColor = UIColor.init(red: 184.0/255.0, green: 140.0/255.0, blue: 9.0/255.0, alpha: 1.0).cgColor
         
         
         self.product_Item6_Btn.setTitle(NSLocalizedString("Product_Item6_Btn_title", comment: ""), for: .normal)
@@ -131,9 +120,6 @@ class ProductViewController: UIViewController {
         self.product_Item6_Btn.titleLabel?.font = UIFont(name: "PingFangTC-Regular", size: 24.0)
         self.product_Item6_Btn.addTarget(self, action: #selector(product_Item6_BtnClick(_:)), for: .touchUpInside)
         self.product_Item1_Btn.addTarget(self, action: #selector(product_Item1_BtnClick(_:)), for: .touchUpInside)
-        self.product_Item6_Btn.layer.cornerRadius = self.product_Item1_Btn.frame.width/8
-        self.product_Item6_Btn.layer.borderWidth = 3.0
-        self.product_Item6_Btn.layer.borderColor = UIColor.init(red: 184.0/255.0, green: 140.0/255.0, blue: 9.0/255.0, alpha: 1.0).cgColor
     }
     
     
