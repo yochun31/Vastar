@@ -28,6 +28,10 @@ class HistoryOrderViewController: UIViewController,UITableViewDelegate,UITableVi
     private var orderPaymentMethodArray:Array<String> = []
     private var orderCreateTimeArray:Array<String> = []
     private var orderStatusArray:Array<String> = []
+    private var deliveryTimeArray:Array<String> = []
+    private var packageDeliveryCodeArray:Array<String> = []
+    private var packageDeliveryUrlArray:Array<String> = []
+    private var orderCompleteTimeArray:Array<String> = []
     
     var accountPhone:String = ""
     
@@ -41,8 +45,9 @@ class HistoryOrderViewController: UIViewController,UITableViewDelegate,UITableVi
         setInterface()
         setupSWReveal()
         setTableView()
-        
         getHistoryOrderData()
+        
+        
     }
 
     
@@ -102,6 +107,10 @@ class HistoryOrderViewController: UIViewController,UITableViewDelegate,UITableVi
         self.orderPaymentMethodArray.removeAll()
         self.orderCreateTimeArray.removeAll()
         self.orderStatusArray.removeAll()
+        self.deliveryTimeArray.removeAll()
+        self.packageDeliveryCodeArray.removeAll()
+        self.packageDeliveryUrlArray.removeAll()
+        self.orderCompleteTimeArray.removeAll()
         
         VClient.sharedInstance().VCGetHistoryOrderListData(phone: accountPhone) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
             if isSuccess {
@@ -123,6 +132,10 @@ class HistoryOrderViewController: UIViewController,UITableViewDelegate,UITableVi
                     self.orderPaymentMethodArray = resDataArray[13] as? Array<String> ?? []
                     self.orderCreateTimeArray = resDataArray[14] as? Array<String> ?? []
                     self.orderStatusArray = resDataArray[15] as? Array<String> ?? []
+                    self.deliveryTimeArray = resDataArray[16] as? Array<String> ?? []
+                    self.packageDeliveryCodeArray = resDataArray[17] as? Array<String> ?? []
+                    self.packageDeliveryUrlArray = resDataArray[18] as? Array<String> ?? []
+                    self.orderCompleteTimeArray = resDataArray[19] as? Array<String> ?? []
                     
                     self.historyOrderTableView.reloadData()
                 }
@@ -172,6 +185,14 @@ class HistoryOrderViewController: UIViewController,UITableViewDelegate,UITableVi
         vc.dataDict = self.getCheckoutDictData(selectIndex: sender.tag)
         self.navigationController?.pushViewController(vc, animated: true)
     }
+    
+    @objc func freightValueBtnClick(_ sender:UIButton) {
+        
+        let urlSt:String = self.packageDeliveryUrlArray[sender.tag]
+        if let url = URL(string: urlSt) {
+            UIApplication.shared.open(url)
+        }
+    }
 
 
     /*
@@ -207,11 +228,15 @@ class HistoryOrderViewController: UIViewController,UITableViewDelegate,UITableVi
 
         let number:String = self.orderNoArray[indexPath.row]
         let status:String = self.orderStatusArray[indexPath.row]
+        let deliveryCode:String = self.packageDeliveryCodeArray[indexPath.row]
         
-        cell.loadData(orderNumSt: number, scheduleSt: status)
+        cell.loadData(orderNumSt: number, scheduleSt: status, freightNum: deliveryCode)
         
         cell.orderNumValueBtn.tag = indexPath.row
         cell.orderNumValueBtn.addTarget(self, action: #selector(orderNumValueBtnClick(_:)), for: .touchUpInside)
+        
+        cell.freightValueBtn.tag = indexPath.row
+        cell.freightValueBtn.addTarget(self, action: #selector(freightValueBtnClick(_:)), for: .touchUpInside)
 
         return cell
     }

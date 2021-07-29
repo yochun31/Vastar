@@ -7,7 +7,7 @@ target 'Vastar' do
 
   # Pods for Vastar
     pod 'Alamofire' ,'4.9.1'
-    pod 'IQKeyboardManagerSwift'
+    pod 'IQKeyboardManagerSwift','6.5.6'
     pod 'SDWebImage', '~> 5.0'
 
 end
