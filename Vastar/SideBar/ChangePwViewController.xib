@@ -66,11 +66,11 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N3E-zU-Nh7">
-                    <rect key="frame" x="200" y="393" width="115" height="40"/>
+                    <rect key="frame" x="190" y="393" width="125" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="KHW-bJ-Uka"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
                     <state key="normal" title="Button" backgroundImage="btn"/>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Rwv-jV-BKd">
@@ -131,7 +131,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="CDp-iy-4qI" secondAttribute="trailing" constant="60" id="RC9-pO-6pj"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="3ny-kC-MH4" secondAttribute="trailing" constant="60" id="Wqu-5e-8Q2"/>
                 <constraint firstItem="gbP-l6-RzN" firstAttribute="top" secondItem="Xzy-le-hY1" secondAttribute="bottom" constant="15" id="Xet-2g-iak"/>
-                <constraint firstItem="N3E-zU-Nh7" firstAttribute="leading" secondItem="gbP-l6-RzN" secondAttribute="trailing" constant="40" id="Y7d-ob-gLN"/>
+                <constraint firstItem="N3E-zU-Nh7" firstAttribute="leading" secondItem="gbP-l6-RzN" secondAttribute="trailing" constant="30" id="Y7d-ob-gLN"/>
                 <constraint firstItem="gbP-l6-RzN" firstAttribute="leading" secondItem="3ny-kC-MH4" secondAttribute="leading" id="bd9-iO-pTf"/>
                 <constraint firstItem="3ny-kC-MH4" firstAttribute="top" secondItem="k9D-yd-9yS" secondAttribute="bottom" constant="15" id="cEb-Fs-JQs"/>
                 <constraint firstItem="Rwv-jV-BKd" firstAttribute="top" secondItem="Mgj-jF-bcs" secondAttribute="bottom" constant="25" id="cPh-CR-RoH"/>

@@ -229,7 +229,7 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
         let number:String = self.orderNoArray[indexPath.row]
         let deliveryCode:String = self.packageDeliveryCodeArray[indexPath.row]
         
-        cell.loadData(orderNumSt: number, scheduleSt: "Btn", freightNum: deliveryCode)
+        cell.loadData(orderNumSt: number, scheduleSt: "", freightNum: deliveryCode)
         
         cell.orderNumValueBtn.tag = indexPath.row
         cell.orderNumValueBtn.addTarget(self, action: #selector(orderNumValueBtnClick(_:)), for: .touchUpInside)
