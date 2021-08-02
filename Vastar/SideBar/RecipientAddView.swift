@@ -95,6 +95,8 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         
     }
     
+    // 設定UI介面
+    
     func setInterface() {
         
         let bkColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
@@ -150,6 +152,8 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         self.cancelBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
     }
     
+    // 建立City PickerView
+    
     func createCityPickerView() {
         let size = UIScreen.main.bounds
         self.cityPickerContainer = UIView(frame: CGRect(x: 0, y: size.size.height - 150, width: size.size.width, height: 250))
@@ -169,6 +173,8 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         self.cityPickerContainer.addSubview(self.cityPickerView)
         self.addSubview(self.cityPickerContainer)
     }
+    
+    // 建立鄉鎮區 PickerView
     
     func createTownPickerView() {
         let size = UIScreen.main.bounds
@@ -204,6 +210,8 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     
     //MARK:- Assistant Methods
     
+    // 取得City資料
+    
     func getCityData() {
         VClient.sharedInstance().VCGetCityData { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) in
             
@@ -215,6 +223,8 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
         }
     }
     
+    // 取得鄉鎮區資料
+    
     func getTownData(citySt:String) {
         
         VClient.sharedInstance().VCGetDistrictData(city: citySt) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) in
@@ -224,6 +234,8 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
             }
         }
     }
+    
+    // 取得City下拉選單 選中值
     
     func GetCityPickerViewSelect() {
         let component = self.cityPickerView.selectedRow(inComponent: 0)
@@ -235,6 +247,8 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
     }
     
     
+    // 取得鄉鎮區下拉選單 選中值
+    
     func GetTownPickerViewSelect() {
         let component = self.townPickerView.selectedRow(inComponent: 0)
         if self.townDataArray.count != 0 {
@@ -242,6 +256,8 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
             self.townTextField.text = self.selectTownSt
         }
     }
+    
+    // 新增收件人資料
     
     func addReceiver(nameSt:String,phoneSt:String,citySt:String,townSt:String,addressSt:String) {
         
@@ -261,6 +277,8 @@ class RecipientAddView: UIView,UIPickerViewDelegate,UIPickerViewDataSource {
             }
         }
     }
+    
+    // 檢查輸入資料
     
     func checkInputData() {
         

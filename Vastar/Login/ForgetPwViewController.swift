@@ -51,6 +51,8 @@ class ForgetPwViewController: UIViewController {
     
     //MARK: - UI Interface Methods
     
+    // 設定UI介面
+    
     func setInterface() {
         
         self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
@@ -145,6 +147,7 @@ class ForgetPwViewController: UIViewController {
         }
     }
     
+    //檢查輸入資料
     
     func checkIputData() {
         let phoneText = self.phoneTextField.text ?? ""
@@ -299,6 +302,7 @@ class ForgetPwViewController: UIViewController {
         }
     }
     
+    // 簡訊驗證碼產生
     
     func sendMMS(phone:String) {
         verifyCode = Int.random(in: 0000...9999)
@@ -310,6 +314,8 @@ class ForgetPwViewController: UIViewController {
             }
         }
     }
+    
+    // 設定簡訊驗證按鈕
     
     func setVerifyBtn() {
     
@@ -339,13 +345,40 @@ class ForgetPwViewController: UIViewController {
     
     @objc func verifyCodeBtnClick(_ sender:UIButton) {
         
+        let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+        let font:UIFont = UIFont.systemFont(ofSize: 20.0)
+        let errorColor:UIColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+        let color:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        
         let phoneText = self.phoneTextField.text ?? ""
         if phoneText.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Forget_Input_Phone_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+
+            self.phoneErrorLabel.text = NSLocalizedString("Forget_Input_Phone_Alert_Text", comment: "")
+            self.phoneErrorLabel.textColor = errorColor
+            
+            self.phoneTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: errorColor, font: font)
+
+            self.nPwErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
+            self.verifyCodeErrorLabel.text = ""
+            
         }else if phoneText.count < 10 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Forget_Input_Phone_10_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.phoneErrorLabel.text = NSLocalizedString("Forget_Input_Phone_10_Alert_Text", comment: "")
+            self.phoneErrorLabel.textColor = errorColor
+            
+            self.phoneTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+            self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: errorColor, font: font)
+
+            self.nPwErrorLabel.text = ""
+            self.confirmPwErrorLabel.text = ""
+            self.verifyCodeErrorLabel.text = ""
         }else{
             self.verifyCodeBtn.isEnabled = false
+            self.phoneErrorLabel.text = ""
+            self.phoneErrorLabel.textColor = color
+            self.phoneTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
+
             sendMMS(phone: phoneText)
         }
         

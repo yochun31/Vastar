@@ -86,6 +86,8 @@ class CloudGatewayManager {
 
     //MARK: - Member
     
+    //取得帳號資料
+    
     func CGMGetUserInfoByPhone(phone:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ isResult:Int,_ dictResData:[String:Any]) -> Void) {
         
         let headers:HTTPHeaders = ["Content-Type" : "application/json"]
@@ -136,6 +138,8 @@ class CloudGatewayManager {
         
     }
     
+    //更新帳號資料
+    
     func CGMUpdateUserInfoByData(reqBodyDict:[String:String],result:@escaping (_ isSuccess:Bool,_ message:String) -> Void) {
         
         let headers:HTTPHeaders = ["Content-Type" : "application/json"]
@@ -167,6 +171,8 @@ class CloudGatewayManager {
             }
         }
     }
+    
+    //註冊帳號
     
     func CGMRegisterUserByData(regBodyDict:[String:Any],result:@escaping (_ isSuccess:Bool,_ message:String) -> Void) {
         
@@ -202,7 +208,7 @@ class CloudGatewayManager {
     
     //MARK: -  Location
     
-    //City
+    //取得City資料
     
     func CGMGetCityData(result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) -> Void) {
         
@@ -244,7 +250,7 @@ class CloudGatewayManager {
     }
     
     
-    //District
+    //取得 District 資料
     
     func CGMGetDistrictData(city:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) -> Void) {
         
@@ -285,7 +291,7 @@ class CloudGatewayManager {
         }
     }
     
-    //郵遞區號
+    //取得郵遞區號
     
     func CGMGetPostalCodeData(city:String,town:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resData:String,_ isOutlying:Int) -> Void) {
         
@@ -330,6 +336,8 @@ class CloudGatewayManager {
     
     //MARK: - Receiver
     
+    //新增收件人資料
+    
     func CGMAddReceiverByData(reqBodyDict:[String:Any],result:@escaping (_ isSuccess:Bool,_ message:String) -> Void) {
         
         let headers:HTTPHeaders = ["Content-Type" : "application/json"]
@@ -362,6 +370,7 @@ class CloudGatewayManager {
         }
     }
     
+    // 取得收件人資料
     
     func CGMGetReceiverData(phone:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
         
@@ -427,7 +436,7 @@ class CloudGatewayManager {
     }
     
     
-    //Delete
+    //刪除收件人資料
     
     func CGMDeleteReceiverByData(reqBodyDict:[String:Any],result:@escaping (_ isSuccess:Bool,_ message:String) -> Void) {
         
@@ -464,6 +473,7 @@ class CloudGatewayManager {
     
     //MARK: - Product
     
+    //取得所有商品資料
     
     func CGMGetAllProductData(result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
         
@@ -525,6 +535,7 @@ class CloudGatewayManager {
         }
     }
     
+    // 取得不同類型商品資料
     
     func CGMGetProductDataByType(type:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
         
@@ -586,6 +597,7 @@ class CloudGatewayManager {
         }
     }
     
+    // 取得單項商品資料
     
     func CGMGetProductGroupData(gID:Int,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
         
@@ -660,6 +672,8 @@ class CloudGatewayManager {
     
     //MARK: - 付款方式
     
+    // 取得付款方式
+    
     func CGMGetPayMethodData(result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) -> Void) {
         
         let headers:HTTPHeaders = ["Content-Type" : "application/json"]
@@ -700,6 +714,8 @@ class CloudGatewayManager {
     
     
     //MARK: - 運費
+    
+    // 取得運費
     
     func CGMGetShippingData(productNo:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ mainPrice:Int,_ OutlyingPrice:Int) -> Void) {
         
@@ -743,6 +759,8 @@ class CloudGatewayManager {
     }
     
     //MARK:- Order
+    
+    // 取得訂單資料
     
     func CGMGetOrderListData(phone:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
         
@@ -853,6 +871,7 @@ class CloudGatewayManager {
         }
     }
     
+    // 新增訂單
     
     func CGMAddOrderByData(reqBodyDict:[String:Any],result:@escaping (_ isSuccess:Bool,_ message:String,_ orderNo:String) -> Void) {
         
@@ -887,6 +906,8 @@ class CloudGatewayManager {
             }
         }
     }
+    
+    // 取得歷史訂單資料
     
     func CGMGetHistoryOrderListData(phone:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
         

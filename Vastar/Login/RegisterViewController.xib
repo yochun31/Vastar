@@ -76,7 +76,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="STa-zm-NXA">
-                    <rect key="frame" x="210" y="432" width="105" height="40"/>
+                    <rect key="frame" x="190" y="432" width="125" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="VoH-PX-rae"/>
                     </constraints>
@@ -145,7 +145,7 @@
                 <constraint firstItem="GuH-gs-aUQ" firstAttribute="top" secondItem="01g-up-R3y" secondAttribute="bottom" constant="12" id="Qjt-Xr-NQQ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pBr-BB-A3L" secondAttribute="trailing" constant="60" id="V5m-bc-obI"/>
                 <constraint firstItem="vLR-ND-zcR" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="120" id="XvJ-zY-Ag8"/>
-                <constraint firstItem="STa-zm-NXA" firstAttribute="leading" secondItem="wWa-fC-EHt" secondAttribute="trailing" constant="50" id="YBy-Iy-Dji"/>
+                <constraint firstItem="STa-zm-NXA" firstAttribute="leading" secondItem="wWa-fC-EHt" secondAttribute="trailing" constant="30" id="YBy-Iy-Dji"/>
                 <constraint firstItem="RBe-Qd-1Xu" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="100" id="YnC-1y-DnY"/>
                 <constraint firstItem="pBr-BB-A3L" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="ZGv-Se-NjA"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="vLR-ND-zcR" secondAttribute="trailing" constant="60" id="ZdA-5X-UlC"/>

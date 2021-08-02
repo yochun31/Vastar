@@ -84,6 +84,8 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
     
     //MARK: - UI Interface Methods
 
+    // 設定UI介面
+    
     func setInterface() {
         
         self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
@@ -128,6 +130,8 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         self.colorTextField.inputAccessoryView = UIView()
     }
     
+    // 設定Navigation右側按鈕
+    
     func setNavBarBtn() {
         
         let rightBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -138,6 +142,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         self.navigationItem.rightBarButtonItem = rightBarItem
     }
     
+    // 建立電壓 PickerView
     
     func createVoltagePickerView() {
         let size = UIScreen.main.bounds
@@ -158,6 +163,8 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         self.voltagePickerContainer.addSubview(self.voltagePickerView)
         self.view.addSubview(self.voltagePickerContainer)
     }
+    
+    // 建立顏色 PickerView
     
     func createColorPickerView() {
         let size = UIScreen.main.bounds
@@ -191,6 +198,8 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
 
     
     //MARK: - Assistant Methods
+    
+    // 取得商品詳細資料
     
     func getProductDetailData() {
         
@@ -243,6 +252,8 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
             }
         }
     }
+    
+    // 整理群組商品資料
     
     func processProductGroupData(v:String,colorSt:String,resDataArray:Array<Array<Any>>) -> [String:Array<Any>] {
         
@@ -298,6 +309,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         
     }
     
+    // 預設載入商品詳細資料
     
     func defaultLoadProductDetailData(voltageSt:String,colorSt:String,responesDataArray:Array<Array<Any>>) {
         
@@ -345,6 +357,8 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
 
     }
     
+    // 選擇條件載入商品詳細資料
+    
     func selectLoadProductDetailData(voltageSt:String,colorSt:String,responesDataArray:Array<Array<Any>>) {
         
         DispatchQueue.global(qos: .userInitiated).async {
@@ -389,6 +403,8 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         }
     }
     
+    // 建立顏色 PickerView
+    
     func GetColorPickerViewSelect() {
         let component = self.colorPickerView.selectedRow(inComponent: 0)
         if self.colorDataArray.count != 0 {
@@ -402,6 +418,8 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         }
     }
     
+    // 建立電壓 PickerView
+    
     func GetVoltagePickerViewSelect() {
         let component = self.voltagePickerView.selectedRow(inComponent: 0)
         if self.voltageDataArray.count != 0 {
@@ -413,6 +431,8 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
             self.selectLoadProductDetailData(voltageSt: self.selectVoltageSt, colorSt: color, responesDataArray: self.responesProductDataArray)
         }
     }
+    
+    // 加入購物車
     
     func addShppingCarData() {
                 
