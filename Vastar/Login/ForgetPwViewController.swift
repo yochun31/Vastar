@@ -51,6 +51,8 @@ class ForgetPwViewController: UIViewController {
     
     //MARK: - UI Interface Methods
     
+    // 設定UI介面
+    
     func setInterface() {
         
         self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
@@ -145,6 +147,7 @@ class ForgetPwViewController: UIViewController {
         }
     }
     
+    //檢查輸入資料
     
     func checkIputData() {
         let phoneText = self.phoneTextField.text ?? ""
@@ -299,6 +302,7 @@ class ForgetPwViewController: UIViewController {
         }
     }
     
+    // 簡訊驗證碼產生
     
     func sendMMS(phone:String) {
         verifyCode = Int.random(in: 0000...9999)
@@ -310,6 +314,8 @@ class ForgetPwViewController: UIViewController {
             }
         }
     }
+    
+    // 設定簡訊驗證按鈕
     
     func setVerifyBtn() {
     

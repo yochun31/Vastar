@@ -51,6 +51,8 @@ class OrderConfirmViewController: UIViewController {
     
     //MARK: - UI Interface Methods
     
+    // 設定UI介面
+    
     func setInterface() {
         
         self.navigationItem.title = NSLocalizedString("Order_Confirm_title", comment: "")

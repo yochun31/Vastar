@@ -37,6 +37,8 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     //MARK: - UI Interface Methods
     
+    // 設定UI介面
+    
     func setTableView() {
         
         self.productTableView.delegate = self
@@ -49,6 +51,8 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     //MARK: - Assistant Methods
 
+    // 判斷商品資料讀取
+    
     func setProductTableData(item:Int) {
         let type:String = AppInfo.GetProductItemTitle(item: item)
         
@@ -59,6 +63,8 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
             self.getProductDataByType(typeSt: type)
         }
     }
+    
+    // 取得所有商品資料
     
     func getAllProductData() {
         
@@ -103,6 +109,8 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
             }
         }
     }
+    
+    // 取得商品分類資料
     
     func getProductDataByType(typeSt:String) {
         
@@ -151,6 +159,8 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
         }
     }
     
+    // 預設下載圖片載入(10張)
+    
     func defaultDownloadImage() {
         
         self.productImageDataArray.removeAll()
@@ -170,6 +180,8 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
         }
         self.productTableView.reloadData()
     }
+    
+    // 下載圖片
     
     func downloadImage(currentCount:Int) {
         self.vaiv.startProgressHUD(view: self.view, content: NSLocalizedString("Alert_Loading_title", comment: ""))
@@ -198,6 +210,7 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
         }
     }
     
+    // 處理取得的商品資料 因為資料
     
     func processProductData(gID:Int,resDataArray:Array<Array<Any>>) -> [Int:Array<Any>] {
         

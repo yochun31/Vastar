@@ -46,6 +46,8 @@ class RegisterViewController: UIViewController {
     
     //MARK: - UI Interface Methods
     
+    // 設定UI介面
+    
     func setInterface() {
         
         self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
@@ -106,6 +108,8 @@ class RegisterViewController: UIViewController {
     
     //MARK: - Assistant Methods
     
+    // 建立註冊資料
+    
     func createRegisterUserData(name:String,phone:String,pw:String) {
         
         let nowdate = Date()
@@ -140,6 +144,8 @@ class RegisterViewController: UIViewController {
         }
         
     }
+    
+    //檢查手機是否註冊過
     
     func checkRegisterPhone(phone:String,handler:@escaping ()->Void) {
         VClient.sharedInstance().VCGetUserInfoByPhone(phone: phone) { (_ isSuccess:Bool,_ message:String,_ isResult:Int,_ dictResData:[String:Any]) in
@@ -178,6 +184,8 @@ class RegisterViewController: UIViewController {
             }
         }
     }
+    
+    //檢查輸入資料
     
     func checkInputData() {
         
@@ -384,6 +392,7 @@ class RegisterViewController: UIViewController {
         
     }
     
+    // 簡訊驗證碼產生
     
     func sendMMS(phone:String) {
         verifyCode = Int.random(in: 0000...9999)
@@ -395,6 +404,8 @@ class RegisterViewController: UIViewController {
             }
         }
     }
+    
+    // 設定簡訊驗證按鈕
     
     func setVerifyBtn() {
     

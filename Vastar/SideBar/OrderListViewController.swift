@@ -52,6 +52,8 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
     
     //MARK: - UI Interface Methods
     
+    // 設定Navigation左側按鈕
+    
     func setLeftBarButton() {
         let leftBarBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         leftBarBtn.setImage(UIImage(named: "menu"), for: .normal)
@@ -59,6 +61,8 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
         let leftBarItem = UIBarButtonItem(customView: leftBarBtn)
         self.navigationItem.leftBarButtonItem = leftBarItem
     }
+    
+    // 設定UI介面
     
     func setInterface() {
         self.navigationItem.title = NSLocalizedString("Order_title", comment: "")
@@ -87,6 +91,8 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
     
     
     //MARK:- Assistant Methods
+    
+    // 取得訂單資料
     
     func getOrderListData() {
         
@@ -143,6 +149,7 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
         }
     }
     
+    // 建立取得的結帳資料 Dict
     
     func getCheckoutDictData(selectIndex:Int) -> [String:Any] {
         var dictData:[String:Any] = [:]

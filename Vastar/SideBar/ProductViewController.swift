@@ -51,6 +51,8 @@ class ProductViewController: UIViewController {
     
     //MARK: - UI Interface Methods
     
+    // 設定Navigation左側按鈕
+    
     func setLeftBarButton() {
         let leftBarBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         leftBarBtn.setImage(UIImage(named: "menu"), for: .normal)

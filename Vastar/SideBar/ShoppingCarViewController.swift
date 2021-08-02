@@ -61,6 +61,8 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
     
     //MARK: - UI Interface Methods
     
+    // 設定Navigation左側按鈕
+    
     func setLeftBarButton() {
         let leftBarBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         leftBarBtn.setImage(UIImage(named: "menu"), for: .normal)
@@ -68,6 +70,8 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
         let leftBarItem = UIBarButtonItem(customView: leftBarBtn)
         self.navigationItem.leftBarButtonItem = leftBarItem
     }
+    
+    // 設定UI介面
     
     func setInterface() {
         self.navigationItem.title = NSLocalizedString("Shopping_title", comment: "")
@@ -106,6 +110,8 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
     }
     
     //MARK: - Assistant Methods
+    
+    // 取得購物車資料
     
     func getShoppingCarData() {
         
@@ -148,6 +154,8 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
         }
     }
     
+    // 計算購物車價錢總和
+    
     func getSum() {
         
         var countProduct:Int = 0
@@ -165,6 +173,8 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
         self.countLabel.text = "共\(countProduct)件  共\(countProductPriceSt)元"
     }
     
+    // 刪除購物車資料
+    
     func deleteShoppingCarByID(titleSt:String,colorSt:String,vSt:String) {
         
         VClient.sharedInstance().VCDeleteShoppingCarDataByID(titleSt: titleSt, colorSt: colorSt, v: vSt) { (_ isDone:Bool) in
@@ -174,6 +184,8 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
             }
         }
     }
+    
+    // 調整購物車數量
     
     func addShppingCarData(dataArray:Array<Any>) {
             
@@ -323,12 +335,17 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
     
     //MARK: - ShoppingCarTableviewDelegate
     
+    // 購物車商品數量增加Click
+    
     func amountAddBtnClick(index: Int) {
         
         let dataArray:Array<Any> = [self.NoArray[index],self.titleArray[index],self.colorArray[index],self.vArray[index],self.priceArray[index],1,self.photoArray[index]]
         addShppingCarData(dataArray: dataArray)
         
     }
+    
+    // 購物車商品數量減少Click
+    
     func amountLessBtnClick(index: Int) {
         
         let dataArray:Array<Any> = [self.NoArray[index],self.titleArray[index],self.colorArray[index],self.vArray[index],self.priceArray[index],-1,self.photoArray[index]]
