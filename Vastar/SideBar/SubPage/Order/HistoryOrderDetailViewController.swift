@@ -50,6 +50,8 @@ class HistoryOrderDetailViewController: UIViewController {
     
     //MARK: - UI Interface Methods
     
+    // 設定UI介面
+    
     func setInterface() {
         
         self.navigationItem.title = NSLocalizedString("", comment: "")

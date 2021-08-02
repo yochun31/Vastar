@@ -60,6 +60,8 @@ class ChangePwViewController: UIViewController {
     
     //MARK: - UI Interface Methods
     
+    // 設定Navigation左側按鈕
+    
     func setLeftBarButton() {
         let leftBarBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         leftBarBtn.setImage(UIImage(named: "menu"), for: .normal)
@@ -78,6 +80,8 @@ class ChangePwViewController: UIViewController {
         //setting reveal width of menu controller manually
         self.revealViewController()?.rearViewRevealWidth = UIScreen.main.bounds.width * (2/3)
     }
+    
+    // 設定UI介面
     
     func setInterface() {
         
@@ -130,6 +134,8 @@ class ChangePwViewController: UIViewController {
     
     //MARK: - Assistant Methods
     
+    // 取得帳號資料
+    
     func getUserInfo(accountName:String,oldPwSt:String,newPwSt:String) {
         
         self.vaiv.startProgressHUD(view: self.view, content: NSLocalizedString("Alert_Loading_title", comment: ""))
@@ -154,6 +160,8 @@ class ChangePwViewController: UIViewController {
         }
     }
     
+    // 更新密碼
+    
     func updateChangePw(phone:String,oldPw:String,newPw:String) {
         
         VClient.sharedInstance().VCUpdateChangePw(phone: phone, oldPw: oldPw, newPw: newPw) { (_ isSuccess:Bool,_ message:String) in
@@ -172,6 +180,8 @@ class ChangePwViewController: UIViewController {
         }
         
     }
+    
+    // 檢查舊密碼時否正確
     
     func checkOldPW(pwSt:String,handler:@escaping ()->Void) {
         
@@ -208,6 +218,7 @@ class ChangePwViewController: UIViewController {
         }
     }
     
+    // 檢查輸入資料
     
     func checkInputData() {
         
@@ -358,6 +369,8 @@ class ChangePwViewController: UIViewController {
         
     }
     
+    // 簡訊驗證碼產生
+    
     func sendMMS(phone:String) {
         verifyCode = Int.random(in: 0000...9999)
         verifyCodeSt = String(format: "%04d", verifyCode)
@@ -368,6 +381,8 @@ class ChangePwViewController: UIViewController {
             }
         }
     }
+    
+    // 設定簡訊驗證按鈕
     
     func setVerifyBtn() {
     
@@ -389,6 +404,8 @@ class ChangePwViewController: UIViewController {
         self.timer.invalidate()
         self.defaultSec = 30
     }
+    
+    // MD5加密
     
     private func MD5_String(string: String) -> Data {
         let length = Int(CC_MD5_DIGEST_LENGTH)

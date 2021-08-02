@@ -76,6 +76,8 @@ class ConfirmOrderViewController: UIViewController,UITableViewDelegate,UITableVi
     
     //MARK: - UI Interface Methods
     
+    // 設定UI介面
+    
     func setInterface() {
         
         self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
@@ -166,6 +168,8 @@ class ConfirmOrderViewController: UIViewController,UITableViewDelegate,UITableVi
     
     //MARK:- Assistant Methods
     
+    // 取得結帳資料
+    
     func getCheckoutData() {
         
         self.IDArray.removeAll()
@@ -194,6 +198,8 @@ class ConfirmOrderViewController: UIViewController,UITableViewDelegate,UITableVi
             }
         }
     }
+    
+    // 新增訂單
     
     func AddOrder() {
         

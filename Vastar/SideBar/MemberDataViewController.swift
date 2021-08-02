@@ -79,6 +79,8 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     
     //MARK: - UI Interface Methods
     
+    // 設定Navigation左側按鈕
+    
     func setLeftBarButton() {
         let leftBarBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         leftBarBtn.setImage(UIImage(named: "menu"), for: .normal)
@@ -97,6 +99,8 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         //setting reveal width of menu controller manually
         self.revealViewController()?.rearViewRevealWidth = UIScreen.main.bounds.width * (2/3)
     }
+    
+    // 設定UI介面
     
     func setInterface() {
         
@@ -157,6 +161,8 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         self.addBtn_Recipient.addTarget(self, action: #selector(addBtn_RecipientClick(_:)), for: .touchUpInside)
         
     }
+    
+    // 建立日期 PickerView
     
     func createDatePickerView() {
         
@@ -221,6 +227,8 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     
     //MARK:- Assistant Methods
     
+    // 取得帳號資料
+    
     func getUserInfo(accountName:String) {
         
         self.vaiv.startProgressHUD(view: self.view, content: NSLocalizedString("Alert_Loading_title", comment: ""))
@@ -248,6 +256,8 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         }
     }
     
+    // 帳戶資料顯示設定
+    
     func showUserInfo(nameSt:String,birthdaySt:String,telSt:String) {
         
         self.nameTextField.text = nameSt
@@ -261,6 +271,8 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         }
         self.telTextField.text = telSt
     }
+    
+    // 更新帳戶姓名
     
     func updateUserName(nameSt:String) {
         
@@ -277,6 +289,8 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         }
     }
     
+    // 更新帳戶電話
+    
     func updateUserTel(telSt:String) {
         
         self.vaiv.startProgressHUD(view: self.view, content: NSLocalizedString("Alert_Loading_title", comment: ""))
@@ -291,6 +305,8 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
             }
         }
     }
+    
+    // 更新帳戶生日
     
     func updateUserBirthday(birthdaySt:String) {
         
@@ -310,6 +326,7 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         }
     }
     
+    // 編輯按鈕顯示設定
     
     func editBtnStatus(item:Int,textField:UITextField) {
         
@@ -350,6 +367,8 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         }
     }
     
+    // 檢查帳戶姓名輸入資料
+    
     func checkNameInputData() {
         
         let name = self.nameTextField.text ?? ""
@@ -360,6 +379,8 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         }
     }
     
+    // 檢查帳戶電話輸入資料
+    
     func checkTelInputData() {
         let tel = self.telTextField.text ?? ""
         if tel == self.userTel || tel.count == 0 {
@@ -369,6 +390,8 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         }
     }
     
+    // 檢查帳戶生日輸入資料
+    
     func checkBirthdayInputData() {
         let birthday = self.birthdayTextField.text ?? ""
         if birthday == NSLocalizedString("Member_Birthday_Placeholder_title", comment: "") || birthday.count == 0 {
@@ -377,6 +400,8 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
             self.updateUserBirthday(birthdaySt: birthday)
         }
     }
+    
+    // 取得收件人資料
     
     func getReceiverData() {
         
@@ -404,6 +429,8 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
             }
         }
     }
+    
+    // 刪除收件人資料
     
     func deleteReceiverData(ID:Int) {
         

@@ -80,7 +80,7 @@
                     <textInputTraits key="textInputTraits" textContentType="username"/>
                 </textField>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="t2H-aN-cBe">
-                    <rect key="frame" x="195" y="392" width="120" height="40"/>
+                    <rect key="frame" x="190" y="392" width="125" height="40"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="40" id="GsQ-tt-t8V"/>
                     </constraints>
@@ -135,7 +135,7 @@
                 <constraint firstItem="WYT-xE-8Q0" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="aek-bE-fzO"/>
                 <constraint firstItem="anE-KS-Ovb" firstAttribute="leading" secondItem="WYT-xE-8Q0" secondAttribute="leading" id="dH3-Zz-hSi"/>
                 <constraint firstItem="xFN-gE-Uuy" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="90" id="eaw-2Z-oyl"/>
-                <constraint firstItem="t2H-aN-cBe" firstAttribute="leading" secondItem="Y5L-Pq-g38" secondAttribute="trailing" constant="35" id="fHB-g2-70a"/>
+                <constraint firstItem="t2H-aN-cBe" firstAttribute="leading" secondItem="Y5L-Pq-g38" secondAttribute="trailing" constant="30" id="fHB-g2-70a"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="pgf-yZ-GUC" secondAttribute="trailing" constant="20" id="ik1-ol-6EI"/>
                 <constraint firstItem="ved-um-MRO" firstAttribute="leading" secondItem="xFN-gE-Uuy" secondAttribute="trailing" constant="10" id="kqZ-GZ-bjK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="pgf-yZ-GUC" secondAttribute="bottom" constant="50" id="n43-7k-eoi"/>

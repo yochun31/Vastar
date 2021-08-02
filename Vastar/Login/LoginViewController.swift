@@ -49,6 +49,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
 
     // MARK: - UI Interface Methods
     
+    // 設定UI介面
+    
     func setInterface() {
         
         self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
@@ -90,6 +92,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     
     //MARK: - Assistant Methods
     
+    //取得帳號資料
+    
     func getUserInfo(accountName:String,pw:String) {
         
         self.vaiv.startProgressHUD(view: self.view, content: NSLocalizedString("Login_ActivityIndicatorView_title", comment: ""))
@@ -124,6 +128,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
             }
         }
     }
+    
+    // 登入驗證
     
     func loginVerification(accountName:String,pw:String,pw_Nodate:String) {
         
@@ -184,6 +190,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
             }
         }
     }
+    
+    // MD5字串
     
     private func MD5_String(string: String) -> Data {
         let length = Int(CC_MD5_DIGEST_LENGTH)

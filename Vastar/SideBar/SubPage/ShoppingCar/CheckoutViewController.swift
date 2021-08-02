@@ -126,6 +126,8 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     //MARK: - UI Interface Methods
     
+    // 設定UI介面
+    
     func setInterface() {
         
         self.navigationItem.title = NSLocalizedString("Shopping_Checkout_title", comment: "")
@@ -226,6 +228,8 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         
     }
     
+    // 設定TableView
+    
     func setTableView() {
         
         self.selectProductTableView.delegate = self
@@ -235,6 +239,8 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         self.selectProductTableView.register(UINib(nibName: "CheckoutProductTableViewCell", bundle: nil), forCellReuseIdentifier: "CheckoutProductCell")
         self.selectProductTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
     }
+    
+    // 建立付款方式 PickerView
     
     func createPayPickerView() {
         let size = UIScreen.main.bounds
@@ -256,6 +262,8 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         self.view.addSubview(self.payPickerContainer)
     }
     
+    // 建立收件人 PickerView
+    
     func createReceiverPickerView() {
         let size = UIScreen.main.bounds
         self.receiverPickerContainer = UIView(frame: CGRect(x: 0, y: size.size.height - 150, width: size.size.width, height: 250))
@@ -276,6 +284,8 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         self.view.addSubview(self.receiverPickerContainer)
     }
     
+    // 建立City PickerView
+    
     func createCityPickerView() {
         let size = UIScreen.main.bounds
         self.cityPickerContainer = UIView(frame: CGRect(x: 0, y: size.size.height - 150, width: size.size.width, height: 250))
@@ -295,6 +305,8 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         self.cityPickerContainer.addSubview(self.cityPickerView)
         self.view.addSubview(self.cityPickerContainer)
     }
+    
+    // 建立鄉鎮區 PickerView
     
     func createTownPickerView() {
         let size = UIScreen.main.bounds
@@ -334,6 +346,8 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
     
     //MARK:- Assistant Methods
     
+    // 取得付款方式資料
+    
     func getPayMethodData() {
         
         VClient.sharedInstance().VCGetPayMethodData { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) in
@@ -347,6 +361,7 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
     }
     
+    // 取得購物車資料
     
     func getShoppingCarData() {
         
@@ -381,6 +396,8 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
     }
     
+    // 計算購物車價錢總和
+    
     func getSum() {
         
         var countProduct:Int = 0
@@ -407,6 +424,8 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         self.totalPriceValueLabel.text = "$\(totalSt)"
 
     }
+    
+    // 取得收件人資料
     
     func getReceiverData() {
         
@@ -436,32 +455,9 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
     }
     
-    func GetPayPickerViewSelect() {
-        let component = self.payPickerView.selectedRow(inComponent: 0)
-        if self.payDataArray.count != 0 {
-            self.selectPaySt = self.payDataArray[component]
-            self.payTextField.text = self.selectPaySt
-        }
-    }
+
     
-    func GetReceiverPickerViewSelect() {
-        let component = self.receiverPickerView.selectedRow(inComponent: 0)
-        if self.receiverDataArray.count != 0 {
-            self.selectReceiverSt = self.receiverDataArray[component]
-            self.receiverTextField.text = self.selectReceiverSt
-            
-            self.receiverNameTextField.text = self.receiverNameArray[component]
-            self.receiverPhoneTextField.text = self.receiverPhoneArray[component]
-            
-            self.cityTextField.text = self.receiverCityArray[component]
-            self.townTextField.text = self.receiverDistrictArray[component]
-            self.addressDetailTextField.text = self.receiverAddressArray[component]
-            
-            getTownData(citySt: self.cityTextField.text ?? "")
-            getPostalCodeData(citySt: self.cityTextField.text ?? "", townSt: self.townTextField.text ?? "")
-        }
-    }
-    
+    // 取得City資料
     
     func getCityData() {
         VClient.sharedInstance().VCGetCityData { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) in
@@ -473,6 +469,8 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
     }
     
+    // 取得鄉鎮區資料
+    
     func getTownData(citySt:String) {
         
         VClient.sharedInstance().VCGetDistrictData(city: citySt) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) in
@@ -482,6 +480,8 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
             }
         }
     }
+    
+    // 取得郵遞區號資料
     
     func getPostalCodeData(citySt:String,townSt:String) {
         
@@ -510,6 +510,38 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
     }
     
+    // 取得付款方式下拉選單 選中值
+    
+    func GetPayPickerViewSelect() {
+        let component = self.payPickerView.selectedRow(inComponent: 0)
+        if self.payDataArray.count != 0 {
+            self.selectPaySt = self.payDataArray[component]
+            self.payTextField.text = self.selectPaySt
+        }
+    }
+    
+    // 取得收件人下拉選單 選中值
+    
+    func GetReceiverPickerViewSelect() {
+        let component = self.receiverPickerView.selectedRow(inComponent: 0)
+        if self.receiverDataArray.count != 0 {
+            self.selectReceiverSt = self.receiverDataArray[component]
+            self.receiverTextField.text = self.selectReceiverSt
+            
+            self.receiverNameTextField.text = self.receiverNameArray[component]
+            self.receiverPhoneTextField.text = self.receiverPhoneArray[component]
+            
+            self.cityTextField.text = self.receiverCityArray[component]
+            self.townTextField.text = self.receiverDistrictArray[component]
+            self.addressDetailTextField.text = self.receiverAddressArray[component]
+            
+            getTownData(citySt: self.cityTextField.text ?? "")
+            getPostalCodeData(citySt: self.cityTextField.text ?? "", townSt: self.townTextField.text ?? "")
+        }
+    }
+    
+    // 取得City下拉選單 選中值
+    
     func GetCityPickerViewSelect() {
         let component = self.cityPickerView.selectedRow(inComponent: 0)
         if self.cityDataArray.count != 0 {
@@ -519,6 +551,7 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         getTownData(citySt: self.selectCitySt)
     }
     
+    // 取得鄉鎮區下拉選單 選中值
     
     func GetTownPickerViewSelect() {
         let component = self.townPickerView.selectedRow(inComponent: 0)
@@ -530,6 +563,7 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         getPostalCodeData(citySt: city, townSt: self.selectTownSt)
     }
     
+    // 計算運費(本島/離島)
     
     func getShippingData() {
         
@@ -549,6 +583,8 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }
     }
     
+    // 檢查運費資料是否完成取得
+    
     func checkGetShippingDataDone(doneFlag:Bool,mainPrice:Int,OutPrice:Int) {
         
         self.doneFlagArray.append(doneFlag)
@@ -562,6 +598,8 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
             getSum()
         }
     }
+    
+    // 建立新增結帳資料 Dict
     
     func getCheckoutDictData() -> [String:Any] {
         var dictData:[String:Any] = [:]
@@ -605,7 +643,7 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         return dictData
     }
     
-    
+    //檢查輸入資料
     
     func checkInputData() {
         

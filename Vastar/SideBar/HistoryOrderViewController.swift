@@ -53,6 +53,8 @@ class HistoryOrderViewController: UIViewController,UITableViewDelegate,UITableVi
     
     //MARK: - UI Interface Methods
     
+    // 設定Navigation左側按鈕
+    
     func setLeftBarButton() {
         let leftBarBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         leftBarBtn.setImage(UIImage(named: "menu"), for: .normal)
@@ -60,6 +62,8 @@ class HistoryOrderViewController: UIViewController,UITableViewDelegate,UITableVi
         let leftBarItem = UIBarButtonItem(customView: leftBarBtn)
         self.navigationItem.leftBarButtonItem = leftBarItem
     }
+    
+    // 設定UI介面
     
     func setInterface() {
         self.navigationItem.title = NSLocalizedString("History_title", comment: "")
@@ -88,6 +92,7 @@ class HistoryOrderViewController: UIViewController,UITableViewDelegate,UITableVi
     
     //MARK:- Assistant Methods
     
+    // 取得歷史訂單資料
     
     func getHistoryOrderData() {
         
@@ -142,6 +147,8 @@ class HistoryOrderViewController: UIViewController,UITableViewDelegate,UITableVi
             }
         }
     }
+    
+    // 建立取得的結帳資料 Dict
     
     func getCheckoutDictData(selectIndex:Int) -> [String:Any] {
         var dictData:[String:Any] = [:]
