@@ -42,6 +42,8 @@
 		228BDDA2269D38A70080F843 /* OrderConfirmViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228BDDA0269D38A70080F843 /* OrderConfirmViewController.xib */; };
 		228BDDA526A15A1C0080F843 /* HistoryOrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BDDA326A15A180080F843 /* HistoryOrderDetailViewController.swift */; };
 		228BDDA626A15A1C0080F843 /* HistoryOrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228BDDA426A15A180080F843 /* HistoryOrderDetailViewController.xib */; };
+		228C406126BA6724003AE590 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228C406026BA6724003AE590 /* CustomAlertView.swift */; };
+		228C406326BA6774003AE590 /* CustomAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228C406226BA6774003AE590 /* CustomAlertView.xib */; };
 		22F1C30E26648CF8003A1D5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C30D26648CF8003A1D5C /* AppDelegate.swift */; };
 		22F1C31026648CF8003A1D5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C30F26648CF8003A1D5C /* SceneDelegate.swift */; };
 		22F1C31226648CF8003A1D5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C31126648CF8003A1D5C /* ViewController.swift */; };
@@ -115,6 +117,8 @@
 		228BDDA0269D38A70080F843 /* OrderConfirmViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderConfirmViewController.xib; sourceTree = "<group>"; };
 		228BDDA326A15A180080F843 /* HistoryOrderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoryOrderDetailViewController.swift; sourceTree = "<group>"; };
 		228BDDA426A15A180080F843 /* HistoryOrderDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryOrderDetailViewController.xib; sourceTree = "<group>"; };
+		228C406026BA6724003AE590 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
+		228C406226BA6774003AE590 /* CustomAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomAlertView.xib; sourceTree = "<group>"; };
 		22F1C30A26648CF7003A1D5C /* Vastar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vastar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F1C30D26648CF8003A1D5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22F1C30F26648CF8003A1D5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -292,6 +296,8 @@
 				22F1C4072668DA83003A1D5C /* VActivityIndicatorView.swift */,
 				22F1C40A2668DAA8003A1D5C /* VAlertView.swift */,
 				2203BBE82670C3EE006986D2 /* CustomButton.swift */,
+				228C406026BA6724003AE590 /* CustomAlertView.swift */,
+				228C406226BA6774003AE590 /* CustomAlertView.xib */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -446,6 +452,7 @@
 				2203BBF12672106D006986D2 /* RecipientAddView.xib in Resources */,
 				2244F61826789606006754D6 /* ProductListTableViewCell.xib in Resources */,
 				22F1C36C2664D152003A1D5C /* Localizable.strings in Resources */,
+				228C406326BA6774003AE590 /* CustomAlertView.xib in Resources */,
 				2203BBF6267362BA006986D2 /* ReceiverTableViewCell.xib in Resources */,
 				2203BBE3266DCD3C006986D2 /* ChangePwViewController.xib in Resources */,
 				22F1C31726648D01003A1D5C /* Assets.xcassets in Resources */,
@@ -537,6 +544,7 @@
 				2244F61726789606006754D6 /* ProductListTableViewCell.swift in Sources */,
 				22F1C3A1266613F7003A1D5C /* SideMenuTableViewCell.swift in Sources */,
 				228BDD80268C72C70080F843 /* shoppingCarTableViewCell.swift in Sources */,
+				228C406126BA6724003AE590 /* CustomAlertView.swift in Sources */,
 				22F1C3F026688620003A1D5C /* MemberDataViewController.swift in Sources */,
 				2203BBE92670C3EE006986D2 /* CustomButton.swift in Sources */,
 				228BDDA1269D38A70080F843 /* OrderConfirmViewController.swift in Sources */,
