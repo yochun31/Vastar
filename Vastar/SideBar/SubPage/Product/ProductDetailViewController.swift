@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource {
+class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource,CustomAlertViewDelegate {
 
     @IBOutlet var productPhoto: UIImageView!
     
@@ -63,6 +63,8 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
     
     private let userDefault = UserDefaults.standard
     
+    private var cav = CustomAlertView()
+    
     var groupID:Int = 0
     
     
@@ -81,6 +83,12 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         
         initializeInputView()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationController?.navigationBar.topItem?.title = ""
+    }
+
     
     //MARK: - UI Interface Methods
 
@@ -128,6 +136,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         self.voltageTextField.inputAccessoryView = UIView()
         
         self.colorTextField.inputAccessoryView = UIView()
+        
     }
     
     // 設定Navigation右側按鈕
@@ -140,6 +149,14 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         
         let rightBarItem = UIBarButtonItem.init(customView: rightBtn)
         self.navigationItem.rightBarButtonItem = rightBarItem
+        
+        
+//        let leftBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+//        leftBtn.setImage(UIImage(named: "home"), for: .normal)
+//        leftBtn.addTarget(self, action: #selector(rightBtnClick(_:)), for: .touchUpInside)
+//        
+//        let leftBarItem = UIBarButtonItem.init(customView: leftBtn)
+//        self.navigationItem.leftBarButtonItem = leftBarItem
     }
     
     // 建立電壓 PickerView
@@ -451,7 +468,9 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         
         VClient.sharedInstance().VCAddShoppingCarData(dataArray: dataArray) { (_ isDone:Bool) in
             if isDone {
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Product_Detail_Add_Success_Alert_title", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+                self.cav = CustomAlertView.init(title: NSLocalizedString("Product_Detail_Add_Success_Alert_title", comment: ""), frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }
         }
     }
@@ -489,7 +508,10 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         if amountNum > 0 && self.amountTextField.text?.count != 0 {
             addShppingCarData()
         }else{
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Product_Detail_Input_Amount_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            
+            cav = CustomAlertView.init(title: NSLocalizedString("Product_Detail_Input_Amount_Alert_Text", comment: ""), frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            cav.delegate = self
+            self.view.addSubview(cav)
         }
         
     }
@@ -563,6 +585,12 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
+    }
+    
+    //MARK: - CustomAlertViewDelegate
+    
+    func sureBtnClick() {
+        self.cav.removeFromSuperview()
     }
 
 }

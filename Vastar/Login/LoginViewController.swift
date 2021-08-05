@@ -23,6 +23,8 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet var accountNameErrorLabel: UILabel!
     @IBOutlet var pwErrorLabel: UILabel!
     
+    @IBOutlet var infoValueLabel: UILabel!
+    
     private var userResgisterTime:String = ""
     
     private var vaiv = VActivityIndicatorView()
@@ -87,6 +89,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         self.registerBtn.setTitle(NSLocalizedString("Login_Register_Button_title", comment: ""), for: .normal)
         self.registerBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.registerBtn.addTarget(self, action: #selector(registerBtn(_:)), for: .touchUpInside)
+        
+        self.infoValueLabel.text = NSLocalizedString("Login_Info_Text", comment: "")
+        self.infoValueLabel.textColor = textColor
         
     }
     
