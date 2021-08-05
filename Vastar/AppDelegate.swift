@@ -22,11 +22,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         IQKeyboardManager.shared.previousNextDisplayMode = IQPreviousNextDisplayMode.alwaysHide
         
         let navBar = UINavigationBar.appearance()
-        navBar.tintColor = UIColor.white
+        navBar.tintColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         navBar.barTintColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
         
         //Change navigation title Color
-        navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white]
+        navBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)]
         
         if #available(iOS 13.0, *) {
             

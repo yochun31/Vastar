@@ -20,6 +20,7 @@
 "Login_Input_Phone_Alert_Text" = "尚未輸入手機";
 "Login_Input_Pw_Alert_Text" = "尚未輸入密碼";
 "Login_Input_Error_Alert_Text" = "帳號或密碼錯誤！";
+"Login_Info_Text" = "服務電話:+886 2 2838 1010/LINE ID:vastarmimichi";
 
 "LogOut_Alert_Text" = "是否確定要登出?";
 
@@ -130,7 +131,7 @@
 "Product_Detail_Amount_title" = "數量";
 "Product_Detail_Add_ShoppingCar_title" = "加入購物車";
 "Product_Detail_Alert_title" = "不存在此商品型號!";
-"Product_Detail_Add_Success_Alert_title" = "成功加入購物車";
+"Product_Detail_Add_Success_Alert_title" = "成功加入購物車！";
 "Product_Detail_Input_Amount_Alert_Text" = "尚未輸入數量";
 
 "Shopping_title" = "購物車";
@@ -167,10 +168,11 @@
 "Shopping_Checkout_ReturnInfo_Text" = "猶豫期不是試用期，本商品不提供試用。商品購買後，若不使用請勿拆封。退換貨的商品，必須為全新未使用狀態，且包裝完好。";
 
 "Order_title" = "訂單狀態";
-"Order_Number_title" = "訂單編號:";
-"Order_Schedule_title" = "訂單進度:";
-"Order_Freight_title" = "貨運編號:";
+"Order_Number_title" = "訂單編號：";
+"Order_Schedule_title" = "訂單進度：";
+"Order_Freight_title" = "貨運編號：";
 "Order_Create_Done_text" = "訂單已建立！";
+"Order_Go_Pay_Btn_title" = "前往付款";
 "Order_Later_Pay_Btn_title" = "稍後付款";
 "Order_Now_Pay_Btn_title" = "立即付款";
 "Order_Confirm_title" = "確認訂單";
