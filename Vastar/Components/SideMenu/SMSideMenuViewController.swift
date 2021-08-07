@@ -243,15 +243,9 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
                 
                 break
             case 2:
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("LogOut_Alert_Text", comment: ""), actionTitle: [NSLocalizedString("Alert_Sure_title", comment: "")], preferredStyle: .alert, viewController: self) { (btnIndex, btnTitle) in
-                    if btnIndex == 1 {
-//                        self.dismiss(animated: true, completion: nil)
-                        VClient.sharedInstance().VCDeleteAllShoppingCarData { isDone in
-                            if isDone {
-                                self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-                            }
-                        }
-                        
+                VClient.sharedInstance().VCDeleteAllShoppingCarData { isDone in
+                    if isDone {
+                        self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
                     }
                 }
                 
@@ -262,5 +256,4 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
         }
         
     }
-    
 }

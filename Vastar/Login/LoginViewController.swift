@@ -106,12 +106,33 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         VClient.sharedInstance().VCGetUserInfoByPhone(phone: accountName) { (_ isSuccess:Bool,_ message:String,_ isResult:Int,_ dictResData:[String:Any]) in
             
             if isSuccess {
-                let res_registerTime = dictResData["RegisterTime"] as? String ?? ""
-                let registerTimeArray = res_registerTime.split(separator: ".")
-                self.userResgisterTime = String(registerTimeArray[0])
+                if isResult == 0 {
+                    let res_registerTime = dictResData["RegisterTime"] as? String ?? ""
+                    let registerTimeArray = res_registerTime.split(separator: ".")
+                    self.userResgisterTime = String(registerTimeArray[0])
+                    
+                    let passWord:String = "\(pw)\(self.userResgisterTime)"
+                    self.loginVerification(accountName: accountName, pw: passWord, pw_Nodate: pw)
+                }else{
+                    self.vaiv.stopProgressHUD(view: self.view)
+           
+                    let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+                    let font:UIFont = UIFont.systemFont(ofSize: 20.0)
+                    let errorColor:UIColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+
+                    self.accountNameErrorLabel.text = NSLocalizedString("Login_Input_Error_Alert_Text", comment: "")
+                    self.accountNameErrorLabel.textColor = errorColor
+                    
+                    self.accountNameTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+                    self.accountNameTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Account_title", comment: ""), colour: errorColor, font: font)
+                    
+                    self.pwErrorLabel.text = NSLocalizedString("Login_Input_Error_Alert_Text", comment: "")
+                    self.pwErrorLabel.textColor = errorColor
+                    
+                    self.passwordTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+                    self.passwordTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Password_title", comment: ""), colour: errorColor, font: font)
+                }
                 
-                let passWord:String = "\(pw)\(self.userResgisterTime)"
-                self.loginVerification(accountName: accountName, pw: passWord, pw_Nodate: pw)
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
        

@@ -1,27 +1,31 @@
 //
-//  CustomAlertView.swift
+//  CustomAlertTwoBtnView.swift
 //  Vastar
 //
-//  Created by 郭堯彰 on 2021/8/4.
+//  Created by 郭堯彰 on 2021/8/7.
 //
 
 import UIKit
 
-protocol CustomAlertViewDelegate {
-    func alertBtnClick(btnTag:Int)
+protocol CustomAlertTwoBtnViewDelegate {
+    func alertBtn1Click(btnTag:Int)
+    func alertBtn2Click(btnTag:Int)
 }
 
-class CustomAlertView: UIView {
-
-    @IBOutlet var alertTitleLabel: UILabel!
-    @IBOutlet var alertBtn: UIButton!
+class CustomAlertTwoBtnView: UIView {
     
-    var delegate:CustomAlertViewDelegate?
+    
+    @IBOutlet var alertTitleLabel: UILabel!
+    
+    @IBOutlet var btn1: UIButton!
+    @IBOutlet var btn2: UIButton!
+    
+    var delegate:CustomAlertTwoBtnViewDelegate?
     
     private var titleSt:String = ""
-    private var btnTitleSt:String = ""
+    private var btn1TitleSt:String = ""
+    private var btn2TitleSt:String = ""
     private var btnTag:Int = 0
-
     
     /*
     // Only override draw() if you perform custom drawing.
@@ -33,16 +37,14 @@ class CustomAlertView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        
-
     }
     
-    init(title:String,btnTitle:String,tag:Int,frame: CGRect) {
+    init(title:String,btn1Title:String,btn2Title:String,tag:Int,frame: CGRect) {
         super.init(frame: frame)
         loadXib()
         self.titleSt = title
-        self.btnTitleSt = btnTitle
+        self.btn1TitleSt = btn1Title
+        self.btn2TitleSt = btn2Title
         self.btnTag = tag
         setInterface()
     }
@@ -55,7 +57,7 @@ class CustomAlertView: UIView {
     
     func loadXib() {
         let bundle = Bundle(for: type(of: self))
-        let nib = UINib(nibName: "CustomAlertView", bundle: bundle)
+        let nib = UINib(nibName: "CustomAlertTwoBtnView", bundle: bundle)
         ///透過nib來取得xibView
         let xibView = nib.instantiate(withOwner: self, options: nil)[0] as! UIView
         addSubview(xibView)
@@ -76,18 +78,26 @@ class CustomAlertView: UIView {
         self.alertTitleLabel.text = self.titleSt
         self.alertTitleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
-        self.alertBtn.setTitle(self.btnTitleSt, for: .normal)
-        self.alertBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
-        self.alertBtn.tag = self.btnTag
-        self.alertBtn.addTarget(self, action: #selector(alertBtnClick(_:)), for: .touchUpInside)
+        self.btn1.setTitle(self.btn1TitleSt, for: .normal)
+        self.btn1.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
+        self.btn1.tag = self.btnTag
+        self.btn1.addTarget(self, action: #selector(btn1Click(_:)), for: .touchUpInside)
+        
+        self.btn2.setTitle(self.btn2TitleSt, for: .normal)
+        self.btn2.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
+        self.btn2.tag = self.btnTag
+        self.btn2.addTarget(self, action: #selector(btn2Click(_:)), for: .touchUpInside)
 
     }
     
-    // Action
+    //MARK: - Action
     
-    @objc func alertBtnClick(_ sender:UIButton) {
-        self.delegate?.alertBtnClick(btnTag: sender.tag)
-        
+    @objc func btn1Click(_ sender:UIButton) {
+        self.delegate?.alertBtn1Click(btnTag: sender.tag)
+    }
+    
+    @objc func btn2Click(_ sender:UIButton) {
+        self.delegate?.alertBtn2Click(btnTag: sender.tag)
     }
 
 }

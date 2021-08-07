@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate {
+class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CustomAlertViewDelegate,CustomAlertTwoBtnViewDelegate {
     
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var nameTextField: UITextField!
@@ -42,6 +42,8 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
 
     private var vaiv = VActivityIndicatorView()
     private var rav = RecipientAddView()
+    private var cav = CustomAlertView()
+    private var cavt = CustomAlertTwoBtnView()
     
     private var receiverIDArray:Array<Int> = []
     private var receiverNameArray:Array<String> = []
@@ -49,6 +51,8 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     private var receiverCityArray:Array<String> = []
     private var receiverDistrictArray:Array<String> = []
     private var receiverAddressArray:Array<String> = []
+    
+    private var deleteTag:Int = 0
     
     let AppInfo = AppInfoManager()
     
@@ -236,22 +240,23 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         VClient.sharedInstance().VCGetUserInfoByPhone(phone: accountName) { (_ isSuccess:Bool,_ message:String,_ isResult:Int,_ dictResData:[String:Any]) in
             
             if isSuccess {
-                
-                let name = dictResData["Name"] as? String ?? ""
-                let birthday = dictResData["Birthday"] as? String ?? ""
-                let tel = dictResData["Telephone"] as? String ?? ""
-                self.userName = name
-                self.userBirthday = birthday
-                self.userTel = tel
-                self.showUserInfo(nameSt: name, birthdaySt: birthday, telSt: tel)
+                if isResult == 0 {
+                    let name = dictResData["Name"] as? String ?? ""
+                    let birthday = dictResData["Birthday"] as? String ?? ""
+                    let tel = dictResData["Telephone"] as? String ?? ""
+                    self.userName = name
+                    self.userBirthday = birthday
+                    self.userTel = tel
+                    self.showUserInfo(nameSt: name, birthdaySt: birthday, telSt: tel)
+                }
                 
                 self.vaiv.stopProgressHUD(view: self.view)
                 
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
-                    
-                }
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }
         }
     }
@@ -284,7 +289,9 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
                 
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }
         }
     }
@@ -301,7 +308,9 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
                 
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }
         }
     }
@@ -321,7 +330,9 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
                 
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }
         }
     }
@@ -443,7 +454,9 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
                 self.vaiv.stopProgressHUD(view: self.view)
                 
             }else{
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }
         }
     }
@@ -485,15 +498,11 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         }
         
         let setAleartMessage:String = "\(NSLocalizedString("Member_Birthday_Set_Alert_title", comment: ""))\(self.dateStaring)"
-        VAlertView.presentAlertMultipleAction(title: NSLocalizedString("Alert_title", comment: ""), message: setAleartMessage, actionTitle: [NSLocalizedString("Alert_Sure_title", comment: ""),NSLocalizedString("Member_Cancel_Btn_title", comment: "")], preferredStyle: .alert, viewController: self) { (btnIndex, btnTitle) in
-            if btnIndex == 1 {
-                
-                self.checkBirthdayInputData()
-                
-            }else if btnIndex == 2 {
-                self.birthdayTextField.text = NSLocalizedString("Member_Birthday_Placeholder_title", comment: "")
-            }
-        }
+        
+        self.cavt = CustomAlertTwoBtnView(title: setAleartMessage, btn1Title: NSLocalizedString("Alert_Sure_title", comment: ""), btn2Title: NSLocalizedString("Member_Cancel_Btn_title", comment: ""), tag: 2, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        self.cavt.delegate = self
+        self.view.addSubview(self.cavt)
+      
     }
 
     
@@ -518,11 +527,10 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     }
 
     @objc func closeBtnClick(_ sender:UIButton) {
-        VAlertView.presentAlert(title: NSLocalizedString("Member_Recipient_Delete_Alert_Text", comment: ""), message: "", actionTitle: [NSLocalizedString("Member_Confirm_Btn_title", comment: "")], preferredStyle: .alert, viewController: self) { (_ buttonIndex:Int,_ buttonTitle:String) in
-            if buttonIndex == 1 {
-                self.deleteReceiverData(ID: sender.tag)
-            }
-        }
+        self.deleteTag = sender.tag
+        self.cavt = CustomAlertTwoBtnView(title: NSLocalizedString("Member_Recipient_Delete_Alert_Text", comment: ""), btn1Title: NSLocalizedString("Member_Confirm_Btn_title", comment: ""), btn2Title: NSLocalizedString("Alert_Cancel_title", comment: ""), tag: 1, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        self.cavt.delegate = self
+        self.view.addSubview(self.cavt)
         
     }
 
@@ -571,14 +579,52 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     
     func addRecipientMessage(text: String) {
         rav.removeFromSuperview()
-        
-        VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: text, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
-            self.getReceiverData()
-        }
+    
+        self.cav = CustomAlertView.init(title: text, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 1, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+        self.cav.delegate = self
+        self.view.addSubview(self.cav)
     }
     
     func cancelBtnClick() {
         rav.removeFromSuperview()
+    }
+    
+    //MARK: - CustomAlertViewDelegate
+    
+    func alertBtnClick(btnTag: Int) {
+        
+        if btnTag == 1 {
+            self.cav.removeFromSuperview()
+            self.getReceiverData()
+        }else{
+            self.cav.removeFromSuperview()
+        }
+        
+    }
+    
+    //MARK: - CustomAlertTwoBtnViewDelegate
+    
+    func alertBtn1Click(btnTag: Int) {
+        
+        if btnTag == 1 {
+            self.cavt.removeFromSuperview()
+            self.deleteReceiverData(ID: self.deleteTag)
+        }else if btnTag == 2 {
+            self.cavt.removeFromSuperview()
+            self.checkBirthdayInputData()
+        }
+        
+    }
+    
+    func alertBtn2Click(btnTag: Int) {
+        
+        if btnTag == 1 {
+            self.cavt.removeFromSuperview()
+        }else if btnTag == 2 {
+            self.cavt.removeFromSuperview()
+            self.birthdayTextField.text = NSLocalizedString("Member_Birthday_Placeholder_title", comment: "")
+        }
+        
     }
     
 }

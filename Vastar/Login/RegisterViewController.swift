@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RegisterViewController: UIViewController {
+class RegisterViewController: UIViewController,CustomAlertViewDelegate {
     
     
     @IBOutlet var nameTextField: UITextField!
@@ -32,6 +32,7 @@ class RegisterViewController: UIViewController {
     private var defaultSec:Int = 30
     
     private var vaiv = VActivityIndicatorView()
+    private var cav = CustomAlertView()
     
     //MARK: - Life Cycle
     
@@ -134,12 +135,15 @@ class RegisterViewController: UIViewController {
             if isSuccess {
             
                 self.vaiv.stopProgressHUD(view: self.view)
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
-                    self.dismiss(animated: true, completion: nil)
-                }
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 1, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
+                
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }
         }
         
@@ -181,6 +185,11 @@ class RegisterViewController: UIViewController {
                 }else{
                     handler()
                 }
+            }else{
+                self.vaiv.stopProgressHUD(view: self.view)
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }
         }
     }
@@ -514,5 +523,19 @@ class RegisterViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //MARK: - CustomAlertViewDelegate
+    
+    func alertBtnClick(btnTag: Int) {
+        
+        if btnTag == 1 {
+            self.cav.removeFromSuperview()
+            self.dismiss(animated: true, completion: nil)
+        }else{
+            self.cav.removeFromSuperview()
+        }
+        
+    }
+
 
 }
