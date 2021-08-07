@@ -123,7 +123,7 @@ class CloudGatewayManager {
         
                 }else{
                     messageStr = jsonInfo["Message"] as? String ?? ""
-                    isResStatus = false
+                    isResStatus = true
                 }
                 
                 result(isResStatus,messageStr,resStatus,dictData)

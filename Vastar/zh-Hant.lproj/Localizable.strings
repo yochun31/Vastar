@@ -62,6 +62,7 @@
 "Forget_Input_VeriftyCode_Alert_Text" = "尚未輸入驗證碼";
 "Forget_Input_VeriftyCode_Error_Alert_Text" = "輸入驗證碼錯誤";
 "Forget_Update_Success_Alert_Text" = "更新成功";
+"Forget_Input_Error_Alert_Text" = "會員不存在";
 
 "SideBar_Menu_Section1_title" = "訂單";
 "SideBar_Menu_Section2_title" = "會員";

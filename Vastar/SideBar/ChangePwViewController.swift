@@ -14,7 +14,7 @@ protocol ChangePwViewDelegate {
     func goVc()
 }
 
-class ChangePwViewController: UIViewController {
+class ChangePwViewController: UIViewController,CustomAlertViewDelegate {
 
     @IBOutlet var oldPwTextField: UITextField!
     @IBOutlet var newPwTextField: UITextField!
@@ -33,6 +33,7 @@ class ChangePwViewController: UIViewController {
     
     private var userResgisterTime:String = ""
     private var vaiv = VActivityIndicatorView()
+    private var cav = CustomAlertView()
     
     private var verifyCode = 0
     private var verifyCodeSt = ""
@@ -143,19 +144,21 @@ class ChangePwViewController: UIViewController {
         VClient.sharedInstance().VCGetUserInfoByPhone(phone: accountName) { (_ isSuccess:Bool,_ message:String,_ isResult:Int,_ dictResData:[String:Any]) in
             
             if isSuccess {
-                let res_registerTime = dictResData["RegisterTime"] as? String ?? ""
-                let registerTimeArray = res_registerTime.split(separator: ".")
-                self.userResgisterTime = String(registerTimeArray[0])
+                if isResult == 0 {
+                    let res_registerTime = dictResData["RegisterTime"] as? String ?? ""
+                    let registerTimeArray = res_registerTime.split(separator: ".")
+                    self.userResgisterTime = String(registerTimeArray[0])
+                    
+                    let oldPassWord:String = "\(oldPwSt)\(self.userResgisterTime)"
+                    let newPassWord:String = "\(newPwSt)\(self.userResgisterTime)"
+                    self.updateChangePw(phone: accountName, oldPw: oldPassWord, newPw: newPassWord)
+                }
                 
-                let oldPassWord:String = "\(oldPwSt)\(self.userResgisterTime)"
-                let newPassWord:String = "\(newPwSt)\(self.userResgisterTime)"
-                self.updateChangePw(phone: accountName, oldPw: oldPassWord, newPw: newPassWord)
-
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
-                    
-                }
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }
         }
     }
@@ -169,13 +172,14 @@ class ChangePwViewController: UIViewController {
             if isSuccess {
                 print(">>\(message)<<")
                 self.vaiv.stopProgressHUD(view: self.view)
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Change_Pw_Update_Success_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
-                    
-                    self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
-                }
+                self.cav = CustomAlertView.init(title: NSLocalizedString("Change_Pw_Update_Success_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 1, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }
         }
         
@@ -460,5 +464,18 @@ class ChangePwViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //MARK: - CustomAlertViewDelegate
+    
+    func alertBtnClick(btnTag: Int) {
+        
+        if btnTag == 1 {
+            self.cav.removeFromSuperview()
+            self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
+        }else{
+            self.cav.removeFromSuperview()
+        }
+        
+    }
 
 }
