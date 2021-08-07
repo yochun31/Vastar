@@ -67,6 +67,9 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
     
     var groupID:Int = 0
     
+    private var default_Voltage_St:String = ""
+    private var default_Color_St:String = ""
+    
     
     //MARK: - Life Cycle 
     
@@ -265,7 +268,9 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
                 }
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }
         }
     }
@@ -366,10 +371,11 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
             
         }else{
             self.vaiv.stopProgressHUD(view: self.view)
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Product_Detail_Alert_title", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
-                self.voltageTextField.text = voltageSt
-                self.colorTextField.text = colorSt
-            }
+            self.default_Color_St = colorSt
+            self.default_Voltage_St = voltageSt
+            self.cav = CustomAlertView.init(title: NSLocalizedString("Product_Detail_Alert_title", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 1, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            self.cav.delegate = self
+            self.view.addSubview(self.cav)
         }
 
     }
@@ -414,7 +420,9 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
             }else{
                 DispatchQueue.main.async {
                     self.vaiv.stopProgressHUD(view: self.view)
-                    VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Product_Detail_Alert_title", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+                    self.cav = CustomAlertView.init(title: NSLocalizedString("Product_Detail_Alert_title", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                    self.cav.delegate = self
+                    self.view.addSubview(self.cav)
                 }
             }
         }
@@ -468,7 +476,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         
         VClient.sharedInstance().VCAddShoppingCarData(dataArray: dataArray) { (_ isDone:Bool) in
             if isDone {
-                self.cav = CustomAlertView.init(title: NSLocalizedString("Product_Detail_Add_Success_Alert_title", comment: ""), frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav = CustomAlertView.init(title: NSLocalizedString("Product_Detail_Add_Success_Alert_title", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
                 self.cav.delegate = self
                 self.view.addSubview(self.cav)
             }
@@ -508,8 +516,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         if amountNum > 0 && self.amountTextField.text?.count != 0 {
             addShppingCarData()
         }else{
-            
-            cav = CustomAlertView.init(title: NSLocalizedString("Product_Detail_Input_Amount_Alert_Text", comment: ""), frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            cav = CustomAlertView.init(title: NSLocalizedString("Product_Detail_Input_Amount_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
             cav.delegate = self
             self.view.addSubview(cav)
         }
@@ -589,8 +596,15 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
     
     //MARK: - CustomAlertViewDelegate
     
-    func sureBtnClick() {
-        self.cav.removeFromSuperview()
+    func alertBtnClick(btnTag: Int) {
+        
+        if btnTag == 1 {
+            self.cav.removeFromSuperview()
+            self.voltageTextField.text = self.default_Voltage_St
+            self.colorTextField.text = self.default_Color_St
+        }else{
+            self.cav.removeFromSuperview()
+        }
     }
 
 }

@@ -8,7 +8,7 @@
 import UIKit
 import SDWebImage
 
-class ProductListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate {
+class ProductListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,CustomAlertViewDelegate {
     
     
     @IBOutlet var productTableView: UITableView!
@@ -23,6 +23,8 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
     private var productTmpImageUrlArray:Array<URL> = []
     
     private var flag:Int = 0
+    private var cav = CustomAlertView()
+    
     let AppInfo = AppInfoManager()
     var productItemID:Int = -1
     
@@ -99,13 +101,18 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
                     }
                     self.defaultDownloadImage()
                 }else{
-                    VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+
+                    self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                    self.cav.delegate = self
+                    self.view.addSubview(self.cav)
                 }
                 
                 self.vaiv.stopProgressHUD(view: self.view)
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }
         }
     }
@@ -148,13 +155,17 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
                     self.defaultDownloadImage()
                     
                 }else{
-                    VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+                    self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                    self.cav.delegate = self
+                    self.view.addSubview(self.cav)
                 }
                 
                 self.vaiv.stopProgressHUD(view: self.view)
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }
         }
     }
@@ -324,4 +335,11 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
             }
         }
     }
+    
+    //MARK: - CustomAlertViewDelegate
+    
+    func alertBtnClick(btnTag: Int) {
+        self.cav.removeFromSuperview()
+    }
+
 }

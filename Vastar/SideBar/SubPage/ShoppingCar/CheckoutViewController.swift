@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource {
+class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIPickerViewDelegate,UIPickerViewDataSource,CustomAlertViewDelegate {
     
     
     @IBOutlet var contentView: UIView!
@@ -68,6 +68,7 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
     private var selectTownSt:String = ""
     
     private var vaiv = VActivityIndicatorView()
+    private var cav = CustomAlertView()
     
     private var IDArray:Array<Int> = []
     private var NoArray:Array<String> = []
@@ -657,28 +658,44 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         let addressDetail = self.addressDetailTextField.text ?? ""
         
         if pay.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Select_Pay_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.cav = CustomAlertView.init(title: NSLocalizedString("Shopping_Checkout_Select_Pay_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            self.cav.delegate = self
+            self.view.addSubview(self.cav)
             
         }else if receiver.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Input_Reciver_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.cav = CustomAlertView.init(title: NSLocalizedString("Shopping_Checkout_Input_Reciver_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            self.cav.delegate = self
+            self.view.addSubview(self.cav)
             
         }else if receiverName.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Input_Reciver_Name_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.cav = CustomAlertView.init(title: NSLocalizedString("Shopping_Checkout_Input_Reciver_Name_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            self.cav.delegate = self
+            self.view.addSubview(self.cav)
             
         }else if receiverPhone.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Input_Reciver_Phone_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.cav = CustomAlertView.init(title: NSLocalizedString("Shopping_Checkout_Input_Reciver_Phone_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            self.cav.delegate = self
+            self.view.addSubview(self.cav)
             
         }else if city.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Select_Reciver_City_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.cav = CustomAlertView.init(title: NSLocalizedString("Shopping_Checkout_Select_Reciver_City_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            self.cav.delegate = self
+            self.view.addSubview(self.cav)
             
         }else if town.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Select_Reciver_Town_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.cav = CustomAlertView.init(title: NSLocalizedString("Shopping_Checkout_Select_Reciver_Town_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            self.cav.delegate = self
+            self.view.addSubview(self.cav)
             
         }else if posttalCode.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Select_PostalCode_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.cav = CustomAlertView.init(title: NSLocalizedString("Shopping_Checkout_Select_PostalCode_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            self.cav.delegate = self
+            self.view.addSubview(self.cav)
             
         }else if addressDetail.count == 0 {
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Input_Address_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.cav = CustomAlertView.init(title: NSLocalizedString("Shopping_Checkout_Input_Address_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            self.cav.delegate = self
+            self.view.addSubview(self.cav)
             
         }else{
             let vc = ConfirmOrderViewController(nibName: "ConfirmOrderViewController", bundle: nil)
@@ -822,5 +839,12 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
     }
+    
+    //MARK: - CustomAlertViewDelegate
+    
+    func alertBtnClick(btnTag: Int) {
+        self.cav.removeFromSuperview()
+    }
+
 
 }

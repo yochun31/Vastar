@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ForgetPwViewController: UIViewController {
+class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
 
     
     @IBOutlet var phoneTextField: UITextField!
@@ -27,6 +27,7 @@ class ForgetPwViewController: UIViewController {
     
     private var userResgisterTime:String = ""
     private var vaiv = VActivityIndicatorView()
+    private var cav = CustomAlertView()
     
     private var verifyCode = 0
     private var verifyCodeSt = ""
@@ -115,18 +116,34 @@ class ForgetPwViewController: UIViewController {
         VClient.sharedInstance().VCGetUserInfoByPhone(phone: accountName) { (_ isSuccess:Bool,_ message:String,_ isResult:Int,_ dictResData:[String:Any]) in
             
             if isSuccess {
-                let res_registerTime = dictResData["RegisterTime"] as? String ?? ""
-                let registerTimeArray = res_registerTime.split(separator: ".")
-                self.userResgisterTime = String(registerTimeArray[0])
-                
-                let newPassWord:String = "\(pw)\(self.userResgisterTime)"
-                self.updateForgetPw(phone: accountName, newPw: newPassWord)
+                if isResult == 0 {
+                    let res_registerTime = dictResData["RegisterTime"] as? String ?? ""
+                    let registerTimeArray = res_registerTime.split(separator: ".")
+                    self.userResgisterTime = String(registerTimeArray[0])
+                    
+                    let newPassWord:String = "\(pw)\(self.userResgisterTime)"
+                    self.updateForgetPw(phone: accountName, newPw: newPassWord)
+                }else{
+                    self.vaiv.stopProgressHUD(view: self.view)
+                    let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
+                    let font:UIFont = UIFont.systemFont(ofSize: 20.0)
+                    let errorColor:UIColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
+                    self.phoneErrorLabel.text = NSLocalizedString("Forget_Input_Error_Alert_Text", comment: "")
+                    self.phoneErrorLabel.textColor = errorColor
+                    
+                    self.phoneTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
+                    self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: errorColor, font: font)
 
+                    self.nPwErrorLabel.text = ""
+                    self.confirmPwErrorLabel.text = ""
+                    self.verifyCodeErrorLabel.text = ""
+                }
+                
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
-                    
-                }
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }
         }
     }
@@ -137,12 +154,14 @@ class ForgetPwViewController: UIViewController {
             if isSuccess {
                 
                 self.vaiv.stopProgressHUD(view: self.view)
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Forget_Update_Success_Alert_Text", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {
-                    self.dismiss(animated: true, completion: nil)
-                }
+                self.cav = CustomAlertView.init(title: NSLocalizedString("Forget_Update_Success_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 1, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
-                VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: message, actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
             }
         }
     }
@@ -403,5 +422,18 @@ class ForgetPwViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //MARK: - CustomAlertViewDelegate
+    
+    func alertBtnClick(btnTag: Int) {
+        
+        if btnTag == 1 {
+            self.cav.removeFromSuperview()
+            self.dismiss(animated: true, completion: nil)
+        }else{
+            self.cav.removeFromSuperview()
+        }
+        
+    }
 
 }

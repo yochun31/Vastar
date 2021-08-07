@@ -11,8 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomAlertView" customModule="Vastar" customModuleProvider="target">
             <connections>
+                <outlet property="alertBtn" destination="eG6-Ow-dty" id="h2q-kA-PV8"/>
                 <outlet property="alertTitleLabel" destination="oYv-Dn-umO" id="c5J-0i-seS"/>
-                <outlet property="sureBtn" destination="Lyw-RW-bWE" id="SUG-lV-gDr"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -27,28 +27,32 @@
                             <rect key="frame" x="0.0" y="0.0" width="275" height="165"/>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oYv-Dn-umO">
-                            <rect key="frame" x="60" y="40" width="155" height="21"/>
+                            <rect key="frame" x="10" y="40" width="255" height="21"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lyw-RW-bWE">
-                            <rect key="frame" x="199" y="105" width="46" height="30"/>
-                            <state key="normal" title="Button"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eG6-Ow-dty">
+                            <rect key="frame" x="107.5" y="105" width="60" height="35"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="60" id="Puo-f3-7wp"/>
+                                <constraint firstAttribute="height" constant="35" id="R6O-k7-CW8"/>
+                            </constraints>
+                            <state key="normal" title="Button" backgroundImage="btn"/>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="Lyw-RW-bWE" secondAttribute="trailing" constant="30" id="2MM-nx-iwW"/>
-                        <constraint firstItem="oYv-Dn-umO" firstAttribute="leading" secondItem="KWW-Qe-aNo" secondAttribute="leading" constant="60" id="EBy-ih-mI9"/>
+                        <constraint firstAttribute="bottom" secondItem="eG6-Ow-dty" secondAttribute="bottom" constant="25" id="0I4-8k-VyL"/>
+                        <constraint firstItem="eG6-Ow-dty" firstAttribute="centerX" secondItem="oYv-Dn-umO" secondAttribute="centerX" id="Bcy-BR-Crp"/>
+                        <constraint firstItem="oYv-Dn-umO" firstAttribute="leading" secondItem="KWW-Qe-aNo" secondAttribute="leading" constant="10" id="EBy-ih-mI9"/>
                         <constraint firstItem="Szz-Wb-zk1" firstAttribute="top" secondItem="KWW-Qe-aNo" secondAttribute="top" id="ES7-0l-WOK"/>
                         <constraint firstAttribute="bottom" secondItem="Szz-Wb-zk1" secondAttribute="bottom" id="HDM-Y9-PTc"/>
                         <constraint firstAttribute="trailing" secondItem="Szz-Wb-zk1" secondAttribute="trailing" id="Hcs-vV-gEL"/>
                         <constraint firstItem="Szz-Wb-zk1" firstAttribute="leading" secondItem="KWW-Qe-aNo" secondAttribute="leading" id="KOB-XL-HZe"/>
                         <constraint firstItem="oYv-Dn-umO" firstAttribute="top" secondItem="KWW-Qe-aNo" secondAttribute="top" constant="40" id="c4f-GH-gjE"/>
                         <constraint firstAttribute="height" constant="165" id="ezF-Bp-kV6"/>
-                        <constraint firstAttribute="trailing" secondItem="oYv-Dn-umO" secondAttribute="trailing" constant="60" id="nyd-Vu-iZ9"/>
-                        <constraint firstAttribute="bottom" secondItem="Lyw-RW-bWE" secondAttribute="bottom" constant="30" id="pk6-SO-P7K"/>
+                        <constraint firstAttribute="trailing" secondItem="oYv-Dn-umO" secondAttribute="trailing" constant="10" id="nyd-Vu-iZ9"/>
                         <constraint firstItem="oYv-Dn-umO" firstAttribute="centerX" secondItem="KWW-Qe-aNo" secondAttribute="centerX" id="qIS-KP-jhy"/>
                     </constraints>
                 </view>
@@ -65,6 +69,7 @@
         </view>
     </objects>
     <resources>
+        <image name="btn" width="477" height="246"/>
         <image name="get_captcha_btn" width="330" height="183"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

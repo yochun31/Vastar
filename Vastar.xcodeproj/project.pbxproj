@@ -15,6 +15,8 @@
 		2203BBF12672106D006986D2 /* RecipientAddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2203BBF02672106D006986D2 /* RecipientAddView.xib */; };
 		2203BBF5267362BA006986D2 /* ReceiverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203BBF3267362BA006986D2 /* ReceiverTableViewCell.swift */; };
 		2203BBF6267362BA006986D2 /* ReceiverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2203BBF4267362BA006986D2 /* ReceiverTableViewCell.xib */; };
+		220B260126BDA99C007FC2AA /* CustomAlertTwoBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220B260026BDA99C007FC2AA /* CustomAlertTwoBtnView.swift */; };
+		220B260326BDAA04007FC2AA /* CustomAlertTwoBtnView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220B260226BDAA04007FC2AA /* CustomAlertTwoBtnView.xib */; };
 		2244F61326789586006754D6 /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244F61126789586006754D6 /* ProductListViewController.swift */; };
 		2244F61426789586006754D6 /* ProductListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2244F61226789586006754D6 /* ProductListViewController.xib */; };
 		2244F61726789606006754D6 /* ProductListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244F61526789606006754D6 /* ProductListTableViewCell.swift */; };
@@ -89,6 +91,8 @@
 		2203BBF02672106D006986D2 /* RecipientAddView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipientAddView.xib; sourceTree = "<group>"; };
 		2203BBF3267362BA006986D2 /* ReceiverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverTableViewCell.swift; sourceTree = "<group>"; };
 		2203BBF4267362BA006986D2 /* ReceiverTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiverTableViewCell.xib; sourceTree = "<group>"; };
+		220B260026BDA99C007FC2AA /* CustomAlertTwoBtnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTwoBtnView.swift; sourceTree = "<group>"; };
+		220B260226BDAA04007FC2AA /* CustomAlertTwoBtnView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomAlertTwoBtnView.xib; sourceTree = "<group>"; };
 		2244F61126789586006754D6 /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
 		2244F61226789586006754D6 /* ProductListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductListViewController.xib; sourceTree = "<group>"; };
 		2244F61526789606006754D6 /* ProductListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListTableViewCell.swift; sourceTree = "<group>"; };
@@ -298,6 +302,8 @@
 				2203BBE82670C3EE006986D2 /* CustomButton.swift */,
 				228C406026BA6724003AE590 /* CustomAlertView.swift */,
 				228C406226BA6774003AE590 /* CustomAlertView.xib */,
+				220B260026BDA99C007FC2AA /* CustomAlertTwoBtnView.swift */,
+				220B260226BDAA04007FC2AA /* CustomAlertTwoBtnView.xib */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -462,6 +468,7 @@
 				228BDD85268EC22F0080F843 /* CheckoutViewController.xib in Resources */,
 				228BDD81268C72C70080F843 /* shoppingCarTableViewCell.xib in Resources */,
 				22F1C3D92668852D003A1D5C /* ProductViewController.xib in Resources */,
+				220B260326BDAA04007FC2AA /* CustomAlertTwoBtnView.xib in Resources */,
 				22F1C3EC266885F7003A1D5C /* HistoryOrderViewController.xib in Resources */,
 				228BDD912696EED80080F843 /* ConfirmOrderViewController.xib in Resources */,
 				22F1C3F126688620003A1D5C /* MemberDataViewController.xib in Resources */,
@@ -541,6 +548,7 @@
 				22F1C3F52668B44C003A1D5C /* CloudGatewayManager.swift in Sources */,
 				2244F61326789586006754D6 /* ProductListViewController.swift in Sources */,
 				22F1C3E02668857B003A1D5C /* ShoppingCarViewController.swift in Sources */,
+				220B260126BDA99C007FC2AA /* CustomAlertTwoBtnView.swift in Sources */,
 				2244F61726789606006754D6 /* ProductListTableViewCell.swift in Sources */,
 				22F1C3A1266613F7003A1D5C /* SideMenuTableViewCell.swift in Sources */,
 				228BDD80268C72C70080F843 /* shoppingCarTableViewCell.swift in Sources */,

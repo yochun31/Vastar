@@ -8,7 +8,7 @@
 import UIKit
 import IQKeyboardManagerSwift
 
-class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,ShoppingCarTableviewDelegate {
+class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,ShoppingCarTableviewDelegate,CustomAlertViewDelegate {
 
     @IBOutlet var shoppingCarTableView: UITableView!
     @IBOutlet var countLabel: UILabel!
@@ -26,6 +26,7 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
     private var photoArray:Array<UIImage> = []
     
     private var tmpAmount:Int = 0
+    private var cav = CustomAlertView()
     
     let userDefault = UserDefaults.standard
 
@@ -257,7 +258,9 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
             vc.accountPhone = self.accountPhone
             self.navigationController?.pushViewController(vc, animated: true)
         }else{
-            VAlertView.presentAlert(title: NSLocalizedString("Alert_title", comment: ""), message: NSLocalizedString("Shopping_Checkout_Alert_title", comment: ""), actionTitle: NSLocalizedString("Alert_Sure_title", comment: ""), viewController: self) {}
+            self.cav = CustomAlertView.init(title: NSLocalizedString("Shopping_Checkout_Alert_title", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            self.cav.delegate = self
+            self.view.addSubview(self.cav)
         }
     }
 
@@ -350,5 +353,11 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
         
         let dataArray:Array<Any> = [self.NoArray[index],self.titleArray[index],self.colorArray[index],self.vArray[index],self.priceArray[index],-1,self.photoArray[index]]
         addShppingCarData(dataArray: dataArray)
+    }
+    
+    //MARK: - CustomAlertViewDelegate
+    
+    func alertBtnClick(btnTag: Int) {
+        self.cav.removeFromSuperview()
     }
 }
