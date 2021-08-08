@@ -559,6 +559,11 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         
         let cell:ReceiverTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ReceiverCell", for: indexPath) as! ReceiverTableViewCell
         cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        
+        let selectBkView = UIView()
+        selectBkView.backgroundColor = UIColor.clear
+        cell.selectedBackgroundView = selectBkView
+        
         let name = self.receiverNameArray[indexPath.row]
         let phone = self.receiverPhoneArray[indexPath.row]
         let city = self.receiverCityArray[indexPath.row]
