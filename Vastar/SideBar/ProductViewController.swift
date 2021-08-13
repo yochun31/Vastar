@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ProductViewController: UIViewController {
+class ProductViewController: UIViewController,SWRevealViewControllerDelegate {
     
     
     @IBOutlet var allProductBtn: UIButton!
@@ -22,6 +22,8 @@ class ProductViewController: UIViewController {
     @IBOutlet var product_Item6_Btn: UIButton!
     
     let userDefault = UserDefaults.standard
+    
+    private let touchView = UIView()
 
     //MARK: - Life Cycle
     
@@ -71,8 +73,8 @@ class ProductViewController: UIViewController {
         //setting reveal width of menu controller manually
         self.revealViewController()?.rearViewRevealWidth = UIScreen.main.bounds.width * (2/3)
         
-//        self.revealViewController()?.delegate = self
-        
+        self.revealViewController()?.delegate = self
+
     }
     
     func setInterface() {
@@ -122,6 +124,9 @@ class ProductViewController: UIViewController {
         self.product_Item6_Btn.titleLabel?.font = UIFont(name: "PingFangTC-Regular", size: 24.0)
         self.product_Item6_Btn.addTarget(self, action: #selector(product_Item6_BtnClick(_:)), for: .touchUpInside)
         self.product_Item1_Btn.addTarget(self, action: #selector(product_Item1_BtnClick(_:)), for: .touchUpInside)
+        
+        
+        self.touchView.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height)
     }
     
     
@@ -189,5 +194,24 @@ class ProductViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //MARK: - SWRevealViewControllerDelegate
+    
+    func revealController(_ revealController: SWRevealViewController!, willMoveTo position: FrontViewPosition) {
+        if position == FrontViewPosition.left {
+            self.touchView.removeFromSuperview()
+        }else{
+            self.touchView.translatesAutoresizingMaskIntoConstraints = false
+            self.view.addSubview(self.touchView)
+            let top = NSLayoutConstraint(item: self.touchView, attribute: .top, relatedBy: .equal, toItem: self.view, attribute: .top, multiplier: 1.0, constant: 0.0)
+            let left = NSLayoutConstraint(item: self.touchView, attribute: .left, relatedBy: .equal, toItem: self.view, attribute: .left, multiplier: 1.0, constant: 0.0)
+            let right = NSLayoutConstraint(item: self.touchView, attribute: .right, relatedBy: .equal, toItem: self.view, attribute: .right, multiplier: 1.0, constant: 0.0)
+            let bottom = NSLayoutConstraint(item: self.touchView, attribute: .bottom, relatedBy: .equal, toItem: self.view, attribute: .bottom, multiplier: 1.0, constant: 0.0)
+            self.view.addConstraint(top)
+            self.view.addConstraint(left)
+            self.view.addConstraint(right)
+            self.view.addConstraint(bottom)
+        }
+    }
 
 }
