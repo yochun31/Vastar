@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FailInfoViewController" customModule="Vastar" customModuleProvider="target">
+            <connections>
+                <outlet property="confirmBtn" destination="k0r-N7-DQY" id="enC-zN-xw1"/>
+                <outlet property="infoLabel" destination="doC-yz-Vpv" id="hjs-l5-93y"/>
+                <outlet property="infoTitleLabel" destination="bqg-hp-scY" id="4Ca-mu-haU"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="na3-6a-YCa">
+                    <rect key="frame" x="20" y="50" width="335" height="567"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bqg-hp-scY">
+                    <rect key="frame" x="166.5" y="222.5" width="42" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="doC-yz-Vpv">
+                    <rect key="frame" x="80" y="323.5" width="215" height="20.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k0r-N7-DQY">
+                    <rect key="frame" x="130" y="424" width="115" height="60"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="60" id="C5j-6o-wyb"/>
+                    </constraints>
+                    <state key="normal" title="Button" backgroundImage="btn"/>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="doC-yz-Vpv" secondAttribute="trailing" constant="80" id="4fT-pP-888"/>
+                <constraint firstItem="na3-6a-YCa" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="50" id="9Uc-YP-3ma"/>
+                <constraint firstItem="doC-yz-Vpv" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="BsD-i0-Odk"/>
+                <constraint firstItem="doC-yz-Vpv" firstAttribute="centerX" secondItem="bqg-hp-scY" secondAttribute="centerX" id="FkP-Ul-h6M"/>
+                <constraint firstItem="doC-yz-Vpv" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="TZz-yf-FBM"/>
+                <constraint firstItem="doC-yz-Vpv" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="80" id="UIQ-oQ-uLl"/>
+                <constraint firstItem="doC-yz-Vpv" firstAttribute="top" secondItem="bqg-hp-scY" secondAttribute="bottom" constant="80" id="VgL-xw-ScQ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="na3-6a-YCa" secondAttribute="trailing" constant="20" id="Yi1-lU-yKC"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="k0r-N7-DQY" secondAttribute="trailing" constant="130" id="cnA-Un-jNZ"/>
+                <constraint firstItem="k0r-N7-DQY" firstAttribute="centerX" secondItem="bqg-hp-scY" secondAttribute="centerX" id="lCt-7p-QRg"/>
+                <constraint firstItem="k0r-N7-DQY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="130" id="tYt-BB-zr4"/>
+                <constraint firstItem="na3-6a-YCa" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="uYY-fb-8Pe"/>
+                <constraint firstItem="k0r-N7-DQY" firstAttribute="top" secondItem="doC-yz-Vpv" secondAttribute="bottom" constant="80" id="uyX-oD-ZfF"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="na3-6a-YCa" secondAttribute="bottom" constant="50" id="y4k-DZ-edz"/>
+            </constraints>
+            <point key="canvasLocation" x="77.599999999999994" y="65.217391304347828"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="background" width="734" height="1224"/>
+        <image name="btn" width="477" height="246"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

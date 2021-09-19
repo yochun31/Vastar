@@ -1,26 +1,36 @@
 PODS:
   - Alamofire (4.9.1)
+  - CryptoSwift (1.4.1)
   - IQKeyboardManagerSwift (6.5.6)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
+  - SwiftyRSA (1.7.0):
+    - SwiftyRSA/ObjC (= 1.7.0)
+  - SwiftyRSA/ObjC (1.7.0)
 
 DEPENDENCIES:
   - Alamofire (= 4.9.1)
+  - CryptoSwift (~> 1.4.1)
   - IQKeyboardManagerSwift (= 6.5.6)
   - SDWebImage (~> 5.0)
+  - SwiftyRSA
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - CryptoSwift
     - IQKeyboardManagerSwift
     - SDWebImage
+    - SwiftyRSA
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  CryptoSwift: 0bc800a7e6a24c4fc9ebeab97d44b0d5f73a78bd
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
+  SwiftyRSA: 8c6dd1ea7db1b8dc4fb517a202f88bb1354bc2c6
 
-PODFILE CHECKSUM: 4c2292c35a1f76812e1b59812fb5c055e3ee3c62
+PODFILE CHECKSUM: 834ef8588603809b5e82102f91d35abed2ebedf5
 
-COCOAPODS: 1.8.4
+COCOAPODS: 1.10.0

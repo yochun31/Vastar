@@ -60,6 +60,7 @@ class ConfirmOrderViewController: UIViewController,UITableViewDelegate,UITableVi
     
     let userDefault = UserDefaults.standard
     var dataDict:[String:Any] = [:]
+    var accountPhone:String = ""
     
     //MARK: - Life Cycle
     
@@ -208,12 +209,56 @@ class ConfirmOrderViewController: UIViewController,UITableViewDelegate,UITableVi
             if isSuccess {
                 
                 print("--\(orderNo)")
-                let vc = OrderCreateDoneViewController(nibName: "OrderCreateDoneViewController", bundle: nil)
-                self.navigationController?.pushViewController(vc, animated: false)
+                self.setOrderDetailDataToDict(orderNo: orderNo)
             }
         }
     }
     
+    func setOrderDetailDataToDict(orderNo:String) {
+        
+        var flag:Int = 0
+        
+        for i in 0 ..< self.IDArray.count {
+            
+            let No:String = self.NoArray[i]
+            let name:String = self.titleArray[i]
+            let v:String = self.vArray[i]
+            let color:String = self.colorArray[i]
+            let price:Int = self.priceArray[i]
+            let quantity:Int = self.amountArray[i]
+            let totalPrice:Int = price * quantity
+            var orderDataDict:[String:Any] = [:]
+            
+            orderDataDict.updateValue("vastar", forKey: "UserID")
+            orderDataDict.updateValue("vastar@2673", forKey: "Password")
+            orderDataDict.updateValue(orderNo, forKey: "Order_No")
+            orderDataDict.updateValue(accountPhone, forKey: "Account_Name")
+            orderDataDict.updateValue(No, forKey: "Product_No")
+            orderDataDict.updateValue(name, forKey: "Product_Name")
+            orderDataDict.updateValue(v, forKey: "Product_Voltage")
+            orderDataDict.updateValue(color, forKey: "Product_Color")
+            orderDataDict.updateValue(price, forKey: "Product_Price")
+            orderDataDict.updateValue(quantity, forKey: "Quantity")
+            orderDataDict.updateValue(totalPrice, forKey: "TotalPrice")
+            
+            VClient.sharedInstance().VCAddOrderDetailByData(reqBodyDict: orderDataDict) { (_ isSuccess:Bool,_ message:String) in
+                if isSuccess {
+                    flag+=1
+                    if flag == self.IDArray.count {
+                        print(">>>\(flag)")
+                        let vc = OrderCreateDoneViewController(nibName: "OrderCreateDoneViewController", bundle: nil)
+                        vc.orderNo = orderNo
+                        let totalPrice = self.dataDict["TotalPrice"] as? Int ?? 0
+                        vc.totalFinalPrice = totalPrice
+                        self.navigationController?.pushViewController(vc, animated: false)
+                    }
+                    print(">>\(message)")
+                }else{
+                    print("==\(message)")
+                }
+            }
+        }
+    }
     
     //MARK: - Action
     

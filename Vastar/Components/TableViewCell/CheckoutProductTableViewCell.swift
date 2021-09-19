@@ -31,4 +31,13 @@ class CheckoutProductTableViewCell: UITableViewCell {
         self.productPhoto.image = photo
         
     }
+    
+    func loadData(titleSt:String,url:URL) {
+        
+        self.productPhoto.sd_setImage(with: url, placeholderImage:nil)
+        
+        self.productContentLabel.text = titleSt
+        self.productContentLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        
+    }
 }
