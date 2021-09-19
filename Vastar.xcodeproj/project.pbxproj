@@ -17,6 +17,16 @@
 		2203BBF6267362BA006986D2 /* ReceiverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2203BBF4267362BA006986D2 /* ReceiverTableViewCell.xib */; };
 		220B260126BDA99C007FC2AA /* CustomAlertTwoBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220B260026BDA99C007FC2AA /* CustomAlertTwoBtnView.swift */; };
 		220B260326BDAA04007FC2AA /* CustomAlertTwoBtnView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220B260226BDAA04007FC2AA /* CustomAlertTwoBtnView.xib */; };
+		220B260526E5AFED007FC2AA /* stage-public.pem in Resources */ = {isa = PBXBuildFile; fileRef = 220B260426E5AFEC007FC2AA /* stage-public.pem */; };
+		220B260926E74758007FC2AA /* TransactionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220B260726E74758007FC2AA /* TransactionViewController.swift */; };
+		220B260A26E74758007FC2AA /* TransactionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220B260826E74758007FC2AA /* TransactionViewController.xib */; };
+		220B260C26E9B424007FC2AA /* pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 220B260B26E9B424007FC2AA /* pub.pem */; };
+		220B260F26E9EBE2007FC2AA /* FailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220B260D26E9EBE2007FC2AA /* FailInfoViewController.swift */; };
+		220B261026E9EBE2007FC2AA /* FailInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220B260E26E9EBE2007FC2AA /* FailInfoViewController.xib */; };
+		220B261526E9EC65007FC2AA /* SuccessInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220B261326E9EC65007FC2AA /* SuccessInfoViewController.swift */; };
+		220B261626E9EC65007FC2AA /* SuccessInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220B261426E9EC65007FC2AA /* SuccessInfoViewController.xib */; };
+		220B261926EEEF7D007FC2AA /* OrderDoneDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220B261726EEEF7D007FC2AA /* OrderDoneDetailViewController.swift */; };
+		220B261A26EEEF7D007FC2AA /* OrderDoneDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220B261826EEEF7D007FC2AA /* OrderDoneDetailViewController.xib */; };
 		2244F61326789586006754D6 /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244F61126789586006754D6 /* ProductListViewController.swift */; };
 		2244F61426789586006754D6 /* ProductListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2244F61226789586006754D6 /* ProductListViewController.xib */; };
 		2244F61726789606006754D6 /* ProductListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244F61526789606006754D6 /* ProductListTableViewCell.swift */; };
@@ -93,6 +103,16 @@
 		2203BBF4267362BA006986D2 /* ReceiverTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiverTableViewCell.xib; sourceTree = "<group>"; };
 		220B260026BDA99C007FC2AA /* CustomAlertTwoBtnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTwoBtnView.swift; sourceTree = "<group>"; };
 		220B260226BDAA04007FC2AA /* CustomAlertTwoBtnView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomAlertTwoBtnView.xib; sourceTree = "<group>"; };
+		220B260426E5AFEC007FC2AA /* stage-public.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "stage-public.pem"; sourceTree = "<group>"; };
+		220B260726E74758007FC2AA /* TransactionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionViewController.swift; sourceTree = "<group>"; };
+		220B260826E74758007FC2AA /* TransactionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TransactionViewController.xib; sourceTree = "<group>"; };
+		220B260B26E9B424007FC2AA /* pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = pub.pem; sourceTree = "<group>"; };
+		220B260D26E9EBE2007FC2AA /* FailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FailInfoViewController.swift; sourceTree = "<group>"; };
+		220B260E26E9EBE2007FC2AA /* FailInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FailInfoViewController.xib; sourceTree = "<group>"; };
+		220B261326E9EC65007FC2AA /* SuccessInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SuccessInfoViewController.swift; sourceTree = "<group>"; };
+		220B261426E9EC65007FC2AA /* SuccessInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuccessInfoViewController.xib; sourceTree = "<group>"; };
+		220B261726EEEF7D007FC2AA /* OrderDoneDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDoneDetailViewController.swift; sourceTree = "<group>"; };
+		220B261826EEEF7D007FC2AA /* OrderDoneDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderDoneDetailViewController.xib; sourceTree = "<group>"; };
 		2244F61126789586006754D6 /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
 		2244F61226789586006754D6 /* ProductListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductListViewController.xib; sourceTree = "<group>"; };
 		2244F61526789606006754D6 /* ProductListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListTableViewCell.swift; sourceTree = "<group>"; };
@@ -181,9 +201,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		220B260626E73AF3007FC2AA /* Pay */ = {
+			isa = PBXGroup;
+			children = (
+				220B260726E74758007FC2AA /* TransactionViewController.swift */,
+				220B260826E74758007FC2AA /* TransactionViewController.xib */,
+				220B260D26E9EBE2007FC2AA /* FailInfoViewController.swift */,
+				220B260E26E9EBE2007FC2AA /* FailInfoViewController.xib */,
+				220B261326E9EC65007FC2AA /* SuccessInfoViewController.swift */,
+				220B261426E9EC65007FC2AA /* SuccessInfoViewController.xib */,
+			);
+			path = Pay;
+			sourceTree = "<group>";
+		};
 		2244F61026789458006754D6 /* SubPage */ = {
 			isa = PBXGroup;
 			children = (
+				220B260626E73AF3007FC2AA /* Pay */,
 				228BDD9226983C760080F843 /* Order */,
 				228BDD8C2696EA810080F843 /* Product */,
 				228BDD8D2696EDE10080F843 /* ShoppingCar */,
@@ -229,6 +263,8 @@
 				228BDD9C269AEE2E0080F843 /* OrderCreateDoneViewController.xib */,
 				228BDD9F269D38A70080F843 /* OrderConfirmViewController.swift */,
 				228BDDA0269D38A70080F843 /* OrderConfirmViewController.xib */,
+				220B261726EEEF7D007FC2AA /* OrderDoneDetailViewController.swift */,
+				220B261826EEEF7D007FC2AA /* OrderDoneDetailViewController.xib */,
 				228BDDA326A15A180080F843 /* HistoryOrderDetailViewController.swift */,
 				228BDDA426A15A180080F843 /* HistoryOrderDetailViewController.xib */,
 			);
@@ -240,6 +276,8 @@
 			children = (
 				22F1C4052668D219003A1D5C /* Vastar-Bridging-Header.h */,
 				228BDD8A26959A860080F843 /* VastarDataBase.db */,
+				220B260426E5AFEC007FC2AA /* stage-public.pem */,
+				220B260B26E9B424007FC2AA /* pub.pem */,
 				22F1C30C26648CF7003A1D5C /* Vastar */,
 				22F1C30B26648CF7003A1D5C /* Products */,
 				8463F18985A4874208FC738A /* Pods */,
@@ -452,23 +490,29 @@
 				22F1C35D2664C7AC003A1D5C /* LoginViewController.xib in Resources */,
 				22F1C3E12668857B003A1D5C /* ShoppingCarViewController.xib in Resources */,
 				22F1C38D2665CBCB003A1D5C /* ForgetPwViewController.xib in Resources */,
+				220B261026E9EBE2007FC2AA /* FailInfoViewController.xib in Resources */,
+				220B260526E5AFED007FC2AA /* stage-public.pem in Resources */,
 				22F1C31A26648D01003A1D5C /* LaunchScreen.storyboard in Resources */,
 				228BDD96269843460080F843 /* OrderListViewController.xib in Resources */,
+				220B261A26EEEF7D007FC2AA /* OrderDoneDetailViewController.xib in Resources */,
 				228BDD89268F0FDD0080F843 /* CheckoutProductTableViewCell.xib in Resources */,
 				2203BBF12672106D006986D2 /* RecipientAddView.xib in Resources */,
 				2244F61826789606006754D6 /* ProductListTableViewCell.xib in Resources */,
 				22F1C36C2664D152003A1D5C /* Localizable.strings in Resources */,
+				220B260C26E9B424007FC2AA /* pub.pem in Resources */,
 				228C406326BA6774003AE590 /* CustomAlertView.xib in Resources */,
 				2203BBF6267362BA006986D2 /* ReceiverTableViewCell.xib in Resources */,
 				2203BBE3266DCD3C006986D2 /* ChangePwViewController.xib in Resources */,
 				22F1C31726648D01003A1D5C /* Assets.xcassets in Resources */,
 				22F1C31526648CF8003A1D5C /* Main.storyboard in Resources */,
 				22F1C3A826661A34003A1D5C /* VideoViewController.xib in Resources */,
+				220B260A26E74758007FC2AA /* TransactionViewController.xib in Resources */,
 				228BDDA2269D38A70080F843 /* OrderConfirmViewController.xib in Resources */,
 				228BDD85268EC22F0080F843 /* CheckoutViewController.xib in Resources */,
 				228BDD81268C72C70080F843 /* shoppingCarTableViewCell.xib in Resources */,
 				22F1C3D92668852D003A1D5C /* ProductViewController.xib in Resources */,
 				220B260326BDAA04007FC2AA /* CustomAlertTwoBtnView.xib in Resources */,
+				220B261626E9EC65007FC2AA /* SuccessInfoViewController.xib in Resources */,
 				22F1C3EC266885F7003A1D5C /* HistoryOrderViewController.xib in Resources */,
 				228BDD912696EED80080F843 /* ConfirmOrderViewController.xib in Resources */,
 				22F1C3F126688620003A1D5C /* MemberDataViewController.xib in Resources */,
@@ -538,6 +582,7 @@
 				228BDD9D269AEE2F0080F843 /* OrderCreateDoneViewController.swift in Sources */,
 				22F1C39C26660FCC003A1D5C /* SMSideMenuViewController.swift in Sources */,
 				22F1C3D82668852D003A1D5C /* ProductViewController.swift in Sources */,
+				220B261926EEEF7D007FC2AA /* OrderDoneDetailViewController.swift in Sources */,
 				228BDD902696EED80080F843 /* ConfirmOrderViewController.swift in Sources */,
 				22F1C31226648CF8003A1D5C /* ViewController.swift in Sources */,
 				2244F61B268039D3006754D6 /* ProductDetailViewController.swift in Sources */,
@@ -560,6 +605,8 @@
 				2244F6202682D10C006754D6 /* SWRevealViewController.m in Sources */,
 				228BDD95269843460080F843 /* OrderListViewController.swift in Sources */,
 				228BDD992698436F0080F843 /* OrderListTableViewCell.swift in Sources */,
+				220B260F26E9EBE2007FC2AA /* FailInfoViewController.swift in Sources */,
+				220B261526E9EC65007FC2AA /* SuccessInfoViewController.swift in Sources */,
 				22F1C38C2665CBCB003A1D5C /* ForgetPwViewController.swift in Sources */,
 				22F1C3A726661A34003A1D5C /* VideoViewController.swift in Sources */,
 				22F1C31026648CF8003A1D5C /* SceneDelegate.swift in Sources */,
@@ -567,6 +614,7 @@
 				228BDD88268F0FDD0080F843 /* CheckoutProductTableViewCell.swift in Sources */,
 				228BDDA526A15A1C0080F843 /* HistoryOrderDetailViewController.swift in Sources */,
 				228BDD84268EC22F0080F843 /* CheckoutViewController.swift in Sources */,
+				220B260926E74758007FC2AA /* TransactionViewController.swift in Sources */,
 				2203BBF5267362BA006986D2 /* ReceiverTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

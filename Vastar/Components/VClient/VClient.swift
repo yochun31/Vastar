@@ -483,6 +483,26 @@ class VClient {
         result(doneFlag)
     }
     
+    func VCGetProductImagUrlByNo(productNoArray:Array<String>,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataDict:[String:String]) -> Void) {
+        
+        var dataDict:[String:String] = [:]
+        var flag:Int = 0
+        for i in 0 ..< productNoArray.count {
+            
+            CloudGatewayManager.sharedInstance().CGMGetProductImagUrlByNo(productNo: productNoArray[i]) { (_ isSuccess:Bool,_ message:String,_ resUrl:String,_ isDone:Bool) in
+                if isSuccess {
+                    if isDone {
+                        flag+=1
+                        dataDict.updateValue(resUrl, forKey: productNoArray[i])
+                        if flag == productNoArray.count {
+                            result(isSuccess,message,dataDict)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
     //MARK: - 付款方式
     
     func VCGetPayMethodData(result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) -> Void) {
@@ -518,10 +538,59 @@ class VClient {
         
     }
     
+    func VCAddOrderDetailByData(reqBodyDict:[String:Any],result:@escaping (_ isSuccess:Bool,_ message:String) -> Void) {
+        CloudGatewayManager.sharedInstance().CGMAddOrderDetailByData(reqBodyDict: reqBodyDict) { (_ isSuccess:Bool,_ message:String) in
+            result(isSuccess,message)
+        }
+    }
+    
     func VCGetHistoryOrderListData(phone:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
         
         CloudGatewayManager.sharedInstance().CGMGetHistoryOrderListData(phone: phone) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
             result(isSuccess,message,resDataArray)
+        }
+    }
+    
+    func VCGetOrderNumericalByOrderNo(order_No:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Any>) -> Void) {
+        
+        CloudGatewayManager.sharedInstance().CGMGetOrderNumericalByOrderNo(order_No: order_No) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Any>) in
+            result(isSuccess,message,resDataArray)
+        }
+    }
+    
+    func VCUpdateOrderStatus(orderNo:String,status:String,result:@escaping (_ isSuccess:Bool,_ message:String) -> Void) {
+        
+        let todayDate = Date()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy/MM/dd HH:mm:ss"
+
+        var bodyDict:[String:String] = [:]
+        bodyDict.updateValue("vastar", forKey: "UserID")
+        bodyDict.updateValue("vastar@2673", forKey: "Password")
+        bodyDict.updateValue(orderNo, forKey: "Order_No")
+        bodyDict.updateValue(status, forKey: "Order_Status")
+        bodyDict.updateValue(dateFormatter.string(from: todayDate), forKey: "Paytime")
+        
+        
+        CloudGatewayManager.sharedInstance().CGMUpdateOrderStatus(reqBodyDict: bodyDict) { (_ isSuccess:Bool,_ message:String) in
+            result(isSuccess,message)
+        }
+    }
+    
+    func VCGetOrderDetailByNo(orderNo:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
+        
+        CloudGatewayManager.sharedInstance().CGMGetOrderDetailByNo(orderNo: orderNo) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
+            result(isSuccess,message,resDataArray)
+        }
+    }
+    
+    //MARK: - 金流
+   
+    func VCGetTransactionUrl(reqBodyDict:[String:String],result:@escaping (_ isSuccess:Bool,_ message:String,_ resString:String) -> Void) {
+        
+        CloudGatewayManager.sharedInstance().CGMGetTransactionUrl(reqBodyDict: reqBodyDict) { (_ isSuccess:Bool,_ message:String,_ resString:String) in
+            
+            result(isSuccess,message,resString)
         }
     }
 

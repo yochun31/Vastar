@@ -177,6 +177,12 @@
 "Order_Later_Pay_Btn_title" = "稍後付款";
 "Order_Now_Pay_Btn_title" = "立即付款";
 "Order_Confirm_title" = "確認訂單";
+"Order_Pay_Done_text" = "訂單已付款";
+
+"Pay_Fail_Title" = "交易取消";
+"Pay_Fail_Info_Text" = "請於訂單狀態頁面重新嘗試付款，或聯繫本公司。";
+"Pay_Success_Title" = "付款成功！";
+"Pay_Success_Info_Text" = "感謝您的訂購，本公司會與您接洽聯繫送貨方式與時間，如有任何問題歡迎來電，(02)2838-1010。";
 
 "Verify_Get_Btn_title" = "取得驗證碼";
 "Verify_Wait_Btn_title" = "秒後可再次發送";

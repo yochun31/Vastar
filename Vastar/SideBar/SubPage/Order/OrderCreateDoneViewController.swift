@@ -14,6 +14,9 @@ class OrderCreateDoneViewController: UIViewController {
     @IBOutlet var laterPayBtn: UIButton!
     @IBOutlet var nowPayBtn: UIButton!
     
+    let userDefault = UserDefaults.standard
+    var orderNo:String = ""
+    var totalFinalPrice:Int = 0
     
     //MARK: - Life Cycle
     
@@ -73,7 +76,16 @@ class OrderCreateDoneViewController: UIViewController {
     
     @objc func nowPayBtnClick(_ sender:UIButton) {
         
-        
+        VClient.sharedInstance().VCDeleteAllShoppingCarData { isDone in
+            if isDone {
+                self.userDefault.set(1, forKey: "backDefault")
+                let vc = TransactionViewController(nibName: "TransactionViewController", bundle: nil)
+                vc.orderNo = self.orderNo
+                vc.getUrl_OrderNo = self.orderNo
+                vc.totalPayPrice = self.totalFinalPrice
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
     }
 
     /*
