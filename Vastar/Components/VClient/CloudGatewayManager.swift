@@ -670,6 +670,52 @@ class CloudGatewayManager {
         }
     }
     
+    func CGMGetProductImagUrlByNo(productNo:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resUrl:String,_ isDone:Bool) -> Void) {
+        
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673", "Product_No" : productNo]
+        let urlString:String = vApiUrl + "/api/Product/QueryProduct_No"
+        let url = URL.init(string: urlString)
+        print("\(urlString)")
+        var messageStr:String = ""
+        var imgUrl:String = ""
+        var flag:Bool = false
+        
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+  
+                    let jsonInfo = json as? [String : Any] ?? [:]
+                    let res:Int = jsonInfo["Result"] as? Int ?? 0
+                    if res == 0 {
+                        
+                        imgUrl = jsonInfo["Thumbnail_Address"] as? String ?? ""
+                        messageStr = jsonInfo["Message"] as? String ?? ""
+                        flag = true
+                    }else{
+                        
+                        messageStr = jsonInfo["Message"] as? String ?? ""
+                    }
+                    
+                    result(true,messageStr,imgUrl,flag)
+                }else{
+                    result(false,"","",flag)
+                }
+                
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"","",false)
+                
+                break
+            }
+        }
+        
+    }
+    
     //MARK: - 付款方式
     
     // 取得付款方式
@@ -907,6 +953,41 @@ class CloudGatewayManager {
         }
     }
     
+    //新增訂單詳細內容
+    
+    func CGMAddOrderDetailByData(reqBodyDict:[String:Any],result:@escaping (_ isSuccess:Bool,_ message:String) -> Void) {
+        
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = reqBodyDict
+        let urlString:String = vApiUrl + "/api/OrderDetail/Insert"
+        let url = URL.init(string: urlString)
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                let jsonInfo = json as? [String : Any] ?? [:]
+                
+                var isResStatus:Bool = false
+                let resStatus:Int = jsonInfo["Result"] as? Int ?? -1
+                let messageStr:String = jsonInfo["Message"] as? String ?? ""
+
+                if resStatus == 0 {
+                    isResStatus = true
+                }else{
+                    isResStatus = false
+                }
+                
+                result(isResStatus,messageStr)
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"Error")
+                break
+            }
+        }
+    }
+    
     // 取得歷史訂單資料
     
     func CGMGetHistoryOrderListData(phone:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
@@ -1014,6 +1095,197 @@ class CloudGatewayManager {
                 
                 print("\(error)")
                 result(false,"Error",[])
+                break
+            }
+        }
+    }
+    
+    func CGMGetOrderNumericalByOrderNo(order_No:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Any>) -> Void) {
+
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673", "Order_No" : order_No]
+        let urlString:String = vApiUrl + "/api/Order/QueryOrder_No"
+        let url = URL.init(string: urlString)
+        print("\(urlString)")
+        var messageStr:String = ""
+        var dataArray:Array<Any> = []
+        
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+  
+                    let jsonInfo = json as? [String : Any] ?? [:]
+                    let res:Int = jsonInfo["Result"] as? Int ?? 0
+                    if res == 0 {
+                        let price:Int = jsonInfo["TotalPrice"] as? Int ?? 0
+                        let number:String = jsonInfo["NumericalOrder"] as? String ?? ""
+                        let pay:String = jsonInfo["PaymentMethod"] as? String ?? ""
+                        
+                        dataArray = [price,number,pay]
+                        messageStr = jsonInfo["Message"] as? String ?? ""
+                        
+                    }else{
+                        
+                        messageStr = jsonInfo["Message"] as? String ?? ""
+                    }
+                    
+                    result(true,messageStr,dataArray)
+                }else{
+                    result(false,"",[])
+                }
+                
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"",[])
+                
+                break
+            }
+        }
+    }
+    
+    func CGMUpdateOrderStatus(reqBodyDict:[String:String],result:@escaping (_ isSuccess:Bool,_ message:String) -> Void) {
+        
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let params:Parameters = reqBodyDict
+        let urlString:String = vApiUrl + "/api/Order/UpdateOrder_Status"
+        let url = URL.init(string: urlString)
+        Alamofire.request(url!, method: .post, parameters: params, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                let jsonInfo = json as? [String : Any] ?? [:]
+                
+                var isResStatus:Bool = false
+                let resStatus:Int = jsonInfo["Result"] as? Int ?? -1
+                let messageStr:String = jsonInfo["Message"] as? String ?? ""
+                if resStatus == 0 {
+                    isResStatus = true
+                }else{
+                    isResStatus = false
+                }
+                
+                result(isResStatus,messageStr)
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"Error")
+                break
+            }
+        }
+        
+    }
+    
+    func CGMGetOrderDetailByNo(orderNo:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
+        
+        var resProductDataArray:Array<Array<Any>> = []
+        
+        var IDArray:Array<Int> = []
+        var accountNameArray:Array<String> = []
+        var productNoArray:Array<String> = []
+        var productNameArray:Array<String> = []
+        var productVoltageArray:Array<String> = []
+        var productColorArray:Array<String> = []
+        var productPriceArray:Array<Int> = []
+        var productQuantityArray:Array<Int> = []
+        var productTotalPriceArray:Array<Int> = []
+       
+        var messageStr:String = ""
+
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673", "order_No" : orderNo]
+        let urlString:String = vApiUrl + "/api/OrderDetail/Query"
+        let url = URL.init(string: urlString)
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+                print("---> \(json)")
+                    let jsonArray:Array<Any> = json as? Array<Any> ?? []
+                    
+                    for i in 0 ..< jsonArray.count{
+                        let resultDict = jsonArray[i] as? [String:Any] ?? [:]
+                        let result:Int = resultDict["Result"] as? Int ?? 0
+                        
+                        if result == 0 {
+                            let ID:Int = resultDict["ID"] as? Int ?? 0
+                            let accountName:String = resultDict["Account_Name"] as? String ?? ""
+                            let NO:String = resultDict["Product_No"] as? String ?? ""
+                            let name:String = resultDict["Product_Name"] as? String ?? ""
+                            let voltage:String = resultDict["Product_Voltage"] as? String ?? ""
+                            let color:String = resultDict["Product_Color"] as? String ?? ""
+                            let price:Int = resultDict["Product_Price"] as? Int ?? 0
+                            let quantity:Int = resultDict["Quantity"] as? Int ?? 0
+                            let totalPrice:Int = resultDict["TotalPrice"] as? Int ?? 0
+                            
+
+                            IDArray.append(ID)
+                            accountNameArray.append(accountName)
+                            productNoArray.append(NO)
+                            productNameArray.append(name)
+                            productVoltageArray.append(voltage)
+                            productColorArray.append(color)
+                            productPriceArray.append(price)
+                            productQuantityArray.append(quantity)
+                            productTotalPriceArray.append(totalPrice)
+
+                        }else{
+                            messageStr = resultDict["Message"] as? String ?? ""
+                        }
+                    }
+                    
+                    resProductDataArray = [IDArray,accountNameArray,productNoArray,productNameArray,productVoltageArray,productColorArray,productPriceArray,productQuantityArray,productTotalPriceArray]
+                    
+                    result(true,messageStr,resProductDataArray)
+                    
+                }else{
+                    result(false,"statusCode = \(String(describing: responseData.response?.statusCode))",[])
+                }
+                
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"Error",[])
+                break
+            }
+        }
+    }
+    
+     //MARK: - 金流
+    
+    func CGMGetTransactionUrl(reqBodyDict:[String:String],result:@escaping (_ isSuccess:Bool,_ message:String,_ resString:String) -> Void) {
+        
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = reqBodyDict
+        let urlString:String = "https://a.intella.co/allpaypass/api/general"
+        let url = URL.init(string: urlString)
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+                    print("---> \(json)")
+                    
+                    let jsonInfo = json as? [String : Any] ?? [:]
+                    let resSt:String = jsonInfo["Response"] as? String ?? ""
+                    
+                    result(true,"",resSt)
+                }else{
+                    result(false,"","")
+                }
+                
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"","")
+                
                 break
             }
         }

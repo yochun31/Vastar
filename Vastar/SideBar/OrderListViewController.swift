@@ -6,8 +6,10 @@
 //
 
 import UIKit
+import CryptoSwift
+import SwiftyRSA
 
-class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,CustomAlertViewDelegate {
 
     
     @IBOutlet var orderTableView: UITableView!
@@ -34,7 +36,12 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
     private var packageDeliveryUrlArray:Array<String> = []
     private var orderCompleteTimeArray:Array<String> = []
     
+    private var cav = CustomAlertView()
+    private var selectOrderNoStr:String = ""
+    private var selectTotalPrice:Int = 0
     var accountPhone:String = ""
+    let userDefault = UserDefaults.standard
+    
     
     //MARK: - Life Cycle
     
@@ -48,6 +55,22 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
         setTableView()
         getOrderListData()
     }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        let flag:Int = self.userDefault.object(forKey: "backDefault")as? Int ?? 0
+        if flag == 1 {
+            self.userDefault.set(0, forKey: "backDefault")
+            let nav = UINavigationController()
+            let reveal = self.revealViewController()
+            let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
+            nav.viewControllers = [vc]
+            reveal?.pushFrontViewController(nav, animated: true)
+        }
+    }
+
     
     
     //MARK: - UI Interface Methods
@@ -181,6 +204,26 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
         return dictData
     }
     
+    func getOrderNumericalData(selectIndex:Int) {
+        
+        VClient.sharedInstance().VCGetOrderNumericalByOrderNo(order_No: self.orderNoArray[selectIndex]) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Any>) in
+            
+            if isSuccess {
+                
+                self.selectOrderNoStr = self.orderNoArray[selectIndex]
+                self.selectTotalPrice = self.orderTotalPriceArray[selectIndex]
+                let num:String = resDataArray[1] as? String ?? ""
+                let orderNO:String = "\(self.orderNoArray[selectIndex])\(num)"
+                let vc = TransactionViewController(nibName: "TransactionViewController", bundle: nil)
+                vc.orderNo = self.selectOrderNoStr
+                vc.getUrl_OrderNo = orderNO
+                vc.totalPayPrice = self.selectTotalPrice
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
+    
     
     //MARK:- Action
 
@@ -190,9 +233,33 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
     
     @objc func orderNumValueBtnClick(_ sender:UIButton) {
         
-        let vc = OrderConfirmViewController(nibName: "OrderConfirmViewController", bundle: nil)
-        vc.dataDict = self.getCheckoutDictData(selectIndex: sender.tag)
-        self.navigationController?.pushViewController(vc, animated: true)
+        let statusSt:String = self.orderStatusArray[sender.tag]
+        
+        if statusSt == "訂單已付款" {
+            let vc = OrderDoneDetailViewController(nibName: "OrderDoneDetailViewController", bundle: nil)
+            vc.dataDict = self.getCheckoutDictData(selectIndex: sender.tag)
+            vc.orderNoSt = self.orderNoArray[sender.tag]
+            self.navigationController?.pushViewController(vc, animated: true)
+            
+        }else{
+            let vc = OrderConfirmViewController(nibName: "OrderConfirmViewController", bundle: nil)
+            vc.dataDict = self.getCheckoutDictData(selectIndex: sender.tag)
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    @objc func orderScheduleValueBtnClick(_ sender:UIButton) {
+        
+        let statusSt:String = self.orderStatusArray[sender.tag]
+        
+        if statusSt == "訂單已付款" {
+            self.cav = CustomAlertView.init(title: "已付款", btnTitle:NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            self.cav.delegate = self
+            self.view.addSubview(self.cav)
+        }else{
+            self.userDefault.set(1, forKey: "backDefault")
+            self.getOrderNumericalData(selectIndex: sender.tag)
+        }
     }
 
     /*
@@ -228,13 +295,27 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
 
         let number:String = self.orderNoArray[indexPath.row]
         let deliveryCode:String = self.packageDeliveryCodeArray[indexPath.row]
+        let statusSt:String = self.orderStatusArray[indexPath.row]
         
-        cell.loadData(orderNumSt: number, scheduleSt: NSLocalizedString("Order_Go_Pay_Btn_title", comment: ""), freightNum: deliveryCode)
+        if statusSt == "訂單已付款" {
+            cell.loadData(orderNumSt: number, scheduleSt: statusSt, freightNum: deliveryCode)
+        }else{
+            cell.loadData(orderNumSt: number, scheduleSt: NSLocalizedString("Order_Go_Pay_Btn_title", comment: ""), freightNum: deliveryCode)
+        }
         
         cell.orderNumValueBtn.tag = indexPath.row
         cell.orderNumValueBtn.addTarget(self, action: #selector(orderNumValueBtnClick(_:)), for: .touchUpInside)
+        
+        cell.orderScheduleValueBtn.tag = indexPath.row
+        cell.orderScheduleValueBtn.addTarget(self, action: #selector(orderScheduleValueBtnClick(_:)), for: .touchUpInside)
 
         return cell
+    }
+    
+    //MARK: - CustomAlertViewDelegate
+    
+    func alertBtnClick(btnTag: Int) {
+        self.cav.removeFromSuperview()
     }
 
 }

@@ -700,6 +700,7 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
         }else{
             let vc = ConfirmOrderViewController(nibName: "ConfirmOrderViewController", bundle: nil)
             vc.dataDict = self.getCheckoutDictData()
+            vc.accountPhone = self.accountPhone
             self.navigationController?.pushViewController(vc, animated: true)
         }
     }

@@ -9,5 +9,7 @@ target 'Vastar' do
     pod 'Alamofire' ,'4.9.1'
     pod 'IQKeyboardManagerSwift','6.5.6'
     pod 'SDWebImage', '~> 5.0'
+    pod 'SwiftyRSA'
+    pod 'CryptoSwift', '~> 1.4.1'
 
 end
