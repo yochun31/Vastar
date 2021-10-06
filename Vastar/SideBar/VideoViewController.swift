@@ -7,8 +7,20 @@
 
 import UIKit
 
-class VideoViewController: UIViewController {
+class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
+    
+    @IBOutlet var videoListTableView: UITableView!
+    @IBOutlet var typeBtn: UIButton!
+    
+    private var videoOrderArray:Array<Int> = []
+    private var vimeoIDArray:Array<String> = []
+    private var videoSeriesArray:Array<String> = []
+    private var videoNameArray:Array<String> = []
+    private var videoImageUrlArray:Array<String> = []
+    
+    let userDefault = UserDefaults.standard
+    
     
     //MARK: - Life Cycle
     
@@ -20,6 +32,19 @@ class VideoViewController: UIViewController {
         setLeftBarButton()
         setInterface()
         setupSWReveal()
+        setTableView()
+        
+        getVideoAllList()
+    }
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        let flag:Int = self.userDefault.object(forKey: "backDefault")as? Int ?? 0
+        if flag == 1 {
+            self.userDefault.set(0, forKey: "backDefault")
+        }
     }
 
     
@@ -35,6 +60,9 @@ class VideoViewController: UIViewController {
     
     func setInterface() {
         self.navigationItem.title = NSLocalizedString("Video_title", comment: "")
+        
+        self.typeBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
+        self.typeBtn.addTarget(self, action: #selector(typeBtnClick(_:)), for: .touchUpInside)
     }
     
     
@@ -52,6 +80,52 @@ class VideoViewController: UIViewController {
         
     }
     
+    
+    func setTableView() {
+        
+        self.videoListTableView.delegate = self
+        self.videoListTableView.dataSource = self
+        
+        self.videoListTableView.register(UINib(nibName: "VideoListTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoCell")
+        self.videoListTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+    }
+    
+    //MARK: - Assistant Methods
+    
+    func getVideoAllList() {
+        
+        VClient.sharedInstance().VCGetVideoListByType(type: "") { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
+            if isSuccess {
+                
+                self.videoOrderArray = resDataArray[0] as? Array<Int> ?? []
+                self.vimeoIDArray = resDataArray[1] as? Array<String> ?? []
+                self.videoSeriesArray = resDataArray[2] as? Array<String> ?? []
+                self.videoNameArray = resDataArray[3] as? Array<String> ?? []
+                self.videoImageUrlArray = resDataArray[4] as? Array<String> ?? []
+                
+                self.videoListTableView.reloadData()
+            }
+        }
+    }
+    
+    func getProductModelData(vimeoID:String,viewControllerTitle:String) {
+        
+        VClient.sharedInstance().VCGetVideoProductByID(vimeoID: vimeoID) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Any>) in
+            
+            if isSuccess {
+                
+                print("=====>\(resDataArray)")
+                
+                let vc = VideoDetailViewController(nibName: "VideoDetailViewController", bundle: nil)
+                vc.productDataArray = resDataArray
+                vc.vimeoIDSt = vimeoID
+                vc.titleSt = viewControllerTitle
+                self.navigationController?.pushViewController(vc, animated: true)
+            }
+        }
+    }
+    
     //MARK: - Action
     
     @objc func leftBarBtnClick(_ sender:UIButton) {
@@ -59,7 +133,12 @@ class VideoViewController: UIViewController {
         self.revealViewController()?.revealToggle(animated: true)
     }
     
-    
+    @objc func typeBtnClick(_ sender:UIButton) {
+        
+        let vc = VideoTypeViewController(nibName: "VideoTypeViewController", bundle: nil)
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
 
     /*
     // MARK: - Navigation
@@ -71,4 +150,44 @@ class VideoViewController: UIViewController {
     }
     */
 
+    
+    //MARK: - UITableViewDataSource
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return self.videoOrderArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell:VideoListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! VideoListTableViewCell
+        cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        
+        let selectBkView = UIView()
+        selectBkView.backgroundColor = UIColor.clear
+        cell.selectedBackgroundView = selectBkView
+
+        let series:String = self.videoSeriesArray[indexPath.row]
+        let name:String = self.videoNameArray[indexPath.row]
+        let urlSt:String = self.videoImageUrlArray[indexPath.row]
+        let url = URL.init(string: urlSt)!
+        cell.loadData(title1St: series, title2St: name, url: url)
+        
+        
+        return cell
+    }
+    
+    //MARK: - UITableViewDelegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        print("==\(indexPath.row)")
+        
+        self.getProductModelData(vimeoID: self.vimeoIDArray[indexPath.row], viewControllerTitle: self.videoNameArray[indexPath.row])
+
+    }
 }
