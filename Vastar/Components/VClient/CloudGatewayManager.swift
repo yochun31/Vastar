@@ -716,6 +716,57 @@ class CloudGatewayManager {
         
     }
     
+    
+    func CGMGetProductInfoByNo(productNo:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resUrl:String,_ resName:String,_ resGroup:Int,_ isDone:Bool) -> Void) {
+        
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673", "Product_No" : productNo]
+        let urlString:String = vApiUrl + "/api/Product/QueryProduct_No"
+        let url = URL.init(string: urlString)
+        print("\(urlString)")
+        var messageStr:String = ""
+        var imgUrl:String = ""
+        var name:String = ""
+        var product_group:Int = 0
+        var flag:Bool = false
+        
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+  
+                    let jsonInfo = json as? [String : Any] ?? [:]
+                    let res:Int = jsonInfo["Result"] as? Int ?? 0
+                    if res == 0 {
+                        
+                        imgUrl = jsonInfo["Thumbnail_Address"] as? String ?? ""
+                        name = jsonInfo["Product_Name"] as? String ?? ""
+                        product_group = jsonInfo["Product_Group"] as? Int ?? 0
+                        messageStr = jsonInfo["Message"] as? String ?? ""
+                        flag = true
+                    }else{
+                        
+                        messageStr = jsonInfo["Message"] as? String ?? ""
+                    }
+                    
+                    result(true,messageStr,imgUrl,name,product_group,flag)
+                }else{
+                    result(false,"","","",0,flag)
+                }
+                
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"","","",0,false)
+                
+                break
+            }
+        }
+        
+    }
+    
     //MARK: - 付款方式
     
     // 取得付款方式
@@ -1285,6 +1336,156 @@ class CloudGatewayManager {
                 
                 print("\(error)")
                 result(false,"","")
+                
+                break
+            }
+        }
+    }
+    
+    
+    //MARK: - 影片
+    
+    func CGMGetVideoListByType(type:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
+        
+        var resVideoDataArray:Array<Array<Any>> = []
+        
+        var videoOrderArray:Array<Int> = []
+        var vimeoIDArray:Array<String> = []
+        var videoSeriesArray:Array<String> = []
+        var videoNameArray:Array<String> = []
+        var videoImageUrlArray:Array<String> = []
+        
+        var messageStr:String = ""
+
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673", "ProductType" : type]
+        let urlString:String = vApiUrl + "/api/Video/Query"
+        let url = URL.init(string: urlString)
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+                    let jsonArray:Array<Any> = json as? Array<Any> ?? []
+                    
+                    for i in 0 ..< jsonArray.count{
+                        let resultDict = jsonArray[i] as? [String:Any] ?? [:]
+                        let result:Int = resultDict["Result"] as? Int ?? 0
+                        
+                        if result == 0 {
+                            let order:Int = resultDict["Video_Order"] as? Int ?? 0
+                            let vimeoID:String = resultDict["Vimeo_ID"] as? String ?? ""
+                            let series:String = resultDict["Video_Series"] as? String ?? ""
+                            let name:String = resultDict["Video_Name"] as? String ?? ""
+                            let imagUrl:String = resultDict["Thumbnail_ID"] as? String ?? ""
+                            
+                            videoOrderArray.append(order)
+                            vimeoIDArray.append(vimeoID)
+                            videoSeriesArray.append(series)
+                            videoNameArray.append(name)
+                            videoImageUrlArray.append(imagUrl)
+                            
+
+                        }else{
+                            messageStr = resultDict["Message"] as? String ?? ""
+                        }
+                    }
+                    
+                    resVideoDataArray = [videoOrderArray,vimeoIDArray,videoSeriesArray,videoNameArray,videoImageUrlArray]
+                    
+                    result(true,messageStr,resVideoDataArray)
+                    
+                }else{
+                    result(false,"statusCode = \(String(describing: responseData.response?.statusCode))",[])
+                }
+                
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"Error",[])
+                break
+            }
+        }
+    }
+    
+    
+    func CGMGetVideoProductByID(vimeoID:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Any>) -> Void) {
+        
+        
+        var dataArray:Array<Array<Any>> = []
+        var typeArray:Array<String> = []
+        var modelArray:Array<String> = []
+        
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673", "Vimeo_ID" : vimeoID]
+        let urlString:String = vApiUrl + "/api/Video/QueryProduct"
+        let url = URL.init(string: urlString)
+        var messageStr:String = ""
+        
+        
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+  
+                    let jsonInfo = json as? [String : Any] ?? [:]
+                    let res:Int = jsonInfo["Result"] as? Int ?? 0
+                    if res == 0 {
+
+                        let pt1:String = jsonInfo["Product_Type_1"] as? String ?? ""
+                        let pm1:String = jsonInfo["Product_Model_1"] as? String ?? ""
+                        let pt2:String = jsonInfo["Product_Type_2"] as? String ?? ""
+                        let pm2:String = jsonInfo["Product_Model_2"] as? String ?? ""
+                        let pt3:String = jsonInfo["Product_Type_3"] as? String ?? ""
+                        let pm3:String = jsonInfo["Product_Model_3"] as? String ?? ""
+                        let pt4:String = jsonInfo["Product_Type_4"] as? String ?? ""
+                        let pm4:String = jsonInfo["Product_Model_4"] as? String ?? ""
+                        let pt5:String = jsonInfo["Product_Type_5"] as? String ?? ""
+                        let pm5:String = jsonInfo["Product_Model_5"] as? String ?? ""
+                        
+                        if pt1 != "" && pm1 != "" {
+                            typeArray.append(pt1)
+                            modelArray.append(pm1)
+                        }
+                        if pt2 != "" && pm2 != "" {
+                            typeArray.append(pt2)
+                            modelArray.append(pm2)
+                        }
+                        if pt3 != "" && pm3 != "" {
+                            typeArray.append(pt3)
+                            modelArray.append(pm3)
+                        }
+                        if pt4 != "" && pm4 != "" {
+                            typeArray.append(pt4)
+                            modelArray.append(pm4)
+                        }
+                        if pt5 != "" && pm5 != "" {
+                            typeArray.append(pt5)
+                            modelArray.append(pm5)
+                        }
+                        
+                        messageStr = jsonInfo["Message"] as? String ?? ""
+                        
+                        dataArray = [typeArray,modelArray]
+                        
+                        
+                    }else{
+                        
+                        messageStr = jsonInfo["Message"] as? String ?? ""
+                    }
+                    
+                    result(true,messageStr,dataArray)
+                }else{
+                    result(false,"",[])
+                }
+                
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"",[])
                 
                 break
             }

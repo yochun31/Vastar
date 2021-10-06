@@ -11,5 +11,7 @@ target 'Vastar' do
     pod 'SDWebImage', '~> 5.0'
     pod 'SwiftyRSA'
     pod 'CryptoSwift', '~> 1.4.1'
+    pod 'HCVimeoVideoExtractor'
+    pod 'GPVideoPlayer'
 
 end

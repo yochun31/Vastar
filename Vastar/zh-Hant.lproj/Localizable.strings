@@ -11,6 +11,11 @@
 "Alert_Cancel_title" = "取消";
 "Alert_title" = "提示";
 
+"Alert_Loading_title" = "載入中";
+"Alert_Sure_title" = "確定";
+"Alert_Cancel_title" = "取消";
+"Alert_title" = "提示";
+
 "Login_Account_title" = "手機號碼";
 "Login_Password_title" = "密碼";
 "Login_Button_title" = "登入";
@@ -184,9 +189,18 @@
 "Pay_Success_Title" = "付款成功！";
 "Pay_Success_Info_Text" = "感謝您的訂購，本公司會與您接洽聯繫送貨方式與時間，如有任何問題歡迎來電，(02)2838-1010。";
 
+
 "Verify_Get_Btn_title" = "取得驗證碼";
 "Verify_Wait_Btn_title" = "秒後可再次發送";
 
 "Video_title" = "影片首頁";
+"Video_Type_title" = "影片\n分類";
+"Video_Type_Item1_Btn_title" = "電爐影片";
+"Video_Type_Item2_Btn_title" = "鍋具影片";
+"Video_Type_Item3_Btn_title" = "烤箱影片";
+"Video_Type_Item1_Btn_Value" = "電爐";
+"Video_Type_Item2_Btn_Value" = "飛騰女兒鍋";
+"Video_Type_Item3_Btn_Value" = "烤箱";
 
 "History_title" = "歷史訂單";
+

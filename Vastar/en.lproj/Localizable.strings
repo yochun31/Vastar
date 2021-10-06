@@ -189,5 +189,12 @@
 "Verify_Wait_Btn_title" = "秒後可再次發送";
 
 "Video_title" = "影片首頁";
+"Video_Type_title" = "影片分類";
+"Video_Type_Item1_Btn_title" = "電爐影片";
+"Video_Type_Item2_Btn_title" = "鍋具影片";
+"Video_Type_Item3_Btn_title" = "烤箱影片";
+"Video_Type_Item1_Btn_Value" = "電爐";
+"Video_Type_Item2_Btn_Value" = "飛騰女兒鍋";
+"Video_Type_Item3_Btn_Value" = "烤箱";
 
 "History_title" = "歷史訂單";
