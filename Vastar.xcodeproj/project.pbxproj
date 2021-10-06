@@ -27,6 +27,14 @@
 		220B261626E9EC65007FC2AA /* SuccessInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220B261426E9EC65007FC2AA /* SuccessInfoViewController.xib */; };
 		220B261926EEEF7D007FC2AA /* OrderDoneDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220B261726EEEF7D007FC2AA /* OrderDoneDetailViewController.swift */; };
 		220B261A26EEEF7D007FC2AA /* OrderDoneDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220B261826EEEF7D007FC2AA /* OrderDoneDetailViewController.xib */; };
+		220B261D2701B248007FC2AA /* VideoListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220B261B2701B248007FC2AA /* VideoListTableViewCell.swift */; };
+		220B261E2701B248007FC2AA /* VideoListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220B261C2701B248007FC2AA /* VideoListTableViewCell.xib */; };
+		220B26222702F8B7007FC2AA /* VideoTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220B26202702F8B7007FC2AA /* VideoTypeViewController.swift */; };
+		220B26232702F8B7007FC2AA /* VideoTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220B26212702F8B7007FC2AA /* VideoTypeViewController.xib */; };
+		220B26262703038B007FC2AA /* VideoListByTypeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220B26242703038B007FC2AA /* VideoListByTypeViewController.swift */; };
+		220B26272703038B007FC2AA /* VideoListByTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220B26252703038B007FC2AA /* VideoListByTypeViewController.xib */; };
+		220B262A270407B6007FC2AA /* VideoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220B2628270407B6007FC2AA /* VideoDetailViewController.swift */; };
+		220B262B270407B6007FC2AA /* VideoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220B2629270407B6007FC2AA /* VideoDetailViewController.xib */; };
 		2244F61326789586006754D6 /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244F61126789586006754D6 /* ProductListViewController.swift */; };
 		2244F61426789586006754D6 /* ProductListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2244F61226789586006754D6 /* ProductListViewController.xib */; };
 		2244F61726789606006754D6 /* ProductListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244F61526789606006754D6 /* ProductListTableViewCell.swift */; };
@@ -56,6 +64,8 @@
 		228BDDA626A15A1C0080F843 /* HistoryOrderDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228BDDA426A15A180080F843 /* HistoryOrderDetailViewController.xib */; };
 		228C406126BA6724003AE590 /* CustomAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228C406026BA6724003AE590 /* CustomAlertView.swift */; };
 		228C406326BA6774003AE590 /* CustomAlertView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228C406226BA6774003AE590 /* CustomAlertView.xib */; };
+		22A5184E2706F4520025C31D /* VideoProductListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22A5184C2706F4520025C31D /* VideoProductListTableViewCell.swift */; };
+		22A5184F2706F4520025C31D /* VideoProductListTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 22A5184D2706F4520025C31D /* VideoProductListTableViewCell.xib */; };
 		22F1C30E26648CF8003A1D5C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C30D26648CF8003A1D5C /* AppDelegate.swift */; };
 		22F1C31026648CF8003A1D5C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C30F26648CF8003A1D5C /* SceneDelegate.swift */; };
 		22F1C31226648CF8003A1D5C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C31126648CF8003A1D5C /* ViewController.swift */; };
@@ -113,6 +123,14 @@
 		220B261426E9EC65007FC2AA /* SuccessInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SuccessInfoViewController.xib; sourceTree = "<group>"; };
 		220B261726EEEF7D007FC2AA /* OrderDoneDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDoneDetailViewController.swift; sourceTree = "<group>"; };
 		220B261826EEEF7D007FC2AA /* OrderDoneDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderDoneDetailViewController.xib; sourceTree = "<group>"; };
+		220B261B2701B248007FC2AA /* VideoListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListTableViewCell.swift; sourceTree = "<group>"; };
+		220B261C2701B248007FC2AA /* VideoListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoListTableViewCell.xib; sourceTree = "<group>"; };
+		220B26202702F8B7007FC2AA /* VideoTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoTypeViewController.swift; sourceTree = "<group>"; };
+		220B26212702F8B7007FC2AA /* VideoTypeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoTypeViewController.xib; sourceTree = "<group>"; };
+		220B26242703038B007FC2AA /* VideoListByTypeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoListByTypeViewController.swift; sourceTree = "<group>"; };
+		220B26252703038B007FC2AA /* VideoListByTypeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoListByTypeViewController.xib; sourceTree = "<group>"; };
+		220B2628270407B6007FC2AA /* VideoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailViewController.swift; sourceTree = "<group>"; };
+		220B2629270407B6007FC2AA /* VideoDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoDetailViewController.xib; sourceTree = "<group>"; };
 		2244F61126789586006754D6 /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
 		2244F61226789586006754D6 /* ProductListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductListViewController.xib; sourceTree = "<group>"; };
 		2244F61526789606006754D6 /* ProductListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListTableViewCell.swift; sourceTree = "<group>"; };
@@ -143,6 +161,8 @@
 		228BDDA426A15A180080F843 /* HistoryOrderDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HistoryOrderDetailViewController.xib; sourceTree = "<group>"; };
 		228C406026BA6724003AE590 /* CustomAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertView.swift; sourceTree = "<group>"; };
 		228C406226BA6774003AE590 /* CustomAlertView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomAlertView.xib; sourceTree = "<group>"; };
+		22A5184C2706F4520025C31D /* VideoProductListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoProductListTableViewCell.swift; sourceTree = "<group>"; };
+		22A5184D2706F4520025C31D /* VideoProductListTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoProductListTableViewCell.xib; sourceTree = "<group>"; };
 		22F1C30A26648CF7003A1D5C /* Vastar.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vastar.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		22F1C30D26648CF8003A1D5C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22F1C30F26648CF8003A1D5C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -214,9 +234,23 @@
 			path = Pay;
 			sourceTree = "<group>";
 		};
+		220B261F2702F87D007FC2AA /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				220B26202702F8B7007FC2AA /* VideoTypeViewController.swift */,
+				220B26212702F8B7007FC2AA /* VideoTypeViewController.xib */,
+				220B26242703038B007FC2AA /* VideoListByTypeViewController.swift */,
+				220B26252703038B007FC2AA /* VideoListByTypeViewController.xib */,
+				220B2628270407B6007FC2AA /* VideoDetailViewController.swift */,
+				220B2629270407B6007FC2AA /* VideoDetailViewController.xib */,
+			);
+			path = Video;
+			sourceTree = "<group>";
+		};
 		2244F61026789458006754D6 /* SubPage */ = {
 			isa = PBXGroup;
 			children = (
+				220B261F2702F87D007FC2AA /* Video */,
 				220B260626E73AF3007FC2AA /* Pay */,
 				228BDD9226983C760080F843 /* Order */,
 				228BDD8C2696EA810080F843 /* Product */,
@@ -370,6 +404,10 @@
 				228BDD87268F0FDD0080F843 /* CheckoutProductTableViewCell.xib */,
 				228BDD972698436F0080F843 /* OrderListTableViewCell.swift */,
 				228BDD982698436F0080F843 /* OrderListTableViewCell.xib */,
+				220B261B2701B248007FC2AA /* VideoListTableViewCell.swift */,
+				220B261C2701B248007FC2AA /* VideoListTableViewCell.xib */,
+				22A5184C2706F4520025C31D /* VideoProductListTableViewCell.swift */,
+				22A5184D2706F4520025C31D /* VideoProductListTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -488,6 +526,7 @@
 				228BDD9E269AEE2F0080F843 /* OrderCreateDoneViewController.xib in Resources */,
 				22F1C3A2266613F7003A1D5C /* SideMenuTableViewCell.xib in Resources */,
 				22F1C35D2664C7AC003A1D5C /* LoginViewController.xib in Resources */,
+				220B26232702F8B7007FC2AA /* VideoTypeViewController.xib in Resources */,
 				22F1C3E12668857B003A1D5C /* ShoppingCarViewController.xib in Resources */,
 				22F1C38D2665CBCB003A1D5C /* ForgetPwViewController.xib in Resources */,
 				220B261026E9EBE2007FC2AA /* FailInfoViewController.xib in Resources */,
@@ -502,11 +541,15 @@
 				220B260C26E9B424007FC2AA /* pub.pem in Resources */,
 				228C406326BA6774003AE590 /* CustomAlertView.xib in Resources */,
 				2203BBF6267362BA006986D2 /* ReceiverTableViewCell.xib in Resources */,
+				220B262B270407B6007FC2AA /* VideoDetailViewController.xib in Resources */,
 				2203BBE3266DCD3C006986D2 /* ChangePwViewController.xib in Resources */,
 				22F1C31726648D01003A1D5C /* Assets.xcassets in Resources */,
 				22F1C31526648CF8003A1D5C /* Main.storyboard in Resources */,
+				220B261E2701B248007FC2AA /* VideoListTableViewCell.xib in Resources */,
+				22A5184F2706F4520025C31D /* VideoProductListTableViewCell.xib in Resources */,
 				22F1C3A826661A34003A1D5C /* VideoViewController.xib in Resources */,
 				220B260A26E74758007FC2AA /* TransactionViewController.xib in Resources */,
+				220B26272703038B007FC2AA /* VideoListByTypeViewController.xib in Resources */,
 				228BDDA2269D38A70080F843 /* OrderConfirmViewController.xib in Resources */,
 				228BDD85268EC22F0080F843 /* CheckoutViewController.xib in Resources */,
 				228BDD81268C72C70080F843 /* shoppingCarTableViewCell.xib in Resources */,
@@ -577,8 +620,10 @@
 				2203BBEE26721043006986D2 /* RecipientAddView.swift in Sources */,
 				2203BBE2266DCD3C006986D2 /* ChangePwViewController.swift in Sources */,
 				2203BBE62670947E006986D2 /* AppInfoManager.swift in Sources */,
+				220B262A270407B6007FC2AA /* VideoDetailViewController.swift in Sources */,
 				22F1C35C2664C7AC003A1D5C /* LoginViewController.swift in Sources */,
 				22F1C3862665CB99003A1D5C /* RegisterViewController.swift in Sources */,
+				220B26262703038B007FC2AA /* VideoListByTypeViewController.swift in Sources */,
 				228BDD9D269AEE2F0080F843 /* OrderCreateDoneViewController.swift in Sources */,
 				22F1C39C26660FCC003A1D5C /* SMSideMenuViewController.swift in Sources */,
 				22F1C3D82668852D003A1D5C /* ProductViewController.swift in Sources */,
@@ -594,6 +639,7 @@
 				2244F61326789586006754D6 /* ProductListViewController.swift in Sources */,
 				22F1C3E02668857B003A1D5C /* ShoppingCarViewController.swift in Sources */,
 				220B260126BDA99C007FC2AA /* CustomAlertTwoBtnView.swift in Sources */,
+				220B26222702F8B7007FC2AA /* VideoTypeViewController.swift in Sources */,
 				2244F61726789606006754D6 /* ProductListTableViewCell.swift in Sources */,
 				22F1C3A1266613F7003A1D5C /* SideMenuTableViewCell.swift in Sources */,
 				228BDD80268C72C70080F843 /* shoppingCarTableViewCell.swift in Sources */,
@@ -616,6 +662,8 @@
 				228BDD84268EC22F0080F843 /* CheckoutViewController.swift in Sources */,
 				220B260926E74758007FC2AA /* TransactionViewController.swift in Sources */,
 				2203BBF5267362BA006986D2 /* ReceiverTableViewCell.swift in Sources */,
+				220B261D2701B248007FC2AA /* VideoListTableViewCell.swift in Sources */,
+				22A5184E2706F4520025C31D /* VideoProductListTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

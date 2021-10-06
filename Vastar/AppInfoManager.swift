@@ -16,6 +16,10 @@ enum VProductItem:Int {
     case VProductAll = 0, VProductElectricStove,VProductElectricHeater,VProductOven,VProductFryPan,VProductVastar,VProductDetergent
 }
 
+enum VVideoPlayerStatusItem:Int {
+    case VVideoPlayerStatusPlay = 0, VVideoPlayerStatusPause, VVideoPlayerStatusBack, VVideoPlayerStatusError
+}
+
 
 class AppInfoManager {
     

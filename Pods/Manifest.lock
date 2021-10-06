@@ -1,6 +1,8 @@
 PODS:
   - Alamofire (4.9.1)
   - CryptoSwift (1.4.1)
+  - GPVideoPlayer (1.0.4)
+  - HCVimeoVideoExtractor (0.0.1)
   - IQKeyboardManagerSwift (6.5.6)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
@@ -12,6 +14,8 @@ PODS:
 DEPENDENCIES:
   - Alamofire (= 4.9.1)
   - CryptoSwift (~> 1.4.1)
+  - GPVideoPlayer
+  - HCVimeoVideoExtractor
   - IQKeyboardManagerSwift (= 6.5.6)
   - SDWebImage (~> 5.0)
   - SwiftyRSA
@@ -20,6 +24,8 @@ SPEC REPOS:
   trunk:
     - Alamofire
     - CryptoSwift
+    - GPVideoPlayer
+    - HCVimeoVideoExtractor
     - IQKeyboardManagerSwift
     - SDWebImage
     - SwiftyRSA
@@ -27,10 +33,12 @@ SPEC REPOS:
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   CryptoSwift: 0bc800a7e6a24c4fc9ebeab97d44b0d5f73a78bd
+  GPVideoPlayer: fcb68bdba2522f3edd3145b0f1de17423e0b30e1
+  HCVimeoVideoExtractor: d3c251280f7027ffd324266e1930b3618e0adb46
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SwiftyRSA: 8c6dd1ea7db1b8dc4fb517a202f88bb1354bc2c6
 
-PODFILE CHECKSUM: 834ef8588603809b5e82102f91d35abed2ebedf5
+PODFILE CHECKSUM: b7da22371fce1b96e868bda4232c0a6042125aaa
 
 COCOAPODS: 1.10.0

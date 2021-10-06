@@ -503,6 +503,28 @@ class VClient {
         }
     }
     
+    func VCGetProductInfoByNo(productNoArray:Array<String>,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataDict:[String:Array<Any>]) -> Void) {
+        
+        var dataDict:[String:Array<Any>] = [:]
+        var flag:Int = 0
+        for i in 0 ..< productNoArray.count {
+            
+            CloudGatewayManager.sharedInstance().CGMGetProductInfoByNo(productNo: productNoArray[i]) { (_ isSuccess:Bool,_ message:String,_ resUrl:String,_ resName:String,_ resGroup:Int,_ isDone:Bool) in
+                
+                if isSuccess {
+                    if isDone {
+                        flag+=1
+                        dataDict.updateValue([resUrl,resName,resGroup], forKey: productNoArray[i])
+                        if flag == productNoArray.count {
+                            result(isSuccess,message,dataDict)
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    
     //MARK: - 付款方式
     
     func VCGetPayMethodData(result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) -> Void) {
@@ -591,6 +613,23 @@ class VClient {
         CloudGatewayManager.sharedInstance().CGMGetTransactionUrl(reqBodyDict: reqBodyDict) { (_ isSuccess:Bool,_ message:String,_ resString:String) in
             
             result(isSuccess,message,resString)
+        }
+    }
+    
+    
+    //MARK: - 影片
+    
+    func VCGetVideoListByType(type:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
+        
+        CloudGatewayManager.sharedInstance().CGMGetVideoListByType(type: type) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
+            result(isSuccess,message,resDataArray)
+        }
+    }
+    
+    func VCGetVideoProductByID(vimeoID:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Any>) -> Void) {
+        
+        CloudGatewayManager.sharedInstance().CGMGetVideoProductByID(vimeoID: vimeoID) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Any>) in
+            result(isSuccess,message,resDataArray)
         }
     }
 
