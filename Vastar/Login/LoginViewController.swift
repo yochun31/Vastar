@@ -174,6 +174,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                 
                 let frontNavigationController:UINavigationController
                 let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
+                vc.accountPhone = accountName
                 frontNavigationController = UINavigationController(rootViewController: vc)
                 let sideMenuTable = SMSideMenuViewController(nibName: "SMSideMenuViewController", bundle: nil)
                 sideMenuTable.menuTitle = accountName

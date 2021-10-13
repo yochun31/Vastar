@@ -53,7 +53,7 @@ class ShoppingCarViewController: UIViewController,UITableViewDelegate,UITableVie
             self.userDefault.set(0, forKey: "backDefault")
             let nav = UINavigationController()
             let reveal = self.revealViewController()
-            let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
+            let vc = ProductViewController(nibName: "ProductViewController", bundle: nil)
             nav.viewControllers = [vc]
             reveal?.pushFrontViewController(nav, animated: true)
         }

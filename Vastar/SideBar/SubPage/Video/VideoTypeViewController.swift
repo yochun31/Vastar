@@ -12,6 +12,7 @@ class VideoTypeViewController: UIViewController {
     @IBOutlet var item1Btn: UIButton!
     @IBOutlet var item2Btn: UIButton!
     @IBOutlet var item3Btn: UIButton!
+    @IBOutlet var infoValueLabel: UILabel!
     
     
     override func viewDidLoad() {
@@ -45,6 +46,9 @@ class VideoTypeViewController: UIViewController {
         self.item3Btn.addTarget(self, action: #selector(item3BtnClick(_:)), for: .touchUpInside)
         self.item3Btn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.item3Btn.titleLabel?.font = UIFont(name: "PingFangTC-Regular", size: 24.0)
+        
+        self.infoValueLabel.text = NSLocalizedString("Login_Info_Text", comment: "")
+        self.infoValueLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
     }
     
     // MARK: - Action

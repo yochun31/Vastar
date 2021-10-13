@@ -662,11 +662,6 @@ class CheckoutViewController: UIViewController,UITableViewDelegate,UITableViewDa
             self.cav.delegate = self
             self.view.addSubview(self.cav)
             
-        }else if receiver.count == 0 {
-            self.cav = CustomAlertView.init(title: NSLocalizedString("Shopping_Checkout_Input_Reciver_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
-            self.cav.delegate = self
-            self.view.addSubview(self.cav)
-            
         }else if receiverName.count == 0 {
             self.cav = CustomAlertView.init(title: NSLocalizedString("Shopping_Checkout_Input_Reciver_Name_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
             self.cav.delegate = self
