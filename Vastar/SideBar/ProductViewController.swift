@@ -24,6 +24,7 @@ class ProductViewController: UIViewController,SWRevealViewControllerDelegate {
     let userDefault = UserDefaults.standard
     
     private let touchView = UIView()
+    var accountPhone:String = ""
 
     //MARK: - Life Cycle
     
@@ -44,7 +45,8 @@ class ProductViewController: UIViewController,SWRevealViewControllerDelegate {
             self.userDefault.set(0, forKey: "backDefault")
             let nav = UINavigationController()
             let reveal = self.revealViewController()
-            let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
+            let vc = ShoppingCarViewController(nibName: "ShoppingCarViewController", bundle: nil)
+            vc.accountPhone = self.accountPhone
             nav.viewControllers = [vc]
             reveal?.pushFrontViewController(nav, animated: true)
         }
