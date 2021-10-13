@@ -184,12 +184,14 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
             switch rowIndex {
             case 0:
                 let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
+                vc.accountPhone = menuTitle
                 nav.viewControllers = [vc]
                 reveal?.pushFrontViewController(nav, animated: true)
                 
                 break
             case 1:
                 let vc = ProductViewController(nibName: "ProductViewController", bundle: nil)
+                vc.accountPhone = menuTitle
                 nav.viewControllers = [vc]
                 reveal?.pushFrontViewController(nav, animated: true)
     

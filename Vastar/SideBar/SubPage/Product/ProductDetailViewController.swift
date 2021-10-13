@@ -147,7 +147,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
     func setNavBarBtn() {
         
         let rightBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        rightBtn.setImage(UIImage(named: "home"), for: .normal)
+        rightBtn.setImage(UIImage(named: "shoppingcart"), for: .normal)
         rightBtn.addTarget(self, action: #selector(rightBtnClick(_:)), for: .touchUpInside)
         
         let rightBarItem = UIBarButtonItem.init(customView: rightBtn)

@@ -66,6 +66,7 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
             let nav = UINavigationController()
             let reveal = self.revealViewController()
             let vc = VideoViewController(nibName: "VideoViewController", bundle: nil)
+            vc.accountPhone = accountPhone
             nav.viewControllers = [vc]
             reveal?.pushFrontViewController(nav, animated: true)
         }

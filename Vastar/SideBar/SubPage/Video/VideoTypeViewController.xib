@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoTypeViewController" customModule="Vastar" customModuleProvider="target">
             <connections>
+                <outlet property="infoValueLabel" destination="09d-ZI-AE2" id="UVU-oc-E6x"/>
                 <outlet property="item1Btn" destination="2Oa-1K-51N" id="TIH-Uv-sup"/>
                 <outlet property="item2Btn" destination="6Vj-Gz-vtd" id="JrK-bL-T6C"/>
                 <outlet property="item3Btn" destination="U5r-Gi-I56" id="hzb-Yq-dks"/>
@@ -34,19 +35,29 @@
                     <rect key="frame" x="50" y="483.5" width="275" height="100"/>
                     <state key="normal" title="Button" backgroundImage="classed_btn"/>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09d-ZI-AE2">
+                    <rect key="frame" x="20" y="630" width="335" height="17"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="U5r-Gi-I56" secondAttribute="trailing" constant="50" id="0fn-2C-upK"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="09d-ZI-AE2" secondAttribute="bottom" constant="20" id="7Be-wS-ys1"/>
                 <constraint firstItem="6Vj-Gz-vtd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="D4R-qf-bjb"/>
                 <constraint firstItem="U5r-Gi-I56" firstAttribute="top" secondItem="6Vj-Gz-vtd" secondAttribute="bottom" constant="100" id="Mqy-Re-hSh"/>
+                <constraint firstItem="09d-ZI-AE2" firstAttribute="centerX" secondItem="U5r-Gi-I56" secondAttribute="centerX" id="Mts-Zq-sYV"/>
                 <constraint firstItem="6Vj-Gz-vtd" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="RAS-74-lHc"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="2Oa-1K-51N" secondAttribute="trailing" constant="50" id="WAX-PT-sBh"/>
                 <constraint firstItem="U5r-Gi-I56" firstAttribute="centerX" secondItem="2Oa-1K-51N" secondAttribute="centerX" id="cTC-wi-KZa"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="09d-ZI-AE2" secondAttribute="trailing" constant="20" id="eqd-Aj-GZx"/>
                 <constraint firstItem="U5r-Gi-I56" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="hWn-sX-XAV"/>
                 <constraint firstItem="6Vj-Gz-vtd" firstAttribute="top" secondItem="2Oa-1K-51N" secondAttribute="bottom" constant="100" id="jRm-Ya-8sn"/>
                 <constraint firstItem="6Vj-Gz-vtd" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="kZl-Wo-9vY"/>
+                <constraint firstItem="09d-ZI-AE2" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="20" id="luz-5V-tqv"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="6Vj-Gz-vtd" secondAttribute="trailing" constant="50" id="lz9-43-vzd"/>
                 <constraint firstItem="6Vj-Gz-vtd" firstAttribute="centerX" secondItem="2Oa-1K-51N" secondAttribute="centerX" id="txA-FT-uP1"/>
                 <constraint firstItem="2Oa-1K-51N" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="50" id="yyX-qb-nrf"/>

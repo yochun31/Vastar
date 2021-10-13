@@ -20,7 +20,7 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     private var videoImageUrlArray:Array<String> = []
     
     let userDefault = UserDefaults.standard
-    
+    var accountPhone:String = ""
     
     //MARK: - Life Cycle
     
@@ -44,6 +44,12 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         let flag:Int = self.userDefault.object(forKey: "backDefault")as? Int ?? 0
         if flag == 1 {
             self.userDefault.set(0, forKey: "backDefault")
+            let nav = UINavigationController()
+            let reveal = self.revealViewController()
+            let vc = ShoppingCarViewController(nibName: "ShoppingCarViewController", bundle: nil)
+            vc.accountPhone = accountPhone
+            nav.viewControllers = [vc]
+            reveal?.pushFrontViewController(nav, animated: true)
         }
     }
 

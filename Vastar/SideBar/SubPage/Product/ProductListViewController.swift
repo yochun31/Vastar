@@ -24,6 +24,7 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     private var flag:Int = 0
     private var cav = CustomAlertView()
+    private let userDefault = UserDefaults.standard
     
     let AppInfo = AppInfoManager()
     var productItemID:Int = -1
@@ -34,6 +35,7 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
         // Do any additional setup after loading the view.
         
         setTableView()
+        setNavBarBtn()
         setProductTableData(item: productItemID)
     }
     
@@ -49,6 +51,19 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
         self.productTableView.register(UINib(nibName: "ProductListTableViewCell", bundle: nil), forCellReuseIdentifier: "ProdectCell")
         self.productTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
         self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+    }
+    
+    // 設定Navigation右側按鈕
+    
+    func setNavBarBtn() {
+        
+        let rightBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        rightBtn.setImage(UIImage(named: "shoppingcart"), for: .normal)
+        rightBtn.addTarget(self, action: #selector(rightBtnClick(_:)), for: .touchUpInside)
+        
+        let rightBarItem = UIBarButtonItem.init(customView: rightBtn)
+        self.navigationItem.rightBarButtonItem = rightBarItem
+        
     }
     
     //MARK: - Assistant Methods
@@ -259,6 +274,13 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
         
     }
     
+    
+    // MARK: - Action
+    
+    @objc func rightBtnClick(_ sender:UIButton) {
+        self.userDefault.set(1, forKey: "backDefault")
+        self.navigationController?.popToRootViewController(animated: false)
+    }
     
 
     /*

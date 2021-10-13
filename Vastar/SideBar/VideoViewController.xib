@@ -32,7 +32,7 @@
                         <constraint firstAttribute="height" constant="70" id="qVo-nR-w1L"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                    <state key="normal" title="影片 分類" backgroundImage="classed_btn"/>
+                    <state key="normal" title="聯絡 我們" backgroundImage="classed_btn"/>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
