@@ -262,6 +262,14 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
             self.getOrderNumericalData(selectIndex: sender.tag)
         }
     }
+    
+    @objc func freightValueBtnClick(_ sender:UIButton) {
+        
+        let urlSt:String = self.packageDeliveryUrlArray[sender.tag]
+        if let url = URL(string: urlSt) {
+            UIApplication.shared.open(url)
+        }
+    }
 
     /*
     // MARK: - Navigation
@@ -309,6 +317,9 @@ class OrderListViewController: UIViewController,UITableViewDelegate,UITableViewD
         
         cell.orderScheduleValueBtn.tag = indexPath.row
         cell.orderScheduleValueBtn.addTarget(self, action: #selector(orderScheduleValueBtnClick(_:)), for: .touchUpInside)
+        
+        cell.freightValueBtn.tag = indexPath.row
+        cell.freightValueBtn.addTarget(self, action: #selector(freightValueBtnClick(_:)), for: .touchUpInside)
 
         return cell
     }
