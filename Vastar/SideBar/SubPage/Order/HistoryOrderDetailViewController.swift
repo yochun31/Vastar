@@ -7,8 +7,10 @@
 
 import UIKit
 
-class HistoryOrderDetailViewController: UIViewController {
+class HistoryOrderDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
+    
+    @IBOutlet var productTableView: UITableView!
     
     @IBOutlet var payTitleLabel: UILabel!
     @IBOutlet var payValueLabel: UILabel!
@@ -38,7 +40,21 @@ class HistoryOrderDetailViewController: UIViewController {
     
     @IBOutlet var viewContainer: UIView!
     
+    
+    private var IDArray:Array<Int> = []
+    private var accountNameArray:Array<String> = []
+    private var productNoArray:Array<String> = []
+    private var productNameArray:Array<String> = []
+    private var productVoltageArray:Array<String> = []
+    private var productColorArray:Array<String> = []
+    private var productPriceArray:Array<Int> = []
+    private var productQuantityArray:Array<Int> = []
+    private var productTotalPriceArray:Array<Int> = []
+    
+    private var productImagDict:[String:String] = [:]
+    
     var dataDict:[String:Any] = [:]
+    var orderNoSt:String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +62,8 @@ class HistoryOrderDetailViewController: UIViewController {
         // Do any additional setup after loading the view.
         
         setInterface()
+        setTableView()
+        getOrderDetailData()
     }
     
     //MARK: - UI Interface Methods
@@ -127,6 +145,57 @@ class HistoryOrderDetailViewController: UIViewController {
         self.totalPriceValueLabel.font = UIFont(name: "PingFangTC-Semibold", size: 17.0)
         
     }
+    
+    func setTableView() {
+        
+        self.productTableView.delegate = self
+        self.productTableView.dataSource = self
+        
+        self.productTableView.separatorStyle = .none
+        
+        self.productTableView.register(UINib(nibName: "CheckoutProductTableViewCell", bundle: nil), forCellReuseIdentifier: "CheckoutProductCell")
+        self.productTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        
+    }
+    
+    // MARK: - Assistant Methods
+
+    func getOrderDetailData() {
+        
+        
+        VClient.sharedInstance().VCGetOrderDetailByNo(orderNo: self.orderNoSt) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
+            
+            if isSuccess {
+                if resDataArray.count != 0 {
+                    
+                    self.IDArray = resDataArray[0] as? Array<Int> ?? []
+                    self.accountNameArray = resDataArray[1] as? Array<String> ?? []
+                    self.productNoArray = resDataArray[2] as? Array<String> ?? []
+                    self.productNameArray = resDataArray[3] as? Array<String> ?? []
+                    self.productVoltageArray = resDataArray[4] as? Array<String> ?? []
+                    self.productColorArray = resDataArray[5] as? Array<String> ?? []
+                    self.productPriceArray = resDataArray[6] as? Array<Int> ?? []
+                    self.productQuantityArray = resDataArray[7] as? Array<Int> ?? []
+                    self.productTotalPriceArray = resDataArray[8] as? Array<Int> ?? []
+                    self.getProductImageUrl()
+                }
+            }
+        }
+    }
+    
+    func getProductImageUrl() {
+        
+        VClient.sharedInstance().VCGetProductImagUrlByNo(productNoArray: self.productNoArray) { (_ isSuccess:Bool,_ message:String,_ resDataDict:[String:String]) in
+
+            if isSuccess {
+
+                self.productImagDict = resDataDict
+                self.productTableView.reloadData()
+                print("===> \(resDataDict)")
+            }
+        }
+        
+    }
 
 
     /*
@@ -138,5 +207,48 @@ class HistoryOrderDetailViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    
+    //MARK: - UITableViewDataSource
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
+        return self.productNameArray.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        let cell:CheckoutProductTableViewCell = tableView.dequeueReusableCell(withIdentifier: "CheckoutProductCell", for: indexPath) as! CheckoutProductTableViewCell
+        cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        
+        let selectBkView = UIView()
+        selectBkView.backgroundColor = UIColor.clear
+        cell.selectedBackgroundView = selectBkView
+
+        let NO:String = self.productNoArray[indexPath.row]
+        let name:String = self.productNameArray[indexPath.row]
+        let voltage:String = self.productVoltageArray[indexPath.row]
+        let color:String = self.productColorArray[indexPath.row]
+        let price:Int = self.productPriceArray[indexPath.row]
+        let quantity:Int = self.productQuantityArray[indexPath.row]
+
+    
+        let urlString:String = self.productImagDict[NO] ?? ""
+        let url = URL.init(string: urlString)
+        
+        let format = NumberFormatter()
+        format.numberStyle = .decimal
+        let countPriceSt:String = format.string(from: NSNumber(value:price)) ?? ""
+  
+        let titleSt:String = "\(name)\(voltage),\(color)\n共\(quantity)件\n單價:\(countPriceSt)"
+
+        cell.loadData(titleSt: titleSt, url: url!)
+
+        return cell
+    }
 
 }
