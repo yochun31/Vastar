@@ -190,6 +190,7 @@ class HistoryOrderViewController: UIViewController,UITableViewDelegate,UITableVi
         
         let vc = HistoryOrderDetailViewController(nibName: "HistoryOrderDetailViewController", bundle: nil)
         vc.dataDict = self.getCheckoutDictData(selectIndex: sender.tag)
+        vc.orderNoSt = self.orderNoArray[sender.tag]
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
