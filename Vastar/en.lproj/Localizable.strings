@@ -20,7 +20,9 @@
 "Login_Input_Phone_Alert_Text" = "尚未輸入手機";
 "Login_Input_Pw_Alert_Text" = "尚未輸入密碼";
 "Login_Input_Error_Alert_Text" = "帳號或密碼錯誤！";
-"Login_Info_Text" = "服務電話:+886 2 2838 1010/LINE ID:vastarmimichi";
+"Login_Radio_Btn_Text" = " 記住帳號密碼";
+"Login_Info_Phone_Text" = "服務電話:+886 2 2838 1010";
+"Login_Info_Line_Text" = "LINE ID:vastarmimichi";
 
 "LogOut_Alert_Text" = "是否確定要登出?";
 
@@ -98,6 +100,8 @@
 "Member_Name_title" = "姓名:";
 "Member_Birthday_title" = "生日:";
 "Member_Tel_title" = "市話:";
+"Member_Phone_title" = "聯絡手機:";
+"Member_Address_title" = "聯絡地址:";
 "Member_Birthday_Placeholder_title" = "暫無資料，生日僅可修改一次";
 "Member_Birthday_Set_Alert_title" = "將生日設定為";
 "Member_Edit_Btn_title" = "修改";
