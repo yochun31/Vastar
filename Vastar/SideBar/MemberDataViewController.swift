@@ -18,9 +18,17 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     @IBOutlet var telLabel: UILabel!
     @IBOutlet var telTextField: UITextField!
     
+    @IBOutlet var mobilePhoneLabel: UILabel!
+    @IBOutlet var mobilePhoneTextField: UITextField!
+    
+    @IBOutlet var addressLabel: UILabel!
+    @IBOutlet var addressTextField: UITextField!
+    
     @IBOutlet var editBtn_Name: UIButton!
     @IBOutlet var setDateBtn: CustomButton!
     @IBOutlet var editBtn_Tel: UIButton!
+    @IBOutlet var editBtn_Phone: UIButton!
+    @IBOutlet var editBtn_Address: UIButton!
     
     @IBOutlet var recipientLabel: UILabel!
     @IBOutlet var addBtn_Recipient: UIButton!
@@ -34,9 +42,13 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     private var userName:String = ""
     private var userBirthday:String = ""
     private var userTel:String = ""
+    private var userMobilePhone:String = ""
+    private var userAddress:String = ""
     
     private var currentNameEditStatus:Int = -1
     private var currentTelEditStatus:Int = -1
+    private var currentPhoneEditStatus:Int = -1
+    private var currentAddressEditStatus:Int = -1
     
     private var dateStaring:String = ""
 
@@ -140,8 +152,28 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         self.telTextField.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.telTextField.font = UIFont.systemFont(ofSize: 17.0)
         
+        self.mobilePhoneLabel.font = UIFont.systemFont(ofSize: 20.0)
+        self.mobilePhoneLabel.text = NSLocalizedString("Member_Phone_title", comment: "")
+        self.mobilePhoneLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        
+        self.mobilePhoneTextField.isEnabled = false
+        self.mobilePhoneTextField.borderStyle = .none
+        self.mobilePhoneTextField.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        self.mobilePhoneTextField.font = UIFont.systemFont(ofSize: 17.0)
+        
+        self.addressLabel.font = UIFont.systemFont(ofSize: 20.0)
+        self.addressLabel.text = NSLocalizedString("Member_Address_title", comment: "")
+        self.addressLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        
+        self.addressTextField.isEnabled = false
+        self.addressTextField.borderStyle = .none
+        self.addressTextField.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        self.addressTextField.font = UIFont.systemFont(ofSize: 17.0)
+        
         self.currentNameEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnEdit.rawValue
         self.currentTelEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnEdit.rawValue
+        self.currentPhoneEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnEdit.rawValue
+        self.currentAddressEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnEdit.rawValue
         
         self.editBtn_Name.setTitle(NSLocalizedString("Member_Edit_Btn_title", comment: ""), for: .normal)
         self.editBtn_Name.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
@@ -155,6 +187,13 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         self.editBtn_Tel.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.editBtn_Tel.addTarget(self, action: #selector(editBtn_TelClick(_:)), for: .touchUpInside)
         
+        self.editBtn_Phone.setTitle(NSLocalizedString("Member_Edit_Btn_title", comment: ""), for: .normal)
+        self.editBtn_Phone.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
+        self.editBtn_Phone.addTarget(self, action: #selector(editBtn_PhoneClick(_:)), for: .touchUpInside)
+        
+        self.editBtn_Address.setTitle(NSLocalizedString("Member_Edit_Btn_title", comment: ""), for: .normal)
+        self.editBtn_Address.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
+        self.editBtn_Address.addTarget(self, action: #selector(editBtn_AddressClick(_:)), for: .touchUpInside)
         
         self.recipientLabel.text = NSLocalizedString("Member_Recipient_title", comment: "")
         self.recipientLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
@@ -244,10 +283,14 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
                     let name = dictResData["Name"] as? String ?? ""
                     let birthday = dictResData["Birthday"] as? String ?? ""
                     let tel = dictResData["Telephone"] as? String ?? ""
+                    let phone = dictResData["MobilePhone"] as? String ?? ""
+                    let address = dictResData["Address"] as? String ?? ""
                     self.userName = name
                     self.userBirthday = birthday
                     self.userTel = tel
-                    self.showUserInfo(nameSt: name, birthdaySt: birthday, telSt: tel)
+                    self.userMobilePhone = phone
+                    self.userAddress = address
+                    self.showUserInfo(nameSt: name, birthdaySt: birthday, telSt: tel, phone: phone, address: address)
                 }
                 
                 self.vaiv.stopProgressHUD(view: self.view)
@@ -263,7 +306,7 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     
     // 帳戶資料顯示設定
     
-    func showUserInfo(nameSt:String,birthdaySt:String,telSt:String) {
+    func showUserInfo(nameSt:String,birthdaySt:String,telSt:String,phone:String,address:String) {
         
         self.nameTextField.text = nameSt
         
@@ -275,6 +318,8 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
             self.birthdayTextField.text = birthdaySt
         }
         self.telTextField.text = telSt
+        self.mobilePhoneTextField.text = phone
+        self.addressTextField.text = address
     }
     
     // 更新帳戶姓名
@@ -337,6 +382,44 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         }
     }
     
+    // 更新帳戶聯絡手機
+    
+    func updateUserMobilePhone(mobilePhoneSt:String) {
+        
+        self.vaiv.startProgressHUD(view: self.view, content: NSLocalizedString("Alert_Loading_title", comment: ""))
+        VClient.sharedInstance().VCUpdateChangeMobilePhone(phone: self.accountPhone, mobilePhone: mobilePhoneSt) { (_ isSuccess:Bool,_ message:String) in
+            
+            if isSuccess {
+                print(">>>\(message)<<<")
+                self.vaiv.stopProgressHUD(view: self.view)
+            }else{
+                self.vaiv.stopProgressHUD(view: self.view)
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
+            }
+        }
+    }
+    
+    // 更新帳戶聯絡地址
+    
+    func updateUserAddress(addressSt:String) {
+        
+        self.vaiv.startProgressHUD(view: self.view, content: NSLocalizedString("Alert_Loading_title", comment: ""))
+        VClient.sharedInstance().VCUpdateChangeAddress(phone: self.accountPhone, address: addressSt) { (_ isSuccess:Bool,_ message:String) in
+            
+            if isSuccess {
+                print(">>>\(message)<<<")
+                self.vaiv.stopProgressHUD(view: self.view)
+            }else{
+                self.vaiv.stopProgressHUD(view: self.view)
+                self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 0, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
+            }
+        }
+    }
+    
     // 編輯按鈕顯示設定
     
     func editBtnStatus(item:Int,textField:UITextField) {
@@ -350,9 +433,15 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
             if textField == self.nameTextField {
                 self.currentNameEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnConfirm.rawValue
                 self.editBtn_Name.setTitle(AppInfo.GetMemberDataEditBtnTitle(item: self.currentNameEditStatus), for: .normal)
-            }else{
+            }else if textField == self.telTextField {
                 self.currentTelEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnConfirm.rawValue
                 self.editBtn_Tel.setTitle(AppInfo.GetMemberDataEditBtnTitle(item: self.currentTelEditStatus), for: .normal)
+            }else if textField == self.mobilePhoneTextField {
+                self.currentPhoneEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnConfirm.rawValue
+                self.editBtn_Phone.setTitle(AppInfo.GetMemberDataEditBtnTitle(item: self.currentPhoneEditStatus), for: .normal)
+            }else if textField == self.addressTextField {
+                self.currentAddressEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnConfirm.rawValue
+                self.editBtn_Address.setTitle(AppInfo.GetMemberDataEditBtnTitle(item: self.currentAddressEditStatus), for: .normal)
             }
             
             textField.setBottomBorder(with: lineColor, width: 1.0, bkColor: backgroundColor)
@@ -364,10 +453,18 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
                 self.currentNameEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnEdit.rawValue
                 self.editBtn_Name.setTitle(AppInfo.GetMemberDataEditBtnTitle(item: self.currentNameEditStatus), for: .normal)
                 checkNameInputData()
-            }else{
+            }else if textField == self.telTextField {
                 self.currentTelEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnEdit.rawValue
                 self.editBtn_Tel.setTitle(AppInfo.GetMemberDataEditBtnTitle(item: self.currentTelEditStatus), for: .normal)
                 checkTelInputData()
+            }else if textField == self.mobilePhoneTextField {
+                self.currentPhoneEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnEdit.rawValue
+                self.editBtn_Phone.setTitle(AppInfo.GetMemberDataEditBtnTitle(item: self.currentPhoneEditStatus), for: .normal)
+                checkMobilePhoneInputData()
+            }else if textField == self.addressTextField {
+                self.currentAddressEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnEdit.rawValue
+                self.editBtn_Address.setTitle(AppInfo.GetMemberDataEditBtnTitle(item: self.currentAddressEditStatus), for: .normal)
+                checkAddressInputData()
             }
             
             textField.setBottomBorder(with: lineColor, width: 0.0, bkColor: backgroundColor)
@@ -409,6 +506,28 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
             
         }else{
             self.updateUserBirthday(birthdaySt: birthday)
+        }
+    }
+    
+    // 檢查帳戶聯絡電話輸入資料
+    
+    func checkMobilePhoneInputData() {
+        let phone = self.mobilePhoneTextField.text ?? ""
+        if phone == self.userMobilePhone || phone.count == 0 {
+            
+        }else{
+            self.updateUserMobilePhone(mobilePhoneSt: phone)
+        }
+    }
+    
+    // 檢查帳戶聯絡地址輸入資料
+    
+    func checkAddressInputData() {
+        let address = self.addressTextField.text ?? ""
+        if address == self.userAddress || address.count == 0 {
+            
+        }else{
+            self.updateUserAddress(addressSt: address)
         }
     }
     
@@ -462,7 +581,7 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     }
     
     
-    //MARK:- Action
+    //MARK: - Action
     
     @objc func leftBarBtnClick(_ sender:UIButton) {
         self.revealViewController()?.revealToggle(animated: true)
@@ -477,6 +596,16 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     @objc func editBtn_TelClick(_ sender:UIButton) {
         
         self.editBtnStatus(item: self.currentTelEditStatus, textField: self.telTextField)
+    }
+    
+    @objc func editBtn_PhoneClick(_ sender:UIButton) {
+        
+        self.editBtnStatus(item: self.currentPhoneEditStatus, textField: self.mobilePhoneTextField)
+    }
+    
+    @objc func editBtn_AddressClick(_ sender:UIButton) {
+        
+        self.editBtnStatus(item: self.currentAddressEditStatus, textField: self.addressTextField)
     }
     
     @objc func setDateBtnClick(_ sender:CustomButton) {
