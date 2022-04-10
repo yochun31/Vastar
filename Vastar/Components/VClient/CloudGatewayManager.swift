@@ -106,13 +106,14 @@ class CloudGatewayManager {
                 if resStatus == 0 {
                     messageStr = jsonInfo["Message"] as? String ?? ""
                     isResStatus = true
-                    
                     let accountName:String = jsonInfo["Account_Name"] as? String ?? ""
                     let ID:Int = jsonInfo["ID"] as? Int ?? 0
                     let name:String = jsonInfo["Name"] as? String ?? ""
                     let birthday:String = jsonInfo["Birthday"] as? String ?? ""
                     let tel:String = jsonInfo["Telephone"] as? String ?? ""
                     let registerTime:String = jsonInfo["RegisterTime"] as? String ?? ""
+                    let mobilePhone:String = jsonInfo["MobilePhone"] as? String ?? ""
+                    let address:String = jsonInfo["Address"] as? String ?? ""
                     
                     dictData.updateValue(accountName, forKey: "Account_Name")
                     dictData.updateValue(ID, forKey: "ID")
@@ -120,6 +121,8 @@ class CloudGatewayManager {
                     dictData.updateValue(birthday, forKey: "Birthday")
                     dictData.updateValue(tel, forKey: "Telephone")
                     dictData.updateValue(registerTime, forKey: "RegisterTime")
+                    dictData.updateValue(mobilePhone, forKey: "MobilePhone")
+                    dictData.updateValue(address, forKey: "Address")
         
                 }else{
                     messageStr = jsonInfo["Message"] as? String ?? ""

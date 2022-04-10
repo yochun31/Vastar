@@ -238,6 +238,49 @@ class VClient {
         
     }
     
+    //修改聯絡手機
+    
+    func VCUpdateChangeMobilePhone(phone:String,mobilePhone:String,result:@escaping(_ isSuccess:Bool,_ message:String) -> Void) {
+        
+        var bodyDict:[String:String] = [:]
+        bodyDict.updateValue("vastar", forKey: "UserID")
+        bodyDict.updateValue("vastar@2673", forKey: "Password")
+        bodyDict.updateValue(phone, forKey: "Account_Name")
+        bodyDict.updateValue("UpdateMobilePhone", forKey: "UpdateMode")
+        bodyDict.updateValue("", forKey: "OldHashPassword")
+        bodyDict.updateValue("", forKey: "NewHashPassword")
+        bodyDict.updateValue("", forKey: "Name")
+        bodyDict.updateValue("", forKey: "Birthday")
+        bodyDict.updateValue("", forKey: "Telephone")
+        bodyDict.updateValue(mobilePhone, forKey: "MobilePhone")
+        bodyDict.updateValue("", forKey: "Address")
+        
+        CloudGatewayManager.sharedInstance().CGMUpdateUserInfoByData(reqBodyDict: bodyDict) { (_ isSuccess:Bool,_ message:String) in
+            result(isSuccess,message)
+        }
+    }
+    
+    //修改聯絡地址
+    
+    func VCUpdateChangeAddress(phone:String,address:String,result:@escaping(_ isSuccess:Bool,_ message:String) -> Void) {
+        
+        var bodyDict:[String:String] = [:]
+        bodyDict.updateValue("vastar", forKey: "UserID")
+        bodyDict.updateValue("vastar@2673", forKey: "Password")
+        bodyDict.updateValue(phone, forKey: "Account_Name")
+        bodyDict.updateValue("UpdateAddress", forKey: "UpdateMode")
+        bodyDict.updateValue("", forKey: "OldHashPassword")
+        bodyDict.updateValue("", forKey: "NewHashPassword")
+        bodyDict.updateValue("", forKey: "Name")
+        bodyDict.updateValue("", forKey: "Birthday")
+        bodyDict.updateValue("", forKey: "Telephone")
+        bodyDict.updateValue("", forKey: "MobilePhone")
+        bodyDict.updateValue(address, forKey: "Address")
+        
+        CloudGatewayManager.sharedInstance().CGMUpdateUserInfoByData(reqBodyDict: bodyDict) { (_ isSuccess:Bool,_ message:String) in
+            result(isSuccess,message)
+        }
+    }
     
     //MARK: - Location
     

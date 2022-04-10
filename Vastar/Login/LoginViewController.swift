@@ -23,11 +23,15 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     @IBOutlet var accountNameErrorLabel: UILabel!
     @IBOutlet var pwErrorLabel: UILabel!
     
-    @IBOutlet var infoValueLabel: UILabel!
+    @IBOutlet var infoPhoneValueLabel: UILabel!
+    @IBOutlet var infoLineValueLabel: UILabel!
+    
+    @IBOutlet var radioBtn: UIButton!
     
     private var userResgisterTime:String = ""
     
     private var vaiv = VActivityIndicatorView()
+
     
     let userDefault = UserDefaults.standard
     
@@ -45,8 +49,29 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        self.accountNameTextField.text = ""
-        self.passwordTextField.text = ""
+        let isSelectSave:Int = self.userDefault.object(forKey: "B0") as? Int ?? -1
+        if isSelectSave == 1 {
+            
+            let encyrptAccount:String? = self.userDefault.object(forKey: "B1") as? String ?? ""
+            let encyrptPw:String? = self.userDefault.object(forKey: "B2") as? String ?? ""
+            let decrypteAccount:String = try! encyrptAccount!.aesDecrypt(key: "vastarvastar1234")
+            let decryptePw:String = try! encyrptPw!.aesDecrypt(key: "vastarvastar1234")
+
+            self.accountNameTextField.text = decrypteAccount
+            self.passwordTextField.text = decryptePw
+            
+            self.radioBtn.setImage(UIImage(named: "radioOnBtn"), for: .normal)
+            self.radioBtn.tag = 0
+            
+        }else{
+            self.accountNameTextField.text = ""
+            self.passwordTextField.text = ""
+            
+            self.radioBtn.setImage(UIImage(named: "radioOffBtn"), for: .normal)
+            self.radioBtn.tag = 1
+        }
+        
+        
     }
 
     // MARK: - UI Interface Methods
@@ -90,9 +115,14 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         self.registerBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.registerBtn.addTarget(self, action: #selector(registerBtn(_:)), for: .touchUpInside)
         
-        self.infoValueLabel.text = NSLocalizedString("Login_Info_Text", comment: "")
-        self.infoValueLabel.textColor = textColor
+        self.infoPhoneValueLabel.text = NSLocalizedString("Login_Info_Phone_Text", comment: "")
+        self.infoPhoneValueLabel.textColor = textColor
+        self.infoLineValueLabel.text = NSLocalizedString("Login_Info_Line_Text", comment: "")
+        self.infoLineValueLabel.textColor = textColor
         
+        self.radioBtn.setTitle(NSLocalizedString("Login_Radio_Btn_Text", comment: ""), for: .normal)
+        self.radioBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
+        self.radioBtn.addTarget(self, action: #selector(radioBtnClick(_:)), for: .touchUpInside)
     }
     
     //MARK: - Assistant Methods
@@ -188,6 +218,12 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                 let md5Hex =  md5Data.map { String(format: "%02hhx", $0) }.joined()
                 self.userDefault.setValue(md5Hex, forKey: "A1")
                 
+                //儲存帳密
+                let isSelectSave:Int = self.userDefault.object(forKey: "B0") as? Int ?? -1
+                if isSelectSave == 1 {
+                    self.setSaveData()
+                }
+                
                 self.accountNameErrorLabel.text = ""
                 self.accountNameTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
                 self.accountNameTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Account_title", comment: ""), colour: color, font: font)
@@ -235,6 +271,25 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
             }
         }
         return digestData
+    }
+    
+    //儲存帳號密碼
+    
+    func setSaveData() {
+        
+        let accountText:String = self.accountNameTextField.text ?? ""
+        let pwText:String = self.passwordTextField.text ?? ""
+        print("A~~~> \(accountText)")
+        print("B~~~> \(pwText)")
+        
+        let encrypteAccount:String = try! accountText.aesEncrypt(key: "vastarvastar1234")
+        let encryptePw:String = try! pwText.aesEncrypt(key: "vastarvastar1234")
+
+        print("~~~> \(encrypteAccount)")
+        print("###> \(encryptePw)")
+
+        self.userDefault.set(encrypteAccount, forKey: "B1")
+        self.userDefault.set(encryptePw, forKey: "B2")
     }
     
     
@@ -294,6 +349,19 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         let vc = RegisterViewController(nibName: "RegisterViewController", bundle: nil)
         vc.modalPresentationStyle = .fullScreen
         self.present(vc, animated: true, completion: nil)
+    }
+    
+    @objc func radioBtnClick(_ sender:UIButton) {
+        
+        if sender.tag == 0 {
+            self.userDefault.set(sender.tag, forKey: "B0")
+            sender.tag = 1
+            sender.setImage(UIImage(named: "radioOffBtn"), for: .normal)
+        }else{
+            self.userDefault.set(sender.tag, forKey: "B0")
+            sender.tag = 0
+            sender.setImage(UIImage(named: "radioOnBtn"), for: .normal)
+        }
     }
 
     
