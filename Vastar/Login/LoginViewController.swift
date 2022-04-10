@@ -60,9 +60,15 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
             self.accountNameTextField.text = decrypteAccount
             self.passwordTextField.text = decryptePw
             
+            self.radioBtn.setImage(UIImage(named: "radioOnBtn"), for: .normal)
+            self.radioBtn.tag = 0
+            
         }else{
             self.accountNameTextField.text = ""
             self.passwordTextField.text = ""
+            
+            self.radioBtn.setImage(UIImage(named: "radioOffBtn"), for: .normal)
+            self.radioBtn.tag = 1
         }
         
         
@@ -117,8 +123,6 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         self.radioBtn.setTitle(NSLocalizedString("Login_Radio_Btn_Text", comment: ""), for: .normal)
         self.radioBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.radioBtn.addTarget(self, action: #selector(radioBtnClick(_:)), for: .touchUpInside)
-        self.radioBtn.setImage(UIImage(named: "radioOnBtn"), for: .normal)
-        self.radioBtn.tag = 0
     }
     
     //MARK: - Assistant Methods
