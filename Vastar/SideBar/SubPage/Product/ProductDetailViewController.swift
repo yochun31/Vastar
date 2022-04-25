@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import BadgeHub
 
 class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPickerViewDataSource,CustomAlertViewDelegate {
 
@@ -70,6 +71,11 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
     private var default_Voltage_St:String = ""
     private var default_Color_St:String = ""
     
+    private var rightNavBtn = UIButton()
+    private var rightBarBtnItem = UIBarButtonItem()
+    private var bHub:BadgeHub?
+    private var IDArray:Array<Int> = []
+    
     
     //MARK: - Life Cycle 
     
@@ -90,6 +96,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.topItem?.title = ""
+        GetShoppingCarDataCount()
     }
 
     
@@ -146,12 +153,17 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
     
     func setNavBarBtn() {
         
-        let rightBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        rightBtn.setImage(UIImage(named: "shoppingcart"), for: .normal)
-        rightBtn.addTarget(self, action: #selector(rightBtnClick(_:)), for: .touchUpInside)
+        self.rightNavBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        self.rightNavBtn.setImage(UIImage(named: "shoppingcart"), for: .normal)
+        self.rightNavBtn.addTarget(self, action: #selector(rightBtnClick(_:)), for: .touchUpInside)
         
-        let rightBarItem = UIBarButtonItem.init(customView: rightBtn)
-        self.navigationItem.rightBarButtonItem = rightBarItem
+        self.rightBarBtnItem = UIBarButtonItem.init(customView: self.rightNavBtn)
+        self.navigationItem.rightBarButtonItem = self.rightBarBtnItem
+        
+        self.bHub = BadgeHub(barButtonItem: self.rightBarBtnItem)
+        self.bHub?.setCount(self.IDArray.count)
+        self.bHub?.moveCircleBy(x: 0, y: 5)
+        self.bHub?.scaleCircleSize(by: 0.8)
         
         
 //        let leftBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -483,6 +495,23 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
         }
     }
     
+    // 取得購物車數量
+    
+    func GetShoppingCarDataCount() {
+        
+        self.IDArray.removeAll()
+        VClient.sharedInstance().VCGetShoppingCarData { (_ dataArray:Array<Array<Any>>,_ isDone:Bool) in
+            if isDone {
+                if dataArray.count != 0 {
+                    self.IDArray = dataArray[0] as? Array<Int> ?? []
+                    self.bHub?.setCount(self.IDArray.count)
+                }else{
+                    self.bHub?.setCount(0)
+                }
+            }
+        }
+    }
+    
     
     //MARK: - Action
     
@@ -604,6 +633,7 @@ class ProductDetailViewController: UIViewController,UIPickerViewDelegate,UIPicke
             self.colorTextField.text = self.default_Color_St
         }else{
             self.cav.removeFromSuperview()
+            GetShoppingCarDataCount()
         }
     }
 

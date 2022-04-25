@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.9.1)
+  - BadgeHub (1.0.0)
   - CryptoSwift (1.4.1)
   - GPVideoPlayer (1.0.4)
   - HCVimeoVideoExtractor (0.0.1)
@@ -13,6 +14,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (= 4.9.1)
+  - BadgeHub
   - CryptoSwift (~> 1.4.1)
   - GPVideoPlayer
   - HCVimeoVideoExtractor
@@ -23,6 +25,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - BadgeHub
     - CryptoSwift
     - GPVideoPlayer
     - HCVimeoVideoExtractor
@@ -32,6 +35,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  BadgeHub: b227771329f78c37a2dae7502607ec6d00a50bd4
   CryptoSwift: 0bc800a7e6a24c4fc9ebeab97d44b0d5f73a78bd
   GPVideoPlayer: fcb68bdba2522f3edd3145b0f1de17423e0b30e1
   HCVimeoVideoExtractor: d3c251280f7027ffd324266e1930b3618e0adb46
@@ -39,6 +43,6 @@ SPEC CHECKSUMS:
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SwiftyRSA: 8c6dd1ea7db1b8dc4fb517a202f88bb1354bc2c6
 
-PODFILE CHECKSUM: b7da22371fce1b96e868bda4232c0a6042125aaa
+PODFILE CHECKSUM: 23a9092c52b4659242ad138c0a67469f842ea2db
 
 COCOAPODS: 1.10.0

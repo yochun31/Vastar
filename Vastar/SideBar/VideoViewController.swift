@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import BadgeHub
 
 class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
@@ -19,6 +20,11 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     private var videoNameArray:Array<String> = []
     private var videoImageUrlArray:Array<String> = []
     
+    private var rightNavBtn = UIButton()
+    private var rightBarBtnItem = UIBarButtonItem()
+    private var bHub:BadgeHub?
+    private var IDArray:Array<Int> = []
+    
     let userDefault = UserDefaults.standard
     var accountPhone:String = ""
     
@@ -30,6 +36,7 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         // Do any additional setup after loading the view.
         
         setLeftBarButton()
+        setRightBarButton()
         setInterface()
         setupSWReveal()
         setTableView()
@@ -50,6 +57,8 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             vc.accountPhone = accountPhone
             nav.viewControllers = [vc]
             reveal?.pushFrontViewController(nav, animated: true)
+        }else{
+            GetShoppingCarDataCount()
         }
     }
 
@@ -62,6 +71,20 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         leftBarBtn.addTarget(self, action: #selector(leftBarBtnClick(_:)), for: .touchUpInside)
         let leftBarItem = UIBarButtonItem(customView: leftBarBtn)
         self.navigationItem.leftBarButtonItem = leftBarItem
+    }
+    
+    func setRightBarButton() {
+        
+        self.rightNavBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        self.rightNavBtn.setImage(UIImage(named: "shoppingcart"), for: .normal)
+        self.rightNavBtn.addTarget(self, action: #selector(rightBtnClick(_:)), for: .touchUpInside)
+        
+        self.rightBarBtnItem = UIBarButtonItem.init(customView: self.rightNavBtn)
+        self.navigationItem.rightBarButtonItem = self.rightBarBtnItem
+        self.bHub = BadgeHub(barButtonItem: self.rightBarBtnItem)
+        self.bHub?.setCount(self.IDArray.count)
+        self.bHub?.moveCircleBy(x: 0, y: 5)
+        self.bHub?.scaleCircleSize(by: 0.8)
     }
     
     func setInterface() {
@@ -132,11 +155,38 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         }
     }
     
+    // 取得購物車數量
+    
+    func GetShoppingCarDataCount() {
+        
+        self.IDArray.removeAll()
+        VClient.sharedInstance().VCGetShoppingCarData { (_ dataArray:Array<Array<Any>>,_ isDone:Bool) in
+            if isDone {
+                if dataArray.count != 0 {
+                    self.IDArray = dataArray[0] as? Array<Int> ?? []
+                    self.bHub?.setCount(self.IDArray.count)
+                }else{
+                    self.bHub?.setCount(0)
+                }
+            }
+        }
+    }
+    
     //MARK: - Action
     
     @objc func leftBarBtnClick(_ sender:UIButton) {
         print("33333333")
         self.revealViewController()?.revealToggle(animated: true)
+    }
+    
+    @objc func rightBtnClick(_ sender:UIButton) {
+        
+        let nav = UINavigationController()
+        let reveal = self.revealViewController()
+        let vc = ShoppingCarViewController(nibName: "ShoppingCarViewController", bundle: nil)
+        vc.accountPhone = accountPhone
+        nav.viewControllers = [vc]
+        reveal?.pushFrontViewController(nav, animated: true)
     }
     
     @objc func typeBtnClick(_ sender:UIButton) {
