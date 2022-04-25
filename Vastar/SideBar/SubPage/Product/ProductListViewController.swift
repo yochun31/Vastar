@@ -7,6 +7,7 @@
 
 import UIKit
 import SDWebImage
+import BadgeHub
 
 class ProductListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UIScrollViewDelegate,CustomAlertViewDelegate {
     
@@ -26,6 +27,13 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
     private var cav = CustomAlertView()
     private let userDefault = UserDefaults.standard
     
+    private var rightNavBtn = UIButton()
+    private var rightBarBtnItem = UIBarButtonItem()
+    private var bHub:BadgeHub?
+    private var IDArray:Array<Int> = []
+    
+//    private var bHub:BadgeHub?
+    
     let AppInfo = AppInfoManager()
     var productItemID:Int = -1
     
@@ -37,6 +45,12 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
         setTableView()
         setNavBarBtn()
         setProductTableData(item: productItemID)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        GetShoppingCarDataCount()
     }
     
     //MARK: - UI Interface Methods
@@ -57,12 +71,16 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
     
     func setNavBarBtn() {
         
-        let rightBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        rightBtn.setImage(UIImage(named: "shoppingcart"), for: .normal)
-        rightBtn.addTarget(self, action: #selector(rightBtnClick(_:)), for: .touchUpInside)
+        self.rightNavBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        self.rightNavBtn.setImage(UIImage(named: "shoppingcart"), for: .normal)
+        self.rightNavBtn.addTarget(self, action: #selector(rightBtnClick(_:)), for: .touchUpInside)
         
-        let rightBarItem = UIBarButtonItem.init(customView: rightBtn)
-        self.navigationItem.rightBarButtonItem = rightBarItem
+        self.rightBarBtnItem = UIBarButtonItem.init(customView: self.rightNavBtn)
+        self.navigationItem.rightBarButtonItem = self.rightBarBtnItem
+        self.bHub = BadgeHub(barButtonItem: self.rightBarBtnItem)
+        self.bHub?.setCount(self.IDArray.count)
+        self.bHub?.moveCircleBy(x: 0, y: 5)
+        self.bHub?.scaleCircleSize(by: 0.8)
         
     }
     
@@ -272,6 +290,23 @@ class ProductListViewController: UIViewController,UITableViewDelegate,UITableVie
         dataDict.updateValue(dataArray, forKey: gID)
         return dataDict
         
+    }
+    
+    // 取得購物車數量
+    
+    func GetShoppingCarDataCount() {
+        
+        self.IDArray.removeAll()
+        VClient.sharedInstance().VCGetShoppingCarData { (_ dataArray:Array<Array<Any>>,_ isDone:Bool) in
+            if isDone {
+                if dataArray.count != 0 {
+                    self.IDArray = dataArray[0] as? Array<Int> ?? []
+                    self.bHub?.setCount(self.IDArray.count)
+                }else{
+                    self.bHub?.setCount(0)
+                }
+            }
+        }
     }
     
     

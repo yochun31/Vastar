@@ -13,5 +13,6 @@ target 'Vastar' do
     pod 'CryptoSwift', '~> 1.4.1'
     pod 'HCVimeoVideoExtractor'
     pod 'GPVideoPlayer'
+    pod 'BadgeHub'
 
 end
