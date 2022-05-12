@@ -191,7 +191,7 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     @objc func typeBtnClick(_ sender:UIButton) {
         
-        let vc = VideoTypeViewController(nibName: "VideoTypeViewController", bundle: nil)
+        let vc = ConnectionViewController(nibName: "ConnectionViewController", bundle: nil)
         
         self.navigationController?.pushViewController(vc, animated: true)
     }

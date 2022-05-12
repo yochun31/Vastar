@@ -66,5 +66,10 @@
 	</array>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>line</string>
+		<string>weixin</string>
+	</array>
 </dict>
 </plist>
