@@ -17,6 +17,12 @@ class SideMenuTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        iconImage.image = nil
+    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -30,6 +36,13 @@ class SideMenuTableViewCell: UITableViewCell {
         self.titleLabel.text = title
         self.titleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
+    }
+    
+    func loadCellData(title:String) {
+        
+//        self.iconImage.isHidden = true
+        self.titleLabel.text = title
+        self.titleLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
     }
     
 }

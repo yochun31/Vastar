@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoViewController" customModule="Vastar" customModuleProvider="target">
             <connections>
+                <outlet property="filteredVideoListTableView" destination="kPf-to-lNS" id="Lt4-DL-sER"/>
+                <outlet property="searchBar" destination="Isn-PC-wli" id="XnZ-u3-ZB9"/>
                 <outlet property="typeBtn" destination="EY1-wh-jaQ" id="aJ6-3h-Bsw"/>
                 <outlet property="videoListTableView" destination="wlE-ni-Orh" id="JtN-Gh-F3C"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -22,11 +24,24 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wlE-ni-Orh">
-                    <rect key="frame" x="10" y="0.0" width="355" height="667"/>
+                    <rect key="frame" x="10" y="51" width="355" height="616"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="kPf-to-lNS">
+                    <rect key="frame" x="10" y="51" width="355" height="616"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                </tableView>
+                <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="Isn-PC-wli">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="51"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="color" keyPath="searchTextField.backgroundColor">
+                            <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </searchBar>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="EY1-wh-jaQ">
-                    <rect key="frame" x="305" y="0.0" width="70" height="70"/>
+                    <rect key="frame" x="305" y="51" width="70" height="70"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="70" id="pBc-KR-gQE"/>
                         <constraint firstAttribute="height" constant="70" id="qVo-nR-w1L"/>
@@ -39,11 +54,18 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="wlE-ni-Orh" secondAttribute="bottom" id="4NN-6j-FUP"/>
-                <constraint firstItem="EY1-wh-jaQ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="C9U-17-SQy"/>
+                <constraint firstItem="kPf-to-lNS" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="57L-V0-9Id"/>
+                <constraint firstItem="Isn-PC-wli" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Fae-Sa-6VE"/>
+                <constraint firstItem="EY1-wh-jaQ" firstAttribute="top" secondItem="Isn-PC-wli" secondAttribute="bottom" id="Fs4-g2-VZz"/>
+                <constraint firstItem="wlE-ni-Orh" firstAttribute="top" secondItem="Isn-PC-wli" secondAttribute="bottom" id="J1A-Ms-Neu"/>
                 <constraint firstItem="EY1-wh-jaQ" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="TcX-5N-c5V"/>
                 <constraint firstItem="wlE-ni-Orh" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="Vwv-g9-fcf"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="wlE-ni-Orh" secondAttribute="trailing" constant="10" id="WzZ-DI-dV2"/>
-                <constraint firstItem="wlE-ni-Orh" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="n3L-zG-BJA"/>
+                <constraint firstItem="kPf-to-lNS" firstAttribute="bottom" secondItem="fnl-2z-Ty3" secondAttribute="bottom" id="aef-ef-wzf"/>
+                <constraint firstItem="kPf-to-lNS" firstAttribute="top" secondItem="Isn-PC-wli" secondAttribute="bottom" id="cY5-0j-W2a"/>
+                <constraint firstItem="Isn-PC-wli" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="nlC-dg-bp5"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kPf-to-lNS" secondAttribute="trailing" constant="10" id="rIh-Pa-ibU"/>
+                <constraint firstItem="Isn-PC-wli" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="t2f-BJ-ZGt"/>
             </constraints>
             <point key="canvasLocation" x="97" y="52"/>
         </view>

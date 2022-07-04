@@ -1348,7 +1348,7 @@ class CloudGatewayManager {
     
     //MARK: - 影片
     
-    func CGMGetVideoListByType(type:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
+    func CGMGetVideoListByProductType(type:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
         
         var resVideoDataArray:Array<Array<Any>> = []
         
@@ -1357,6 +1357,7 @@ class CloudGatewayManager {
         var videoSeriesArray:Array<String> = []
         var videoNameArray:Array<String> = []
         var videoImageUrlArray:Array<String> = []
+        var videoTypeArray:Array<String> = []
         
         var messageStr:String = ""
 
@@ -1381,20 +1382,21 @@ class CloudGatewayManager {
                             let series:String = resultDict["Video_Series"] as? String ?? ""
                             let name:String = resultDict["Video_Name"] as? String ?? ""
                             let imagUrl:String = resultDict["Thumbnail_ID"] as? String ?? ""
+                            let v_type:String = resultDict["Video_Type"] as? String ?? ""
                             
                             videoOrderArray.append(order)
                             vimeoIDArray.append(vimeoID)
                             videoSeriesArray.append(series)
                             videoNameArray.append(name)
                             videoImageUrlArray.append(imagUrl)
-                            
+                            videoTypeArray.append(v_type)
 
                         }else{
                             messageStr = resultDict["Message"] as? String ?? ""
                         }
                     }
                     
-                    resVideoDataArray = [videoOrderArray,vimeoIDArray,videoSeriesArray,videoNameArray,videoImageUrlArray]
+                    resVideoDataArray = [videoOrderArray,vimeoIDArray,videoSeriesArray,videoNameArray,videoImageUrlArray,videoTypeArray]
                     
                     result(true,messageStr,resVideoDataArray)
                     
@@ -1412,6 +1414,141 @@ class CloudGatewayManager {
         }
     }
     
+    
+    func CGMGetVideoListByType(type:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
+        
+        var resVideoDataArray:Array<Array<Any>> = []
+        
+        var videoOrderArray:Array<Int> = []
+        var vimeoIDArray:Array<String> = []
+        var videoSeriesArray:Array<String> = []
+        var videoNameArray:Array<String> = []
+        var videoImageUrlArray:Array<String> = []
+        var videoTypeArray:Array<String> = []
+        
+        var messageStr:String = ""
+
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673", "Video_Type" : type]
+        let urlString:String = vApiUrl + "/api/Video/Query"
+        let url = URL.init(string: urlString)
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+                    let jsonArray:Array<Any> = json as? Array<Any> ?? []
+                    
+                    for i in 0 ..< jsonArray.count{
+                        let resultDict = jsonArray[i] as? [String:Any] ?? [:]
+                        let result:Int = resultDict["Result"] as? Int ?? 0
+                        
+                        if result == 0 {
+                            let order:Int = resultDict["Video_Order"] as? Int ?? 0
+                            let vimeoID:String = resultDict["Vimeo_ID"] as? String ?? ""
+                            let series:String = resultDict["Video_Series"] as? String ?? ""
+                            let name:String = resultDict["Video_Name"] as? String ?? ""
+                            let imagUrl:String = resultDict["Thumbnail_ID"] as? String ?? ""
+                            let v_type:String = resultDict["Video_Type"] as? String ?? ""
+                            
+                            videoOrderArray.append(order)
+                            vimeoIDArray.append(vimeoID)
+                            videoSeriesArray.append(series)
+                            videoNameArray.append(name)
+                            videoImageUrlArray.append(imagUrl)
+                            videoTypeArray.append(v_type)
+                            
+
+                        }else{
+                            messageStr = resultDict["Message"] as? String ?? ""
+                        }
+                    }
+                    
+                    resVideoDataArray = [videoOrderArray,vimeoIDArray,videoSeriesArray,videoNameArray,videoImageUrlArray,videoTypeArray]
+                    
+                    result(true,messageStr,resVideoDataArray)
+                    
+                }else{
+                    result(false,"statusCode = \(String(describing: responseData.response?.statusCode))",[])
+                }
+                
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"Error",[])
+                break
+            }
+        }
+    }
+    
+    
+    func CGMGetVideoListBySeries(series:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
+        
+        var resVideoDataArray:Array<Array<Any>> = []
+        
+        var videoOrderArray:Array<Int> = []
+        var vimeoIDArray:Array<String> = []
+        var videoSeriesArray:Array<String> = []
+        var videoNameArray:Array<String> = []
+        var videoImageUrlArray:Array<String> = []
+        var videoTypeArray:Array<String> = []
+        
+        var messageStr:String = ""
+
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673", "Video_Series" : series]
+        let urlString:String = vApiUrl + "/api/Video/Query"
+        let url = URL.init(string: urlString)
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+                    let jsonArray:Array<Any> = json as? Array<Any> ?? []
+                    
+                    for i in 0 ..< jsonArray.count{
+                        let resultDict = jsonArray[i] as? [String:Any] ?? [:]
+                        let result:Int = resultDict["Result"] as? Int ?? 0
+                        
+                        if result == 0 {
+                            let order:Int = resultDict["Video_Order"] as? Int ?? 0
+                            let vimeoID:String = resultDict["Vimeo_ID"] as? String ?? ""
+                            let series:String = resultDict["Video_Series"] as? String ?? ""
+                            let name:String = resultDict["Video_Name"] as? String ?? ""
+                            let imagUrl:String = resultDict["Thumbnail_ID"] as? String ?? ""
+                            let v_type:String = resultDict["Video_Type"] as? String ?? ""
+                            
+                            videoOrderArray.append(order)
+                            vimeoIDArray.append(vimeoID)
+                            videoSeriesArray.append(series)
+                            videoNameArray.append(name)
+                            videoImageUrlArray.append(imagUrl)
+                            videoTypeArray.append(v_type)
+                            
+
+                        }else{
+                            messageStr = resultDict["Message"] as? String ?? ""
+                        }
+                    }
+                    
+                    resVideoDataArray = [videoOrderArray,vimeoIDArray,videoSeriesArray,videoNameArray,videoImageUrlArray,videoTypeArray]
+                    
+                    result(true,messageStr,resVideoDataArray)
+                    
+                }else{
+                    result(false,"statusCode = \(String(describing: responseData.response?.statusCode))",[])
+                }
+                
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"Error",[])
+                break
+            }
+        }
+    }
     
     func CGMGetVideoProductByID(vimeoID:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Any>) -> Void) {
         
@@ -1495,4 +1632,98 @@ class CloudGatewayManager {
         }
     }
     
+    
+    //查詢食堂清單
+    
+    func CGMGetVideoCanteenList(result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) -> Void) {
+        
+        var videoSeriesArray:Array<String> = []
+        var messageStr:String = ""
+
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673"]
+        let urlString:String = vApiUrl + "/api/Video/QueryVideo_Series"
+        let url = URL.init(string: urlString)
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+                    let jsonArray:Array<Any> = json as? Array<Any> ?? []
+                    
+                    for i in 0 ..< jsonArray.count{
+                        let resultDict = jsonArray[i] as? [String:Any] ?? [:]
+                        let result:Int = resultDict["Result"] as? Int ?? 0
+                        
+                        if result == 0 {
+                            let series:String = resultDict["Video_Series"] as? String ?? ""
+                            videoSeriesArray.append(series)
+
+                        }else{
+                            messageStr = resultDict["Message"] as? String ?? ""
+                        }
+                    }
+                    
+                    result(true,messageStr,videoSeriesArray)
+                    
+                }else{
+                    result(false,"statusCode = \(String(describing: responseData.response?.statusCode))",[])
+                }
+                
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"Error",[])
+                break
+            }
+        }
+    }
+    
+    //查詢料理清單
+    
+    func CGMGetVideoFoodTypeList(result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) -> Void) {
+        
+        var videoTypeArray:Array<String> = []
+        var messageStr:String = ""
+
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673"]
+        let urlString:String = vApiUrl + "/api/Video/QueryVideo_Type"
+        let url = URL.init(string: urlString)
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+                    let jsonArray:Array<Any> = json as? Array<Any> ?? []
+                    
+                    for i in 0 ..< jsonArray.count{
+                        let resultDict = jsonArray[i] as? [String:Any] ?? [:]
+                        let result:Int = resultDict["Result"] as? Int ?? 0
+                        
+                        if result == 0 {
+                            let type:String = resultDict["Video_Type"] as? String ?? ""
+                            videoTypeArray.append(type)
+
+                        }else{
+                            messageStr = resultDict["Message"] as? String ?? ""
+                        }
+                    }
+                    
+                    result(true,messageStr,videoTypeArray)
+                    
+                }else{
+                    result(false,"statusCode = \(String(describing: responseData.response?.statusCode))",[])
+                }
+                
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"Error",[])
+                break
+            }
+        }
+    }
 }
