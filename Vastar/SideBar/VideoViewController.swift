@@ -8,17 +8,31 @@
 import UIKit
 import BadgeHub
 
-class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UISearchBarDelegate {
 
     
     @IBOutlet var videoListTableView: UITableView!
+    @IBOutlet var filteredVideoListTableView: UITableView!
     @IBOutlet var typeBtn: UIButton!
+    @IBOutlet var searchBar: UISearchBar!
+    
+    private var videoTypeListArray:Array<String> = []
     
     private var videoOrderArray:Array<Int> = []
     private var vimeoIDArray:Array<String> = []
     private var videoSeriesArray:Array<String> = []
     private var videoNameArray:Array<String> = []
     private var videoImageUrlArray:Array<String> = []
+    private var videoTypeArray:Array<String> = []
+    
+    private var F_videoOrderArray:Array<Int> = []
+    private var F_vimeoIDArray:Array<String> = []
+    private var F_videoSeriesArray:Array<String> = []
+    private var F_videoNameArray:Array<String> = []
+    private var F_videoImageUrlArray:Array<String> = []
+    private var F_videoTypeArray:Array<String> = []
+    
+    private var filterStArray:Array<String> = []
     
     private var rightNavBtn = UIButton()
     private var rightBarBtnItem = UIBarButtonItem()
@@ -40,7 +54,9 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         setInterface()
         setupSWReveal()
         setTableView()
+        setTextFieldKeyboard()
         
+        getFoodTypeList()
         getVideoAllList()
     }
     
@@ -92,6 +108,30 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         self.typeBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.typeBtn.addTarget(self, action: #selector(typeBtnClick(_:)), for: .touchUpInside)
+        
+        self.searchBar.delegate = self
+        self.searchBar.searchBarStyle = .minimal
+        self.searchBar.returnKeyType = UIReturnKeyType.done
+        
+        self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        
+        self.filteredVideoListTableView.isHidden = true
+    
+    }
+    
+    func setTextFieldKeyboard() {
+        
+        let keyboardToolBar = UIToolbar()
+        keyboardToolBar.barStyle = .default
+        keyboardToolBar.sizeToFit()
+        let rightBarButton = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
+        let leftBarButton = UIBarButtonItem(image: UIImage(named: "keyboard"), style: .done, target: self, action: #selector(doneBtnClick(_:)))
+        keyboardToolBar.items = [rightBarButton,leftBarButton]
+        if #available(iOS 13.0, *) {
+            self.searchBar.searchTextField.inputAccessoryView = keyboardToolBar
+        } else {
+            // Fallback on earlier versions
+        }
     }
     
     
@@ -115,12 +155,28 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         self.videoListTableView.delegate = self
         self.videoListTableView.dataSource = self
         
-        self.videoListTableView.register(UINib(nibName: "VideoListTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoCell")
+        self.videoListTableView.register(UINib(nibName: "VideoPageTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoCell")
         self.videoListTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
-        self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        
+        self.filteredVideoListTableView.delegate = self
+        self.filteredVideoListTableView.dataSource = self
+        self.filteredVideoListTableView.register(UINib(nibName: "VideoListTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoListCell")
+        self.filteredVideoListTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+    
     }
     
     //MARK: - Assistant Methods
+    
+    func getFoodTypeList() {
+        
+        VClient.sharedInstance().VCGetVideoFoodTypeList { isSuccess, message, resDataArray in
+            if isSuccess {
+                self.videoTypeListArray = resDataArray
+                print("---->\(resDataArray)")
+                self.videoListTableView.reloadData()
+            }
+        }
+    }
     
     func getVideoAllList() {
         
@@ -132,11 +188,18 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
                 self.videoSeriesArray = resDataArray[2] as? Array<String> ?? []
                 self.videoNameArray = resDataArray[3] as? Array<String> ?? []
                 self.videoImageUrlArray = resDataArray[4] as? Array<String> ?? []
+                self.videoTypeArray = resDataArray[5] as? Array<String> ?? []
                 
+                for i in 0 ..< self.videoOrderArray.count {
+                    let st:String = "\(self.videoTypeArray[i]),\(self.videoNameArray[i])"
+                    self.filterStArray.append(st)
+                }
+                print("---\(self.filterStArray)")
                 self.videoListTableView.reloadData()
             }
         }
     }
+    
     
     func getProductModelData(vimeoID:String,viewControllerTitle:String) {
         
@@ -154,6 +217,8 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
             }
         }
     }
+
+    
     
     // 取得購物車數量
     
@@ -191,9 +256,14 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
     
     @objc func typeBtnClick(_ sender:UIButton) {
         
-        let vc = VideoTypeViewController(nibName: "VideoTypeViewController", bundle: nil)
+        let vc = ConnectionViewController(nibName: "ConnectionViewController", bundle: nil)
         
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @objc func doneBtnClick(_ sender:UIButton) {
+        
+        self.view.endEditing(true)
     }
 
     /*
@@ -215,26 +285,45 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return self.videoOrderArray.count
+        if tableView == self.videoListTableView {
+            return self.videoTypeListArray.count
+        }else{
+            return self.F_vimeoIDArray.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell:VideoListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! VideoListTableViewCell
-        cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
-        
-        let selectBkView = UIView()
-        selectBkView.backgroundColor = UIColor.clear
-        cell.selectedBackgroundView = selectBkView
+        if tableView == self.videoListTableView {
+            let cell:VideoPageTableViewCell = tableView.dequeueReusableCell(withIdentifier: "VideoCell", for: indexPath) as! VideoPageTableViewCell
+            cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+            
+            let selectBkView = UIView()
+            selectBkView.backgroundColor = UIColor.clear
+            cell.selectedBackgroundView = selectBkView
 
-        let series:String = self.videoSeriesArray[indexPath.row]
-        let name:String = self.videoNameArray[indexPath.row]
-        let urlSt:String = self.videoImageUrlArray[indexPath.row]
-        let url = URL.init(string: urlSt)!
-        cell.loadData(title1St: series, title2St: name, url: url)
+            let type:String = self.videoTypeListArray[indexPath.row]
+            cell.loadTextData(title: type)
+            return cell
+            
+        }else{
+            
+            let cell:VideoListTableViewCell = tableView.dequeueReusableCell(withIdentifier: "VideoListCell", for: indexPath) as! VideoListTableViewCell
+            cell.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+            
+            let selectBkView = UIView()
+            selectBkView.backgroundColor = UIColor.clear
+            cell.selectedBackgroundView = selectBkView
+
+            let series:String = self.F_videoSeriesArray[indexPath.row]
+            let name:String = self.F_videoNameArray[indexPath.row]
+            let urlSt:String = self.F_videoImageUrlArray[indexPath.row]
+            let url = URL.init(string: urlSt)!
+            cell.loadData(title1St: series, title2St: name, url: url)
+            return cell
+        }
         
-        
-        return cell
     }
     
     //MARK: - UITableViewDelegate
@@ -243,7 +332,63 @@ class VideoViewController: UIViewController,UITableViewDelegate,UITableViewDataS
         
         print("==\(indexPath.row)")
         
-        self.getProductModelData(vimeoID: self.vimeoIDArray[indexPath.row], viewControllerTitle: self.videoNameArray[indexPath.row])
+        if tableView == self.videoListTableView {
+            let vc = VideoListByTypeViewController(nibName: "VideoListByTypeViewController", bundle: nil)
+            vc.titleSt = self.videoTypeListArray[indexPath.row]
+            vc.typeSt = self.videoTypeListArray[indexPath.row]
+            vc.accountPhone = self.accountPhone
+            self.navigationController?.pushViewController(vc, animated: true)
+        }else{
+            
+            self.getProductModelData(vimeoID: self.F_vimeoIDArray[indexPath.row], viewControllerTitle: self.F_videoNameArray[indexPath.row])
 
+        }
+    }
+    
+    //MARK: - UISearchBarDelegate
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        print("333333333")
+        
+        self.F_vimeoIDArray.removeAll()
+        self.F_videoSeriesArray.removeAll()
+        self.F_videoNameArray.removeAll()
+        self.F_videoImageUrlArray.removeAll()
+        self.F_videoTypeArray.removeAll()
+        
+        if searchText == "" {
+            self.videoListTableView.isHidden = false
+            self.filteredVideoListTableView.isHidden = true
+            
+        }else{
+            self.videoListTableView.isHidden = true
+            self.filteredVideoListTableView.isHidden = false
+            
+            for video in self.filterStArray {
+                
+                if video.lowercased().contains(searchText.lowercased()){
+                    let array = video.split(separator: ",")
+                    let index:Int = self.videoNameArray.firstIndex(where: {$0 == array[1]})!
+                    
+                    self.F_vimeoIDArray.append(self.vimeoIDArray[index])
+                    self.F_videoSeriesArray.append(self.videoSeriesArray[index])
+                    self.F_videoNameArray.append(self.videoNameArray[index])
+                    self.F_videoImageUrlArray.append(self.videoImageUrlArray[index])
+                    self.F_videoTypeArray.append(self.videoTypeArray[index])
+                    
+                    print(">>>\(array[1])-\(index)")
+                }
+            }
+            
+        }
+        
+        self.filteredVideoListTableView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        
+        print("222222222")
+        self.view.endEditing(true)
     }
 }

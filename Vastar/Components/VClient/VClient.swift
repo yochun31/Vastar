@@ -662,6 +662,13 @@ class VClient {
     
     //MARK: - 影片
     
+    func VCGetVideoListByProductType(type:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
+        
+        CloudGatewayManager.sharedInstance().CGMGetVideoListByProductType(type: type) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
+            result(isSuccess,message,resDataArray)
+        }
+    }
+    
     func VCGetVideoListByType(type:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
         
         CloudGatewayManager.sharedInstance().CGMGetVideoListByType(type: type) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
@@ -669,9 +676,35 @@ class VClient {
         }
     }
     
+    func VCGetVideoListBySeries(series:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) -> Void) {
+        
+        CloudGatewayManager.sharedInstance().CGMGetVideoListBySeries(series: series) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
+            result(isSuccess,message,resDataArray)
+        }
+    }
+    
     func VCGetVideoProductByID(vimeoID:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Any>) -> Void) {
         
         CloudGatewayManager.sharedInstance().CGMGetVideoProductByID(vimeoID: vimeoID) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Any>) in
+            result(isSuccess,message,resDataArray)
+        }
+    }
+    
+    
+    //查詢食堂清單
+    
+    func VCGetVideoCanteenList(result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) -> Void) {
+        
+        CloudGatewayManager.sharedInstance().CGMGetVideoCanteenList { isSuccess, message, resDataArray in
+            result(isSuccess,message,resDataArray)
+        }
+    }
+    
+    //查詢料理清單
+    
+    func VCGetVideoFoodTypeList(result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<String>) -> Void) {
+        
+        CloudGatewayManager.sharedInstance().CGMGetVideoFoodTypeList { isSuccess, message, resDataArray in
             result(isSuccess,message,resDataArray)
         }
     }

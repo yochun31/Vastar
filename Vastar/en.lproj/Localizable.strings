@@ -201,4 +201,14 @@
 "Video_Type_Item2_Btn_Value" = "飛騰女兒鍋";
 "Video_Type_Item3_Btn_Value" = "烤箱";
 
+"Connection_title" = "聯絡我們";
+"Connection_Info_Address_title" = "地址:";
+"Connection_Info_Phone_title" = "服務電話:";
+"Connection_Info_Line_title" = "LINE ID:";
+"Connection_Info_Wechat_title" = "Wechat ID:";
+"Connection_Info_Address_Text" = "103台北市大同區承德路三段285號1樓 飛騰會館";
+"Connection_Info_Phone_Text" = "+886 2 2838 1010";
+"Connection_Info_Line_Text" = "vastarmimichi";
+"Connection_Info_Wechat_Text" = "vastarmimichi";
+
 "History_title" = "歷史訂單";
