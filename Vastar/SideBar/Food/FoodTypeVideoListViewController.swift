@@ -1,14 +1,13 @@
 //
-//  VideoListByTypeViewController.swift
+//  FoodTypeVideoListViewController.swift
 //  Vastar
 //
-//  Created by 郭堯彰 on 2021/9/28.
+//  Created by 郭堯彰 on 2022/6/1.
 //
 
 import UIKit
-import BadgeHub
 
-class VideoListByTypeViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class FoodTypeVideoListViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet var videoListTableView: UITableView!
     
@@ -17,38 +16,74 @@ class VideoListByTypeViewController: UIViewController,UITableViewDelegate,UITabl
     private var videoSeriesArray:Array<String> = []
     private var videoNameArray:Array<String> = []
     private var videoImageUrlArray:Array<String> = []
+    private var videoTypeArray:Array<String> = []
     
     private var rightNavBtn = UIButton()
     private var rightBarBtnItem = UIBarButtonItem()
-    private var bHub:BadgeHub?
+
     private var IDArray:Array<Int> = []
     
-    var typeSt:String = ""
-    var titleSt:String = ""
+    let userDefault = UserDefaults.standard
     var accountPhone:String = ""
-
+    
+    var typeSt:String = ""
+    
+    //MARK: - Life Cycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        setInterface()
-        setTableView()
-        setRightBarButton()
-        getVideoAllList()
         
+        setLeftBarButton()
+
+        setInterface()
+        setupSWReveal()
+        setTableView()
+        
+        getVideoAllList()
     }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
-        GetShoppingCarDataCount()
+
     }
+
     
     //MARK: - UI Interface Methods
     
-    func setInterface() {
-        self.navigationItem.title = self.titleSt
+    func setLeftBarButton() {
+        let leftBarBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        leftBarBtn.setImage(UIImage(named: "menu"), for: .normal)
+        leftBarBtn.addTarget(self, action: #selector(leftBarBtnClick(_:)), for: .touchUpInside)
+        let leftBarItem = UIBarButtonItem(customView: leftBarBtn)
+        self.navigationItem.leftBarButtonItem = leftBarItem
     }
+    
+    
+    func setInterface() {
+        self.navigationItem.title = NSLocalizedString(self.typeSt, comment: "")
+        
+        
+    }
+    
+    
+    func setupSWReveal(){
+        //adding panGesture to reveal menu controller
+        view.addGestureRecognizer((self.revealViewController()?.panGestureRecognizer())!)
+        
+        //adding tap gesture to hide menu controller
+        view.addGestureRecognizer((self.revealViewController()?.tapGestureRecognizer())!)
+        
+        //setting reveal width of menu controller manually
+        self.revealViewController()?.rearViewRevealWidth = UIScreen.main.bounds.width * (2/3)
+        
+//        self.revealViewController()?.delegate = self
+        
+    }
+    
     
     func setTableView() {
         
@@ -58,20 +93,6 @@ class VideoListByTypeViewController: UIViewController,UITableViewDelegate,UITabl
         self.videoListTableView.register(UINib(nibName: "VideoListTableViewCell", bundle: nil), forCellReuseIdentifier: "VideoCell")
         self.videoListTableView.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
         self.view.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
-    }
-    
-    func setRightBarButton() {
-        
-        self.rightNavBtn = UIButton(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        self.rightNavBtn.setImage(UIImage(named: "shoppingcart"), for: .normal)
-        self.rightNavBtn.addTarget(self, action: #selector(rightBtnClick(_:)), for: .touchUpInside)
-        
-        self.rightBarBtnItem = UIBarButtonItem.init(customView: self.rightNavBtn)
-        self.navigationItem.rightBarButtonItem = self.rightBarBtnItem
-        self.bHub = BadgeHub(barButtonItem: self.rightBarBtnItem)
-        self.bHub?.setCount(self.IDArray.count)
-        self.bHub?.moveCircleBy(x: 0, y: 5)
-        self.bHub?.scaleCircleSize(by: 0.8)
     }
     
     //MARK: - Assistant Methods
@@ -92,26 +113,10 @@ class VideoListByTypeViewController: UIViewController,UITableViewDelegate,UITabl
         }
     }
     
-    func getVideoList() {
-        
-        VClient.sharedInstance().VCGetVideoListByProductType(type: self.typeSt) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Array<Any>>) in
-            if isSuccess {
-                
-                self.videoOrderArray = resDataArray[0] as? Array<Int> ?? []
-                self.vimeoIDArray = resDataArray[1] as? Array<String> ?? []
-                self.videoSeriesArray = resDataArray[2] as? Array<String> ?? []
-                self.videoNameArray = resDataArray[3] as? Array<String> ?? []
-                self.videoImageUrlArray = resDataArray[4] as? Array<String> ?? []
-                
-                self.videoListTableView.reloadData()
-            }
-        }
-    }
-    
-
     func getProductModelData(vimeoID:String,viewControllerTitle:String) {
         
         VClient.sharedInstance().VCGetVideoProductByID(vimeoID: vimeoID) { (_ isSuccess:Bool,_ message:String,_ resDataArray:Array<Any>) in
+            
             if isSuccess {
                 
                 print("=====>\(resDataArray)")
@@ -125,33 +130,21 @@ class VideoListByTypeViewController: UIViewController,UITableViewDelegate,UITabl
         }
     }
     
-    // 取得購物車數量
+
     
-    func GetShoppingCarDataCount() {
-        
-        self.IDArray.removeAll()
-        VClient.sharedInstance().VCGetShoppingCarData { (_ dataArray:Array<Array<Any>>,_ isDone:Bool) in
-            if isDone {
-                if dataArray.count != 0 {
-                    self.IDArray = dataArray[0] as? Array<Int> ?? []
-                    self.bHub?.setCount(self.IDArray.count)
-                }else{
-                    self.bHub?.setCount(0)
-                }
-            }
-        }
+    //MARK: - Action
+    
+    @objc func leftBarBtnClick(_ sender:UIButton) {
+        print("33333333")
+        self.revealViewController()?.revealToggle(animated: true)
     }
     
-    // MARK: - Action
     
-    @objc func rightBtnClick(_ sender:UIButton) {
+    @objc func typeBtnClick(_ sender:UIButton) {
         
-        let nav = UINavigationController()
-        let reveal = self.revealViewController()
-        let vc = ShoppingCarViewController(nibName: "ShoppingCarViewController", bundle: nil)
-        vc.accountPhone = accountPhone
-        nav.viewControllers = [vc]
-        reveal?.pushFrontViewController(nav, animated: true)
+        let vc = ConnectionViewController(nibName: "ConnectionViewController", bundle: nil)
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 
     /*
@@ -163,6 +156,7 @@ class VideoListByTypeViewController: UIViewController,UITableViewDelegate,UITabl
         // Pass the selected object to the new view controller.
     }
     */
+
     
     //MARK: - UITableViewDataSource
     
@@ -203,5 +197,5 @@ class VideoListByTypeViewController: UIViewController,UITableViewDelegate,UITabl
         self.getProductModelData(vimeoID: self.vimeoIDArray[indexPath.row], viewControllerTitle: self.videoNameArray[indexPath.row])
 
     }
-
 }
+

@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2200F4F32845EE76003BEAC9 /* CanteenVideoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200F4F12845EE75003BEAC9 /* CanteenVideoListViewController.swift */; };
+		2200F4F42845EE76003BEAC9 /* CanteenVideoListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2200F4F22845EE75003BEAC9 /* CanteenVideoListViewController.xib */; };
+		2200F4F72847509C003BEAC9 /* FoodTypeVideoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200F4F52847509C003BEAC9 /* FoodTypeVideoListViewController.swift */; };
+		2200F4F82847509D003BEAC9 /* FoodTypeVideoListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2200F4F62847509C003BEAC9 /* FoodTypeVideoListViewController.xib */; };
+		2200F4FB284DFC2D003BEAC9 /* VideoPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2200F4F9284DFC2D003BEAC9 /* VideoPageTableViewCell.swift */; };
+		2200F4FC284DFC2D003BEAC9 /* VideoPageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2200F4FA284DFC2D003BEAC9 /* VideoPageTableViewCell.xib */; };
 		2203BBE2266DCD3C006986D2 /* ChangePwViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203BBE0266DCD3C006986D2 /* ChangePwViewController.swift */; };
 		2203BBE3266DCD3C006986D2 /* ChangePwViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2203BBE1266DCD3C006986D2 /* ChangePwViewController.xib */; };
 		2203BBE62670947E006986D2 /* AppInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203BBE52670947D006986D2 /* AppInfoManager.swift */; };
@@ -15,6 +21,8 @@
 		2203BBF12672106D006986D2 /* RecipientAddView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2203BBF02672106D006986D2 /* RecipientAddView.xib */; };
 		2203BBF5267362BA006986D2 /* ReceiverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2203BBF3267362BA006986D2 /* ReceiverTableViewCell.swift */; };
 		2203BBF6267362BA006986D2 /* ReceiverTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2203BBF4267362BA006986D2 /* ReceiverTableViewCell.xib */; };
+		2206DC0C285C2E11004A6EFC /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 2206DC0B285C2E11004A6EFC /* libsqlite3.tbd */; };
+		2206DC0D285C2E3D004A6EFC /* SWRevealViewController.h in Sources */ = {isa = PBXBuildFile; fileRef = 2244F61E2682D10A006754D6 /* SWRevealViewController.h */; };
 		220B260126BDA99C007FC2AA /* CustomAlertTwoBtnView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220B260026BDA99C007FC2AA /* CustomAlertTwoBtnView.swift */; };
 		220B260326BDAA04007FC2AA /* CustomAlertTwoBtnView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220B260226BDAA04007FC2AA /* CustomAlertTwoBtnView.xib */; };
 		220B260526E5AFED007FC2AA /* stage-public.pem in Resources */ = {isa = PBXBuildFile; fileRef = 220B260426E5AFEC007FC2AA /* stage-public.pem */; };
@@ -105,6 +113,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2200F4F12845EE75003BEAC9 /* CanteenVideoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanteenVideoListViewController.swift; sourceTree = "<group>"; };
+		2200F4F22845EE75003BEAC9 /* CanteenVideoListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CanteenVideoListViewController.xib; sourceTree = "<group>"; };
+		2200F4F52847509C003BEAC9 /* FoodTypeVideoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodTypeVideoListViewController.swift; sourceTree = "<group>"; };
+		2200F4F62847509C003BEAC9 /* FoodTypeVideoListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FoodTypeVideoListViewController.xib; sourceTree = "<group>"; };
+		2200F4F9284DFC2D003BEAC9 /* VideoPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoPageTableViewCell.swift; sourceTree = "<group>"; };
+		2200F4FA284DFC2D003BEAC9 /* VideoPageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoPageTableViewCell.xib; sourceTree = "<group>"; };
 		2203BBE0266DCD3C006986D2 /* ChangePwViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePwViewController.swift; sourceTree = "<group>"; };
 		2203BBE1266DCD3C006986D2 /* ChangePwViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePwViewController.xib; sourceTree = "<group>"; };
 		2203BBE52670947D006986D2 /* AppInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoManager.swift; sourceTree = "<group>"; };
@@ -113,6 +127,7 @@
 		2203BBF02672106D006986D2 /* RecipientAddView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecipientAddView.xib; sourceTree = "<group>"; };
 		2203BBF3267362BA006986D2 /* ReceiverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverTableViewCell.swift; sourceTree = "<group>"; };
 		2203BBF4267362BA006986D2 /* ReceiverTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ReceiverTableViewCell.xib; sourceTree = "<group>"; };
+		2206DC0B285C2E11004A6EFC /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		220B260026BDA99C007FC2AA /* CustomAlertTwoBtnView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTwoBtnView.swift; sourceTree = "<group>"; };
 		220B260226BDAA04007FC2AA /* CustomAlertTwoBtnView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomAlertTwoBtnView.xib; sourceTree = "<group>"; };
 		220B260426E5AFEC007FC2AA /* stage-public.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "stage-public.pem"; sourceTree = "<group>"; };
@@ -216,6 +231,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2206DC0C285C2E11004A6EFC /* libsqlite3.tbd in Frameworks */,
 				22F1C4032668D1E8003A1D5C /* swiftMBProgressHUD.framework in Frameworks */,
 				59BB5765C24B763600503843 /* Pods_Vastar.framework in Frameworks */,
 				228BDD7B268C55B50080F843 /* DBSqliteHelper.framework in Frameworks */,
@@ -225,6 +241,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2200F4EF2845EC5D003BEAC9 /* Canteen */ = {
+			isa = PBXGroup;
+			children = (
+				2200F4F12845EE75003BEAC9 /* CanteenVideoListViewController.swift */,
+				2200F4F22845EE75003BEAC9 /* CanteenVideoListViewController.xib */,
+			);
+			path = Canteen;
+			sourceTree = "<group>";
+		};
+		2200F4F02845EC6A003BEAC9 /* Food */ = {
+			isa = PBXGroup;
+			children = (
+				2200F4F52847509C003BEAC9 /* FoodTypeVideoListViewController.swift */,
+				2200F4F62847509C003BEAC9 /* FoodTypeVideoListViewController.xib */,
+			);
+			path = Food;
+			sourceTree = "<group>";
+		};
 		220B260626E73AF3007FC2AA /* Pay */ = {
 			isa = PBXGroup;
 			children = (
@@ -412,6 +446,8 @@
 				220B261C2701B248007FC2AA /* VideoListTableViewCell.xib */,
 				22A5184C2706F4520025C31D /* VideoProductListTableViewCell.swift */,
 				22A5184D2706F4520025C31D /* VideoProductListTableViewCell.xib */,
+				2200F4F9284DFC2D003BEAC9 /* VideoPageTableViewCell.swift */,
+				2200F4FA284DFC2D003BEAC9 /* VideoPageTableViewCell.xib */,
 			);
 			path = TableViewCell;
 			sourceTree = "<group>";
@@ -437,6 +473,8 @@
 				2203BBE1266DCD3C006986D2 /* ChangePwViewController.xib */,
 				226018802823AACE00B063A4 /* ConnectionViewController.swift */,
 				226018812823AACE00B063A4 /* ConnectionViewController.xib */,
+				2200F4F02845EC6A003BEAC9 /* Food */,
+				2200F4EF2845EC5D003BEAC9 /* Canteen */,
 				2244F61026789458006754D6 /* SubPage */,
 			);
 			path = SideBar;
@@ -454,6 +492,7 @@
 		4F478BFC4CD209678CBA066D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2206DC0B285C2E11004A6EFC /* libsqlite3.tbd */,
 				4D3F6B628888968EBF5FED1C /* Pods_Vastar.framework */,
 			);
 			name = Frameworks;
@@ -532,8 +571,10 @@
 				228BDD9E269AEE2F0080F843 /* OrderCreateDoneViewController.xib in Resources */,
 				22F1C3A2266613F7003A1D5C /* SideMenuTableViewCell.xib in Resources */,
 				22F1C35D2664C7AC003A1D5C /* LoginViewController.xib in Resources */,
+				2200F4F82847509D003BEAC9 /* FoodTypeVideoListViewController.xib in Resources */,
 				220B26232702F8B7007FC2AA /* VideoTypeViewController.xib in Resources */,
 				22F1C3E12668857B003A1D5C /* ShoppingCarViewController.xib in Resources */,
+				2200F4FC284DFC2D003BEAC9 /* VideoPageTableViewCell.xib in Resources */,
 				22F1C38D2665CBCB003A1D5C /* ForgetPwViewController.xib in Resources */,
 				220B261026E9EBE2007FC2AA /* FailInfoViewController.xib in Resources */,
 				220B260526E5AFED007FC2AA /* stage-public.pem in Resources */,
@@ -563,6 +604,7 @@
 				22F1C3D92668852D003A1D5C /* ProductViewController.xib in Resources */,
 				220B260326BDAA04007FC2AA /* CustomAlertTwoBtnView.xib in Resources */,
 				220B261626E9EC65007FC2AA /* SuccessInfoViewController.xib in Resources */,
+				2200F4F42845EE76003BEAC9 /* CanteenVideoListViewController.xib in Resources */,
 				22F1C3EC266885F7003A1D5C /* HistoryOrderViewController.xib in Resources */,
 				228BDD912696EED80080F843 /* ConfirmOrderViewController.xib in Resources */,
 				22F1C3F126688620003A1D5C /* MemberDataViewController.xib in Resources */,
@@ -624,6 +666,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2206DC0D285C2E3D004A6EFC /* SWRevealViewController.h in Sources */,
 				2203BBEE26721043006986D2 /* RecipientAddView.swift in Sources */,
 				2203BBE2266DCD3C006986D2 /* ChangePwViewController.swift in Sources */,
 				2203BBE62670947E006986D2 /* AppInfoManager.swift in Sources */,
@@ -646,6 +689,7 @@
 				22F1C3F52668B44C003A1D5C /* CloudGatewayManager.swift in Sources */,
 				2244F61326789586006754D6 /* ProductListViewController.swift in Sources */,
 				22F1C3E02668857B003A1D5C /* ShoppingCarViewController.swift in Sources */,
+				2200F4F32845EE76003BEAC9 /* CanteenVideoListViewController.swift in Sources */,
 				220B260126BDA99C007FC2AA /* CustomAlertTwoBtnView.swift in Sources */,
 				220B26222702F8B7007FC2AA /* VideoTypeViewController.swift in Sources */,
 				2244F61726789606006754D6 /* ProductListTableViewCell.swift in Sources */,
@@ -667,8 +711,10 @@
 				22F1C4082668DA83003A1D5C /* VActivityIndicatorView.swift in Sources */,
 				228BDD88268F0FDD0080F843 /* CheckoutProductTableViewCell.swift in Sources */,
 				228BDDA526A15A1C0080F843 /* HistoryOrderDetailViewController.swift in Sources */,
+				2200F4F72847509C003BEAC9 /* FoodTypeVideoListViewController.swift in Sources */,
 				228BDD84268EC22F0080F843 /* CheckoutViewController.swift in Sources */,
 				220B260926E74758007FC2AA /* TransactionViewController.swift in Sources */,
+				2200F4FB284DFC2D003BEAC9 /* VideoPageTableViewCell.swift in Sources */,
 				2203BBF5267362BA006986D2 /* ReceiverTableViewCell.swift in Sources */,
 				220B261D2701B248007FC2AA /* VideoListTableViewCell.swift in Sources */,
 				22A5184E2706F4520025C31D /* VideoProductListTableViewCell.swift in Sources */,

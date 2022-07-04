@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19455" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19454"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="83" id="KGk-i7-Jjw" customClass="VideoPageTableViewCell" customModule="Vastar" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="83"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="classed_btn" translatesAutoresizingMaskIntoConstraints="NO" id="qIr-pm-RJD">
+                        <rect key="frame" x="0.0" y="5" width="320" height="73"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XhB-ap-8UP">
+                        <rect key="frame" x="100" y="31" width="120" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="XhB-ap-8UP" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="100" id="6se-X1-USd"/>
+                    <constraint firstAttribute="bottom" secondItem="qIr-pm-RJD" secondAttribute="bottom" constant="5" id="CHk-bJ-P0v"/>
+                    <constraint firstAttribute="trailing" secondItem="qIr-pm-RJD" secondAttribute="trailing" id="JcI-Pc-vJu"/>
+                    <constraint firstAttribute="trailing" secondItem="XhB-ap-8UP" secondAttribute="trailing" constant="100" id="Yie-as-4i7"/>
+                    <constraint firstItem="XhB-ap-8UP" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="tkO-E5-hos"/>
+                    <constraint firstItem="qIr-pm-RJD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="uQt-HT-7Eb"/>
+                    <constraint firstItem="qIr-pm-RJD" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="yuv-ZN-vnd"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="titleLabel" destination="XhB-ap-8UP" id="bik-No-MxK"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="78.683035714285708"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="classed_btn" width="100" height="100"/>
+    </resources>
+</document>
