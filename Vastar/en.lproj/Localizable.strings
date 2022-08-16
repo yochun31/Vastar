@@ -11,6 +11,11 @@
 "Alert_Cancel_title" = "取消";
 "Alert_title" = "提示";
 
+"Alert_Loading_title" = "載入中";
+"Alert_Sure_title" = "確定";
+"Alert_Cancel_title" = "取消";
+"Alert_title" = "提示";
+
 "Login_Account_title" = "手機號碼";
 "Login_Password_title" = "密碼";
 "Login_Button_title" = "登入";
@@ -66,16 +71,19 @@
 "Forget_Update_Success_Alert_Text" = "更新成功";
 "Forget_Input_Error_Alert_Text" = "會員不存在";
 
-"SideBar_Menu_Section1_title" = "訂單";
-"SideBar_Menu_Section2_title" = "會員";
-"SideBar_Menu_Section0_row0_title" = "影片首頁";
-"SideBar_Menu_Section0_row1_title" = "商品圖片與規格";
-"SideBar_Menu_Section0_row2_title" = "購物車";
-"SideBar_Menu_Section1_row0_title" = "訂單狀態";
-"SideBar_Menu_Section1_row1_title" = "歷史訂單";
-"SideBar_Menu_Section2_row0_title" = "會員資料";
-"SideBar_Menu_Section2_row1_title" = "修改密碼";
-"SideBar_Menu_Section2_row2_title" = "登出";
+"SideBar_Menu_Section0_title" = "影片首頁";
+"SideBar_Menu_Section1_title" = "食堂";
+"SideBar_Menu_Section2_title" = "各式料理";
+"SideBar_Menu_Section4_title" = "訂單";
+"SideBar_Menu_Section5_title" = "會員";
+
+"SideBar_Menu_Section3_row0_title" = "商品圖片與規格";
+"SideBar_Menu_Section3_row1_title" = "購物車";
+"SideBar_Menu_Section4_row0_title" = "訂單狀態";
+"SideBar_Menu_Section4_row1_title" = "歷史訂單";
+"SideBar_Menu_Section5_row0_title" = "會員資料";
+"SideBar_Menu_Section5_row1_title" = "修改密碼";
+"SideBar_Menu_Section5_row2_title" = "登出";
 
 "Change_Pw_title" = "修改密碼";
 "Change_Pw_Old_title" = "舊密碼";
@@ -193,7 +201,7 @@
 "Verify_Wait_Btn_title" = "秒後可再次發送";
 
 "Video_title" = "影片首頁";
-"Video_Type_title" = "影片分類";
+"Video_Type_title" = "影片\n分類";
 "Video_Type_Item1_Btn_title" = "電爐影片";
 "Video_Type_Item2_Btn_title" = "鍋具影片";
 "Video_Type_Item3_Btn_title" = "烤箱影片";
