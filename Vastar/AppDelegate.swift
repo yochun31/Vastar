@@ -7,6 +7,7 @@
 
 import UIKit
 import IQKeyboardManagerSwift
+import AVFAudio
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -37,6 +38,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             window = UIWindow(frame: UIScreen.main.bounds)
             window?.rootViewController = rootVC
             window?.makeKeyAndVisible()
+        }
+        
+        do {
+            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
+            try AVAudioSession.sharedInstance().setActive(true)
+            
+        } catch let error as NSError {
+            print("error: \(error.localizedDescription)")
         }
 
         return true
