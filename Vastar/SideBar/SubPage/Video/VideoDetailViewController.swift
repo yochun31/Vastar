@@ -13,7 +13,7 @@ import GPVideoPlayer
 class VideoDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet var productTableView: UITableView!
     @IBOutlet var vimeoPlayView: UIView!
-    
+    @IBOutlet var errorDisplayImg: UIImageView!
     private var productTypeArray:Array<String> = []
     private var productModelArray:Array<String> = []
     
@@ -21,6 +21,7 @@ class VideoDetailViewController: UIViewController,UITableViewDelegate,UITableVie
     
     private var gpPlayer = GPVideoPlayer()
     private var playFlag:Int = -1
+    
     
     var productDataArray:Array<Any> = []
     var vimeoIDSt:String = ""
@@ -38,6 +39,7 @@ class VideoDetailViewController: UIViewController,UITableViewDelegate,UITableVie
         
         setTableView()
         getProductListData()
+        self.errorDisplayImg.isHidden = true
         self.playView()
     }
     
@@ -110,9 +112,15 @@ class VideoDetailViewController: UIViewController,UITableViewDelegate,UITableVie
     func playView() {
         
         let url = URL(string: "https://vimeo.com/\(vimeoIDSt)")!
+        print("URL = \(url)")
         HCVimeoVideoExtractor.fetchVideoURLFrom(url: url, completion: { ( video:HCVimeoVideo?, error:Error?) -> Void in
             if let err = error {
                 print("Error = \(err.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.errorDisplayImg.isHidden = false
+                    self.errorDisplayImg.image = UIImage(named: "videoError")
+                }
+                
                 self.playFlag = VVideoPlayerStatusItem.VVideoPlayerStatusError.rawValue
                 return
             }
