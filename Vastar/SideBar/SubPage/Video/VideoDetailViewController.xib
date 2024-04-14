@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -11,6 +11,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="VideoDetailViewController" customModule="Vastar" customModuleProvider="target">
             <connections>
+                <outlet property="errorDisplayImg" destination="P0r-pI-y7l" id="wKf-AV-gNk"/>
                 <outlet property="productTableView" destination="Uqz-a4-MpL" id="m9Y-Bj-UWS"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
                 <outlet property="vimeoPlayView" destination="5YH-kQ-aKd" id="fO8-Gn-dlD"/>
@@ -22,16 +23,22 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5YH-kQ-aKd">
-                    <rect key="frame" x="0.0" y="20" width="375" height="250"/>
+                    <rect key="frame" x="0.0" y="40" width="375" height="250"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="250" id="DeT-a1-39d"/>
                     </constraints>
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Uqz-a4-MpL">
-                    <rect key="frame" x="10" y="290" width="355" height="377"/>
+                    <rect key="frame" x="10" y="310" width="355" height="357"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="P0r-pI-y7l">
+                    <rect key="frame" x="0.0" y="40" width="375" height="250"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="250" id="kuH-zv-NXs"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -40,10 +47,13 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="5YH-kQ-aKd" secondAttribute="trailing" id="8zy-Lv-wyk"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Uqz-a4-MpL" secondAttribute="bottom" id="Exi-yS-eI1"/>
                 <constraint firstItem="5YH-kQ-aKd" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="JHC-MX-4Io"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="P0r-pI-y7l" secondAttribute="trailing" id="SAL-Jf-PeL"/>
+                <constraint firstItem="P0r-pI-y7l" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="UH6-zT-iN2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Uqz-a4-MpL" secondAttribute="trailing" constant="10" id="V7T-gu-19P"/>
                 <constraint firstItem="Uqz-a4-MpL" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="XZc-MO-6oi"/>
                 <constraint firstItem="5YH-kQ-aKd" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="bJX-Jo-K1e"/>
                 <constraint firstItem="5YH-kQ-aKd" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="ewI-mA-XOS"/>
+                <constraint firstItem="P0r-pI-y7l" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gtc-KS-Dh2"/>
                 <constraint firstItem="Uqz-a4-MpL" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="z3u-U0-avw"/>
             </constraints>
             <point key="canvasLocation" x="4" y="49"/>
