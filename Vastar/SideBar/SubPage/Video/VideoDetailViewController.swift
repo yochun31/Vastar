@@ -9,6 +9,7 @@ import UIKit
 import HCVimeoVideoExtractor
 import AVKit
 import GPVideoPlayer
+import TRVideoView
 
 class VideoDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
     @IBOutlet var productTableView: UITableView!
@@ -20,7 +21,7 @@ class VideoDetailViewController: UIViewController,UITableViewDelegate,UITableVie
     private var productDictData:[String:Array<Any>] = [:]
     
     private var gpPlayer = GPVideoPlayer()
-    private var playFlag:Int = -1
+    
     
     
     var productDataArray:Array<Any> = []
@@ -52,26 +53,7 @@ class VideoDetailViewController: UIViewController,UITableViewDelegate,UITableVie
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
 
-        switch playFlag {
-        case VVideoPlayerStatusItem.VVideoPlayerStatusPlay.rawValue:
-            
-            break
-        case VVideoPlayerStatusItem.VVideoPlayerStatusPause.rawValue:
-            
-            self.gpPlayer.pauseVideo()
-            
-            break
-        case VVideoPlayerStatusItem.VVideoPlayerStatusBack.rawValue:
-            
-            self.gpPlayer.pauseVideo()
-            self.gpPlayer.removeFromSuperview()
-            break
-        case VVideoPlayerStatusItem.VVideoPlayerStatusError.rawValue:
-            
-            break
-        default:
-            break
-        }
+
 
     }
     
@@ -113,57 +95,30 @@ class VideoDetailViewController: UIViewController,UITableViewDelegate,UITableVie
         
         let url = URL(string: "https://vimeo.com/\(vimeoIDSt)")!
         print("URL = \(url)")
-        HCVimeoVideoExtractor.fetchVideoURLFrom(url: url, completion: { ( video:HCVimeoVideo?, error:Error?) -> Void in
-            if let err = error {
-                print("Error = \(err.localizedDescription)")
-                DispatchQueue.main.async {
-                    self.errorDisplayImg.isHidden = false
-                    self.errorDisplayImg.image = UIImage(named: "videoError")
-                }
-                
-                self.playFlag = VVideoPlayerStatusItem.VVideoPlayerStatusError.rawValue
-                return
-            }
-            
-            guard let vid = video else {
-                print("Invalid video object")
-                self.playFlag = VVideoPlayerStatusItem.VVideoPlayerStatusError.rawValue
-                return
-            }
-            
-//            print("Title = \(vid.title), url = \(vid.videoURL), thumbnail = \(vid.thumbnailURL)")
-                
-            if let videoURL = vid.videoURL[.QualityUnknown] {
-                
-                self.playFlag = VVideoPlayerStatusItem.VVideoPlayerStatusPlay.rawValue
-                DispatchQueue.main.async {
-                
-                    self.gpPlayer = GPVideoPlayer.initialize(with: self.vimeoPlayView.bounds)!
-                    self.gpPlayer.isToShowPlaybackControls = true
-                    
-                    self.vimeoPlayView.addSubview(self.gpPlayer)
-                    
+        
+        let video = TRVideoView(text: "https://vimeo.com/\(vimeoIDSt)", allowInlinePlayback: true)
+    
+        let screenSize: CGRect = UIScreen.main.bounds
+        let screenWidth = screenSize.width
 
-                    self.gpPlayer.loadVideos(with: [videoURL])
-                    self.gpPlayer.isToShowPlaybackControls = true
-                    self.gpPlayer.isMuted = true
-                    self.gpPlayer.playVideo()
+        // Set the frame as always, or use AutoLayout
+        print("vimeoPlay = \(self.vimeoPlayView.frame)")
+        video.frame = CGRect(x: 0, y: 0, width: screenWidth, height: self.vimeoPlayView.frame.height)
+        video.backgroundColor = UIColor.init(red: 0.0/255.0, green: 36.0/255.0, blue: 22.0/255.0, alpha: 1.0)
+        print("video = \(video.frame)")
+        
+        // Returns String with out URLs (i.e. "This is some sample text with a YouTube link")
+//        let text = video.textWithoutURLs()
 
-                }
-                
-            }
-        })
+        // Finally add it to your view
+        self.vimeoPlayView.addSubview(video)
+        
     }
     
     //MARK: - Action
     
     @objc func leftbackBtnClick(_ sender:UIButton) {
-        if playFlag == VVideoPlayerStatusItem.VVideoPlayerStatusError.rawValue {
-            
-        }else{
-            self.playFlag = VVideoPlayerStatusItem.VVideoPlayerStatusBack.rawValue
-        }
-        
+
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -220,13 +175,7 @@ class VideoDetailViewController: UIViewController,UITableViewDelegate,UITableVie
     //MARK: - UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        if playFlag == VVideoPlayerStatusItem.VVideoPlayerStatusError.rawValue {
-            
-        }else{
-            self.playFlag = VVideoPlayerStatusItem.VVideoPlayerStatusPause.rawValue
-        }
-        
+
         print("==\(indexPath.row)")
         let vc = ProductDetailViewController(nibName: "ProductDetailViewController", bundle: nil)
         let model:String = self.productModelArray[indexPath.row]

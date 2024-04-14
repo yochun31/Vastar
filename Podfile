@@ -14,6 +14,7 @@ target 'Vastar' do
     pod 'HCVimeoVideoExtractor'
     pod 'GPVideoPlayer'
     pod 'BadgeHub'
+    pod 'TRVideoView'
 
 end
 
