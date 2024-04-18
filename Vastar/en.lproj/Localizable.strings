@@ -83,7 +83,8 @@
 "SideBar_Menu_Section4_row1_title" = "歷史訂單";
 "SideBar_Menu_Section5_row0_title" = "會員資料";
 "SideBar_Menu_Section5_row1_title" = "修改密碼";
-"SideBar_Menu_Section5_row2_title" = "登出";
+"SideBar_Menu_Section5_row2_title" = "刪除帳號";
+"SideBar_Menu_Section5_row3_title" = "登出";
 
 "Change_Pw_title" = "修改密碼";
 "Change_Pw_Old_title" = "舊密碼";

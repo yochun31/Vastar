@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 51;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -43,6 +43,8 @@
 		220B26272703038B007FC2AA /* VideoListByTypeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220B26252703038B007FC2AA /* VideoListByTypeViewController.xib */; };
 		220B262A270407B6007FC2AA /* VideoDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 220B2628270407B6007FC2AA /* VideoDetailViewController.swift */; };
 		220B262B270407B6007FC2AA /* VideoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 220B2629270407B6007FC2AA /* VideoDetailViewController.xib */; };
+		2236AE112BCFD45000025F66 /* DeleteUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2236AE0F2BCFD45000025F66 /* DeleteUserViewController.swift */; };
+		2236AE122BCFD45000025F66 /* DeleteUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2236AE102BCFD45000025F66 /* DeleteUserViewController.xib */; };
 		2244F61326789586006754D6 /* ProductListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244F61126789586006754D6 /* ProductListViewController.swift */; };
 		2244F61426789586006754D6 /* ProductListViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2244F61226789586006754D6 /* ProductListViewController.xib */; };
 		2244F61726789606006754D6 /* ProductListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2244F61526789606006754D6 /* ProductListTableViewCell.swift */; };
@@ -148,6 +150,8 @@
 		220B26252703038B007FC2AA /* VideoListByTypeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoListByTypeViewController.xib; sourceTree = "<group>"; };
 		220B2628270407B6007FC2AA /* VideoDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoDetailViewController.swift; sourceTree = "<group>"; };
 		220B2629270407B6007FC2AA /* VideoDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VideoDetailViewController.xib; sourceTree = "<group>"; };
+		2236AE0F2BCFD45000025F66 /* DeleteUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteUserViewController.swift; sourceTree = "<group>"; };
+		2236AE102BCFD45000025F66 /* DeleteUserViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DeleteUserViewController.xib; sourceTree = "<group>"; };
 		2244F61126789586006754D6 /* ProductListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListViewController.swift; sourceTree = "<group>"; };
 		2244F61226789586006754D6 /* ProductListViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProductListViewController.xib; sourceTree = "<group>"; };
 		2244F61526789606006754D6 /* ProductListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductListTableViewCell.swift; sourceTree = "<group>"; };
@@ -473,6 +477,8 @@
 				2203BBE1266DCD3C006986D2 /* ChangePwViewController.xib */,
 				226018802823AACE00B063A4 /* ConnectionViewController.swift */,
 				226018812823AACE00B063A4 /* ConnectionViewController.xib */,
+				2236AE0F2BCFD45000025F66 /* DeleteUserViewController.swift */,
+				2236AE102BCFD45000025F66 /* DeleteUserViewController.xib */,
 				2200F4F02845EC6A003BEAC9 /* Food */,
 				2200F4EF2845EC5D003BEAC9 /* Canteen */,
 				2244F61026789458006754D6 /* SubPage */,
@@ -581,6 +587,7 @@
 				22F1C31A26648D01003A1D5C /* LaunchScreen.storyboard in Resources */,
 				228BDD96269843460080F843 /* OrderListViewController.xib in Resources */,
 				220B261A26EEEF7D007FC2AA /* OrderDoneDetailViewController.xib in Resources */,
+				2236AE122BCFD45000025F66 /* DeleteUserViewController.xib in Resources */,
 				228BDD89268F0FDD0080F843 /* CheckoutProductTableViewCell.xib in Resources */,
 				2203BBF12672106D006986D2 /* RecipientAddView.xib in Resources */,
 				2244F61826789606006754D6 /* ProductListTableViewCell.xib in Resources */,
@@ -697,6 +704,7 @@
 				228BDD80268C72C70080F843 /* shoppingCarTableViewCell.swift in Sources */,
 				228C406126BA6724003AE590 /* CustomAlertView.swift in Sources */,
 				22F1C3F026688620003A1D5C /* MemberDataViewController.swift in Sources */,
+				2236AE112BCFD45000025F66 /* DeleteUserViewController.swift in Sources */,
 				2203BBE92670C3EE006986D2 /* CustomButton.swift in Sources */,
 				228BDDA1269D38A70080F843 /* OrderConfirmViewController.swift in Sources */,
 				22F1C3FF2668BD44003A1D5C /* AppDefine.swift in Sources */,
