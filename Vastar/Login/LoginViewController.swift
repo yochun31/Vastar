@@ -11,7 +11,7 @@ import func CommonCrypto.CC_MD5
 import typealias CommonCrypto.CC_LONG
 
 
-class LoginViewController: UIViewController,UITextFieldDelegate {
+class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewDelegate {
 
     @IBOutlet var accountNameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
@@ -31,6 +31,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
     private var userResgisterTime:String = ""
     
     private var vaiv = VActivityIndicatorView()
+    private var cav = CustomAlertView()
 
     
     let userDefault = UserDefaults.standard
@@ -161,6 +162,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
                     
                     self.passwordTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
                     self.passwordTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Password_title", comment: ""), colour: errorColor, font: font)
+                    self.cav = CustomAlertView.init(title: message, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 1, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                    self.cav.delegate = self
+                    self.view.addSubview(self.cav)
                 }
                 
             }else{
@@ -194,11 +198,11 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         let errorColor:UIColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
         let color:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
-        VClient.sharedInstance().VCLoginByPhone(account: accountName, pw: pw) { (_ isSuccess:Bool,_ message:String) in
+        VClient.sharedInstance().VCLoginByPhone(account: accountName, pw: pw) { (_ isSuccess:Bool,_ messageSt:String) in
             
             if isSuccess {
                 
-                print("--\(message)--")
+                print("--\(messageSt)--")
 
                 self.vaiv.stopProgressHUD(view: self.view)
                 
@@ -374,5 +378,15 @@ class LoginViewController: UIViewController,UITextFieldDelegate {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //MARK: - CustomAlertViewDelegate
+    
+    func alertBtnClick(btnTag: Int) {
+        
+        if btnTag == 1 {
+            self.cav.removeFromSuperview()
+        }
+        
+    }
 
 }

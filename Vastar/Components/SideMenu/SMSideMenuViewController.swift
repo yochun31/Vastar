@@ -37,6 +37,8 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
     private var section5_menuItemArray:Array<String> = []
     
     
+    
+    
     var menuTitle:String = ""
     
     //MARK: - Life Cycle
@@ -77,7 +79,7 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
         
         self.section3_menuItemArray = [NSLocalizedString("SideBar_Menu_Section3_row0_title", comment: ""),NSLocalizedString("SideBar_Menu_Section3_row1_title", comment: "")]
         self.section4_menuItemArray = [NSLocalizedString("SideBar_Menu_Section4_row0_title", comment: ""),NSLocalizedString("SideBar_Menu_Section4_row1_title", comment: "")]
-        self.section5_menuItemArray = [NSLocalizedString("SideBar_Menu_Section5_row0_title", comment: ""),NSLocalizedString("SideBar_Menu_Section5_row1_title", comment: ""),NSLocalizedString("SideBar_Menu_Section5_row2_title", comment: "")]
+        self.section5_menuItemArray = [NSLocalizedString("SideBar_Menu_Section5_row0_title", comment: ""),NSLocalizedString("SideBar_Menu_Section5_row1_title", comment: ""),NSLocalizedString("SideBar_Menu_Section5_row2_title", comment: ""),NSLocalizedString("SideBar_Menu_Section5_row3_title", comment: "")]
         
         
         self.sideBarTitleLabel.text = menuTitle
@@ -109,6 +111,8 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
             }
         }
     }
+    
+    
 
     /*
     // MARK: - Navigation
@@ -388,6 +392,13 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
                 
                 break
             case 2:
+                let vc = DeleteUserViewController(nibName: "DeleteUserViewController", bundle: nil)
+                vc.accountSt = menuTitle
+                nav.viewControllers = [vc]
+                reveal?.pushFrontViewController(nav, animated: true)
+                
+                break
+            case 3:
                 VClient.sharedInstance().VCDeleteAllShoppingCarData { isDone in
                     if isDone {
                         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
