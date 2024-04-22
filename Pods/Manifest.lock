@@ -11,6 +11,7 @@ PODS:
   - SwiftyRSA (1.7.0):
     - SwiftyRSA/ObjC (= 1.7.0)
   - SwiftyRSA/ObjC (1.7.0)
+  - TRVideoView (0.1.5)
 
 DEPENDENCIES:
   - Alamofire (= 4.9.1)
@@ -21,6 +22,7 @@ DEPENDENCIES:
   - IQKeyboardManagerSwift (= 6.5.6)
   - SDWebImage (~> 5.0)
   - SwiftyRSA
+  - TRVideoView
 
 SPEC REPOS:
   trunk:
@@ -32,6 +34,7 @@ SPEC REPOS:
     - IQKeyboardManagerSwift
     - SDWebImage
     - SwiftyRSA
+    - TRVideoView
 
 SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
@@ -42,7 +45,8 @@ SPEC CHECKSUMS:
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SwiftyRSA: 8c6dd1ea7db1b8dc4fb517a202f88bb1354bc2c6
+  TRVideoView: dc9617f61f7d3b207b2a5ad8afe401ef7c03e51e
 
-PODFILE CHECKSUM: d69e4ce3e90dacfd7b1a129a31643ce383da9555
+PODFILE CHECKSUM: 782321dfc3959f0049ebe603294ffd14d240a5de
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.15.2

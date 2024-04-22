@@ -70,8 +70,8 @@ class VClient {
         let md5Hex =  md5Data1.map { String(format: "%02hhx", $0) }.joined()
         let hashPassword = "0x\(md5Hex)"
         print("====> \(hashPassword)")
-        CloudGatewayManager.sharedInstance().CGMLoginByPhone(account: account, hashPw: hashPassword) { (_ isSuccess:Bool,_ message:String) in
-            result(isSuccess,message)
+        CloudGatewayManager.sharedInstance().CGMLoginByPhone(account: account, hashPw: hashPassword) { (_ isSuccess:Bool,_ messageSt:String) in
+            result(isSuccess,messageSt)
         }
         
     }
@@ -95,7 +95,7 @@ class VClient {
         }
     }
     
-    //MARK:- Member
+    //MARK: - Member
     
     
     //註冊
@@ -118,6 +118,15 @@ class VClient {
 
         CloudGatewayManager.sharedInstance().CGMGetUserInfoByPhone(phone: phone) { (_ isSuccess:Bool,_ message:String,_ isResult:Int,_ dictResData:[String:Any]) in
             result(isSuccess,message,isResult,dictResData)
+        }
+    }
+    
+    //帳號刪除
+    
+    func VCDeleteUserByPhone(phone:String,delTime:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ isResult:Int) -> Void) {
+        
+        CloudGatewayManager.sharedInstance().CGMDeleteUserByPhone(phone: phone, delTime: delTime) {(_ isSuccess:Bool,_ message:String,_ isResult:Int) in
+            result(isSuccess,message,isResult)
         }
     }
     

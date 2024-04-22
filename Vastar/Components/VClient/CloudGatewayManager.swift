@@ -23,7 +23,7 @@ class CloudGatewayManager {
     
     //MARK: - Login
     
-    func CGMLoginByPhone(account:String,hashPw:String,result:@escaping(_ isSuccess:Bool,_ message:String) -> Void) {
+    func CGMLoginByPhone(account:String,hashPw:String,result:@escaping(_ isSuccess:Bool,_ messageSt:String) -> Void) {
         
         let headers:HTTPHeaders = ["Content-Type" : "application/json"]
         let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673", "Account_Name" : account, "HashPassword" : hashPw]
@@ -44,7 +44,6 @@ class CloudGatewayManager {
                 }else{
                     isResStatus = false
                 }
-                
                 result(isResStatus,messageStr)
                 break
             case .failure(let error):
@@ -208,6 +207,43 @@ class CloudGatewayManager {
             }
         }
     }
+    
+    //帳號刪除
+    
+    func CGMDeleteUserByPhone(phone:String,delTime:String,result:@escaping (_ isSuccess:Bool,_ message:String,_ isResult:Int) -> Void) {
+        
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673", "Account_Name" : phone, "DeleteTime" : delTime]
+        let urlString:String = vApiUrl + "/api/Member/Delete"
+        let url = URL.init(string: urlString)
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                let jsonInfo = json as? [String : Any] ?? [:]
+                var messageStr:String = ""
+                var isResStatus:Bool = false
+                let resStatus:Int = jsonInfo["Result"] as? Int ?? -1
+                if resStatus == 0 {
+                    messageStr = jsonInfo["Message"] as? String ?? ""
+                    isResStatus = true
+                }else{
+                    messageStr = jsonInfo["Message"] as? String ?? ""
+                    isResStatus = true
+                }
+                
+                result(isResStatus,messageStr,resStatus)
+        
+                break
+            case .failure(_):
+                
+                result(false,"Error",-1)
+                break
+            }
+        }
+        
+    }
+    
     
     //MARK: -  Location
     
