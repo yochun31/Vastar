@@ -787,6 +787,7 @@ class CloudGatewayManager {
                     }else{
                         
                         messageStr = jsonInfo["Message"] as? String ?? ""
+                        flag = true
                     }
                     
                     result(true,messageStr,imgUrl,name,product_group,flag)
@@ -1762,4 +1763,42 @@ class CloudGatewayManager {
             }
         }
     }
+    
+    //MARK: - 官網
+    
+    func CGMGetVastarURLData(result:@escaping (_ isSuccess:Bool,_ message:String,_ resData:String) -> Void) {
+        
+        let headers:HTTPHeaders = ["Content-Type" : "application/json"]
+        let parames:Parameters = ["UserID" : "vastar", "Password" : "vastar@2673"]
+        let urlString:String = vApiUrl + "/api/Setting/GetVastarURL"
+        let url = URL.init(string: urlString)
+        var webUrl:String = ""
+        Alamofire.request(url!, method: .post, parameters: parames, encoding: JSONEncoding.default, headers: headers).validate().responseJSON { (responseData:DataResponse<Any>) in
+            switch (responseData.result) {
+            case .success(let json):
+                
+                if responseData.response?.statusCode == 200 {
+                    let jsonInfo = json as? [String : Any] ?? [:]
+                    var messageStr:String = ""
+                    let resStatus:Int = jsonInfo["Result"] as? Int ?? -1
+                    if resStatus == 0 {
+                        webUrl = jsonInfo["WebURL"] as? String ?? ""
+                    }else{
+                        messageStr = jsonInfo["Message"] as? String ?? ""
+                    }
+                    result(true,messageStr,webUrl)
+                    
+                }else{
+                    result(false,"statusCode = \(String(describing: responseData.response?.statusCode))","")
+                }
+                break
+            case .failure(let error):
+                
+                print("\(error)")
+                result(false,"Error","")
+                break
+            }
+        }
+    }
+    
 }
