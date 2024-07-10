@@ -11,7 +11,7 @@ import AVKit
 import GPVideoPlayer
 import TRVideoView
 
-class VideoDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
+class VideoDetailViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,CustomAlertViewDelegate {
     @IBOutlet var productTableView: UITableView!
     @IBOutlet var vimeoPlayView: UIView!
     @IBOutlet var errorDisplayImg: UIImageView!
@@ -21,7 +21,8 @@ class VideoDetailViewController: UIViewController,UITableViewDelegate,UITableVie
     private var productDictData:[String:Array<Any>] = [:]
     
     private var gpPlayer = GPVideoPlayer()
-    
+    private var cav = CustomAlertView()
+    private var resProductMessageArray:[String] = []
     
     
     var productDataArray:Array<Any> = []
@@ -79,12 +80,12 @@ class VideoDetailViewController: UIViewController,UITableViewDelegate,UITableVie
     
     func getProductListData() {
         
-        VClient.sharedInstance().VCGetProductInfoByNo(productNoArray: productModelArray) { (_ isSuccess:Bool,_ message:String,_ resDataDict:[String:Array<Any>]) in
+        VClient.sharedInstance().VCGetProductInfoByNo(productNoArray: productModelArray) { (_ isSuccess:Bool,_ messageArray:Array<String>,_ resDataDict:[String:Array<Any>]) in
             
             if isSuccess {
-                
+                print("----->",resDataDict)
+                self.resProductMessageArray = messageArray
                 self.productDictData = resDataDict
-                
                 self.productTableView.reloadData()
             }
         }
@@ -164,8 +165,13 @@ class VideoDetailViewController: UIViewController,UITableViewDelegate,UITableVie
         if dataArray.count != 0 {
             let urlSt:String = dataArray[0] as? String ?? ""
             let name:String = dataArray[1] as? String ?? ""
-            let url = URL.init(string: urlSt)
-            cell.loadData(typeSt: typeSt, titleSt: name, url: url!)
+            if urlSt != "" {
+                let url = URL.init(string: urlSt)
+                cell.loadData(typeSt: typeSt, titleSt: name, url: url!)
+            }else{
+                cell.loadData(typeSt: typeSt, titleSt: "", imageSt: "no-image")
+            }
+            
         }
 
         
@@ -181,8 +187,27 @@ class VideoDetailViewController: UIViewController,UITableViewDelegate,UITableVie
         let model:String = self.productModelArray[indexPath.row]
         let dataArray = self.productDictData[model] ?? []
         let groupID:Int = dataArray[2] as? Int ?? 0
-        vc.groupID = groupID
-        self.navigationController?.pushViewController(vc, animated: true)
+        let resProductMessage:String = self.resProductMessageArray[indexPath.row]
+        if resProductMessage != "" {
+            self.cav = CustomAlertView.init(title: resProductMessage, btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 1, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            self.cav.delegate = self
+            self.view.addSubview(self.cav)
+        }else{
+            vc.groupID = groupID
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+        
     }
+    
+    //MARK: - CustomAlertViewDelegate
+    
+    func alertBtnClick(btnTag: Int) {
+        
+        if btnTag == 1 {
+            self.cav.removeFromSuperview()
+        }
+        
+    }
+
 
 }

@@ -21,6 +21,7 @@ class ConnectionViewController: UIViewController {
     @IBOutlet var wechatIdLabel: UILabel!
     @IBOutlet var phoneLabel: UILabel!
     @IBOutlet var addressLabel: UILabel!
+    @IBOutlet var vastarWebBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +67,9 @@ class ConnectionViewController: UIViewController {
         self.lineBtn.addTarget(self, action: #selector(lineBtnClick(_:)), for: .touchUpInside)
         self.wechatBtn.addTarget(self, action: #selector(wechatBtnClick(_:)), for: .touchUpInside)
         
+        self.vastarWebBtn.setTitle(NSLocalizedString("Connection_Info_Vastar_Text", comment: ""), for: .normal)
+        self.vastarWebBtn.addTarget(self, action: #selector(vastarWebBtnClick(_:)), for: .touchUpInside)
+        
         self.navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back"), style: .plain, target: self, action: #selector(leftbackBtnClick(_:)))
     }
 
@@ -95,6 +99,12 @@ class ConnectionViewController: UIViewController {
     @objc func leftbackBtnClick(_ sender:UIButton) {
         
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func vastarWebBtnClick(_ sender:UIButton) {
+        if let url = URL(string: "https://www.vastar.com.tw/") {
+            UIApplication.shared.open(url)
+        }
     }
 
     /*

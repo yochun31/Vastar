@@ -1,4 +1,4 @@
-/* 
+/*
   Localizable.strings
   Vastar
 
@@ -72,19 +72,20 @@
 "Forget_Input_Error_Alert_Text" = "會員不存在";
 
 "SideBar_Menu_Section0_title" = "影片首頁";
-"SideBar_Menu_Section1_title" = "食堂";
-"SideBar_Menu_Section2_title" = "各式料理";
-"SideBar_Menu_Section4_title" = "訂單";
-"SideBar_Menu_Section5_title" = "會員";
+"SideBar_Menu_Section1_title" = "體驗營課程";
+"SideBar_Menu_Section2_title" = "食堂";
+"SideBar_Menu_Section3_title" = "各式料理";
+"SideBar_Menu_Section5_title" = "訂單";
+"SideBar_Menu_Section6_title" = "會員";
 
-"SideBar_Menu_Section3_row0_title" = "商品圖片與規格";
-"SideBar_Menu_Section3_row1_title" = "購物車";
-"SideBar_Menu_Section4_row0_title" = "訂單狀態";
-"SideBar_Menu_Section4_row1_title" = "歷史訂單";
-"SideBar_Menu_Section5_row0_title" = "會員資料";
-"SideBar_Menu_Section5_row1_title" = "修改密碼";
-"SideBar_Menu_Section5_row2_title" = "刪除帳號";
-"SideBar_Menu_Section5_row3_title" = "登出";
+"SideBar_Menu_Section4_row0_title" = "商品圖片與規格";
+"SideBar_Menu_Section4_row1_title" = "購物車";
+"SideBar_Menu_Section5_row0_title" = "訂單狀態";
+"SideBar_Menu_Section5_row1_title" = "歷史訂單";
+"SideBar_Menu_Section6_row0_title" = "會員資料";
+"SideBar_Menu_Section6_row1_title" = "修改密碼";
+"SideBar_Menu_Section6_row2_title" = "刪除帳號";
+"SideBar_Menu_Section6_row3_title" = "登出";
 
 "Change_Pw_title" = "修改密碼";
 "Change_Pw_Old_title" = "舊密碼";
@@ -219,5 +220,7 @@
 "Connection_Info_Phone_Text" = "+886 2 2838 1010";
 "Connection_Info_Line_Text" = "vastarmimichi";
 "Connection_Info_Wechat_Text" = "vastarmimichi";
+"Connection_Info_Vastar_Text" = "活動報名";
 
 "History_title" = "歷史訂單";
+

@@ -555,9 +555,10 @@ class VClient {
         }
     }
     
-    func VCGetProductInfoByNo(productNoArray:Array<String>,result:@escaping (_ isSuccess:Bool,_ message:String,_ resDataDict:[String:Array<Any>]) -> Void) {
+    func VCGetProductInfoByNo(productNoArray:Array<String>,result:@escaping (_ isSuccess:Bool,_ messageArray:Array<String>,_ resDataDict:[String:Array<Any>]) -> Void) {
         
         var dataDict:[String:Array<Any>] = [:]
+        var mesArray:[String] = []
         var flag:Int = 0
         for i in 0 ..< productNoArray.count {
             
@@ -567,8 +568,9 @@ class VClient {
                     if isDone {
                         flag+=1
                         dataDict.updateValue([resUrl,resName,resGroup], forKey: productNoArray[i])
+                        mesArray.append(message)
                         if flag == productNoArray.count {
-                            result(isSuccess,message,dataDict)
+                            result(isSuccess,mesArray,dataDict)
                         }
                     }
                 }
@@ -715,6 +717,14 @@ class VClient {
         
         CloudGatewayManager.sharedInstance().CGMGetVideoFoodTypeList { isSuccess, message, resDataArray in
             result(isSuccess,message,resDataArray)
+        }
+    }
+    
+    //MARK: - 官網
+    
+    func VCGetVastarURLData(result:@escaping (_ isSuccess:Bool,_ message:String,_ resData:String) -> Void) {
+        CloudGatewayManager.sharedInstance().CGMGetVastarURLData { isSuccess, message, resData in
+            result(isSuccess,message,resData)
         }
     }
 
