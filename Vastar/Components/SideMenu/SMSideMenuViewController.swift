@@ -22,21 +22,23 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
     private var section0_menuItemArray:Array<String> = []
     
     private var section1_menuItemArray:Array<String> = []
-    private var section1_Open:Bool = false
-    private var section1_Sub0_ItemArray:Array<String> = []
-
     
     private var section2_menuItemArray:Array<String> = []
     private var section2_Open:Bool = false
     private var section2_Sub0_ItemArray:Array<String> = []
 
     
-    
     private var section3_menuItemArray:Array<String> = []
+    private var section3_Open:Bool = false
+    private var section3_Sub0_ItemArray:Array<String> = []
+
+    
+    
     private var section4_menuItemArray:Array<String> = []
     private var section5_menuItemArray:Array<String> = []
+    private var section6_menuItemArray:Array<String> = []
     
-    
+    private var vastarWeb:String = ""
     
     
     var menuTitle:String = ""
@@ -51,6 +53,7 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
         setSideMenuTableView()
         getCanteenList()
         getFoodTypeList()
+        getVasterWebUrl()
     }
     
     
@@ -73,13 +76,15 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
         
         self.section1_menuItemArray = [NSLocalizedString("SideBar_Menu_Section1_title", comment: "")]
         
-        
         self.section2_menuItemArray = [NSLocalizedString("SideBar_Menu_Section2_title", comment: "")]
         
         
-        self.section3_menuItemArray = [NSLocalizedString("SideBar_Menu_Section3_row0_title", comment: ""),NSLocalizedString("SideBar_Menu_Section3_row1_title", comment: "")]
+        self.section3_menuItemArray = [NSLocalizedString("SideBar_Menu_Section3_title", comment: "")]
+        
+        
         self.section4_menuItemArray = [NSLocalizedString("SideBar_Menu_Section4_row0_title", comment: ""),NSLocalizedString("SideBar_Menu_Section4_row1_title", comment: "")]
-        self.section5_menuItemArray = [NSLocalizedString("SideBar_Menu_Section5_row0_title", comment: ""),NSLocalizedString("SideBar_Menu_Section5_row1_title", comment: ""),NSLocalizedString("SideBar_Menu_Section5_row2_title", comment: ""),NSLocalizedString("SideBar_Menu_Section5_row3_title", comment: "")]
+        self.section5_menuItemArray = [NSLocalizedString("SideBar_Menu_Section5_row0_title", comment: ""),NSLocalizedString("SideBar_Menu_Section5_row1_title", comment: "")]
+        self.section6_menuItemArray = [NSLocalizedString("SideBar_Menu_Section6_row0_title", comment: ""),NSLocalizedString("SideBar_Menu_Section6_row1_title", comment: ""),NSLocalizedString("SideBar_Menu_Section6_row2_title", comment: ""),NSLocalizedString("SideBar_Menu_Section6_row3_title", comment: "")]
         
         
         self.sideBarTitleLabel.text = menuTitle
@@ -94,7 +99,7 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
         VClient.sharedInstance().VCGetVideoCanteenList { isSuccess, message, resDataArray in
             if isSuccess {
                 
-                self.section1_Sub0_ItemArray = resDataArray
+                self.section2_Sub0_ItemArray = resDataArray
                 
                 self.sideMenuTableView.reloadData()
             }
@@ -105,14 +110,22 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
         
         VClient.sharedInstance().VCGetVideoFoodTypeList { isSuccess, message, resDataArray in
             if isSuccess {
-                self.section2_Sub0_ItemArray = resDataArray
+                self.section3_Sub0_ItemArray = resDataArray
                 print("---->\(resDataArray)")
                 self.sideMenuTableView.reloadData()
             }
         }
     }
     
-    
+    func getVasterWebUrl() {
+        
+        VClient.sharedInstance().VCGetVastarURLData { isSuccess, message, resData in
+            if isSuccess {
+                self.vastarWeb = resData
+                self.sideMenuTableView.reloadData()
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation
@@ -128,7 +141,7 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
     //MARK: - UITableViewDataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 6
+        return 7
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -139,11 +152,7 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
             cellcount = self.section0_menuItemArray.count
             break
         case 1:
-            if section1_Open == true {
-                cellcount = self.section1_Sub0_ItemArray.count + 1
-            }else{
-                cellcount = 1
-            }
+            cellcount = self.section1_menuItemArray.count
             break
         case 2:
             if section2_Open == true {
@@ -153,13 +162,20 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
             }
             break
         case 3:
-            cellcount = self.section3_menuItemArray.count
+            if section3_Open == true {
+                cellcount = self.section3_Sub0_ItemArray.count + 1
+            }else{
+                cellcount = 1
+            }
             break
         case 4:
             cellcount = self.section4_menuItemArray.count
             break
         case 5:
             cellcount = self.section5_menuItemArray.count
+            break
+        case 6:
+            cellcount = self.section6_menuItemArray.count
             break
         default:
             break
@@ -185,8 +201,12 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
             cell.loadCellData(icon: icon, title: titleString)
             break
         case 1:
+            let titleString = self.section1_menuItemArray[indexPath.row]
+            cell.loadCellData(icon: icon, title: titleString)
+            break
+        case 2:
             if indexPath.row == 0 {
-                let titleString = self.section1_menuItemArray[indexPath.row]
+                let titleString = self.section2_menuItemArray[indexPath.row]
                 cell.loadCellData(icon: icon, title: titleString)
             }else{
                 let cell_1:SideMenuTableViewCell = tableView.dequeueReusableCell(withIdentifier: "sidemenuCell", for: indexPath) as! SideMenuTableViewCell
@@ -194,14 +214,14 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
                 let selectBkView = UIView()
                 selectBkView.backgroundColor = UIColor.clear
                 cell_1.selectedBackgroundView = selectBkView
-                let titleString = self.section1_Sub0_ItemArray[dataIndex]
+                let titleString = self.section2_Sub0_ItemArray[dataIndex]
                 cell_1.loadCellData(title: titleString)
                 return cell_1
             }
             break
-        case 2:
+        case 3:
             if indexPath.row == 0 {
-                let titleString = self.section2_menuItemArray[indexPath.row]
+                let titleString = self.section3_menuItemArray[indexPath.row]
                 cell.loadCellData(icon: icon, title: titleString)
             }else{
                 let cell_2:SideMenuTableViewCell = tableView.dequeueReusableCell(withIdentifier: "sidemenuCell", for: indexPath) as! SideMenuTableViewCell
@@ -209,14 +229,10 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
                 let selectBkView = UIView()
                 selectBkView.backgroundColor = UIColor.clear
                 cell_2.selectedBackgroundView = selectBkView
-                let titleString = self.section2_Sub0_ItemArray[dataIndex]
+                let titleString = self.section3_Sub0_ItemArray[dataIndex]
                 cell_2.loadCellData(title: titleString)
                 return cell_2
             }
-            break
-        case 3:
-            let titleString = self.section3_menuItemArray[indexPath.row]
-            cell.loadCellData(icon: icon, title: titleString)
             break
         case 4:
             let titleString = self.section4_menuItemArray[indexPath.row]
@@ -224,6 +240,10 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
             break
         case 5:
             let titleString = self.section5_menuItemArray[indexPath.row]
+            cell.loadCellData(icon: icon, title: titleString)
+            break
+        case 6:
+            let titleString = self.section6_menuItemArray[indexPath.row]
             cell.loadCellData(icon: icon, title: titleString)
             break
         default:
@@ -239,11 +259,11 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
         
         var title:String = ""
         switch section {
-        case 4:
-            title = NSLocalizedString("SideBar_Menu_Section4_title", comment: "")
-            break
         case 5:
             title = NSLocalizedString("SideBar_Menu_Section5_title", comment: "")
+            break
+        case 6:
+            title = NSLocalizedString("SideBar_Menu_Section6_title", comment: "")
             break
         default:
             break
@@ -263,11 +283,11 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         
-        if section == 4 || section == 5 {
+        if section == 5 || section == 6 {
             return 50.0
-        }else if section == 1 || section == 2 || section == 3 {
+        }else if section == 2 || section == 3 || section == 4 || section == 1{
             return 0
-        }else if section == 0{
+        }else if section == 0 {
             return 0.5
         }else{
             return 10.0
@@ -293,25 +313,9 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
             nav.viewControllers = [vc]
             reveal?.pushFrontViewController(nav, animated: true)
         }else if section == 1 {
-            if rowIndex == 0 {
-                if section1_Open == true {
-                    section1_Open = false
-                    let sections = IndexSet.init(integer: indexPath.section)
-                    tableView.reloadSections(sections, with: .none)
-                }else{
-                    section1_Open = true
-                    let sections = IndexSet.init(integer: indexPath.section)
-                    tableView.reloadSections(sections, with: .none)
-                }
-            }else{
-                let vc = CanteenVideoListViewController(nibName: "CanteenVideoListViewController", bundle: nil)
-                vc.accountPhone = menuTitle
-                vc.seriesSt = self.section1_Sub0_ItemArray[dataIndex]
-                nav.viewControllers = [vc]
-                reveal?.pushFrontViewController(nav, animated: true)
+            if let url = URL(string: self.vastarWeb) {
+                UIApplication.shared.open(url)
             }
-            
-            
         }else if section == 2 {
             if rowIndex == 0 {
                 if section2_Open == true {
@@ -320,6 +324,26 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
                     tableView.reloadSections(sections, with: .none)
                 }else{
                     section2_Open = true
+                    let sections = IndexSet.init(integer: indexPath.section)
+                    tableView.reloadSections(sections, with: .none)
+                }
+            }else{
+                let vc = CanteenVideoListViewController(nibName: "CanteenVideoListViewController", bundle: nil)
+                vc.accountPhone = menuTitle
+                vc.seriesSt = self.section2_Sub0_ItemArray[dataIndex]
+                nav.viewControllers = [vc]
+                reveal?.pushFrontViewController(nav, animated: true)
+            }
+            
+            
+        }else if section == 3 {
+            if rowIndex == 0 {
+                if section3_Open == true {
+                    section3_Open = false
+                    let sections = IndexSet.init(integer: indexPath.section)
+                    tableView.reloadSections(sections, with: .none)
+                }else{
+                    section3_Open = true
 
                     let sections = IndexSet.init(integer: indexPath.section)
                     tableView.reloadSections(sections, with: .none)
@@ -327,13 +351,13 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
             }else{
                 let vc = FoodTypeVideoListViewController(nibName: "FoodTypeVideoListViewController", bundle: nil)
                 vc.accountPhone = menuTitle
-                vc.typeSt = self.section2_Sub0_ItemArray[dataIndex]
+                vc.typeSt = self.section3_Sub0_ItemArray[dataIndex]
                 nav.viewControllers = [vc]
                 reveal?.pushFrontViewController(nav, animated: true)
             }
             
             
-        }else if section == 3 {
+        }else if section == 4 {
             switch rowIndex {
             case 0:
                 let vc = ProductViewController(nibName: "ProductViewController", bundle: nil)
@@ -354,7 +378,7 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
                 break
             }
             
-        }else if section == 4 {
+        }else if section == 5 {
             switch rowIndex {
             case 0:
                 let vc = OrderListViewController(nibName: "OrderListViewController", bundle: nil)
@@ -375,7 +399,7 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
                 break
             }
             
-        }else if section == 5 {
+        }else if section == 6 {
             switch rowIndex {
             case 0:
                 let vc = MemberDataViewController(nibName: "MemberDataViewController", bundle: nil)
