@@ -8,7 +8,7 @@
 import UIKit
 
 class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
-
+    
     
     @IBOutlet var phoneTextField: UITextField!
     @IBOutlet var nPwTextField: UITextField!
@@ -38,7 +38,7 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         setInterface()
@@ -48,7 +48,7 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
         super.viewWillAppear(animated)
         
     }
-
+    
     
     //MARK: - UI Interface Methods
     
@@ -86,7 +86,7 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
         self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Verify_Code_title", comment: ""), colour: placeHolderTextColor, font: font)
         self.verifyCodeTextField.setTextColor(textColor, font: font)
         self.verifyCodeTextField.keyboardType = .numberPad
-
+        
         self.verifyCodeBtn.setTitle(NSLocalizedString("Forget_Verify_Code_Btn_title", comment: ""), for: .normal)
         self.verifyCodeBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.verifyCodeBtn.addTarget(self, action: #selector(verifyCodeBtnClick(_:)), for: .touchUpInside)
@@ -122,7 +122,7 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
                     self.userResgisterTime = String(registerTimeArray[0])
                     
                     let newPassWord:String = "\(pw)\(self.userResgisterTime)"
-                    self.updateForgetPw(phone: accountName, newPw: newPassWord)
+                    self.updateForgetPw(phone: accountName, newPw: newPassWord, inputNewPw: pw)
                 }else{
                     self.vaiv.stopProgressHUD(view: self.view)
                     let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
@@ -133,7 +133,7 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
                     
                     self.phoneTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
                     self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: errorColor, font: font)
-
+                    
                     self.nPwErrorLabel.text = ""
                     self.confirmPwErrorLabel.text = ""
                     self.verifyCodeErrorLabel.text = ""
@@ -148,12 +148,24 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
         }
     }
     
-    func updateForgetPw(phone:String,newPw:String) {
+    func updateForgetPw(phone:String,newPw:String,inputNewPw:String) {
         
         VClient.sharedInstance().VCUpdateForgetPw(phone: phone, newPw: newPw) { (_ isSuccess:Bool,_ message:String) in
             if isSuccess {
                 
+                let credentials = Credentials(username: phone, password: inputNewPw)
+                do {
+                    try KeychainPasswordItem.addCredentials(credentials, server: KeychainConfiguration.serviceName)
+                    print("Add keychain success")
+                } catch {
+                    if let error = error as? KeychainPasswordItem.KeychainError {
+                        print(error)
+                        print("Keychain error: \(error.localizedDescription)")
+                    }
+                }
+                
                 self.vaiv.stopProgressHUD(view: self.view)
+                UserDefaults.standard.set(true, forKey: "C3")
                 self.cav = CustomAlertView.init(title: NSLocalizedString("Forget_Update_Success_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 1, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
                 self.cav.delegate = self
                 self.view.addSubview(self.cav)
@@ -185,28 +197,28 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
             
             self.phoneTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
             self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: errorColor, font: font)
-
+            
             self.nPwErrorLabel.text = ""
             self.confirmPwErrorLabel.text = ""
             self.verifyCodeErrorLabel.text = ""
-
+            
         }else if phoneText.count < 10 {
             self.phoneErrorLabel.text = NSLocalizedString("Forget_Input_Phone_10_Alert_Text", comment: "")
             self.phoneErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
             self.phoneTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
             self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: errorColor, font: font)
-
-
+            
+            
             self.nPwErrorLabel.text = ""
             self.confirmPwErrorLabel.text = ""
             self.verifyCodeErrorLabel.text = ""
-
+            
         }else if nPwText.count == 0 {
             self.nPwErrorLabel.text = NSLocalizedString("Forget_Input_Pw_Alert_Text", comment: "")
             self.nPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
             self.nPwTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
             self.nPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_New_title", comment: ""), colour: errorColor, font: font)
-
+            
             
             self.phoneErrorLabel.text = ""
             self.phoneTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
@@ -219,7 +231,7 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
             self.verifyCodeErrorLabel.text = ""
             self.verifyCodeTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
             self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Verify_Code_title", comment: ""), colour: color, font: font)
-
+            
         }else if nPwText.count < 8 {
             self.nPwErrorLabel.text = NSLocalizedString("Forget_Input_Pw_8_Alert_Text", comment: "")
             self.nPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
@@ -237,7 +249,7 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
             self.verifyCodeErrorLabel.text = ""
             self.verifyCodeTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
             self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Verify_Code_title", comment: ""), colour: color, font: font)
-
+            
         }else if confirmPwText.count == 0 {
             self.confirmPwErrorLabel.text = NSLocalizedString("Forget_Input_Confirm_Pw_Alert_Text", comment: "")
             self.confirmPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
@@ -257,7 +269,7 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
             self.verifyCodeErrorLabel.text = ""
             self.verifyCodeTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
             self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Verify_Code_title", comment: ""), colour: color, font: font)
-
+            
         }else if nPwText != confirmPwText {
             self.confirmPwErrorLabel.text = NSLocalizedString("Forget_Input_diff_Alert_Text", comment: "")
             self.confirmPwErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
@@ -276,7 +288,7 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
             self.verifyCodeErrorLabel.text = ""
             self.verifyCodeTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
             self.verifyCodeTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Verify_Code_title", comment: ""), colour: color, font: font)
-
+            
         }else if veriftyCodeText.count == 0 {
             self.verifyCodeErrorLabel.text = NSLocalizedString("Forget_Input_VeriftyCode_Alert_Text", comment: "")
             self.verifyCodeErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
@@ -295,7 +307,7 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
             self.confirmPwErrorLabel.text = ""
             self.confirmPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
             self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Confirm_title", comment: ""), colour: color, font: font)
-
+            
         }else if veriftyCodeText != verifyCodeSt {
             self.verifyCodeErrorLabel.text = NSLocalizedString("Forget_Input_VeriftyCode_Error_Alert_Text", comment: "")
             self.verifyCodeErrorLabel.textColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
@@ -314,9 +326,17 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
             self.confirmPwErrorLabel.text = ""
             self.confirmPwTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
             self.confirmPwTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Confirm_title", comment: ""), colour: color, font: font)
-
+            
         }else{
-
+            
+            do {
+                try KeychainPasswordItem.deleteCredentials(server: KeychainConfiguration.serviceName)
+                print("Deleted key success")
+            } catch {
+                if let error = error as? KeychainPasswordItem.KeychainError {
+                    print(error.localizedDescription)
+                }
+            }
             self.getUserInfo(accountName: phoneText, pw: nPwText)
         }
     }
@@ -337,7 +357,7 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
     // 設定簡訊驗證按鈕
     
     func setVerifyBtn() {
-    
+        
         self.timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true, block: { (Timer) in
             if self.defaultSec == 0 {
                 self.verifyCodeBtn.isEnabled = true
@@ -371,13 +391,13 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
         
         let phoneText = self.phoneTextField.text ?? ""
         if phoneText.count == 0 {
-
+            
             self.phoneErrorLabel.text = NSLocalizedString("Forget_Input_Phone_Alert_Text", comment: "")
             self.phoneErrorLabel.textColor = errorColor
             
             self.phoneTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
             self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: errorColor, font: font)
-
+            
             self.nPwErrorLabel.text = ""
             self.confirmPwErrorLabel.text = ""
             self.verifyCodeErrorLabel.text = ""
@@ -388,7 +408,7 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
             
             self.phoneTextField.setBottomBorder(with: errorColor, width: 1.0, bkColor: backgroundColor)
             self.phoneTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Forget_Pw_Phone_title", comment: ""), colour: errorColor, font: font)
-
+            
             self.nPwErrorLabel.text = ""
             self.confirmPwErrorLabel.text = ""
             self.verifyCodeErrorLabel.text = ""
@@ -397,7 +417,7 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
             self.phoneErrorLabel.text = ""
             self.phoneErrorLabel.textColor = color
             self.phoneTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
-
+            
             sendMMS(phone: phoneText)
         }
         
@@ -412,16 +432,16 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
         
         self.dismiss(animated: true, completion: nil)
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
     //MARK: - CustomAlertViewDelegate
     
@@ -435,5 +455,5 @@ class ForgetPwViewController: UIViewController,CustomAlertViewDelegate {
         }
         
     }
-
+    
 }

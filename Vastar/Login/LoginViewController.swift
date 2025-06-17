@@ -9,10 +9,11 @@ import UIKit
 import var CommonCrypto.CC_MD5_DIGEST_LENGTH
 import func CommonCrypto.CC_MD5
 import typealias CommonCrypto.CC_LONG
+import LocalAuthentication
 
 
 class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewDelegate {
-
+    
     @IBOutlet var accountNameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     
@@ -27,12 +28,13 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
     @IBOutlet var infoLineValueLabel: UILabel!
     
     @IBOutlet var radioBtn: UIButton!
+    @IBOutlet weak var biometricBtn: UIButton!
     
     private var userResgisterTime:String = ""
     
     private var vaiv = VActivityIndicatorView()
     private var cav = CustomAlertView()
-
+    
     
     let userDefault = UserDefaults.standard
     
@@ -40,11 +42,12 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         
         setInterface()
-    
+        UserDefaults.standard.set(false, forKey: "C2")
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -57,7 +60,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
             let encyrptPw:String? = self.userDefault.object(forKey: "B2") as? String ?? ""
             let decrypteAccount:String = try! encyrptAccount!.aesDecrypt(key: "vastarvastar1234")
             let decryptePw:String = try! encyrptPw!.aesDecrypt(key: "vastarvastar1234")
-
+            
             self.accountNameTextField.text = decrypteAccount
             self.passwordTextField.text = decryptePw
             
@@ -71,10 +74,22 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
             self.radioBtn.setImage(UIImage(named: "radioOffBtn"), for: .normal)
             self.radioBtn.tag = 1
         }
-        
-        
     }
-
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if UserDefaults.standard.bool(forKey: "C1") {
+            if UserDefaults.standard.bool(forKey: "C2") == false {
+                if UserDefaults.standard.bool(forKey: "C3") == false {
+                    self.biometricsLogin()
+                }
+                
+            }
+            
+        }
+    }
+    
     // MARK: - UI Interface Methods
     
     // 設定UI介面
@@ -100,13 +115,17 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
         
         self.pwErrorLabel.text = ""
         
-//        self.passwordTextField.placeholder = NSLocalizedString("Login_Password_title", comment: "")
+        //        self.passwordTextField.placeholder = NSLocalizedString("Login_Password_title", comment: "")
         self.passwordTextField.isSecureTextEntry = true
         
         self.loginBtn.setTitle(NSLocalizedString("Login_Button_title", comment: ""), for: .normal)
         self.loginBtn.titleLabel?.font = UIFont.systemFont(ofSize: 25.0)
         self.loginBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
         self.loginBtn.addTarget(self, action: #selector(loginBtnClick(_:)), for: .touchUpInside)
+        
+        self.biometricBtn.setTitle(NSLocalizedString("Login_Touch_Face_ID_Text", comment: ""), for: .normal)
+        self.biometricBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
+        self.biometricBtn.addTarget(self, action: #selector(biometricBtnClick(_:)), for: .touchUpInside)
         
         self.forgetPwBtn.setTitle(NSLocalizedString("Login_Forget_Button_title", comment: ""), for: .normal)
         self.forgetPwBtn.setTitleColor(UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0), for: .normal)
@@ -146,11 +165,11 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
                     self.loginVerification(accountName: accountName, pw: passWord, pw_Nodate: pw)
                 }else{
                     self.vaiv.stopProgressHUD(view: self.view)
-           
+                    
                     let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
                     let font:UIFont = UIFont.systemFont(ofSize: 20.0)
                     let errorColor:UIColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
-
+                    
                     self.accountNameErrorLabel.text = NSLocalizedString("Login_Input_Error_Alert_Text", comment: "")
                     self.accountNameErrorLabel.textColor = errorColor
                     
@@ -169,11 +188,11 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
                 
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
-       
+                
                 let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
                 let font:UIFont = UIFont.systemFont(ofSize: 20.0)
                 let errorColor:UIColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
-
+                
                 self.accountNameErrorLabel.text = NSLocalizedString("Login_Input_Error_Alert_Text", comment: "")
                 self.accountNameErrorLabel.textColor = errorColor
                 
@@ -203,7 +222,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
             if isSuccess {
                 
                 print("--\(messageSt)--")
-
+                
                 self.vaiv.stopProgressHUD(view: self.view)
                 
                 let frontNavigationController:UINavigationController
@@ -216,7 +235,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
                 let reveal = SWRevealViewController(rearViewController: sideMenuTable, frontViewController: frontNavigationController)
                 reveal?.modalPresentationStyle = .fullScreen
                 self.present(reveal!, animated: true, completion:  nil)
-
+                
                 //加密一次Md5，用於修改密碼比對原始密碼是否正確
                 let md5Data = self.MD5_String(string:pw_Nodate)
                 let md5Hex =  md5Data.map { String(format: "%02hhx", $0) }.joined()
@@ -227,6 +246,9 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
                 if isSelectSave == 1 {
                     self.setSaveData()
                 }
+                self.saveAccountAndPw(a: accountName, p: pw_Nodate) //儲存至Keychain
+                
+                UserDefaults.standard.set(false, forKey: "C3")
                 
                 self.accountNameErrorLabel.text = ""
                 self.accountNameTextField.setBottomBorder(with: color, width: 1.0, bkColor: backgroundColor)
@@ -242,7 +264,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
                 
             }else{
                 self.vaiv.stopProgressHUD(view: self.view)
-                                
+                
                 self.accountNameErrorLabel.text = NSLocalizedString("Login_Input_Error_Alert_Text", comment: "")
                 self.accountNameErrorLabel.textColor = errorColor
                 
@@ -288,12 +310,39 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
         
         let encrypteAccount:String = try! accountText.aesEncrypt(key: "vastarvastar1234")
         let encryptePw:String = try! pwText.aesEncrypt(key: "vastarvastar1234")
-
+        
         print("~~~> \(encrypteAccount)")
         print("###> \(encryptePw)")
-
+        
         self.userDefault.set(encrypteAccount, forKey: "B1")
         self.userDefault.set(encryptePw, forKey: "B2")
+    }
+    
+    //儲存帳號密碼至Keychain
+    
+    fileprivate func saveAccountAndPw(a:String,p:String) {
+        print("++++\(a) + \(p)")
+        let keychainItem = KeychainPasswordItem(service: KeychainConfiguration.serviceName, account: a)
+        do {
+            try keychainItem.savePassword(p)
+        } catch {
+            print("密碼儲存失敗：\(error)")
+        }
+    }
+    
+    //生物辨識登入
+    
+    fileprivate func biometricsLogin() {
+        do {
+            print(KeychainConfiguration.serviceName)
+            let credentials = try KeychainPasswordItem.readCredentials(server: KeychainConfiguration.serviceName)
+            self.getUserInfo(accountName: credentials.username, pw: credentials.password)
+            
+        } catch {
+            if let error = error as? KeychainPasswordItem.KeychainError {
+                print(error)
+            }
+        }
     }
     
     
@@ -310,7 +359,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
         let color:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         
         if accountText.count == 0 {
-
+            
             self.accountNameErrorLabel.text = NSLocalizedString("Login_Input_Phone_Alert_Text", comment: "")
             self.accountNameErrorLabel.textColor = errorColor
             
@@ -322,7 +371,7 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
             self.passwordTextField.setPlaceHolderAttributes(placeHolderText: NSLocalizedString("Login_Password_title", comment: ""), colour: color, font: font)
             
         }else if pwText.count == 0 {
-
+            
             self.pwErrorLabel.text = NSLocalizedString("Login_Input_Pw_Alert_Text", comment: "")
             self.pwErrorLabel.textColor = errorColor
             
@@ -336,8 +385,33 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
         }else {
             getUserInfo(accountName: accountText, pw: pwText)
         }
+    }
+    
+    @objc func biometricBtnClick(_ sender:UIButton) {
+        let localAuthContext = LAContext()
+        var authError: NSError?
         
-        
+        if localAuthContext.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
+            
+            if UserDefaults.standard.bool(forKey: "C3") == true {
+                self.cav = CustomAlertView.init(title: NSLocalizedString("Login_Input_New_Pw_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 1, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
+            }else {
+                if UserDefaults.standard.bool(forKey: "C1") == true {
+                    biometricsLogin()
+                }else{
+                    self.cav = CustomAlertView.init(title: NSLocalizedString("Login_Biometric_Not_Open_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 1, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                    self.cav.delegate = self
+                    self.view.addSubview(self.cav)
+                }
+            }
+            
+        }else {
+            self.cav = CustomAlertView.init(title: NSLocalizedString("Login_Biometric_Not_Supported_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 1, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+            self.cav.delegate = self
+            self.view.addSubview(self.cav)
+        }
         
     }
     
@@ -367,17 +441,17 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
             sender.setImage(UIImage(named: "radioOnBtn"), for: .normal)
         }
     }
-
+    
     
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destination.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
     //MARK: - CustomAlertViewDelegate
     
@@ -388,5 +462,5 @@ class LoginViewController: UIViewController,UITextFieldDelegate,CustomAlertViewD
         }
         
     }
-
+    
 }
