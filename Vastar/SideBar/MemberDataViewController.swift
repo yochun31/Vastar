@@ -6,8 +6,9 @@
 //
 
 import UIKit
+import LocalAuthentication
 
-class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CustomAlertViewDelegate,CustomAlertTwoBtnViewDelegate {
+class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate,CustomAlertViewDelegate,CustomAlertTwoBtnViewDelegate,CustomAlertTextFiledViewDelegate {
     
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var nameTextField: UITextField!
@@ -23,6 +24,10 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     
     @IBOutlet var addressLabel: UILabel!
     @IBOutlet var addressTextField: UITextField!
+    
+    @IBOutlet weak var biometricLabel: UILabel!
+    @IBOutlet weak var biometricInfoLabel: UILabel!
+    @IBOutlet weak var biometricSwitch: UISwitch!
     
     @IBOutlet var editBtn_Name: UIButton!
     @IBOutlet var setDateBtn: CustomButton!
@@ -44,6 +49,7 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     private var userTel:String = ""
     private var userMobilePhone:String = ""
     private var userAddress:String = ""
+    private var userRegisterTime = ""
     
     private var currentNameEditStatus:Int = -1
     private var currentTelEditStatus:Int = -1
@@ -56,6 +62,7 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     private var rav = RecipientAddView()
     private var cav = CustomAlertView()
     private var cavt = CustomAlertTwoBtnView()
+    private var catf = CustomAlertTextFiledView()
     
     private var receiverIDArray:Array<Int> = []
     private var receiverNameArray:Array<String> = []
@@ -170,6 +177,18 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         self.addressTextField.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
         self.addressTextField.font = UIFont.systemFont(ofSize: 17.0)
         
+        self.biometricLabel.font = UIFont.systemFont(ofSize: 20.0)
+        self.biometricLabel.text = NSLocalizedString("Member_Biometric_title", comment: "")
+        self.biometricLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        
+        self.biometricInfoLabel.text = NSLocalizedString("Member_Biometric_Info", comment: "")
+        self.biometricInfoLabel.textColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
+        
+        let biometricStatus:Bool = UserDefaults.standard.bool(forKey: "C1")
+        print("-----\(biometricStatus)")
+        self.biometricSwitch.setOn(biometricStatus, animated: true)
+        self.biometricSwitch.addTarget(self, action: #selector(biometricSwitchAction(_:)), for: .valueChanged)
+        
         self.currentNameEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnEdit.rawValue
         self.currentTelEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnEdit.rawValue
         self.currentPhoneEditStatus = VMemberDataEditBtnItem.VMemberDataEditBtnEdit.rawValue
@@ -268,7 +287,7 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     }
     
     
-    //MARK:- Assistant Methods
+    //MARK: - Assistant Methods
     
     // 取得帳號資料
     
@@ -285,11 +304,13 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
                     let tel = dictResData["Telephone"] as? String ?? ""
                     let phone = dictResData["MobilePhone"] as? String ?? ""
                     let address = dictResData["Address"] as? String ?? ""
+                    let res_registerTime = dictResData["RegisterTime"] as? String ?? ""
                     self.userName = name
                     self.userBirthday = birthday
                     self.userTel = tel
                     self.userMobilePhone = phone
                     self.userAddress = address
+                    self.userRegisterTime = res_registerTime
                     self.showUserInfo(nameSt: name, birthdaySt: birthday, telSt: tel, phone: phone, address: address)
                 }
                 
@@ -580,6 +601,26 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         }
     }
     
+    // MD5字串
+    
+    private func MD5_String(string: String) -> Data {
+        let length = Int(CC_MD5_DIGEST_LENGTH)
+        let messageData = string.data(using:.utf8)!
+        var digestData = Data(count: length)
+        
+        _ = digestData.withUnsafeMutableBytes { digestBytes -> UInt8 in
+            messageData.withUnsafeBytes { messageBytes -> UInt8 in
+                if let messageBytesBaseAddress = messageBytes.baseAddress, let digestBytesBlindMemory = digestBytes.bindMemory(to: UInt8.self).baseAddress {
+                    let messageLength = CC_LONG(messageData.count)
+                    CC_MD5(messageBytesBaseAddress, messageLength, digestBytesBlindMemory)
+                }
+                return 0
+            }
+        }
+        return digestData
+    }
+    
+    
     
     //MARK: - Action
     
@@ -660,7 +701,18 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         self.cavt = CustomAlertTwoBtnView(title: NSLocalizedString("Member_Recipient_Delete_Alert_Text", comment: ""), btn1Title: NSLocalizedString("Member_Confirm_Btn_title", comment: ""), btn2Title: NSLocalizedString("Alert_Cancel_title", comment: ""), tag: 1, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
         self.cavt.delegate = self
         self.view.addSubview(self.cavt)
-        
+    }
+    
+    @objc func biometricSwitchAction(_ sender:UISwitch) {
+        var switchValue:Int = 0
+        if sender.isOn == true {
+            switchValue = 1
+        }else{
+            switchValue = 0
+        }
+        self.catf = CustomAlertTextFiledView(title: NSLocalizedString("Member_Input_Login_Pw_Alert_Text", comment: ""), btn1Title: NSLocalizedString("Alert_Cancel_title", comment: ""), btn2Title: NSLocalizedString("Member_Confirm_Btn_title", comment: ""), tag: switchValue, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height),isSecureTextEntry: true)
+        self.catf.delegate = self
+        self.view.addSubview(self.catf)
     }
 
     /*
@@ -733,7 +785,6 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         }else{
             self.cav.removeFromSuperview()
         }
-        
     }
     
     //MARK: - CustomAlertTwoBtnViewDelegate
@@ -747,7 +798,6 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
             self.cavt.removeFromSuperview()
             self.checkBirthdayInputData()
         }
-        
     }
     
     func alertBtn2Click(btnTag: Int) {
@@ -757,8 +807,79 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         }else if btnTag == 2 {
             self.cavt.removeFromSuperview()
             self.birthdayTextField.text = NSLocalizedString("Member_Birthday_Placeholder_title", comment: "")
+        }else if btnTag == 3 {
+            self.cavt.removeFromSuperview()
+            self.biometricSwitch.setOn(false, animated: true)
         }
-        
     }
     
+    //MARK: - CustomAlertTextFiledViewDelegate
+    
+    func alertTextFiledBtn1Click(btnTag: Int) {
+        let currentSwitchValue:Bool = UserDefaults.standard.bool(forKey: "C1")
+        self.biometricSwitch.setOn(currentSwitchValue, animated: true)
+        self.catf.removeFromSuperview()
+    }
+    
+    func alertTextFiledBtn2Click(btnTag: Int, inputText: String) {
+        let registerTimeArray = self.userRegisterTime.split(separator: ".")
+        let resgisterTime = String(registerTimeArray[0])
+        let passWord:String = "\(inputText)\(resgisterTime)"
+        // 驗證登入密碼
+        VClient.sharedInstance().VCLoginByPhone(account: accountPhone, pw: passWord) { (_ isSuccess:Bool,_ messageSt:String) in
+            if isSuccess {
+                print("--\(messageSt)--")
+                self.catf.removeFromSuperview()
+                self.vaiv.stopProgressHUD(view: self.view)
+                let localAuthContext = LAContext()
+                var authError: NSError?
+                
+                if localAuthContext.canEvaluatePolicy(LAPolicy.deviceOwnerAuthenticationWithBiometrics, error: &authError) {
+                    
+                    if btnTag == 0 {
+                        UserDefaults.standard.set(false, forKey: "C1")
+                        self.biometricSwitch.setOn(false, animated: true)
+                        do {
+                            try KeychainPasswordItem.deleteCredentials(server: KeychainConfiguration.serviceName)
+                            print("Deleted key success")
+                        } catch {
+                            if let error = error as? KeychainPasswordItem.KeychainError {
+                                print(error.localizedDescription)
+                            }
+                        }
+                    }else {
+                        UserDefaults.standard.set(true, forKey: "C1")
+                        self.biometricSwitch.setOn(true, animated: true)
+                        let credentials = Credentials(username: self.accountPhone, password: inputText)
+                        do {
+                            try KeychainPasswordItem.addCredentials(credentials, server: KeychainConfiguration.serviceName)
+                            print("Add keychain success")
+                        } catch {
+                            if let error = error as? KeychainPasswordItem.KeychainError {
+                                print(error)
+                                print("Keychain error: \(error.localizedDescription)")
+                            }
+                        }
+                    }
+                    
+                }else{
+                    self.biometricSwitch.setOn(false, animated: true)
+                    self.cav = CustomAlertView.init(title: NSLocalizedString("Member_Biometric_Not_Supported_Disabled", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 3, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                    self.cav.delegate = self
+                    self.view.addSubview(self.cav)
+                }
+                
+            }else{
+                let currentSwitchValue:Bool = UserDefaults.standard.bool(forKey: "C1")
+                self.biometricSwitch.setOn(currentSwitchValue, animated: true)
+                self.catf.removeFromSuperview()
+                self.vaiv.stopProgressHUD(view: self.view)
+                self.cav = CustomAlertView.init(title: NSLocalizedString("Member_Input_Pw_Error_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 3, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
+                self.cav.delegate = self
+                self.view.addSubview(self.cav)
+                
+            }
+        }
+    }
+
 }

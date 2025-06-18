@@ -425,6 +425,7 @@ class SMSideMenuViewController: UIViewController,UITableViewDelegate,UITableView
             case 3:
                 VClient.sharedInstance().VCDeleteAllShoppingCarData { isDone in
                     if isDone {
+                        UserDefaults.standard.set(true, forKey: "C2")
                         self.view.window?.rootViewController?.dismiss(animated: true, completion: nil)
                     }
                 }

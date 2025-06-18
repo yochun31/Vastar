@@ -11,8 +11,6 @@
 
 #endif /* Vastar_Bridging_Header_h */
 
-#import <swiftMBProgressHUD/swiftMBProgressHUD.h>
 #import "SWRevealViewController.h"
-#import <DBSqliteHelper/DBSqliteHelper.h>
 #include "sqlite3.h"
 #import <CommonCrypto/CommonCrypto.h>
