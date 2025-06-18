@@ -400,8 +400,8 @@ class VClient {
         let p_price:Int = dataArray[5] as? Int ?? 0
         let imageData:NSData = dataArray[6] as! NSData
 
-        let dbSqliteHelper = DBSqlite()
-        let db = dbSqliteHelper.openDataBase("VastarDataBase")
+        let dbSqliteHelper = DBSqliteHelper()
+        let db = dbSqliteHelper.openDatabase()
         let sql:String = "Insert into 'shoppingCar' ('No','title','color','voltage','amount','price','photo','addtime')  VALUES (?,?,?,?,?,?,?,datetime('now', 'localtime'));"
         var stmt:OpaquePointer? = nil
         let sqlResult:Int = Int(sqlite3_prepare(db, sql, -1, &stmt, nil))
@@ -422,7 +422,7 @@ class VClient {
             }
         }
         
-        dbSqliteHelper.closeDataBase()
+        dbSqliteHelper.closeDatabase()
         result(doneFlag)
     }
     
@@ -440,8 +440,8 @@ class VClient {
         var priceArray:Array<Int> = []
         var photoArray:Array<UIImage> = []
         
-        let dbSqliteHelper = DBSqlite()
-        let db = dbSqliteHelper.openDataBase("VastarDataBase")
+        let dbSqliteHelper = DBSqliteHelper()
+        let db = dbSqliteHelper.openDatabase()
         let sql:String = "select ID,No,title,color,sum(amount)as amountS, voltage, price,photo from shoppingCar group by title,color,voltage"
         var stmt:OpaquePointer? = nil
         let sqlResult:Int = Int(sqlite3_prepare(db, sql, -1, &stmt, nil))
@@ -479,7 +479,7 @@ class VClient {
             doneFlag = false
         }
         
-        dbSqliteHelper.closeDataBase()
+        dbSqliteHelper.closeDatabase()
         result(DataArray,doneFlag)
     }
     
@@ -488,8 +488,8 @@ class VClient {
         
         var doneFlag:Bool = false
         let SQLITE_TRANSIENT = unsafeBitCast(-1, to: sqlite3_destructor_type.self)
-        let dbSqliteHelper = DBSqlite()
-        let db = dbSqliteHelper.openDataBase("VastarDataBase")
+        let dbSqliteHelper = DBSqliteHelper()
+        let db = dbSqliteHelper.openDatabase()
         let sql:String = "DELETE FROM shoppingCar WHERE title = ? and color = ? and voltage = ?"
         var stmt:OpaquePointer? = nil
         let sqlResult:Int = Int(sqlite3_prepare(db, sql, -1, &stmt, nil))
@@ -507,7 +507,7 @@ class VClient {
             }
         }
         
-        dbSqliteHelper.closeDataBase()
+        dbSqliteHelper.closeDatabase()
         result(doneFlag)
     }
     
@@ -515,8 +515,8 @@ class VClient {
         
         var doneFlag:Bool = false
 
-        let dbSqliteHelper = DBSqlite()
-        let db = dbSqliteHelper.openDataBase("VastarDataBase")
+        let dbSqliteHelper = DBSqliteHelper()
+        let db = dbSqliteHelper.openDatabase()
         let sql:String = "DELETE FROM shoppingCar;UPDATE SQLITE_SEQUENCE SET seq = 0 WHERE name = 'shoppingCar';VACUUM;"
         var stmt:OpaquePointer? = nil
         let sqlResult:Int = Int(sqlite3_prepare(db, sql, -1, &stmt, nil))
@@ -531,7 +531,7 @@ class VClient {
             }
         }
         
-        dbSqliteHelper.closeDataBase()
+        dbSqliteHelper.closeDatabase()
         result(doneFlag)
     }
     

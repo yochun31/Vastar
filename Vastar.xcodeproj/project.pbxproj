@@ -54,7 +54,6 @@
 		2244F6202682D10C006754D6 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 2244F61F2682D10A006754D6 /* SWRevealViewController.m */; };
 		226018822823AACE00B063A4 /* ConnectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 226018802823AACE00B063A4 /* ConnectionViewController.swift */; };
 		226018832823AACE00B063A4 /* ConnectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 226018812823AACE00B063A4 /* ConnectionViewController.xib */; };
-		228BDD7B268C55B50080F843 /* DBSqliteHelper.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 228BDD7A268C55B50080F843 /* DBSqliteHelper.framework */; };
 		228BDD80268C72C70080F843 /* shoppingCarTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BDD7E268C72C70080F843 /* shoppingCarTableViewCell.swift */; };
 		228BDD81268C72C70080F843 /* shoppingCarTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 228BDD7F268C72C70080F843 /* shoppingCarTableViewCell.xib */; };
 		228BDD84268EC22F0080F843 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228BDD82268EC22E0080F843 /* CheckoutViewController.swift */; };
@@ -108,9 +107,9 @@
 		22F1C3F52668B44C003A1D5C /* CloudGatewayManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C3F42668B44C003A1D5C /* CloudGatewayManager.swift */; };
 		22F1C3F82668B522003A1D5C /* VClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C3F72668B522003A1D5C /* VClient.swift */; };
 		22F1C3FF2668BD44003A1D5C /* AppDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C3FE2668BD44003A1D5C /* AppDefine.swift */; };
-		22F1C4032668D1E8003A1D5C /* swiftMBProgressHUD.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 22F1C4022668D1E8003A1D5C /* swiftMBProgressHUD.framework */; };
 		22F1C4082668DA83003A1D5C /* VActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C4072668DA83003A1D5C /* VActivityIndicatorView.swift */; };
 		22F1C40B2668DAA8003A1D5C /* VAlertView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22F1C40A2668DAA8003A1D5C /* VAlertView.swift */; };
+		56E417052E030AD300A99734 /* DBSqliteHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56E417042E030AD300A99734 /* DBSqliteHelper.swift */; };
 		56F44F682DFF08B600771A75 /* KeychainConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F44F672DFF08B600771A75 /* KeychainConfiguration.swift */; };
 		56F44F6A2DFF08CE00771A75 /* KeychainPasswordItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F44F692DFF08CE00771A75 /* KeychainPasswordItem.swift */; };
 		56F44F6C2E005FFF00771A75 /* CustomAlertTextFiledView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56F44F6B2E005FFF00771A75 /* CustomAlertTextFiledView.swift */; };
@@ -166,7 +165,6 @@
 		2244F61F2682D10A006754D6 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		226018802823AACE00B063A4 /* ConnectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionViewController.swift; sourceTree = "<group>"; };
 		226018812823AACE00B063A4 /* ConnectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ConnectionViewController.xib; sourceTree = "<group>"; };
-		228BDD7A268C55B50080F843 /* DBSqliteHelper.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = DBSqliteHelper.framework; sourceTree = "<group>"; };
 		228BDD7E268C72C70080F843 /* shoppingCarTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shoppingCarTableViewCell.swift; sourceTree = "<group>"; };
 		228BDD7F268C72C70080F843 /* shoppingCarTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = shoppingCarTableViewCell.xib; sourceTree = "<group>"; };
 		228BDD82268EC22E0080F843 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
@@ -225,11 +223,11 @@
 		22F1C3F42668B44C003A1D5C /* CloudGatewayManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudGatewayManager.swift; sourceTree = "<group>"; };
 		22F1C3F72668B522003A1D5C /* VClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VClient.swift; sourceTree = "<group>"; };
 		22F1C3FE2668BD44003A1D5C /* AppDefine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDefine.swift; sourceTree = "<group>"; };
-		22F1C4022668D1E8003A1D5C /* swiftMBProgressHUD.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = swiftMBProgressHUD.framework; sourceTree = "<group>"; };
 		22F1C4052668D219003A1D5C /* Vastar-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Vastar-Bridging-Header.h"; sourceTree = "<group>"; };
 		22F1C4072668DA83003A1D5C /* VActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VActivityIndicatorView.swift; sourceTree = "<group>"; };
 		22F1C40A2668DAA8003A1D5C /* VAlertView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VAlertView.swift; sourceTree = "<group>"; };
 		4D3F6B628888968EBF5FED1C /* Pods_Vastar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Vastar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		56E417042E030AD300A99734 /* DBSqliteHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBSqliteHelper.swift; sourceTree = "<group>"; };
 		56F44F672DFF08B600771A75 /* KeychainConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainConfiguration.swift; sourceTree = "<group>"; };
 		56F44F692DFF08CE00771A75 /* KeychainPasswordItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainPasswordItem.swift; sourceTree = "<group>"; };
 		56F44F6B2E005FFF00771A75 /* CustomAlertTextFiledView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomAlertTextFiledView.swift; sourceTree = "<group>"; };
@@ -244,9 +242,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2206DC0C285C2E11004A6EFC /* libsqlite3.tbd in Frameworks */,
-				22F1C4032668D1E8003A1D5C /* swiftMBProgressHUD.framework in Frameworks */,
 				59BB5765C24B763600503843 /* Pods_Vastar.framework in Frameworks */,
-				228BDD7B268C55B50080F843 /* DBSqliteHelper.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -414,8 +410,6 @@
 			isa = PBXGroup;
 			children = (
 				2244F61D2682CFFD006754D6 /* SWRevealViewController */,
-				22F1C4022668D1E8003A1D5C /* swiftMBProgressHUD.framework */,
-				228BDD7A268C55B50080F843 /* DBSqliteHelper.framework */,
 				22F1C3F32668B41B003A1D5C /* VClient */,
 				22F1C39326660F17003A1D5C /* TableViewCell */,
 				22F1C39226660EFE003A1D5C /* SideMenu */,
@@ -430,6 +424,7 @@
 				56F44F6D2E00600B00771A75 /* CustomAlertTextFiledView.xib */,
 				56F44F672DFF08B600771A75 /* KeychainConfiguration.swift */,
 				56F44F692DFF08CE00771A75 /* KeychainPasswordItem.swift */,
+				56E417042E030AD300A99734 /* DBSqliteHelper.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -724,6 +719,7 @@
 				228BDDA1269D38A70080F843 /* OrderConfirmViewController.swift in Sources */,
 				22F1C3FF2668BD44003A1D5C /* AppDefine.swift in Sources */,
 				2244F6202682D10C006754D6 /* SWRevealViewController.m in Sources */,
+				56E417052E030AD300A99734 /* DBSqliteHelper.swift in Sources */,
 				228BDD95269843460080F843 /* OrderListViewController.swift in Sources */,
 				228BDD992698436F0080F843 /* OrderListTableViewCell.swift in Sources */,
 				56F44F6C2E005FFF00771A75 /* CustomAlertTextFiledView.swift in Sources */,
