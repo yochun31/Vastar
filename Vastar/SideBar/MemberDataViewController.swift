@@ -601,18 +601,6 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         }
     }
     
-    // 登入驗證
-    
-    func loginVerification(accountName:String,pw:String) {
-        
-        let backgroundColor:UIColor = UIColor.init(red: 0.0/255.0, green: 62.0/255.0, blue: 39.0/255.0, alpha: 1.0)
-        let font:UIFont = UIFont.systemFont(ofSize: 20.0)
-        let errorColor:UIColor = UIColor.init(red: 213.0/255.0, green: 92.0/255.0, blue: 76.0/255.0, alpha: 1.0)
-        let color:UIColor = UIColor.init(red: 247.0/255.0, green: 248.0/255.0, blue: 211.0/255.0, alpha: 1.0)
-        
-        
-    }
-    
     // MD5字串
     
     private func MD5_String(string: String) -> Data {
@@ -722,7 +710,7 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
         }else{
             switchValue = 0
         }
-        self.catf = CustomAlertTextFiledView(title: NSLocalizedString("Member_Input_Login_Pw_Alert_Text", comment: ""), btn1Title: NSLocalizedString("Member_Confirm_Btn_title", comment: ""), btn2Title: NSLocalizedString("Alert_Cancel_title", comment: ""), tag: switchValue, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height),isSecureTextEntry: true)
+        self.catf = CustomAlertTextFiledView(title: NSLocalizedString("Member_Input_Login_Pw_Alert_Text", comment: ""), btn1Title: NSLocalizedString("Alert_Cancel_title", comment: ""), btn2Title: NSLocalizedString("Member_Confirm_Btn_title", comment: ""), tag: switchValue, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height),isSecureTextEntry: true)
         self.catf.delegate = self
         self.view.addSubview(self.catf)
     }
@@ -827,16 +815,18 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
     
     //MARK: - CustomAlertTextFiledViewDelegate
     
+    func alertTextFiledBtn1Click(btnTag: Int) {
+        let currentSwitchValue:Bool = UserDefaults.standard.bool(forKey: "C1")
+        self.biometricSwitch.setOn(currentSwitchValue, animated: true)
+        self.catf.removeFromSuperview()
+    }
     
-    func alertTextFiledBtn1Click(btnTag: Int, inputText: String) {
-        let encyrptAccount:String? = UserDefaults.standard.object(forKey: "B1") as? String ?? ""
-        let decrypteAccount:String = try! encyrptAccount!.aesDecrypt(key: "vastarvastar1234")
-        
+    func alertTextFiledBtn2Click(btnTag: Int, inputText: String) {
         let registerTimeArray = self.userRegisterTime.split(separator: ".")
         let resgisterTime = String(registerTimeArray[0])
         let passWord:String = "\(inputText)\(resgisterTime)"
         // 驗證登入密碼
-        VClient.sharedInstance().VCLoginByPhone(account: decrypteAccount, pw: passWord) { (_ isSuccess:Bool,_ messageSt:String) in
+        VClient.sharedInstance().VCLoginByPhone(account: accountPhone, pw: passWord) { (_ isSuccess:Bool,_ messageSt:String) in
             if isSuccess {
                 print("--\(messageSt)--")
                 self.catf.removeFromSuperview()
@@ -860,7 +850,7 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
                     }else {
                         UserDefaults.standard.set(true, forKey: "C1")
                         self.biometricSwitch.setOn(true, animated: true)
-                        let credentials = Credentials(username: decrypteAccount, password: inputText)
+                        let credentials = Credentials(username: self.accountPhone, password: inputText)
                         do {
                             try KeychainPasswordItem.addCredentials(credentials, server: KeychainConfiguration.serviceName)
                             print("Add keychain success")
@@ -873,6 +863,7 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
                     }
                     
                 }else{
+                    self.biometricSwitch.setOn(false, animated: true)
                     self.cav = CustomAlertView.init(title: NSLocalizedString("Member_Biometric_Not_Supported_Disabled", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 3, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
                     self.cav.delegate = self
                     self.view.addSubview(self.cav)
@@ -890,11 +881,5 @@ class MemberDataViewController: UIViewController,RecipientAddViewDelegate,UITabl
             }
         }
     }
-    
-    func alertTextFiledBtn2Click(btnTag: Int) {
-        let currentSwitchValue:Bool = UserDefaults.standard.bool(forKey: "C1")
-        self.biometricSwitch.setOn(currentSwitchValue, animated: true)
-        self.catf.removeFromSuperview()
-    }
-    
+
 }

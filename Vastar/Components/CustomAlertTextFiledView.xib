@@ -32,7 +32,7 @@
                             </constraints>
                         </imageView>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J24-S7-Y06">
-                            <rect key="frame" x="10" y="32.5" width="255" height="20.5"/>
+                            <rect key="frame" x="10" y="29.5" width="255" height="20.5"/>
                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -52,7 +52,10 @@
                             <state key="normal" title="Button" backgroundImage="btn"/>
                         </button>
                         <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="cnZ-vK-osr">
-                            <rect key="frame" x="15" y="78" width="245" height="34"/>
+                            <rect key="frame" x="30" y="75" width="215" height="40"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="40" id="LcK-vN-BzL"/>
+                            </constraints>
                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                             <textInputTraits key="textInputTraits"/>
                         </textField>
@@ -64,14 +67,14 @@
                         <constraint firstItem="cnZ-vK-osr" firstAttribute="top" secondItem="J24-S7-Y06" secondAttribute="bottom" constant="25" id="45a-3K-K8l"/>
                         <constraint firstItem="7L4-FH-FLU" firstAttribute="width" secondItem="p7E-2l-hLk" secondAttribute="width" id="B0g-KT-G5m"/>
                         <constraint firstAttribute="trailing" secondItem="sS7-Ca-FpY" secondAttribute="trailing" id="BTw-7R-Dve"/>
-                        <constraint firstItem="cnZ-vK-osr" firstAttribute="leading" secondItem="Gvw-jd-ujL" secondAttribute="leading" constant="15" id="JXO-dp-bU0"/>
+                        <constraint firstItem="cnZ-vK-osr" firstAttribute="leading" secondItem="Gvw-jd-ujL" secondAttribute="leading" constant="30" id="JXO-dp-bU0"/>
                         <constraint firstItem="cnZ-vK-osr" firstAttribute="centerY" secondItem="Gvw-jd-ujL" secondAttribute="centerY" id="Jhc-dh-SIt"/>
                         <constraint firstItem="7L4-FH-FLU" firstAttribute="leading" secondItem="Gvw-jd-ujL" secondAttribute="leading" constant="65" id="Kpw-Hn-MbZ"/>
                         <constraint firstAttribute="bottom" secondItem="sS7-Ca-FpY" secondAttribute="bottom" id="NKO-Va-KrX"/>
                         <constraint firstItem="p7E-2l-hLk" firstAttribute="centerY" secondItem="7L4-FH-FLU" secondAttribute="centerY" id="UZn-gb-6gw"/>
                         <constraint firstAttribute="trailing" secondItem="p7E-2l-hLk" secondAttribute="trailing" constant="65" id="WuB-Qm-cnZ"/>
                         <constraint firstAttribute="trailing" secondItem="J24-S7-Y06" secondAttribute="trailing" constant="10" id="YHM-zx-WNr"/>
-                        <constraint firstAttribute="trailing" secondItem="cnZ-vK-osr" secondAttribute="trailing" constant="15" id="aqe-Te-mfL"/>
+                        <constraint firstAttribute="trailing" secondItem="cnZ-vK-osr" secondAttribute="trailing" constant="30" id="aqe-Te-mfL"/>
                         <constraint firstItem="sS7-Ca-FpY" firstAttribute="leading" secondItem="Gvw-jd-ujL" secondAttribute="leading" id="sBC-0v-IS1"/>
                         <constraint firstItem="J24-S7-Y06" firstAttribute="leading" secondItem="Gvw-jd-ujL" secondAttribute="leading" constant="10" id="vQq-g5-aod"/>
                         <constraint firstAttribute="height" constant="190" id="vwN-tD-4g5"/>

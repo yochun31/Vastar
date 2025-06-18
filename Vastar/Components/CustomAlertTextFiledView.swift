@@ -8,8 +8,8 @@
 import UIKit
 
 protocol CustomAlertTextFiledViewDelegate {
-    func alertTextFiledBtn1Click(btnTag:Int,inputText:String)
-    func alertTextFiledBtn2Click(btnTag:Int)
+    func alertTextFiledBtn1Click(btnTag:Int)
+    func alertTextFiledBtn2Click(btnTag:Int,inputText:String)
 }
 
 class CustomAlertTextFiledView: UIView {
@@ -101,11 +101,11 @@ class CustomAlertTextFiledView: UIView {
     //MARK: - Action
     
     @objc func btn1Click(_ sender:UIButton) {
-        self.delegate?.alertTextFiledBtn1Click(btnTag: sender.tag, inputText: self.inputTextField.text ?? "")
+        self.delegate?.alertTextFiledBtn1Click(btnTag: sender.tag)
     }
     
     @objc func btn2Click(_ sender:UIButton) {
-        self.delegate?.alertTextFiledBtn2Click(btnTag: sender.tag)
+        self.delegate?.alertTextFiledBtn2Click(btnTag: sender.tag, inputText: self.inputTextField.text ?? "")
     }
 
 }
