@@ -28,6 +28,10 @@
 "Login_Radio_Btn_Text" = " 記住帳號密碼";
 "Login_Info_Phone_Text" = "服務電話:+886 2 2838 1010";
 "Login_Info_Line_Text" = "LINE ID:vastarmimichi";
+"Login_Touch_Face_ID_Text" = "Touch/Face ID登入";
+"Login_Input_New_Pw_Alert_Text" = "請使用新密碼重新登入";
+"Login_Biometric_Not_Open_Alert_Text" = "尚未開啟設定生物辨識";
+"Login_Biometric_Not_Supported_Alert_Text" = "此裝置不支援生物辨識或未開啟";
 
 "LogOut_Alert_Text" = "是否確定要登出?";
 
@@ -112,6 +116,9 @@
 "Member_Tel_title" = "市話:";
 "Member_Phone_title" = "聯絡手機:";
 "Member_Address_title" = "聯絡地址:";
+"Member_Biometric_title" = "生物辨識登入";
+"Member_Biometric_Info" = "使用您的面孔或指紋進行驗證";
+"Member_Biometric_Not_Supported_Disabled" = "此裝置不支援生物辨識或未開啟";
 "Member_Birthday_Placeholder_title" = "暫無資料，生日僅可修改一次";
 "Member_Birthday_Set_Alert_title" = "將生日設定為";
 "Member_Edit_Btn_title" = "修改";
@@ -132,6 +139,8 @@
 "Member_Recipient_Phone_Alert_Text" = "*尚未輸入電話";
 "Member_Recipient_Address_Alert_Text" = "*尚未輸入地址";
 "Member_Recipient_Delete_Alert_Text" = "是否確定刪除?";
+"Member_Input_Pw_Error_Alert_Text" = "輸入密碼錯誤";
+"Member_Input_Login_Pw_Alert_Text" = "請輸入登入密碼";
 
 "Product_title" = "商品圖片與規格";
 "Product_All_Btn_title" = "所有商品";

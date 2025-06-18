@@ -5,6 +5,7 @@ PODS:
   - GPVideoPlayer (1.0.4)
   - HCVimeoVideoExtractor (0.0.1)
   - IQKeyboardManagerSwift (6.5.6)
+  - MBProgressHUD (1.1.0)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
@@ -20,6 +21,7 @@ DEPENDENCIES:
   - GPVideoPlayer
   - HCVimeoVideoExtractor
   - IQKeyboardManagerSwift (= 6.5.6)
+  - MBProgressHUD (~> 1.1.0)
   - SDWebImage (~> 5.0)
   - SwiftyRSA
   - TRVideoView
@@ -32,6 +34,7 @@ SPEC REPOS:
     - GPVideoPlayer
     - HCVimeoVideoExtractor
     - IQKeyboardManagerSwift
+    - MBProgressHUD
     - SDWebImage
     - SwiftyRSA
     - TRVideoView
@@ -43,10 +46,11 @@ SPEC CHECKSUMS:
   GPVideoPlayer: fcb68bdba2522f3edd3145b0f1de17423e0b30e1
   HCVimeoVideoExtractor: d3c251280f7027ffd324266e1930b3618e0adb46
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  MBProgressHUD: e7baa36a220447d8aeb12769bf0585582f3866d9
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SwiftyRSA: 8c6dd1ea7db1b8dc4fb517a202f88bb1354bc2c6
   TRVideoView: dc9617f61f7d3b207b2a5ad8afe401ef7c03e51e
 
-PODFILE CHECKSUM: 782321dfc3959f0049ebe603294ffd14d240a5de
+PODFILE CHECKSUM: 76f3f3c0fb493d7c5ecce5aba740eddc57348daf
 
-COCOAPODS: 1.15.2
+COCOAPODS: 1.16.2

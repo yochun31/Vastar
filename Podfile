@@ -15,6 +15,7 @@ target 'Vastar' do
     pod 'GPVideoPlayer'
     pod 'BadgeHub'
     pod 'TRVideoView'
+    pod 'MBProgressHUD', '~> 1.1.0'
 
 end
 

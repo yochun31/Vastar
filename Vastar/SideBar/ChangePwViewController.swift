@@ -151,7 +151,7 @@ class ChangePwViewController: UIViewController,CustomAlertViewDelegate {
                     
                     let oldPassWord:String = "\(oldPwSt)\(self.userResgisterTime)"
                     let newPassWord:String = "\(newPwSt)\(self.userResgisterTime)"
-                    self.updateChangePw(phone: accountName, oldPw: oldPassWord, newPw: newPassWord)
+                    self.updateChangePw(phone: accountName, oldPw: oldPassWord, newPw: newPassWord, inputNewPw: newPwSt)
                 }
                 
             }else{
@@ -165,13 +165,24 @@ class ChangePwViewController: UIViewController,CustomAlertViewDelegate {
     
     // 更新密碼
     
-    func updateChangePw(phone:String,oldPw:String,newPw:String) {
+    func updateChangePw(phone:String,oldPw:String,newPw:String,inputNewPw:String) {
         
         VClient.sharedInstance().VCUpdateChangePw(phone: phone, oldPw: oldPw, newPw: newPw) { (_ isSuccess:Bool,_ message:String) in
             
             if isSuccess {
                 print(">>\(message)<<")
+                let credentials = Credentials(username: phone, password: inputNewPw)
+                do {
+                    try KeychainPasswordItem.addCredentials(credentials, server: KeychainConfiguration.serviceName)
+                    print("Add keychain success")
+                } catch {
+                    if let error = error as? KeychainPasswordItem.KeychainError {
+                        print(error)
+                        print("Keychain error: \(error.localizedDescription)")
+                    }
+                }
                 self.vaiv.stopProgressHUD(view: self.view)
+                UserDefaults.standard.set(true, forKey: "C3")
                 self.cav = CustomAlertView.init(title: NSLocalizedString("Change_Pw_Update_Success_Alert_Text", comment: ""), btnTitle: NSLocalizedString("Alert_Sure_title", comment: ""), tag: 1, frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height))
                 self.cav.delegate = self
                 self.view.addSubview(self.cav)
@@ -366,6 +377,14 @@ class ChangePwViewController: UIViewController,CustomAlertViewDelegate {
         }else{
             
             self.checkOldPW(pwSt: oldPwText) {
+                do {
+                    try KeychainPasswordItem.deleteCredentials(server: KeychainConfiguration.serviceName)
+                    print("Deleted key success")
+                } catch {
+                    if let error = error as? KeychainPasswordItem.KeychainError {
+                        print(error.localizedDescription)
+                    }
+                }
                 self.getUserInfo(accountName: self.accountPhone, oldPwSt: oldPwText, newPwSt: newPwText)
             }
             

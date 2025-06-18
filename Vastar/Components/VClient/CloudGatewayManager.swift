@@ -131,8 +131,7 @@ class CloudGatewayManager {
                 result(isResStatus,messageStr,resStatus,dictData)
         
                 break
-            case .failure(_):
-                
+            case .failure(let error):
                 result(false,"Error",-1,[:])
                 break
             }
